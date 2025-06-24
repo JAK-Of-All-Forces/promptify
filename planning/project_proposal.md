@@ -1,10 +1,10 @@
 # Project Proposal
 
-Pod Members: **Add Pod Members Names**
+Pod Members: Amari May, Jessica Obi, and Kenna Nyuga-Galega
 
 ## Problem Statement
 
-Insert your groups problem statement and target audience.
+Insert your groups problem statement and target audience
 
 ## Description
 
