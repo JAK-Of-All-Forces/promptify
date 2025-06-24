@@ -2,13 +2,13 @@
 
 # SITE Capstone Project
 
-SITE Course Year: **20__**
+SITE Course Year: **2025**
 
-Cohort: **Add Company Sponsor Name**
+Cohort: **Salesforce FTL Scholars**
 
-Team Member Names:**Insert Team Member Names**
+Team Member Names:**Amari May, Jessica Obi, Kenna Nyuga-Galega**
 
-Mentors Names: **Insert Professional Mentor Names**
+Mentors Names: **Prashasthi Prabhakar, Lillian Zhang, Nitika Aggarwal**
 
 Project Code Repository Links
 
