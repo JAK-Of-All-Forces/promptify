@@ -5,11 +5,14 @@ Pod Members: Amari May, Jessica Obi, and Kenna Nyuga-Galega
 ## Problem Statement
 
 Insert your groups problem statement and target audience
-We recognize that music listeners and lovers do not have a single condensed space to discuss their opinions or experience on the music they listen to, they have to traverse through multiple niche apps to find their community. So, we wanted to make this app to fix that. Our target audience is all music listeners who want to make it easy to find their communities.
+
+Music lovers often move through a variety of activities throughout their day, from studying and commuting to hiking or working out. However, the playlists they use for those activities are usually built manually, either from scratch or slowly over time. This process can be tedious, especially when someone wants a playlist that fits both their personal taste and the vibe or duration of their activity. 
 
 ## Description
 
 What is the main purpose of your project? What are the key features your site has to offer its users? How will your targeted audience use your website?
+
+
 
 ## Expected Features List
 
