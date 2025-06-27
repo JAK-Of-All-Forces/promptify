@@ -25,8 +25,10 @@ What is the main purpose of your project? What are the key features your site ha
 
 What similar apps and websites? How will your project stand out from these other websites?
 
-Some similar apps and websites are Instagram, Twitter, and Genius. Our project will stand out from these as a social media platform because it will be personally, by connecting users' Spotify accounts and utilize AI to personalize their feed based on what they listen to. It will be a place for active discussion on music on one app.
+Some similar apps and websites are Spotify, Twitter, Stats for Spotify, and Genius. Our project will stand out from these because while it will utilize data from the music depending on the user who logs in, it will be creating playlists and learning from their data to curate their experience based on what they directly ask for.
 
 ## Open Questions
 
 What questions do you still have? What topics do you need to research more for your project?
+
+We need to research what exactly is in the Spotify API and how to access it. We also need to research how to use Spotfy login as an authentcation point for user, as well as how to keep that information secure. Some questions we have include is what are required features for our project, if any? 
