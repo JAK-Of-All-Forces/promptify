@@ -8,15 +8,17 @@ Music lovers often move through a variety of activities throughout their day, fr
 
 ## Description - What is the main purpose of your project? What are the key features your site has to offer its users? How will your targeted audience use your website?
 
-The main purpose of our project is to personalize a playlist based on the users chosen activity and their recently listened to songs. How users will interact with our website is by signing into their Spotify account so that we can have access to their most recently played songs, after that they choose their activity that they would like to have a playlist for and then a playlist is curated for them and added to their account.
+The main purpose of our project is to personalize a playlist based on the users chosen activity and their Spotify data. How users will interact with our website is by signing into their Spotify account so that we can have access to their most recently played songs, after that they choose their activity that they would like to have a playlist for and then a playlist is curated for them and added to their account.
 
 ## Expected Features List
-- Spotify API (database)
-- AI ChatBot - user can communicate with the chat bot to get details on what they want in the playlist
+preference utilizing Spotify API as a database
+AI ChatBot - user can communicate with the chat bot to get details on what they want in the playlist
 
 Possible Features:
-- Brand Recognition Feature - based on the amount of collaborations an artist has brands ( can measure how influential someone is, is ranked with some kind of point system)
-- Hot Topic Featured Podcast Section
+Brand Recognition Feature - based on the amount of collaborations an artist has brands (can measure how influential someone is, is ranked with some kind of point system)
+Hot Topic Featured Podcast Section
+Personalizing Activity to Playlist Feature
+Personalizing Duration to Playlist Feature
 
 ## Related Work - What similar apps and websites? How will your project stand out from these other websites?
 
@@ -24,4 +26,4 @@ Some similar apps and websites are Spotify, Twitter, Stats for Spotify, and Geni
 
 ## Open Questions - What questions do you still have? What topics do you need to research more for your project?
 
-We need to research what exactly is in the Spotify API and how to access it. We also need to research how to use Spotfy login as an authentcation point for user, as well as how to keep that information secure. Some questions we have include is what are required features for our project, if any? 
+We need to research what exactly is in the Spotify API and how to access it. We also need to research how to use Spotify login as an authentication point for users, as well as how to keep that information secure. Some questions we have include what are required features for our project, if any? 
