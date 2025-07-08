@@ -31,6 +31,11 @@ Kelis works as an intern for Salesforce in San Francisco, her commute to work is
 8. As a user, I want to type in my chosen activity for today so that I can have a playlist that matches it. 
 9. As a user, I want to login in to my spotify so that the app can now look at my spotify data to curate a playlist. 
 10. As a user who is a busy intern with crazy mornings, I want to curate R&B playlists designed for morning listening, so that I can avoid skipping songs or touching my phone on the crowded bus.
+11. As a user, I want to be able to log out of Promptify securely without worrying about someone accessing my data
+12. As a user, after I login I want to be able to see my spotify username as I interact with Promptify for a more personalized experience.
+13. As a user, I want to get a list of genre options so I can get a playlist based off of the genres I like
+14. As a user, I want to view my generated playlist before I save it to my spotify. 
+
 
 
 ## Wireframe (Bonus)
