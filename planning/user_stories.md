@@ -21,8 +21,8 @@ Kelis works as an intern for Salesforce in San Francisco, her commute to work is
 ## User Stories
 1. **As a [user role], I want to [what], so that [why]**
 
-As a music listener, I want personalized playlists tailored to my lifestyle so that I can enjoy music that fits my daily activities and mood.
-As a music listener who is a student, I want playlists designed for studying and walking to class, so that I can stay focused and energized throughout my school day.
+1. As a music listener, I want personalized playlists tailored to my lifestyle so that I can enjoy music that fits my daily activities and mood.
+2. As a music listener who is a student, I want playlists designed for studying and walking to class, so that I can stay focused and energized throughout my school day.
 As a user who is employed, I want playlists that help me concentrate and match my music taste so that I can stay productive at work.
 As a user who is a fitness enthusiast, I want high energy playlists suitable for workouts and outdoor activities so that I stay motivated while active.
 As an avid hiker, I like to listen to indie and calming music while going on different hikes. I want to create a playlist that feels like a fresh breeze and allows me to enjoy the scenery.
