@@ -34,7 +34,8 @@ Kelis works as an intern for Salesforce in San Francisco, her commute to work is
 11. As a user, I want to be able to log out of Promptify securely without worrying about someone accessing my data
 12. As a user, after I login I want to be able to see my spotify username as I interact with Promptify for a more personalized experience.
 13. As a user, I want to get a list of genre options so I can get a playlist based off of the genres I like
-14. As a user, I want to view my generated playlist before I save it to my spotify. 
+14. As a user, I want to view my generated playlist before I save it to my spotify.
+15. As a user, I want to be able to view my recently generated playlists through Promptify. 
 
 
 
