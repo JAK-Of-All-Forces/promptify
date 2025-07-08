@@ -19,6 +19,7 @@ Bugsby is an opera singer and major fan of the opera genre from Berlin, Germany.
 Kelis works as an intern for Salesforce in San Francisco, her commute to work is about 20 minutes 10 filled with walking and the other ten filled with waiting on a packed bus. In the mornings she loves listening to R&B music, however her spotify playlist covers a variety of genres so she spends half of her commute skipping songs rather than enjoying her playlist. Because she’s so busy with her work as an intern she doesn't have time to curate her own morning playlist, and she’s already tried looking some up on spotify and the ones recommended have songs she doesn’t like. 
 
 ## User Stories
+1. **As a [user role], I want to [what], so that [why]**
 
 As a music listener, I want personalized playlists tailored to my lifestyle so that I can enjoy music that fits my daily activities and mood.
 As a music listener who is a student, I want playlists designed for studying and walking to class, so that I can stay focused and energized throughout my school day.
@@ -31,7 +32,6 @@ As a user, I want to type in my chosen activity for today so that I can have a p
 As a user, I want to login in to my spotify so that the app can now look at my spotify data to curate a playlist. 
 As a user who is a busy intern with crazy mornings, I want to curate R&B playlists designed for morning listening, so that I can avoid skipping songs or touching my phone on the crowded bus.
 
-1. **As a [user role], I want to [what], so that [why]**
 
 ## Wireframe (Bonus)
 
