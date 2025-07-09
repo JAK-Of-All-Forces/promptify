@@ -6,13 +6,19 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 async function testOpenAI() {
   try {
+//     const prompt = process.argv[2] || "What genres does playboi carti fall under";
+//     //prompt acts a default if you run a command in the terminal it'll run as well
+
+// const response = await openai.chat.completions.create({
+//   model: "gpt-3.5-turbo",
+//   messages: [{ role: "user", content: prompt }],
+// });
+
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
-        {
-          role: "user",
-          content: "Make a 20-minute upbeat playlist for walking to class. List 8 songs with artist names only.",
-        },
+        {role: "system", content: "You are a playlist generator that outputs JSON"}, 
+        {  role: "user", content: "I need a 30 minute playlist for studying.", },
       ],
     })
 
