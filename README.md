@@ -12,8 +12,8 @@ Mentors Names: **Prashasthi Prabhakar, Lillian Zhang, Nitika Aggarwal**
 
 Project Code Repository Links
 
-* [Frontend Repo Link]()
-* [Backend Repo Link]()
+* [Frontend Repo Link](https://github.com/JAK-Of-All-Forces/promptify/tree/main/frontend)
+* [Backend Repo Link](https://github.com/JAK-Of-All-Forces/promptify/tree/main/backend)
 
 ## Project Overview
 
