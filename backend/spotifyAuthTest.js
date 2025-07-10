@@ -8,6 +8,11 @@ dotenv.config()
 
 //to run call node spotifyAuthTest.js
 
+import express from 'express'
+const app = express()
+
+
+
 
 const clientId = process.env.SPOTIFY_CLIENT_ID
 //client ID is our application 
@@ -19,5 +24,42 @@ const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&re
 //the actual link 
 
 console.log("Visit this URL to log in:", authUrl)
+
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET
+const PORT = process.env.PORT || 3001
+
+
+app.get('/api/auth/callback', async (req, res) => {
+  const code = req.query.code
+  if (!code) return res.send("Missing code!")
+
+  try {
+    const response = await axios.post('https://accounts.spotify.com/api/token',
+      new URLSearchParams({
+        code,
+        redirect_uri,
+        grant_type: 'authorization_code'
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Basic ' + Buffer.from(`${clientId}:${client_secret}`).toString('base64')
+        }
+      }
+    )
+
+    const { access_token, refresh_token, expires_in } = response.data
+    console.log("Access token:", access_token)
+    res.send("Login successful! You can close this tab.")
+  } catch (err) {
+    console.error("Error exchanging code for token:", err.response?.data || err.message)
+    res.status(500).send("Auth failed.")
+  }
+})
+
+app.listen(PORT, () => {
+  console.log(`Listening on http://localhost:${PORT}`)
+})
+
 
 
