@@ -42,7 +42,7 @@ app.get('/api/auth/callback', async (req, res) => {
     )
     const { access_token, refresh_token } = response.data
     console.log("Access token:", access_token)
-    res.redirect("http://localhost:3001/home"); 
+    res.redirect(`http://localhost:3000/home?access_token=${access_token}`); 
 
     const profileResponse = await axios.get('https://api.spotify.com/v1/me',
       {
