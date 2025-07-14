@@ -1,4 +1,4 @@
-const prisma = require("../models/user");
+const prisma = require("../routes/user");
 
 exports.create = async (req, res) => {
   try {

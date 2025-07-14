@@ -5,8 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const authController = require('./Controllers/authController');
-// /Users/amari.may/codepath/capstone/promptify/backend/controllers/authController.js
-// /Users/amari.may/codepath/capstone/promptify/backend/user-auth.js
+
 
 
 const app = express()
