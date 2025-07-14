@@ -6,8 +6,8 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
+
 
 datasource db {
   provider = "postgresql"
@@ -20,6 +20,8 @@ model User {
   email         String?
   displayName   String?
   playlists     Playlist[]  // 1:N relation with Playlist
+  accessToken   String
+  refreshToken  String 
   createdAt     DateTime    @default(now())
 }
 
