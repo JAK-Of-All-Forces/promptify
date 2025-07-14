@@ -1,25 +1,24 @@
 const prisma = require("../models/user");
 
-exports.create = async (req,res) =>{
-    const {spotifyId, email, displayName, playlists, accessToken, refreshToken} = req.body; 
+exports.create = async (req, res) => {
+  try {
+    const {spotifyId} =  req.body; 
 
+    const existingUser = await prisma.user.findUnique({
+        where: {spotifyId},
 
-    try{
-       const user = await prisma.user.upsert({
-        //upsert is the same as create but it does not allow duplicates 
-        where: { spotifyId: data.spotifyId },
-         update: {
-         accessToken: data.accessToken,
-         refreshToken: data.refreshToken,
-        },
-        create: {
-         ...data
-        }
-            });
+    })
 
-        res.status(201).json(user);
-
-    }catch(error){
-        res.status(400).json(error); 
+    if(existingUser){
+        return res.status(200).json(existingUser); 
     }
-}
+
+    const user = await prisma.user.create({
+      data: req.body, 
+    });
+    res.status(201).json(user);
+  } catch (error) {
+    console.error("Failed to create user:", error);
+    res.status(400).json(error);
+  }
+};

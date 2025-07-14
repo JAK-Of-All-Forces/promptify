@@ -1,10 +1,12 @@
-//https://developer.spotify.com/documentation/web-api/tutorials/refreshing-tokens
+//https://developer.spotify.com/documentation/web-api/tutorials/refreshing-token
 
-import axios from 'axios'
-import dotenv from 'dotenv'
-dotenv.config()
-import express from 'express'
-import * as authController from './controllers/authController.js'
+const axios = require('axios');
+const dotenv = require('dotenv');
+dotenv.config();
+const express = require('express');
+const authController = require('./Controllers/authController');
+// /Users/amari.may/codepath/capstone/promptify/backend/controllers/authController.js
+// /Users/amari.may/codepath/capstone/promptify/backend/user-auth.js
 
 
 const app = express()
@@ -37,7 +39,7 @@ app.get('/api/auth/callback', async (req, res) => {
         }
       }
     )
-    const { access_token, refresh_token, expires_in } = response.data
+    const { access_token, refresh_token } = response.data
     console.log("Access token:", access_token)
     res.send("Login successful! You can close this tab.")
 
