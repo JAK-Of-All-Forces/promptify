@@ -28,6 +28,7 @@ model User {
 model Playlist {
   id        String               @id @default(uuid())
   name      String?
+  image_url String
   activity  String
   bpmLow    Int?
   bpmHigh   Int?
@@ -43,6 +44,7 @@ model Track {
   spotifyId String
   name     String
   artist   String
+  image_url String
   playlists TracksOnPlaylists[] // N:N relation with Playlist
 }
 
