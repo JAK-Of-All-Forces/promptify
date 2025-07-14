@@ -19,7 +19,9 @@ console.log("Visit this URL to log in:", authUrl)
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 const PORT = process.env.PORT || 3001
 
-
+app.get("/api/auth/login-url", (req, res) => {
+  res.json({ url: authUrl });
+});
 
 app.get('/api/auth/callback', async (req, res) => {
   const code = req.query.code
@@ -40,7 +42,7 @@ app.get('/api/auth/callback', async (req, res) => {
     )
     const { access_token, refresh_token } = response.data
     console.log("Access token:", access_token)
-    res.send("Login successful! You can close this tab.")
+    res.redirect("http://localhost:3001/home"); 
 
     const profileResponse = await axios.get('https://api.spotify.com/v1/me',
       {
