@@ -20,6 +20,8 @@ model User {
   email         String?
   displayName   String?
   playlists     Playlist[]  // 1:N relation with Playlist
+  accessToken   String
+  refreshToken  String 
   createdAt     DateTime    @default(now())
 }
 
