@@ -9,7 +9,7 @@ function PlaylistCard({ playlist }) {
             {/* Make sure to come back to this endpoint for the individual playlist to see if this matches up*/}
             <Link to = {`/${playlist.id}`}>
                 {/* Playlist cover */}
-                <div className = "media">
+                <div className = "playlist-cover">
                     {playlist.image_url ? (
                         <img src={playlist.image_url} alt = "Playlist cover" />
                     ) : (
