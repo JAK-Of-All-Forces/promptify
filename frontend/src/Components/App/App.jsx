@@ -43,7 +43,7 @@ function App() {
 
 
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={
@@ -60,7 +60,7 @@ function App() {
           } />
         <Route path="*" element={<ErrorPage />} /> 
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
