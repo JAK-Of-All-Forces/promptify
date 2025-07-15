@@ -1,14 +1,30 @@
 const {OpenAI} = require("openai");
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+
 const dotenv = require("dotenv");
 dotenv.config()
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+
 const clientId = process.env.SPOTIFY_CLIENT_ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 
+const axios = require("axios");
+
+// neeed  to try this after a user has logged in
+const getAccessToken = async(userId) => {
+  const response = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { accessToken: true }
+  });
+
+  if (response){
+    return response.accessToken
+  } else {
+    return null
+  }
+}
 
 async function callOpenAI(prompt) {
   try {
@@ -51,31 +67,47 @@ async function callOpenAI(prompt) {
   }
 }
 
-async function getSpotifyId(name, artist){
-  console.log("Searching for the track ID with this name and artist on Spotify")
-  console.log("This is the name:" + name);
-  console.log("This is the artist:" + artist);
-  let headers = {
-    headers: {
+async function getSpotifyId(name, artist, id) {
+  try {
+    console.log("Searching for the track ID with this name and artist on Spotify");
+    console.log("This is the name: " + name);
+    console.log("This is the artist: " + artist);
+    const spotifyToken = await getAccessToken(id);
+
+    const headers = {
+      headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + accessToken
+        'Authorization': 'Bearer ' + spotifyToken
+      }
+    };
+    const query = `track:"${name}" artist:"${artist}"`;
+    const encodedQuery = encodeURIComponent(query);
+
+    const response = await axios.get(
+      `https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=1`,
+      headers
+    );
+
+    console.log("we have searched the spotify api, this is what we got: ")
+    console.log(response);
+    console.log(response.data);
+
+    const items = response.data.tracks.items;
+    if (items && items.length > 0) {
+      console.log("the spotify id was found! returning it now")
+      return items[0].id; // Spotify ID
+    } else {
+      console.log("The Spotify ID for this track was not found in Spotify.");
+      return null;
     }
+  } catch (error) {
+    console.error("Error fetching Spotify ID:", error);
+    return null;
   }
-  const response = await axios.get(
-    `https://api.spotify.com/v1/search?q=track:${name}%20artist:${artist}&type=track&limit=1`,
-    headers
-  );  
-  console.log(response);
-  console.log(response.data);
-  const items = response.data.tracks.items;
-  if (items && items.length > 0) {
-      return items[0].id; // Spotidy ID
-    }
-  console.log("The Spotify ID for this track was not found in Spotify.")
-  return null;
 }
 
-async function createTracks(tracks) {
+
+async function createTracks(tracks, id) {
   console.log("now in the create trackss function")
   if (!tracks || !Array.isArray(tracks) || tracks.length === 0) {
     throw new Error("The tracks are required and must be a non-empty array");
@@ -84,7 +116,7 @@ async function createTracks(tracks) {
   try { // doesn not account for if the track is already in db so you will need to add that
     const prismaTracks = await Promise.all(
       tracks.map(async (track) => {
-        const spotifyId = await getSpotifyId(track.name, track.artist);
+        const spotifyId = await getSpotifyId(track.name, track.artist, id);
         return prisma.track.create({
           data: {
             spotifyId,
@@ -172,7 +204,7 @@ const createPrompt = async (req, res) => {
   console.log("done talking to OpenAIAPI ");
 
   console.log("trying to get the spotify ids and make the tracks for the database, entering the createTracks function");
-  const songTracks = await createTracks(openAIResponse.tracks);
+  const songTracks = await createTracks(openAIResponse.tracks, userId);
 
   try {
     const playlistInfo = await prisma.playlist.create({
