@@ -1,14 +1,12 @@
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import no_image from "../../assets/no_img.png";
 import "./TrackCard.css";
 
 function TrackCard({ track }) {
   return (
     <div className="TrackCard">
-      {/* Make sure to come back to this endpoint for the individual playlist to see if this matches up*/}
-      <Link to={`/${track.id}`}>
         {/* Track cover */}
-        <div className="media">
+        <div className="track-cover">
           {track.image_url ? (
             <img src = {track.image_url} alt="Track cover" />
           ) : (
@@ -22,7 +20,6 @@ function TrackCard({ track }) {
             <p className = "track-artist">{track.artist}</p>
             <p className = "track-duration">{track.duration}</p>
         </div>
-      </Link>
     </div>
   );
 }
