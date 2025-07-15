@@ -18,10 +18,62 @@ console.log("Visit this URL to log in:", authUrl)
 
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 const PORT = process.env.PORT || 3001
+const basicAuth = Buffer.from(`${clientId}:${client_secret}`).toString("base64");
+
 
 app.get("/api/auth/login-url", (req, res) => {
   res.json({ url: authUrl });
 });
+
+
+app.get("/api/auth/refresh-token/:spotifyId", async (req, res) => {
+  const spotifyId = req.params.spotifyId;
+
+  try {
+    const user = await prisma.user.findUnique({ where: { spotifyId } });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found!" });
+    }
+
+    // Make request to Spotify to get a new access token
+    const params = new URLSearchParams();
+    params.append("grant_type", "refresh_token");
+    params.append("refresh_token", user.refreshToken);
+
+
+    const { data } = await axios.post(
+      "https://accounts.spotify.com/api/token",
+      params,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Basic ${basicAuth}`,
+        },
+      }
+    );
+
+    // Update user access token in DB
+    await prisma.user.update({
+      where: { spotifyId },
+      data: {
+        accessToken: data.access_token,
+        // update refresh token if returned 
+        ...(data.refresh_token && { refreshToken: data.refresh_token }),
+      },
+    });
+
+    // Send new access token to client
+    res.json({
+      accessToken: data.access_token,
+      expiresIn: data.expires_in,
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: "Failed to refresh token" });
+  }
+});
+
 
 app.get('/api/auth/callback', async (req, res) => {
   const code = req.query.code
@@ -36,13 +88,14 @@ app.get('/api/auth/callback', async (req, res) => {
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + Buffer.from(`${clientId}:${client_secret}`).toString('base64')
+          'Authorization': `Basic ${basicAuth}`
         }
       }
     )
     const { access_token, refresh_token } = response.data
     console.log("Access token:", access_token)
-    res.redirect(`http://localhost:3000/home?access_token=${access_token}`); 
+    res.redirect(`http://localhost:3000/home?access_token=${access_token}&spotify_id=${userSpotifyProfile.id}`);
+
 
     const profileResponse = await axios.get('https://api.spotify.com/v1/me',
       {
@@ -82,7 +135,7 @@ app.get('/api/auth/callback', async (req, res) => {
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': 'Basic ' + Buffer.from(`${clientId}:${client_secret}`).toString('base64')
+          'Authorization': `Basic ${basicAuth}`
         }
       }
 
