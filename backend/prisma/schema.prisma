@@ -8,6 +8,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -19,12 +20,15 @@ model User {
   email         String?
   displayName   String?
   playlists     Playlist[]  // 1:N relation with Playlist
+  accessToken   String
+  refreshToken  String 
   createdAt     DateTime    @default(now())
 }
 
 model Playlist {
   id        String               @id @default(uuid())
   name      String?
+  image_url String
   activity  String
   bpmLow    Int?
   bpmHigh   Int?
@@ -42,6 +46,7 @@ model Track {
   name     String
   artist   String
   duration String
+  image_url String
   playlists TracksOnPlaylists[] // N:N relation with Playlist
 }
 

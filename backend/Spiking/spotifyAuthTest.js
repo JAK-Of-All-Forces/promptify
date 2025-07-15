@@ -33,6 +33,7 @@ app.get('/api/auth/callback', async (req, res) => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization': 'Basic ' + Buffer.from(`${clientId}:${client_secret}`).toString('base64')
+          
         }
       }
     )
