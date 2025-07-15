@@ -1,14 +1,21 @@
 const express = require('express');
 require("dotenv").config();
-const app = express();
-const PORT = process.env.PORT || 3000;
-
 const playlistRoutes = require('../backend/routes/playlist.js');
 const trackRoutes = require('../backend/routes/track.js');
 const tracksOnPlaylistRoutes = require('../backend/routes/tracksOnPlaylist.js');
 const userRoutes = require('../backend/routes/user.js')
 
-app.use(express.json());
+const app = express();
+const PORT = process.env.PORT || 3001
+
+// middleware
+const cors = require("cors");
+app.use(cors());
+app.use(express.json()); 
+
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
+app.use("/api/tracks/" ,trackRoutes);
 
 
 app.get('/', (req, res) => {
