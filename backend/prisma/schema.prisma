@@ -33,6 +33,7 @@ model Playlist {
   bpmLow    Int?
   bpmHigh   Int?
   genres    String[]
+  duration Int
   tracks    TracksOnPlaylists[]  // N:N relation with Track
   user      User                 @relation(fields: [userId], references: [id])
   userId    String
@@ -41,7 +42,7 @@ model Playlist {
 
 model Track {
   id       String               @id @default(uuid())
-  spotifyId String
+  spotifyId String              @unique
   name     String
   artist   String
   duration String
