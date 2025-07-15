@@ -44,6 +44,7 @@ model Track {
   spotifyId String
   name     String
   artist   String
+  duration String
   image_url String
   playlists TracksOnPlaylists[] // N:N relation with Playlist
 }

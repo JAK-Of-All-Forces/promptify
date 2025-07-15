@@ -4,7 +4,7 @@ import "./PlaylistPage.css";
 
 function PlaylistPage(playlist) {
     return (
-        <div>
+        <div className = "PlaylistPage">
             {/* Displayling NavBar component */}
             <NavBar></NavBar>
 
@@ -18,6 +18,10 @@ function PlaylistPage(playlist) {
                     ) : (
                         <img src={no_image} alt="Playlist cover (no image)" />
                     )}
+                </div>
+                <div className = "playlist-songs">
+
+
                 </div>
             </div>
         </div>
