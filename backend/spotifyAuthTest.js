@@ -1,11 +1,13 @@
-import axios from 'axios'
+// import axios from 'axios'
+const axios = require("axios");
+
 //axios makes http request to the spotify api
-import dotenv from 'dotenv'
+const dotenv = require("dotenv");
 dotenv.config()
 //.env just makes sure that we can use the spotify credentials
 //in order to access any data  a token is needed aka the user needs to be logged in to access their data
 //to run call node spotifyAuthTest.js
-import express from 'express'
+const express = require("express");
 const app = express()
 const clientId = process.env.SPOTIFY_CLIENT_ID
 //client ID is our application
