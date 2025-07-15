@@ -17,9 +17,9 @@ function LoginButton({}){
   }
     }
     return(
-        <i className="login-button" onClick={handleLoginClick}>
+        <button className="login-button" onClick={handleLoginClick}>
              Login
-            </i>
+            </button>
     ); 
 }
 
