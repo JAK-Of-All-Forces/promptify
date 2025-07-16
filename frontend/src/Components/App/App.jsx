@@ -11,7 +11,7 @@ import ErrorPage from '../../Pages/ErrorPage/ErrorPage';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
-      const [token, setToken] = useState(); 
+      const [token, setToken] = useState(undefined); 
 
       useEffect(() => {
 
@@ -35,11 +35,18 @@ function App() {
      const storedToken = localStorage.getItem("spotify_access_token");
      if (storedToken){ 
         setToken(storedToken);
+     }else{
+      setToken(null); 
      }
 
     }
    
   },[] );
+
+  if (token === undefined) {
+  return null; 
+}
+
 
 
   return (
@@ -48,7 +55,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={
             <ProtectedRoute token = {token}>
-          <HomePage token = {token}/>
+          <HomePage token = {token} setToken = {setToken}/>
           </ProtectedRoute>
           } />
         <Route path="/about" element={<AboutPage />} />
