@@ -5,8 +5,8 @@ const { PrismaClient } = require("@prisma/client");
 const router = express.Router();
 const prisma = new PrismaClient();
 // const controller = require("../controllers/playlistController");
-const generatePlaylistController = require("../Controllers/generatePlaylistController");
+// const generatePlaylistController = require("../Controllers/generatePlaylistController");
 
-router.post("/createPrompt", generatePlaylistController.createPrompt);
+// router.post("/createPrompt", generatePlaylistController.createPrompt);
 
 module.exports = router;
