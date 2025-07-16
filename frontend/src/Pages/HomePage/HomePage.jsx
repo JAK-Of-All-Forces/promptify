@@ -1,6 +1,7 @@
 import NavBar from "../../Components/NavBar/NavBar";
 import { useState, useEffect } from "react";
 import LogoutButton from "../../Components/SpotifyLogout/LogoutButton"
+import "./HomePage.css"
 
 
 function HomePage({token, setToken}) {
