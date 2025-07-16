@@ -71,7 +71,14 @@ function HomePage({token}) {
 
     return (
         //Displayling NavBar component
-        <NavBar></NavBar>
+        <div className="home-container">
+                    <NavBar></NavBar>
+            <div style={{ padding: "2rem" }}>
+                <LogoutButton />
+            </div>
+
+            {/* Rest of the home page content below */}
+        </div>
 
     );
 }
