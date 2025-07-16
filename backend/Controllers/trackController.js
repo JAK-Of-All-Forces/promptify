@@ -1,26 +1,23 @@
 const prisma = require("../models/prismaClient");
 
 
-//Controller for getting all playlist tracks
+//Controller for getting a singular track
 //GET
-exports.getAllPlaylistTracks = async (req, res) => {
-  const id = Number(req.params.id);
+exports.getTrackById = async (req, res) => {
+  const id = String(req.params.id);
 
   try {
-    const allTracks = await prisma.playlist.findUnique({
+    const track = await prisma.track.findUnique({
       where: { id },
-      include: {
-        cards: true,
-      },
     });
 
-    if (!allTracks) {
+    if (!track) {
       return res
         .status(404)
         .json({ error: "Tracks for this board cannot be found!" });
     }
 
-    res.json(allTracks);
+    res.json(track);
 
   } catch (err) {
     console.error(err);
