@@ -9,15 +9,15 @@ exports.getAll = async (req, res) => {
 
   try {
     //Syntax - prisma get all playlists
-    const playlists = await prisma.Playlist.findMany();
+    const playlists = await prisma.playlist.findMany();
 
     //Returning all playlists
     res.json(playlists);
   } 
   
   catch (error) {
-      throw new Error(error);
-  }
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch playlists." });  }
 };
 
 

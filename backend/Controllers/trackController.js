@@ -3,7 +3,8 @@ const prisma = require("../models/prismaClient");
 
 //Controller for getting a singular track
 //GET
-exports.getTrackById = async (req, res) => {
+//This is possibly not neccessary but I am going to keep this here for now
+exports.getById = async (req, res) => {
   const id = String(req.params.id);
 
   try {

@@ -7,17 +7,10 @@ const controller = require("../controllers/playlistController");
 
 
 //GET all playlists
-
-
+router.get("/", controller.getAll);
 
 //GET specifc playlist
 router.get("/:id", controller.getById);
-
-
-
-
-
-
 
 
 module.exports = router;
