@@ -22,6 +22,12 @@ app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 3001
 
+// app.use('/playlist', playlistRoutes);
+// app.use('/track', trackRoutes);
+// app.use('/trackPlaylist', tracksOnPlaylistRoutes);
+
+//app.use('/user', userRoutes);
+
 // const authRoutes = require("./routes/authRoutes");
 // app.use("/api/auth", authRoutes);
 app.use("/api/tracks/" ,trackRoutes);
@@ -35,7 +41,3 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
-// app.use('/playlist', playlistRoutes);
-// app.use('/track', trackRoutes);
-// app.use('/trackPlaylist', tracksOnPlaylistRoutes);
-// app.use('user', userRoutes);
