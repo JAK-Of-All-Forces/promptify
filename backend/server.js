@@ -26,11 +26,11 @@ const PORT = process.env.PORT || 3001
 // app.use('/track', trackRoutes);
 // app.use('/trackPlaylist', tracksOnPlaylistRoutes);
 
-//app.use('/user', userRoutes);
 
 // const authRoutes = require("./routes/authRoutes");
 // app.use("/api/auth", authRoutes);
 app.use("/api/tracks/" ,trackRoutes);
+app.use('/user', userRoutes);
 
 
 app.get('/', (req, res) => {
