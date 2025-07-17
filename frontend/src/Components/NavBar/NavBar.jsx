@@ -1,26 +1,34 @@
 import "./NavBar.css";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
+function NavBar() {
+  const navigate = useNavigate();
 
+  //This function checks if the user is logged in or not based off of their token 
+  const handleLogoClick = () => {
+    const token = localStorage.getItem("spotify_access_token");
 
-function NavBar(){
-return (
-  <nav className="content">
-    {/* Link to homepage on click of the word Promptify*/}
-    <div className="promptify-logo">
-      <Link to = {`/home`}>
+    if (token) {
+      navigate("/home");
+    } else {
+      navigate("/");
+    }
+  };
+
+  return (
+    <nav className="content">
+      {/* Replace <Link> with onClick to handle redirect */}
+      <div className="promptify-logo" onClick={handleLogoClick} style={{ cursor: "pointer" }}>
         <h1>Promptify</h1>
-      </Link>
-    </div>
+      </div>
 
-    {/* Link to about us page */}
-    <div className="about-us">
-      <Link to={`/about`}>
-        <h3>About Us</h3>
-      </Link>
-    </div>
-  </nav>
-);
+      <div className="about-us">
+        <Link to="/about">
+          <h3>About Us</h3>
+        </Link>
+      </div>
+    </nav>
+  );
 }
 
 export default NavBar;
