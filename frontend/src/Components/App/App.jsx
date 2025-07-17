@@ -49,25 +49,6 @@ function App() {
   return null; 
 }
 
-    // const openModal = async (){
-    //   setShowModal(true);
-    //   setSelectedPerson(null)
-
-    //   try{
-
-    //   }catch(err){
-    //     console.error("Error fetching: ", err); 
-    //   }
-
-      
-    // }
-    // const closeModal = () =>{
-    //     setShowModal(false); 
-    //      setSelectedPerson(null); 
-    //   }
-
-
-
   return (
     <BrowserRouter>
       <Routes>
