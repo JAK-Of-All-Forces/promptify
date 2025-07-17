@@ -10,9 +10,9 @@ import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
-  const [token, setToken] = useState();
+      const [token, setToken] = useState(undefined); 
 
-  useEffect(() => {
+    useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     //.search only grabs the query params at the end of a url
     const accessToken = queryParams.get("access_token");
@@ -32,22 +32,29 @@ function App() {
       const storedToken = localStorage.getItem("spotify_access_token");
       if (storedToken) {
         setToken(storedToken);
-      }
+     }else{
+      setToken(null); 
+     }
+
     }
-  }, []);
+   
+  },[] );
+
+  if (token === undefined) {
+  return null; 
+}
+
+
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute token={token}>
-              <HomePage token={token} />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/home" element={
+            <ProtectedRoute token = {token}>
+          <HomePage token = {token} setToken = {setToken}/>
+          </ProtectedRoute>
+          } />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/prompt" element={<PromptPage />} />
         <Route path="/playlist" element={<PlaylistPage />} />
