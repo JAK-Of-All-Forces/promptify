@@ -12,6 +12,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
       const [token, setToken] = useState(undefined); 
+      const [showModal,setShowModal] = useState(false); 
+      const [selectedPerson, setSelectedPerson] = useState(null); 
 
       useEffect(() => {
 
@@ -46,6 +48,23 @@ function App() {
   if (token === undefined) {
   return null; 
 }
+
+    // const openModal = async (){
+    //   setShowModal(true);
+    //   setSelectedPerson(null)
+
+    //   try{
+
+    //   }catch(err){
+    //     console.error("Error fetching: ", err); 
+    //   }
+
+      
+    // }
+    // const closeModal = () =>{
+    //     setShowModal(false); 
+    //      setSelectedPerson(null); 
+    //   }
 
 
 

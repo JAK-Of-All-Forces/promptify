@@ -5,6 +5,7 @@ import greenCard from "../../assets/greenAboutCard.png";
 import "../AboutPage/AboutPage.css"; 
 
 function AboutPage() {
+    
     return (
         <div className="about-container">
             <NavBar />
