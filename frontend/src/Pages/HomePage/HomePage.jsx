@@ -1,10 +1,13 @@
 import NavBar from "../../Components/NavBar/NavBar";
 import { useState, useEffect } from "react";
-import LogoutButton from "../../Components/SpotifyLogout/LogoutButton"
-import "./HomePage.css"
+import PreviousPlaylists from "../../Components/PreviousPlaylists/PreviousPlaylists";
+import LogoutButton from "../../Components/SpotifyLogout/LogoutButton";
+import "./HomePage.css";
 
 
 function HomePage({token, setToken}) {
+
+  const [userPlaylists, setUserPlaylists] = useState([]);
 
   useEffect(() => {
   if (!token) return;
@@ -51,6 +54,13 @@ function HomePage({token, setToken}) {
             </div>
 
             {/* Rest of the home page content below */}
+
+            <div>
+                <PreviousPlaylists
+                  userPlaylists = {userPlaylists}
+                />
+                  
+            </div>
         </div>
 
     );
