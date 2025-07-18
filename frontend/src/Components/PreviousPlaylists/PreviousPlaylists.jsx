@@ -4,6 +4,7 @@ import no_image from "../../assets/no_img.png"
 
 function PreviousPlaylists({ userPlaylists = []}){
 
+    console.log("previous playlist" , userPlaylists)
     return (
         <div className="content">
             <div className="header">
