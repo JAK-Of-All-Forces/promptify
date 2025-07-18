@@ -14,6 +14,7 @@ app.use(express.json());
 const trackRoutes = require('../backend/routes/track.js');
 const tracksOnPlaylistRoutes = require('../backend/routes/tracksOnPlaylist.js');
 const userRoutes = require('../backend/routes/user.js')
+const playlistRoutes = require('../backend/routes/playlist.js')
 
 const authRoutes = require("./routes/authRoutes");
 console.log("authRoutes:", authRoutes); // Add this
@@ -22,7 +23,6 @@ app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT || 3001
 
-// app.use('/playlist', playlistRoutes);
 // app.use('/track', trackRoutes);
 // app.use('/trackPlaylist', tracksOnPlaylistRoutes);
 
@@ -31,6 +31,8 @@ const PORT = process.env.PORT || 3001
 // app.use("/api/auth", authRoutes);
 app.use("/api/tracks/" ,trackRoutes);
 app.use('/user', userRoutes);
+app.use('/playlist', playlistRoutes);
+
 
 
 app.get('/', (req, res) => {

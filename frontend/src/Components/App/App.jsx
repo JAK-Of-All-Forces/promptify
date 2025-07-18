@@ -57,7 +57,7 @@ function App() {
           } />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/prompt" element={<PromptPage />} />
-        <Route path="/playlist" element={<PlaylistPage />} />
+        <Route path="/playlist/:id" element={<PlaylistPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
