@@ -1,14 +1,39 @@
 import NavBar from "../../Components/NavBar/NavBar";
+import { useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
 import no_image from "../../assets/no_img.png"
 import "./PlaylistPage.css";
 import TrackCard from "../../Components/TrackCard/TrackCard"
 
-function PlaylistPage(playlist) {
+function PlaylistPage() {
 
+    const {id} = useParams();
+    const [playlist, setPlaylist] = useState(null);
+
+    useEffect(() => {
+        const fetchPlaylist = async () => {
+            try {
+                const res = await fetch(`http://localhost:3001/playlist/${id}`);
+                const data = await res.json();
+                setPlaylist(data);
+            }
+            catch (err) {
+                console.error("Error fetching playlist: ", err);
+            }
+        }
+        fetchPlaylist();
+
+    }, [id]);
+
+    console.log("Playlist", playlist);
     function AddToSpotify(playlist) {
 
     }
 
+
+    if (!playlist) {
+      return <div className="PlaylistPage">Loading...</div>;
+    }
 
     return (
         <div className="PlaylistPage">
@@ -18,7 +43,7 @@ function PlaylistPage(playlist) {
             {/* Playlist Page */}
             <div>
             {/* Playlist Title */}
-            <h1 className="playlist-title">{playlist.title}</h1>
+            <h1 className="playlist-title">{playlist.name}</h1>
 
             {/* Add to Spotify Button */}
             <button>Add to Spotify</button>
@@ -34,13 +59,13 @@ function PlaylistPage(playlist) {
 
             {/* Mapping through all of the playlist tracks */}
             <div className="playlist-tracks">
-                {!playlist?.length ? (
+                {!playlist.tracks || playlist.tracks.length === 0? (
                 <div className="no-tracks">
                     <img src={no_image} alt="No tracks" />
                     <p>This Promptify playlist has no tracks</p>
                 </div>
                 ) : (
-                playlist.track.map((track) => (
+                playlist.tracks.map((track) => (
                     <TrackCard key={track.id} track={track} />
                 ))
                 )}

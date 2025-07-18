@@ -17,8 +17,7 @@ function App() {
       const [showModal,setShowModal] = useState(false); 
       const [selectedPerson, setSelectedPerson] = useState(null); 
 
-      useEffect(() => {
-
+    useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     //.search only grabs the query params at the end of a url
     const accessToken = queryParams.get("access_token");
@@ -56,14 +55,10 @@ function App() {
           <HomePage token = {token} setToken = {setToken}/>
           </ProtectedRoute>
           } />
-        <Route path="/about" element={<AboutPage token={token} />} />
-        <Route path="/prompt" element={
-              <PromptPage />
-          } />
-        <Route path="/playlist" element={
-          <PlaylistPage />
-          } />
-        <Route path="*" element={<ErrorPage />} /> 
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/prompt" element={<PromptPage />} />
+        <Route path="/playlist/:id" element={<PlaylistPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
