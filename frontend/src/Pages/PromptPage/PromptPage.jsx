@@ -1,11 +1,15 @@
 import NavBar from "../../Components/NavBar/NavBar"
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PromptPage.css";
 import { toast } from 'react-toastify';
 
 
 
 function PromptPage () {
+    const navigate = useNavigate();
+
+
     // playlist Name logic
     const [inputPlaylistName, setInputPlaylistName] = useState("");
     const handleOnNameInputChange = (event) => {
@@ -155,6 +159,8 @@ function PromptPage () {
             setShowGenreInput(false)
 
             // TODO: need to send payload to the backend with a route call
+            // TODO: navigate user to playlist page automatically , need nadviage, a route for the playlist by id
+            navigate("/playlist")
 
         } else {
             toast.error("Please make sure you have chosen an activity, set the duration, and selected a genre.")
