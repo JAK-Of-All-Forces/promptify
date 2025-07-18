@@ -12,6 +12,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
       const [token, setToken] = useState(undefined); 
+      const [showModal,setShowModal] = useState(false); 
+      const [selectedPerson, setSelectedPerson] = useState(null); 
 
       useEffect(() => {
 
@@ -47,8 +49,6 @@ function App() {
   return null; 
 }
 
-
-
   return (
     <BrowserRouter>
       <Routes>
@@ -58,7 +58,7 @@ function App() {
           <HomePage token = {token} setToken = {setToken}/>
           </ProtectedRoute>
           } />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/about" element={<AboutPage token={token} />} />
         <Route path="/prompt" element={
               <PromptPage />
           } />
