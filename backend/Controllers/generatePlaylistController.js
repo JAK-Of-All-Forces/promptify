@@ -104,21 +104,31 @@ async function createTracks(tracks) {
   }
 }
 
+async function getSpotifyIdFromToken() {
+  
+}
+
 // this is for the route : router.post("/", generatePlaylistController.createPrompt)
 const createPrompt = async (req, res) => {
   console.log("Saving the created prompt to database.");
+
+  const spotifyUserId = getSpotifyIdFromToken();
+  const user = await prisma.user.findUnique({
+    where: { spotifyUserId }
+  });
+  const userId = user.id;
     
   // these are the things we need to get the playlist
   console.log(req.body);
-  const { name, activity, bpmLow, bpmHigh, genres, duration, userId } = req.body;
-  if (!name || !activity || !genres || !duration || !userId) {
+  const { name, activity, bpmLow, bpmHigh, genres, duration } = req.body;
+  if (!name || !activity || !genres || !duration) {
     return res
       .status(400)
-      .json({ error: "The name, activity, genres, duration, and userID fields are required" });
+      .json({ error: "The name, activity, genres, and duration fields are required" });
   }
 
   let userContentPrompt = "";
-  if (bpmLow && bpmHigh){
+  if ((bpmLow != 0) && (bpmHigh != 0)){
     userContentPrompt = `Create a playlist for the activity: ${activity}. 
       All songs should have a tempo between ${bpmLow} and ${bpmHigh} BPM. 
       Use the following genres: ${genres.join(", ")}. 
