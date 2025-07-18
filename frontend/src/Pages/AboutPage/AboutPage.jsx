@@ -1,30 +1,66 @@
 import NavBar from "../../Components/NavBar/NavBar";
-import blueCard from "../../assets/blueAboutCard.png";
-import purpleCard from "../../assets/purpleAboutCard.png";
-import greenCard from "../../assets/greenAboutCard.png";
 import "../AboutPage/AboutPage.css"; 
+import aboutData from "../../data/aboutData";
+import { useState } from "react";
+import AboutModal from "../../Components/AboutModal/AboutModal";
 
-function AboutPage() {
-    return (
-        <div className="about-container">
-            <NavBar />
-            <div className="aboutCard-container">
-                <img src={blueCard} alt="Blue About Card" className="aboutCard" />
-                <img src={purpleCard} alt="Purple About Card" className="aboutCard" />
-                <img src={greenCard} alt="Green About Card" className="aboutCard" />
-            </div>
-            <div className="faq-container">
-                <h2>Frequently Asked Questions</h2>
-                 <ul>
-                     <li>How does Promptify work?</li>
-                     <li>Is my data secure?</li>
-                     <li>Can I customize my playlists?</li>
-                     <li>Do I need a premium Spotify account?</li>
-                </ul>
-            </div>
 
-        </div>
-    );
+
+function AboutPage({token}) {
+    const [selectedPerson, setSelectedPerson] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false); 
+
+    const handleClose = () => {
+        setModalOpen(false);
+        setSelectedPerson(null); 
+        };
+
+return (
+  <div className="about-container">
+    <NavBar token = {token}/>
+    <div className="aboutCard-container">
+      {aboutData.map((person) => (
+  <div
+    className="about-card"
+    key={person.id}
+    onClick={() => {
+      setSelectedPerson(person);
+      setModalOpen(true);
+    }}
+  >
+    <img src={person.image} alt={person.name} className="card-bg" />
+    <div className="card-content">
+      <h3>{person.name}</h3>
+      <p>{person.role}</p>
+      <a href={person.linkedin} >
+        LinkedIn
+      </a>
+    </div>
+  </div>
+))}
+
+  </div>
+
+
+    <div className="faq-container">
+      <h2>Frequently Asked Questions</h2>
+      <ul>
+        <li>How does Promptify work?</li>
+        <li>Is my data secure?</li>
+        <li>Can I customize my playlists?</li>
+        <li>Do I need a premium Spotify account?</li>
+      </ul>
+    </div>
+   {
+    modalOpen && selectedPerson &&(
+   <AboutModal
+       onClose={handleClose}
+       selectedPerson={selectedPerson}
+     />
+    )}
+  </div>
+);
 }
+
 
 export default AboutPage;
