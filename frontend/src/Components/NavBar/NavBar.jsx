@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 
 
-function NavBar(){
+function NavBar({token}){
 return (
   <nav className="content">
     {/* Link to homepage on click of the word Promptify*/}
     <div className="promptify-logo">
-      <Link to = {`/home`}>
+      <Link to = {token ? `/home`: `/`}>
         <h1>Promptify</h1>
       </Link>
     </div>

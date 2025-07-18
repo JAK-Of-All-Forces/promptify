@@ -6,7 +6,7 @@ import AboutModal from "../../Components/AboutModal/AboutModal";
 
 
 
-function AboutPage() {
+function AboutPage({token}) {
     const [selectedPerson, setSelectedPerson] = useState(null);
     const [modalOpen, setModalOpen] = useState(false); 
 
@@ -17,7 +17,7 @@ function AboutPage() {
 
 return (
   <div className="about-container">
-    <NavBar />
+    <NavBar token = {token}/>
     <div className="aboutCard-container">
       {aboutData.map((person) => (
   <div
