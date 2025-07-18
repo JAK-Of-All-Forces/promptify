@@ -2,7 +2,6 @@ import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ token, children }) {
   if (token === undefined) {
-    // Still loading — render nothing or a spinner
     return null;
   }
 
