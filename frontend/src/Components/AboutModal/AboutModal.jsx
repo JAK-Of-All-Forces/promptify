@@ -17,10 +17,13 @@ const AboutModal = ({selectedPerson, onClose}) => {
 ) : (
   <div className="details">
     <h2>{selectedPerson.name}</h2>
-    <p>{selectedPerson.funFacts}</p>
-
-    {/* gotta loop through this  */}
-   
+    {selectedPerson.funFacts && (
+  <div className="fun-facts">
+    <p><strong>Favorite Song:</strong> {selectedPerson.funFacts.favoriteSong}</p>
+    <p><strong>Favorite Genre:</strong> {selectedPerson.funFacts.favoriteGenre}</p>
+    <p><strong>Favorite Emoji:</strong> {selectedPerson.funFacts.favoriteEmoji}</p>
+  </div>
+)}   
    
   </div>
 )}

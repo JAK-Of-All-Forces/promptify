@@ -2,12 +2,18 @@ import NavBar from "../../Components/NavBar/NavBar";
 import "../AboutPage/AboutPage.css"; 
 import aboutData from "../../data/aboutData";
 import { useState } from "react";
+import AboutModal from "../../Components/AboutModal/AboutModal";
 
 
 
 function AboutPage() {
     const [selectedPerson, setSelectedPerson] = useState(null);
     const [modalOpen, setModalOpen] = useState(false); 
+
+    const handleClose = () => {
+        setModalOpen(false);
+        setSelectedPerson(null); 
+        };
 
 return (
   <div className="about-container">
@@ -45,6 +51,13 @@ return (
         <li>Do I need a premium Spotify account?</li>
       </ul>
     </div>
+   {
+    modalOpen && selectedPerson &&(
+   <AboutModal
+       onClose={handleClose}
+       selectedPerson={selectedPerson}
+     />
+    )}
   </div>
 );
 }
