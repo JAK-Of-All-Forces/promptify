@@ -6,18 +6,43 @@ import { toast } from 'react-toastify';
 
 
 function PromptPage () {
+    // playlist Name logic
     const [inputPlaylistName, setInputPlaylistName] = useState("");
+    const handleOnNameInputChange = (event) => {
+        setInputPlaylistName(event.target.value);
+    };
 
+
+
+    // activity button logic
     const [showActivityInput, setShowActivityInput] = useState(false);
     const activities = ["Studying", "Commuting", "Hiking", "Yoga", "Gym", "Sleep"]; // need to change this to have more features in stretch
     const [selectedActivity, setSelectedActivity] = useState("");
+        function handleActivityCheckboxChange(event) {
+        const { value, checked } = event.target; // destructures event to the value and checked
+        if (checked) {
+            setSelectedActivity([...selectedActivity, value]);
+        } else {
+            setSelectedActivity(selectedActivity.filter(a => a !== value)); // removes unchecked values from selected activities
+        }
+    }
     const toggleActivities = () => { 
         setShowActivityInput(prev => !prev) 
     };
 
+
+
+    // duration button logic
     const [showDurationInput, setShowDurationInput] = useState(false);
     const durations = ["15 minutes", "30 minutes", "45 minutes", "60 minutes", "75 minutes", "90 minutes", "105 minutes", "120 minutes"];
     const [selectedDuration, setSelectedDuration] = useState("")
+    function handleDurationChange(event){     // stretch feature: change 90 minutes to be hour and minutes format to users
+          if (selectedDuration.includes(event)) {
+            setSelectedDuration(selectedDuration.filter(d => d !== event));
+        } else {
+            setSelectedDuration([event]);
+        } 
+    }
     const toggleDuration = () => { 
         if (selectedActivity.length == 0){
             toast.error("Please select at least one activity before continuing.");
@@ -27,9 +52,20 @@ function PromptPage () {
         }  
     }
 
+
+
+    // genre button logic
     const [showGenreInput, setShowGenreInput] = useState(false);
     const genres = ["lyrical rap", "rnb", "rap", "country", "pop", "worship"]
     const [selectedGenres, setSelectedGenres] = useState([]);
+    function handleGenreCheckboxChange(event) {
+        const { value, checked } = event.target; // destructures event to the value and checked
+        if (checked) {
+            setSelectedGenres([...selectedGenres, value]);
+        } else {
+            setSelectedGenres(selectedGenres.filter(a => a !== value)); // removes unchecked values from selected activities
+        }
+    }
     const toggleGenre = () => {
         if (!selectedDuration || !selectedActivity){
             toast.error("Please select the activity and duration of your activity to set the length of your playlist before continuing.");
@@ -38,9 +74,32 @@ function PromptPage () {
         }
     }
 
+
+
+    // BPM button logic
     const [showBPMInput, setShowBPMInput] = useState(false);
     const [bpmLow, setBPMLow] = useState("");
     const [bpmHigh, setBPMHigh] = useState("");
+    const handleBPMLowInputChange = (event) => {
+        // const value = parseInt(event.target.value);
+        // if (!isNaN(value) && value > 40 && value <= 200) {
+        //     setBPMLow(value);
+        // } else {
+        //     setBPMLow(""); 
+        //     toast.error("Please ensure that this input for BPM Low is an integer between the range of 40 to 200.")
+        // }
+        setBPMLow(event.target.value); // just update the raw input
+    }
+    const handleBPMHighInputChange = (event) => {
+        // const value = parseInt(event.target.value);
+        // if (!isNaN(value) && value > 40 && value <= 200) {
+        //     setBPMHigh(value);
+        // } else {
+        //     setBPMHigh(""); 
+        //     toast.error("Please ensure that this input for BPM High is an integer between the range of 40 to 200.")
+        // }
+        setBPMHigh(event.target.value); // just update the raw input
+    }
     const toggleBPM = () => {
         if (selectedGenres.length === 0 || !selectedDuration || !selectedActivity){
             toast.error("Please select the activity,  genre(s), and duration you would like to be in your playlist before continuing.");
@@ -49,6 +108,9 @@ function PromptPage () {
         }
     }
 
+  
+
+    // generate playlist logic
     const [allowGenerate, setAllowGenerate] = useState(false);
     const proceedGenerate = () => { setAllowGenerate(true) }
     function generatePlaylist(){
@@ -80,6 +142,7 @@ function PromptPage () {
             }
             console.log(payload)
 
+            // resetting the page
             setInputPlaylistName("")
             setSelectedActivity("")
             setBPMLow("")
@@ -90,65 +153,13 @@ function PromptPage () {
             setShowBPMInput(false)
             setShowDurationInput(false)
             setShowGenreInput(false)
+
             // TODO: need to send payload to the backend with a route call
 
         } else {
             toast.error("Please make sure you have chosen an activity, set the duration, and selected a genre.")
         }
     }
-
-    const handleOnNameInputChange = (event) => {
-        setInputPlaylistName(event.target.value);
-    };
-
-    function handleActivityCheckboxChange(event) {
-        const { value, checked } = event.target; // destructures event to the value and checked
-        if (checked) {
-            setSelectedActivity([...selectedActivity, value]);
-        } else {
-            setSelectedActivity(selectedActivity.filter(a => a !== value)); // removes unchecked values from selected activities
-        }
-    }
-
-    // stretch feature: change 90 minutes to be hour and minutes format to users
-    function handleDurationChange(event){
-          if (selectedDuration.includes(event)) {
-            setSelectedDuration(selectedDuration.filter(d => d !== event));
-        } else {
-            setSelectedDuration([event]);
-        } 
-    }
-
-    function handleGenreCheckboxChange(event) {
-        const { value, checked } = event.target; // destructures event to the value and checked
-        if (checked) {
-            setSelectedGenres([...selectedGenres, value]);
-        } else {
-            setSelectedGenres(selectedGenres.filter(a => a !== value)); // removes unchecked values from selected activities
-        }
-    }
-
-    const handleBPMLowInputChange = (event) => {
-        // const value = parseInt(event.target.value);
-        // if (!isNaN(value) && value > 40 && value <= 200) {
-        //     setBPMLow(value);
-        // } else {
-        //     setBPMLow(""); 
-        //     toast.error("Please ensure that this input for BPM Low is an integer between the range of 40 to 200.")
-        // }
-        setBPMLow(event.target.value); // just update the raw input
-    };
-
-    const handleBPMHighInputChange = (event) => {
-        // const value = parseInt(event.target.value);
-        // if (!isNaN(value) && value > 40 && value <= 200) {
-        //     setBPMHigh(value);
-        // } else {
-        //     setBPMHigh(""); 
-        //     toast.error("Please ensure that this input for BPM High is an integer between the range of 40 to 200.")
-        // }
-        setBPMHigh(event.target.value); // just update the raw input
-    };
 
 
 
