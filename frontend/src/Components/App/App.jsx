@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import HomePage from "../../Pages/HomePage/HomePage.jsx";
 import AboutPage from "../../Pages/AboutPage/AboutPage";
@@ -13,8 +13,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
-  const [token, setToken] = useState();
-  useEffect(() => {
+      const [token, setToken] = useState(undefined); 
+
+      useEffect(() => {
+
     const queryParams = new URLSearchParams(window.location.search);
     //.search only grabs the query params at the end of a url
     const accessToken = queryParams.get("access_token");
@@ -31,24 +33,27 @@ function App() {
       const storedToken = localStorage.getItem("spotify_access_token");
       if (storedToken) {
         setToken(storedToken);
-      }
+     }else{
+      setToken(null); 
+     }
+
     }
   }, []);
-  
 
+
+  if (token === undefined) {
+    return null; 
+  }
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute token={token}>
-              <HomePage token={token} />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/home" element={
+            <ProtectedRoute token = {token}>
+          <HomePage token = {token} setToken = {setToken}/>
+          </ProtectedRoute>
+          } />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/prompt" element={<PromptPage />} />
         <Route path="/playlist" element={<PlaylistPage />} />

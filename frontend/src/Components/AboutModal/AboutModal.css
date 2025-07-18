@@ -1,0 +1,28 @@
+body {
+
+    background: url("../../assets/Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    
+}
+
+/* .aboutCard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 200px;
+  justify-content: center;
+} */
+
+.aboutCard-container img {
+  max-width: 250px; 
+  height: auto;
+  margin: 10px;
+  border-radius: 8px; 
+}
+
+.aboutCard{
+    padding: 300px;
+
+}
