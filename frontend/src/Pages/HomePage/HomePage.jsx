@@ -82,7 +82,7 @@ function HomePage({token, setToken}) {
   return (
     //Displayling NavBar component
     <div className="home-container">
-      <NavBar></NavBar>
+      <NavBar token = {token}></NavBar>
       <div style={{ padding: "2rem" }}>
         <LogoutButton setToken={setToken} />
       </div>
