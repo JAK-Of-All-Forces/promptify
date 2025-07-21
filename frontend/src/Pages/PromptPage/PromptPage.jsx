@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 function PromptPage () {
     const navigate = useNavigate();
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 
     // playlist Name logic
@@ -15,8 +17,6 @@ function PromptPage () {
     const handleOnNameInputChange = (event) => {
         setInputPlaylistName(event.target.value);
     };
-
-
 
     // activity button logic
     const [showActivityInput, setShowActivityInput] = useState(false);
@@ -34,8 +34,6 @@ function PromptPage () {
         setShowActivityInput(prev => !prev) 
     };
 
-
-
     // duration button logic
     const [showDurationInput, setShowDurationInput] = useState(false);
     const durations = ["15 minutes", "30 minutes", "45 minutes", "60 minutes", "75 minutes", "90 minutes", "105 minutes", "120 minutes"];
@@ -48,15 +46,13 @@ function PromptPage () {
         } 
     }
     const toggleDuration = () => { 
-        if (selectedActivity.length == 0){
-            toast.error("Please select at least one activity before continuing.");
+        if (selectedActivity.length !== 1){
+            toast.error("Please select ONE activity before continuing.");
             return;
         } else {
             setShowDurationInput(prev => !prev) 
         }  
     }
-
-
 
     // genre button logic
     const [showGenreInput, setShowGenreInput] = useState(false);
@@ -78,30 +74,14 @@ function PromptPage () {
         }
     }
 
-
-
     // BPM button logic
     const [showBPMInput, setShowBPMInput] = useState(false);
     const [bpmLow, setBPMLow] = useState("");
     const [bpmHigh, setBPMHigh] = useState("");
     const handleBPMLowInputChange = (event) => {
-        // const value = parseInt(event.target.value);
-        // if (!isNaN(value) && value > 40 && value <= 200) {
-        //     setBPMLow(value);
-        // } else {
-        //     setBPMLow(""); 
-        //     toast.error("Please ensure that this input for BPM Low is an integer between the range of 40 to 200.")
-        // }
         setBPMLow(event.target.value); // just update the raw input
     }
     const handleBPMHighInputChange = (event) => {
-        // const value = parseInt(event.target.value);
-        // if (!isNaN(value) && value > 40 && value <= 200) {
-        //     setBPMHigh(value);
-        // } else {
-        //     setBPMHigh(""); 
-        //     toast.error("Please ensure that this input for BPM High is an integer between the range of 40 to 200.")
-        // }
         setBPMHigh(event.target.value); // just update the raw input
     }
     const toggleBPM = () => {
@@ -112,60 +92,80 @@ function PromptPage () {
         }
     }
 
-  
-
     // generate playlist logic
     const [allowGenerate, setAllowGenerate] = useState(false);
     const proceedGenerate = () => { setAllowGenerate(true) }
-    function generatePlaylist(){
-        if (selectedGenres && selectedDuration && selectedActivity){
+    async function generatePlaylist(){
+        if (selectedGenres && selectedDuration && selectedActivity) {
             const low = parseInt(bpmLow);
             const high = parseInt(bpmHigh);
 
-            const bpmProvided = (bpmLow !== "" && bpmHigh !== "")
+            const bpmProvided = (bpmLow !== "" && bpmHigh !== "");
 
             if (bpmProvided) {
-                if (isNaN(low) || isNaN(high) || low < 40 || low > 200 || high < 40 || high > 200) {
+            if (isNaN(low) || isNaN(high) || low < 40 || low > 200 || high < 40 || high > 200) {
                 toast.error("Please enter BPM values between 40 and 200.");
                 return;
-                }
+            }
             } else {
-                if (!allowGenerate) {
-                    toast.error("You did not set a BPM Low, BPM High, or select the PROCEED button.");
-                    return;
-                }
+            if (!allowGenerate) {
+                toast.error("You did not set a BPM Low, BPM High, or select the PROCEED button.");
+                return;
+            }
             }
 
-            const spotifyId = localStorage.getItem("spotifyId");
+            const spotifyID = localStorage.getItem("spotify_id");
             const payload = {
-                "name": inputPlaylistName ? inputPlaylistName : "Promptify Playlist",
-                "activity": selectedActivity,
-                "bpmLow": bpmLow ? bpmLow : 0,
-                "bpmHigh": bpmHigh ? bpmHigh : 0 ,
-                "genres": selectedGenres,
-                "duration": selectedDuration,
-                "spotifyid" : spotifyId
+                name: inputPlaylistName ? inputPlaylistName : "Promptify Playlist",
+                activity: selectedActivity[0],
+                bpmLow: bpmLow ? bpmLow : 0,
+                bpmHigh: bpmHigh ? bpmHigh : 0,
+                genres: selectedGenres,
+                duration: Number(selectedDuration[0]?.replace(" minutes", "")),
+                spotifyId: spotifyID,
+            };
+
+            console.log(payload);
+
+            try {
+                // navigate(/loading) // uncomment when the loading state page is made
+                const response = await fetch( `${API_BASE_URL}/playlist/createPrompt`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`error! something went wrong when posting to backend. status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log("Playlist created:", result);
+
+                // navigate user after success
+                navigate("/playlist");
+
+                return result;
+            } catch (error) {
+                console.error("Failed to create playlist prompt:", error);
             }
-            console.log(payload)
 
-            // resetting the page
-            setInputPlaylistName("")
-            setSelectedActivity("")
-            setBPMLow("")
-            setBPMHigh("")
-            setSelectedGenres([])
-            setSelectedDuration("")
-            setShowActivityInput(false)
-            setShowBPMInput(false)
-            setShowDurationInput(false)
-            setShowGenreInput(false)
 
-            // TODO: need to send payload to the backend with a route call
-            // TODO: navigate user to playlist page automatically , need nadviage, a route for the playlist by id
-            navigate("/playlist")
-
+            // resetting the page inputs
+            setInputPlaylistName("");
+            setSelectedActivity("");
+            setBPMLow("");
+            setBPMHigh("");
+            setSelectedGenres([]);
+            setSelectedDuration("");
+            setShowActivityInput(false);
+            setShowBPMInput(false);
+            setShowDurationInput(false);
+            setShowGenreInput(false);
         } else {
-            toast.error("Please make sure you have chosen an activity, set the duration, and selected a genre.")
+        toast.error("Please make sure you have chosen an activity, set the duration, and selected a genre.");
         }
     }
 
