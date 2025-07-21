@@ -10,7 +10,12 @@ const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
 
 exports.getLoginUrl = (req, res) => {
-  const scope = "user-read-private user-read-email";
+  const scope = [
+    "user-read-private",
+    "user-read-email",
+    "playlist-modify-private",
+    "playlist-modify-public"
+  ].join(" ");;
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
   res.json({ url: authUrl });
 };

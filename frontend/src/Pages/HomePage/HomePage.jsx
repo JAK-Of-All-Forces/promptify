@@ -26,7 +26,6 @@ function HomePage({token, setToken}) {
     },
   ];
 
-
   const [userPlaylists, setUserPlaylists] = useState([]);
   useEffect(() => {
     if (!token) return;
@@ -68,6 +67,8 @@ function HomePage({token, setToken}) {
           setUserPlaylists(dummyPlaylists);
 
           console.log("User playlists:", userPlaylists);
+          //Checking where the token is stored
+          console.log("Token", token);
         }
       } catch (err) {
         console.error("Error fetching profile:", err);
