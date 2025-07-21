@@ -1,0 +1,13 @@
+body {
+
+    background: url("../../assets/Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    
+}
+
+.about-us{
+    font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+}
