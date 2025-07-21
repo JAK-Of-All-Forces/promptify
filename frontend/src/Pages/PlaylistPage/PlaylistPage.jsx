@@ -43,7 +43,7 @@ function PlaylistPage() {
 
         try{
             //As the user is logged in up to this point, it will do an API call to the user's playlists on Spotify and do a post request for the playlist
-            const postPlaylistRes = await fetch(
+            const addPlaylistRes = await fetch(
                 `https://api.spotify.com/v1/me/playlists`,
                 {
                 method: "POST",
@@ -60,14 +60,14 @@ function PlaylistPage() {
             );
 
             //Error handeling for the creating response
-            if (!postPlaylistRes.ok) {
-                const errorData = await postPlaylistRes.json();
+            if (!addPlaylistRes.ok) {
+                const errorData = await addPlaylistRes.json();
                 throw new Error(
                 `Spotify playlist creation failed: ${errorData.error.message}`
                 );
             }
 
-            const createdPlaylist = await postPlaylistRes.json();
+            const createdPlaylist = await addPlaylistRes.json();
 
             //Error handling for the created playlist id
             if (!createdPlaylist.id) {
@@ -78,11 +78,11 @@ function PlaylistPage() {
             //Track URIs are required by the the Spotify API to add tracks to playlists
             //As Promptify fetches the Spotify IDs and not URIs we have to convert it to the correct format when mapping through the playlist's tracks
             const trackURIs = (playlist.tracks || []).map(
-                (track) => `spotify:track:${track.id}`
+                (track) => `spotify:track:${track.spotifyId}`
             );
 
             //The Spotify API does not accept this call if there are no tracks available so we have to have a conditional for the track length
-            if (tracks.length > 0) {
+            if (playlist.tracks.length > 0) {
                 const addTracksRes = await fetch(
                 `https://api.spotify.com/v1/playlists/${createdPlaylist.id}/tracks`,
                 {
@@ -105,6 +105,7 @@ function PlaylistPage() {
             }
 
             alert("Playlist added to Spotify!");
+
             } catch (err) {
             console.error("Error adding to Spotify:", err);
             alert("Failed to add playlist to Spotify.");
@@ -119,7 +120,7 @@ function PlaylistPage() {
 
 
     if (!playlist) {
-      return <div className="PlaylistPage">Loading...</div>;
+        return <div className="PlaylistPage">Loading...</div>;
     }
 
     return (
