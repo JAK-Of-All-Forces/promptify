@@ -6,6 +6,7 @@ import "./PlaylistPage.css";
 import TrackCard from "../../Components/TrackCard/TrackCard"
 
 function PlaylistPage() {
+    const PORT = import.meta.env.PORT
 
     const {id} = useParams();
     const [playlist, setPlaylist] = useState(null);
