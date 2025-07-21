@@ -21,7 +21,7 @@ console.log("authRoutes:", authRoutes); // Add this
 app.use("/api/auth", authRoutes);
 
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT 
 
 // app.use('/track', trackRoutes);
 // app.use('/trackPlaylist', tracksOnPlaylistRoutes);

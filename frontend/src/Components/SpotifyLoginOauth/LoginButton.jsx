@@ -1,12 +1,15 @@
 import axios from "axios";
 import "./LoginButton.css";
 
+
 function LoginButton({}){
+
+    const PORT = process.env.PORT
 
     const handleLoginClick = async ()=>{
          try {
     const { data } = await axios.get(
-      `http://localhost:3001/api/auth/login-url` 
+      `http://localhost:${PORT}/api/auth/login-url` 
     );
 
     //redirects the user to the spotify login page

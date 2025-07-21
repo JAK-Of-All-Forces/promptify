@@ -9,11 +9,13 @@ function PlaylistPage() {
 
     const {id} = useParams();
     const [playlist, setPlaylist] = useState(null);
+    const PORT = process.env.PORT
+
 
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/playlist/${id}`);
+                const res = await fetch(`http://localhost:${PORT}/playlist/${id}`);
                 const data = await res.json();
                 setPlaylist(data);
             }
