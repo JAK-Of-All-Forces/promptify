@@ -7,6 +7,8 @@ import "./HomePage.css";
 
 
 function HomePage({token, setToken}) {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   // TEMP: Dummy playlists for testing
   const PORT = import.meta.env.PORT
 
@@ -48,7 +50,7 @@ function HomePage({token, setToken}) {
           // Call backend to refresh the token
           const spotifyId = localStorage.getItem("spotify_id");
           const refreshRes = await fetch(
-            `http://localhost:${PORT}/api/auth/refresh-token/${spotifyId}`
+            `${API_BASE_URL}/api/auth/refresh-token/${spotifyId}`
           );
           const refreshData = await refreshRes.json();
 
@@ -63,7 +65,7 @@ function HomePage({token, setToken}) {
           console.log("spotify id", data.id);
           //Calling for previous playlists
           const playlistRes = await fetch(
-            `http://localhost:${PORT}/user/${data.id}`
+            `${API_BASE_URL}/user/${data.id}`
           );
           const playlistData = await playlistRes.json();
           setUserPlaylists(playlistData);
@@ -82,7 +84,7 @@ function HomePage({token, setToken}) {
   return (
     //Displayling NavBar component
     <div className="home-container">
-      <NavBar></NavBar>
+      <NavBar token = {token}></NavBar>
       <div style={{ padding: "2rem" }}>
         <LogoutButton setToken={setToken} />
       </div>
