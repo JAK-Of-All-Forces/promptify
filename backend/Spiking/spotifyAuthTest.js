@@ -18,7 +18,7 @@ const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&re
 //the actual link
 console.log("Visit this URL to log in:", authUrl)
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
-const API_BASE_URL=process.env.API_BASE_URL
+const API_BASE_URL=process.env.VITE_API_BASE_URL
 app.get('/api/auth/callback', async (req, res) => {
   const code = req.query.code
   if (!code) return res.send("Missing code!")
