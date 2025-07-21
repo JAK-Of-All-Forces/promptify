@@ -2,7 +2,7 @@ import axios from "axios";
 import "./LoginButton.css";
 
 function LoginButton({}) {
-  const API_BASE_URL = import.meta.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const handleLoginClick = async () => {
     try {
