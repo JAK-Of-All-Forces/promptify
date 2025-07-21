@@ -6,6 +6,7 @@ import "./PlaylistPage.css";
 import TrackCard from "../../Components/TrackCard/TrackCard"
 
 function PlaylistPage() {
+    const PORT = import.meta.env.PORT
 
     const {id} = useParams();
     const [playlist, setPlaylist] = useState(null);
@@ -13,7 +14,7 @@ function PlaylistPage() {
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/playlist/${id}`);
+                const res = await fetch(`http://localhost:${PORT}/playlist/${id}`);
                 const data = await res.json();
                 setPlaylist(data);
             }
