@@ -12,6 +12,7 @@ function PlaylistPage() {
     const token = localStorage.getItem("spotify_access_token");
     console.log("Token (Playlist Page)", token);
 
+    //Fetching the playlist using the id from the url
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
@@ -29,86 +30,84 @@ function PlaylistPage() {
 
     console.log("Playlist", playlist);
     
-
-
-
-
-
-    //Add to Spotify button
+    //Add to Spotify function
     async function AddToSpotify(playlist) {
         console.log ("Spotify Playlist", playlist);
-        //Getting the user's Spotify token (this can also be brought in from the user data)
-        //const token = localStorage.getItem("spotifyAccessToken");
-      
-        //If they do not have a token, it will show that the user is not logged in
+
+        //If there is no token upon hitting this page, it will show that the user is not logged in as an alert
         if (!token) {
             alert("User is not logged in")
         }
 
         try{
-        //We can fetch the user information whihc is already stored in the home page. All we would have to do is pass that in.
-        const userRes = await fetch("https://api.spotify.com/v1/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        const userData = await userRes.json();
+            //As the user is logged in up to this point, it will do an API call to the user's playlists on Spotify and do a post request for the playlist
+            const postPlaylistRes = await fetch(
+                `https://api.spotify.com/v1/me/playlists`,
+                {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: playlist.name,
+                    description: "Created with Promptify",
+                    public: false,
+                }),
+                }
+            );
 
-        //Fetching the user data
+            //Error handeling for the creating response
+            if (!postPlaylistRes.ok) {
+                const errorData = await postPlaylistRes.json();
+                throw new Error(
+                `Spotify playlist creation failed: ${errorData.error.message}`
+                );
+            }
 
-        const createRes = await fetch(
-          `https://api.spotify.com/v1/me/playlists`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: playlist.name,
-              description: "Created with Promptify",
-              public: false,
-            }),
-          }
-        );
+            const createdPlaylist = await postPlaylistRes.json();
 
-        //Error handeling for the creating response
-        if (!createRes.ok) {
-          const errorData = await createRes.json();
-          throw new Error(
-            `Spotify playlist creation failed: ${errorData.error.message}`
-          );
+            //Error handling for the created playlist id
+            if (!createdPlaylist.id) {
+                throw new Error("Created playlist ID is missing");
+            }
+
+
+            //Track URIs are required by the the Spotify API to add tracks to playlists
+            //As Promptify fetches the Spotify IDs and not URIs we have to convert it to the correct format when mapping through the playlist's tracks
+            const trackURIs = (playlist.tracks || []).map(
+                (track) => `spotify:track:${track.id}`
+            );
+
+            //The Spotify API does not accept this call if there are no tracks available so we have to have a conditional for the track length
+            if (tracks.length > 0) {
+                const addTracksRes = await fetch(
+                `https://api.spotify.com/v1/playlists/${createdPlaylist.id}/tracks`,
+                {
+                    method: "POST",
+                    headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ uris: trackURIs }),
+                }
+                );
+
+                //Error handling for adding tracks
+                if (!addTracksRes.ok) {
+                const errorData = await addTracksRes.json();
+                throw new Error(
+                    `Failed to add tracks: ${errorData.error.message}`
+                );
+                }
+            }
+
+            alert("Playlist added to Spotify!");
+            } catch (err) {
+            console.error("Error adding to Spotify:", err);
+            alert("Failed to add playlist to Spotify.");
         }
-        const createdPlaylist = await createRes.json();
-
-
-        //Error handling for the created playlist id
-        if (!createdPlaylist.id) {
-          throw new Error("Created playlist ID is missing");
         }
-
-        //Track URIs are required by the the Spotify API to add tracks to playlists
-        //As this application fetches the Spotify IDs and not URIs we have to convert it to the correct format when mapping through the playlist's tracks
-        const trackUris = (playlist.tracks || []).map(track => `spotify:track:${track.id}`);
-        const addTracksRes = await fetch(`https://api.spotify.com/v1/playlists/${createdPlaylist.id}/tracks`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ uris: trackUris })
-        });
-    
-        //Error handling for adding tracks
-        if (!addTracksRes.ok) {
-          const errorData = await addTracksRes.json();
-          throw new Error(`Failed to add tracks: ${errorData.error.message}`);
-        }
-        
-        alert("Playlist added to Spotify!");
-      } catch (err) {
-        console.error("Error adding to Spotify:", err);
-        alert("Failed to add playlist to Spotify.");
-      }
-    }
 
 
 
