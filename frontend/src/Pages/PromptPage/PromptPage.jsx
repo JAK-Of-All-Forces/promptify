@@ -1,5 +1,5 @@
 import NavBar from "../../Components/NavBar/NavBar"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PromptPage.css";
 import { toast } from 'react-toastify';
@@ -136,13 +136,15 @@ function PromptPage () {
                 }
             }
 
+            const spotifyId = localStorage.getItem("spotifyId");
             const payload = {
                 "name": inputPlaylistName ? inputPlaylistName : "Promptify Playlist",
                 "activity": selectedActivity,
                 "bpmLow": bpmLow ? bpmLow : 0,
                 "bpmHigh": bpmHigh ? bpmHigh : 0 ,
                 "genres": selectedGenres,
-                "duration": selectedDuration
+                "duration": selectedDuration,
+                "spotifyid" : spotifyId
             }
             console.log(payload)
 
