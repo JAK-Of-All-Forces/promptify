@@ -1,7 +1,7 @@
 
 
 
-function LogoutButton(){
+function LogoutButton({setToken}){
 
 const handleLogout = () => {
   //clear access token takes the user back to landing page 

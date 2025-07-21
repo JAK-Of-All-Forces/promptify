@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import LoginButton from "../../Components/SpotifyLoginOauth/LoginButton";
+import "./LandingPage.css"
 
 function LandingPage() {
     return (

@@ -1,0 +1,26 @@
+/* .right-side .activity-button .sidebar.closed, 
+.right-side .duration-button .sidebar.closed {
+    display: none;
+}
+
+.right-side .activity-button .sidebar.open,
+.right-side .duration-button .sidebar.closed {
+    display: block;
+    padding: 10px;
+
+} */
+
+.sidebar.closed {
+    display: none;
+}
+
+.sidebar.open {
+    display: block;
+    padding: 10px;
+}
+
+.sidebar button.selected {
+  border-color: #009dff;
+  border-radius: 4px;
+}
+
