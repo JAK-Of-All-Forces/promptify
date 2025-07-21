@@ -1,13 +1,15 @@
-import PlaylistCard from "../PlaylistCard/PlaylistCard"
+import PlaylistCard from "../PlaylistCard/PlaylistCard";
 import no_image from "../../assets/no_img.png"
-import "./PreviousPlaylists.css"
+import "./PreviousPlaylist.css";
+
 
 function PreviousPlaylists({ userPlaylists = []}){
 
+    console.log("previous playlist" , userPlaylists)
     return (
         <div className="content">
             <div className="header">
-                <h1>Your Promptify Playlists</h1>
+                <h2>Your Promptify Playlists</h2>
             </div>
             {/* Mapping through all of the previous playlists if there are any */}
             <div className="previous-playlists">
@@ -31,4 +33,4 @@ function PreviousPlaylists({ userPlaylists = []}){
     );
 }
 
-export default PreviousPlaylists
+export default PreviousPlaylists;
