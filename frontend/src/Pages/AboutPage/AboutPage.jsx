@@ -1,6 +1,7 @@
 import NavBar from "../../Components/NavBar/NavBar";
 import "../AboutPage/AboutPage.css"; 
 import aboutData from "../../data/aboutData";
+import faqData from "../../data/faqData";
 import { useState } from "react";
 import AboutModal from "../../Components/AboutModal/AboutModal";
 
@@ -9,11 +10,20 @@ import AboutModal from "../../Components/AboutModal/AboutModal";
 function AboutPage({token}) {
     const [selectedPerson, setSelectedPerson] = useState(null);
     const [modalOpen, setModalOpen] = useState(false); 
+    const [openFAQ, setOpenFAQ] = useState(false);
 
     const handleClose = () => {
         setModalOpen(false);
         setSelectedPerson(null); 
         };
+
+    const toggleFAQ = (index) => {
+        setOpenFAQ((prev) => ({
+        ...prev,
+     [index]: !prev[index]
+     }));
+    };
+
 
 return (
   <div className="about-container">
@@ -43,14 +53,24 @@ return (
 
 
     <div className="faq-container">
-      <h2>Frequently Asked Questions</h2>
-      <ul>
-        <li>How does Promptify work?</li>
-        <li>Is my data secure?</li>
-        <li>Can I customize my playlists?</li>
-        <li>Do I need a premium Spotify account?</li>
-      </ul>
+  <h2>Frequently Asked Questions</h2>
+  {faqData.map((item, index) => (
+    <div
+      key={index}
+      className={`faq-item ${openFAQ[index] ? "open" : ""}`}
+      onClick={() => toggleFAQ(index)}
+      style={{ cursor: "pointer", marginBottom: "1rem" }}
+    >
+      <div className="faq-question">
+        <span>{item.question}</span>
+<span>{openFAQ[index] ? "⌄" : "›"}</span>
+      </div>
+      {openFAQ[index] && <p className="faq-answer">{item.answer}</p>}
     </div>
+  ))}
+</div>
+
+
    {
     modalOpen && selectedPerson &&(
    <AboutModal

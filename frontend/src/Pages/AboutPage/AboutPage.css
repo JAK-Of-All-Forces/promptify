@@ -46,30 +46,35 @@ img.card-bg {
   line-height: 45px;
 }
 
-
 .faq-container {
-  background-color: white; 
-  border: 2px solid #cccccc;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 24px;
-  max-width: 600px;
-  margin: 40px auto; 
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-.faq-container h2 {
-  margin-bottom: 16px;
-  color: #333;
+.faq-item {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: background 0.3s;
 }
 
-.faq-container ul {
-  list-style-type: disc;
-  padding-left: 20px;
-  color: #444;
+.faq-item.open {
+  background: #e6f7ff;
 }
 
-.faq-container li {
-  margin-bottom: 10px;
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: black;
+}
+
+.faq-answer {
+  margin-top: 0.5rem;
+  line-height: 1.5;
+    color: #333;
 }
 
 
