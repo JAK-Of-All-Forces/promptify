@@ -1,6 +1,7 @@
 import PlaylistCard from "../PlaylistCard/PlaylistCard";
 import no_image from "../../assets/no_img.png"
-//import "./PreviousPlaylists.css"
+import "./PreviousPlaylist.css";
+
 
 function PreviousPlaylists({ userPlaylists = []}){
 

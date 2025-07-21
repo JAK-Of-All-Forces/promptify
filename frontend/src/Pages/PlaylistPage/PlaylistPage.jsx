@@ -26,6 +26,7 @@ function PlaylistPage() {
     }, [id]);
 
     console.log("Playlist", playlist);
+    
     function AddToSpotify(playlist) {
 
     }

@@ -1,5 +1,6 @@
 import NavBar from "../../Components/NavBar/NavBar";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import PreviousPlaylists from "../../Components/PreviousPlaylists/PreviousPlaylists";
 import LogoutButton from "../../Components/SpotifyLogout/LogoutButton";
 import "./HomePage.css";
@@ -88,6 +89,14 @@ function HomePage({token, setToken}) {
 
       <div>
         <PreviousPlaylists userPlaylists={userPlaylists} />
+      </div>
+
+      <div>
+        <button>
+          <Link to = "/prompt">
+            <h1>Let's Make a Playlist</h1>
+          </Link>
+        </button>
       </div>
     </div>
   );

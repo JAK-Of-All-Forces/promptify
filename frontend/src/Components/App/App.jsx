@@ -50,12 +50,15 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={
-            <ProtectedRoute token = {token}>
-          <HomePage token = {token} setToken = {setToken}/>
-          </ProtectedRoute>
-          } />
-        <Route path="/about" element={<AboutPage />} />
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute token={token}>
+              <HomePage token={token} setToken={setToken} />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/about" element={<AboutPage token={token} />} />
         <Route path="/prompt" element={<PromptPage />} />
         <Route path="/playlist/:id" element={<PlaylistPage />} />
         <Route path="*" element={<ErrorPage />} />
