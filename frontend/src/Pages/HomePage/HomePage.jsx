@@ -7,10 +7,8 @@ import "./HomePage.css";
 
 
 function HomePage({token, setToken}) {
-  const PORT = process.env.PORT
-
   // TEMP: Dummy playlists for testing
-    const PORT = import.meta.env.PORT
+  const PORT = import.meta.env.PORT
 
   const dummyPlaylists = [
     {

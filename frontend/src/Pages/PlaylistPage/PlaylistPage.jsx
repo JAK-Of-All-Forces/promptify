@@ -10,7 +10,6 @@ function PlaylistPage() {
 
     const {id} = useParams();
     const [playlist, setPlaylist] = useState(null);
-    const PORT = process.env.PORT
 
 
     useEffect(() => {
