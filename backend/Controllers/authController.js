@@ -8,6 +8,7 @@ const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 const redirectUri = process.env.SPOTIFY_REDIRECT_URI;
 const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString("base64");
+const CLIENT_URL = process.env.CLIENT_URL
 
 exports.getLoginUrl = (req, res) => {
   const scope = [
@@ -69,7 +70,7 @@ exports.handleCallback = async (req, res) => {
       },
     });
 
-    res.redirect(`http://localhost:5173/home?access_token=${access_token}&spotify_id=${userProfile.id}`);
+    res.redirect(`${CLIENT_URL}/home?access_token=${access_token}&spotify_id=${userProfile.id}`);
   } catch (err) {
     console.error("Callback error:", err.response?.data || err.message);
     res.status(500).send("Callback failed.");

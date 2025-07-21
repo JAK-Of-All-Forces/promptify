@@ -11,12 +11,14 @@ function PlaylistPage() {
     const [playlist, setPlaylist] = useState(null);
     const token = localStorage.getItem("spotify_access_token");
     console.log("Token (Playlist Page)", token);
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
     //Fetching the playlist using the id from the url
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
-                const res = await fetch(`http://localhost:3001/playlist/${id}`);
+                const res = await fetch(`${API_BASE_URL}/playlist/${id}`);
                 const data = await res.json();
                 setPlaylist(data);
             }
