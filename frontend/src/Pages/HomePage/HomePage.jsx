@@ -7,7 +7,7 @@ import "./HomePage.css";
 
 
 function HomePage({token, setToken}) {
-  const PORT = process.env.PORT
+  API_BASE_URL=process.env.API_BASE_URL
 
   // TEMP: Dummy playlists for testing
   const dummyPlaylists = [
@@ -48,7 +48,7 @@ function HomePage({token, setToken}) {
           // Call backend to refresh the token
           const spotifyId = localStorage.getItem("spotify_id");
           const refreshRes = await fetch(
-            `http://localhost:${PORT}/api/auth/refresh-token/${spotifyId}`
+            `${API_BASE_URL}/api/auth/refresh-token/${spotifyId}`
           );
           const refreshData = await refreshRes.json();
 
@@ -63,7 +63,7 @@ function HomePage({token, setToken}) {
           console.log("spotify id", data.id);
           //Calling for previous playlists
           const playlistRes = await fetch(
-            `http://localhost:${PORT}/user/${data.id}`
+            `${API_BASE_URL}/user/${data.id}`
           );
           const playlistData = await playlistRes.json();
           setUserPlaylists(playlistData);
