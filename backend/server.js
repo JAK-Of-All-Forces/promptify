@@ -3,8 +3,9 @@ require("dotenv").config();
 const app = express();
 // middleware
 const cors = require("cors");
+const frontPort = process.env.FRONT_PORT
 app.use(cors({
-  origin: "http://localhost:5173", // allow frontend origin
+  origin: `http://localhost:${frontPort}`, // allow frontend origin
   credentials: true               // allow cookies if needed
 }));
 
@@ -21,7 +22,7 @@ console.log("authRoutes:", authRoutes); // Add this
 app.use("/api/auth", authRoutes);
 
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT 
 
 // app.use('/track', trackRoutes);
 // app.use('/trackPlaylist', tracksOnPlaylistRoutes);

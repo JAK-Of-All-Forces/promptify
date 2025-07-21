@@ -7,6 +7,8 @@ import "./HomePage.css";
 
 
 function HomePage({token, setToken}) {
+  const PORT = process.env.PORT
+
   // TEMP: Dummy playlists for testing
     const PORT = import.meta.env.PORT
 
@@ -63,7 +65,7 @@ function HomePage({token, setToken}) {
           console.log("spotify id", data.id);
           //Calling for previous playlists
           const playlistRes = await fetch(
-            `http://localhost${PORT}/user/${data.id}`
+            `http://localhost:${PORT}/user/${data.id}`
           );
           const playlistData = await playlistRes.json();
           setUserPlaylists(playlistData);
