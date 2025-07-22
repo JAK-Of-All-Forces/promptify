@@ -9,30 +9,12 @@ import "./HomePage.css";
 function HomePage({token, setToken}) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  // TEMP: Dummy playlists for testing
-  const PORT = import.meta.env.PORT
-
-  const dummyPlaylists = [
-    {
-      id: "1",
-      name: "Energetic Gym Afrobeats",
-      image_url:
-        "https://i.scdn.co/image/ab67616d0000b273a0b4e05b489e5e037028b496",
-      createdAt: "2025-07-17T10:00:00Z",
-    },
-
-    {
-      id: "2",
-      name: "Chill Walk",
-      image_url:
-        "https://i.scdn.co/image/ab67616d0000b2739b791593e61e77e9a1c092fa",
-      createdAt: "2025-07-17T12:30:00Z",
-    },
-  ];
-
+  //User playlists variable
   const [userPlaylists, setUserPlaylists] = useState([]);
+
   useEffect(() => {
     if (!token) return;
+
 
     const fetchProfile = async () => {
       try {
@@ -61,16 +43,18 @@ function HomePage({token, setToken}) {
           const data = await res.json();
           console.log("User profile:", data);
 
-          console.log("spotify id", data.id);
+
+
           //Calling for previous playlists
           const playlistRes = await fetch(
             `${API_BASE_URL}/user/${data.id}`
           );
+          
           const playlistData = await playlistRes.json();
-          setUserPlaylists(playlistData);
-          setUserPlaylists(dummyPlaylists);
+          console.log("Playlist data", playlistData);
 
-          console.log("User playlists:", userPlaylists);
+          setUserPlaylists(playlistData);
+
           //Checking where the token is stored
           console.log("Token", token);
         }
