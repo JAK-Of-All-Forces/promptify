@@ -10,8 +10,6 @@ function PromptPage () {
     const navigate = useNavigate();
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-
-
     // playlist Name logic
     const [inputPlaylistName, setInputPlaylistName] = useState("");
     const handleOnNameInputChange = (event) => {
@@ -103,15 +101,15 @@ function PromptPage () {
             const bpmProvided = (bpmLow !== "" && bpmHigh !== "");
 
             if (bpmProvided) {
-            if (isNaN(low) || isNaN(high) || low < 40 || low > 200 || high < 40 || high > 200) {
-                toast.error("Please enter BPM values between 40 and 200.");
-                return;
-            }
+                if (isNaN(low) || isNaN(high) || low < 40 || low > 200 || high < 40 || high > 200) {
+                    toast.error("Please enter BPM values between 40 and 200.");
+                    return;
+                }
             } else {
-            if (!allowGenerate) {
-                toast.error("You did not set a BPM Low, BPM High, or select the PROCEED button.");
-                return;
-            }
+                if (!allowGenerate) {
+                    toast.error("You did not set a BPM Low, BPM High, or select the PROCEED button.");
+                    return;
+                }
             }
 
             const spotifyID = localStorage.getItem("spotify_id");
@@ -128,7 +126,7 @@ function PromptPage () {
             console.log(payload);
 
             try {
-                // navigate(/loading) // uncomment when the loading state page is made
+                navigate("/loading") // uncomment when the loading state page is made
                 const response = await fetch( `${API_BASE_URL}/playlist/createPrompt`, {
                     method: 'POST',
                     headers: {
@@ -143,9 +141,14 @@ function PromptPage () {
 
                 const result = await response.json();
                 console.log("Playlist created:", result);
+                if (result.id) {
+                    console.log("Playlist ID found in result");
+                } else {
+                    console.error("Playlist ID not found in result:");
+                }
 
                 // navigate user after success
-                navigate("/playlist");
+                navigate(`/playlist/:${result.id}`);
 
                 return result;
             } catch (error) {
