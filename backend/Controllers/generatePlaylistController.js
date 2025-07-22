@@ -7,9 +7,6 @@ dotenv.config()
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const clientId = process.env.SPOTIFY_CLIENT_ID
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET
-
 const axios = require("axios");
 
 // neeed  to try this after a user has logged in
@@ -20,6 +17,7 @@ const getAccessToken = async(userId) => {
   });
 
   if (response){
+    console.log("we got the accesss token")
     return response.accessToken
   } else {
     return null
@@ -67,30 +65,33 @@ async function callOpenAI(prompt) {
   }
 }
 
-async function getSpotifyId(name, artist, id) {
+async function getSpotifyId(name, artist, userId) {
   try {
     console.log("Searching for the track ID with this name and artist on Spotify");
     console.log("This is the name: " + name);
     console.log("This is the artist: " + artist);
-    const spotifyToken = await getAccessToken(id);
+    const spotifyToken = await getAccessToken(userId);
+    if (spotifyToken){
+      console.log(`Looking up Spotify ID for ${name} by ${artist}`);
+    } else {
+      console.log("there is no valid token")
+    }
 
     const headers = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + spotifyToken
-      }
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + spotifyToken
     };
     const query = `track:"${name}" artist:"${artist}"`;
     const encodedQuery = encodeURIComponent(query);
 
     const response = await axios.get(
       `https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=1`,
-      headers
+      {headers}
     );
 
-    console.log("we have searched the spotify api, this is what we got: ")
-    console.log(response);
-    console.log(response.data);
+    // console.log("we have searched the spotify api, this is what we got: ")
+    // console.log(response);
+    // console.log(response.data);
 
     const items = response.data.tracks.items;
     if (items && items.length > 0) {
@@ -106,58 +107,157 @@ async function getSpotifyId(name, artist, id) {
   }
 }
 
-
-async function createTracks(tracks, id) {
-  console.log("now in the create trackss function")
+async function createTracks(tracks, userId) {
+  console.log("now in the createTracks function");
   if (!tracks || !Array.isArray(tracks) || tracks.length === 0) {
     throw new Error("The tracks are required and must be a non-empty array");
   }
 
-  try { // doesn not account for if the track is already in db so you will need to add that
+  try {
     const prismaTracks = await Promise.all(
       tracks.map(async (track) => {
-        const spotifyId = await getSpotifyId(track.name, track.artist, id);
-        return prisma.track.create({
-          data: {
-            spotifyId,
-            name: track.name,
-            artist: track.artist,
-            bpm: track.bpm
-          }
-        });
+        const spotifyID = await getSpotifyId(track.name, track.artist, userId);
+        console.log(`Track: ${track.name}, Artist: ${track.artist}, Spotify ID: ${spotifyID}`);
+
+        if (!spotifyID) {
+          console.warn(`Skipping track: ${track.name} by ${track.artist} — No Spotify ID found`);
+          return null;
+        }
+
+        let existingTrack = await prisma.track.findUnique({ where: {  spotifyId: spotifyID } });
+
+        if (!existingTrack) {
+          const imageURL = await getTrackImageURL(userId, spotifyID);
+          const trackDuration = await getTrackDuration(userId, spotifyID)
+          console.log(`Creating track in DB with image: ${imageURL}`);
+          existingTrack = await prisma.track.create({
+            data: {
+              spotifyId : spotifyID,
+              name: track.name,
+              artist: track.artist,
+              duration: trackDuration,
+              image_url: imageURL,
+            },
+          });
+        } else {
+          console.log(`Track already exists: ${track.name}`);
+        }
+
+        console.log("leaving create tracks!")
+        return existingTrack;
       })
     );
-
-    console.log("the tracks have been made");
-    return prismaTracks;
+    // Remove any nulls from skipped tracks
+    return prismaTracks.filter(Boolean);
   } catch (err) {
     console.error("Error making tracks", err);
     throw err;
   }
 }
 
-async function getSpotifyIdFromToken() {
-  
+async function getTrackImageURL(userId, spotifyId) {
+  try {
+    console.log("Inside getTrackImageURL");
+
+    const spotifyToken = await getAccessToken(userId);
+    if (!spotifyToken) {
+      console.log("no valid access token found");
+      return null;
+    }
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + spotifyToken
+    };
+
+    const response = await axios.get(
+      `https://api.spotify.com/v1/tracks/${spotifyId}`,
+      { headers }
+    );
+
+    if (
+      response &&
+      response.data &&
+      response.data.album &&
+      Array.isArray(response.data.album.images) &&
+      response.data.album.images.length > 0
+    ) {
+      const imageUrl = response.data.album.images[0].url;
+      console.log(`fetched track image URL: ${imageUrl}`);
+      return imageUrl;
+    } else {
+      console.log("no album images found for this track");
+      return null;
+    }
+  } catch (error) {
+    console.error("error fetching track image URL from Spotify:", error.response?.data || error.message);
+    return null;
+  }
 }
+
+async function getTrackDuration(userId, spotifyId) {
+try {
+    console.log("Inside getTrackDuration");
+
+    const spotifyToken = await getAccessToken(userId);
+    if (!spotifyToken) {
+      console.log("no valid access token found");
+      return null;
+    }
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + spotifyToken
+    };
+
+    const response = await axios.get(
+      `https://api.spotify.com/v1/tracks/${spotifyId}`,
+      { headers }
+    );
+
+    if (response && response.data && response.data.duration_ms){
+      const durationMs = response.data.duration_ms;
+      console.log(`fetched duration in ms: ${durationMs}`);
+
+      // regular duration as string
+      let minutes = Number(((durationMs / 1000) / 60).toFixed(0));
+      let seconds = Number(((durationMs / 1000) % 60).toFixed(0));
+      let regularDuration = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+      console.log(`calculated duration is: ${regularDuration} `)
+
+      return regularDuration;
+    } else {
+      console.log("no duration found for this track");
+      return null;
+    }
+  } catch (error) {
+    console.error("error fetching track image URL from Spotify:", error.response?.data || error.message);
+    return null;
+  }
+
+
+}
+
+
 
 // this is for the route : router.post("/", generatePlaylistController.createPrompt)
 const createPrompt = async (req, res) => {
   console.log("Saving the created prompt to database.");
-
-  const spotifyUserId = getSpotifyIdFromToken();
-  const user = await prisma.user.findUnique({
-    where: { spotifyUserId }
-  });
-  const userId = user.id;
-    
+  
   // these are the things we need to get the playlist
   console.log(req.body);
-  const { name, activity, bpmLow, bpmHigh, genres, duration } = req.body;
-  if (!name || !activity || !genres || !duration) {
+  const { name, activity, bpmLow, bpmHigh, genres, duration, spotifyId } = req.body;
+  if (!name || !activity || !genres || !duration || !spotifyId ){
     return res
-      .status(400)
-      .json({ error: "The name, activity, genres, and duration fields are required" });
+    .status(400)
+    .json({ error: "The name, activity, genres, duration, and SpotifyId fields are required" });
   }
+
+  // get spotifyID
+  const user = await prisma.user.findUnique({
+    where: { spotifyId }
+  });
+  const userId = user.id;
 
   let userContentPrompt = "";
   if ((bpmLow != 0) && (bpmHigh != 0)){
@@ -214,12 +314,27 @@ const createPrompt = async (req, res) => {
   console.log("done talking to OpenAIAPI ");
 
   console.log("trying to get the spotify ids and make the tracks for the database, entering the createTracks function");
+
+  console.log("here are the songTracks:")
   const songTracks = await createTracks(openAIResponse.tracks, userId);
+  console.log("made it back to createPrompt from createTracks")
+  console.log("these are the songtracks")
+  console.log(songTracks)
+
+
+  let playlistImageUrl;
+  console.log("setting playlist image url");
+  if (songTracks.length > 0 && songTracks[0].imageURL) {
+    playlistImageUrl = songTracks[0].imageURL;
+  } else {
+    playlistImageUrl = "backend/assets/no_img.png";
+  }
 
   try {
+    // Create the playlist first
     const playlistInfo = await prisma.playlist.create({
       data: {
-        name: playlistName,
+        name,
         activity,
         bpmLow,
         bpmHigh,
@@ -228,40 +343,42 @@ const createPrompt = async (req, res) => {
         user: {
           connect: { id: userId }
         },
+        image_url : playlistImageUrl
       }
     });
 
-    console.log(playlistInfo);
     console.log("Playlist data created successfully, but there are no tracks yet");
 
-    try {
-      const trackPlaylistRelation = await Promise.all(       
-        songTracks.map(async (track) => {
-          return prisma.tracksOnPlaylists.create({
-            data: {
-              playlistId : playlistInfo.id,
-              trackId : track.id
-            }
-          });
-        })
-      )
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
+    // Create relations between tracks and the playlist
+    await Promise.all(
+      songTracks.map(async (track) => {
+        if (!track.id) {
+          console.warn(`Skipping track with missing id: ${JSON.stringify(track)}`);
+          return null; // Skip this track to avoid error
+        }
+        return prisma.tracksOnPlaylists.create({
+          data: {
+            playlistId: playlistInfo.id,
+            trackId: track.id,
+          },
+        });
+      })
+    );
+    console.log("Relation between track and playlist has been made");
 
     res.json(playlistInfo);
+
   } catch (error) {
+    console.error("Error creating playlist or relations:", error);
     res.status(500).json({ error: error.message });
   }
 
+  console.log("all done!");
+
 }
-
-
 
 
 
 module.exports = {
   createPrompt
 };
-
-
