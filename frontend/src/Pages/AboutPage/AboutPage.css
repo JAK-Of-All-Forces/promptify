@@ -1,12 +1,4 @@
-body {
 
-    background: url("../../assets/Background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    
-}
 
 .aboutCard-container {
   display: flex;

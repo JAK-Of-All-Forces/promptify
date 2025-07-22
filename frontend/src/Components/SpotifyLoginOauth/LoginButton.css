@@ -2,8 +2,8 @@
    width: 300px;
    height: 300px;
    border-radius: 50%;
-   border: 2px solid #a397ef;
-   animation: spin 12s linear infinite;
+   border: 2px solid #fcfcff2a;
+   animation: spin 15s linear infinite;
 }
 
 
