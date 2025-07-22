@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("../Controllers/playlistController");
-// const generatePlaylistController = require("../Controllers/generatePlaylistController");
+const generatePlaylistController = require("../Controllers/generatePlaylistController");
 
-// router.post("/createPrompt", generatePlaylistController.createPrompt);
+router.post("/createPrompt", generatePlaylistController.createPrompt);
 
 
 //GET all playlists

@@ -6,6 +6,7 @@ import LandingPage from "../../Pages/LandingPage/LandingPage";
 import PromptPage from "../../Pages/PromptPage/PromptPage";
 import PlaylistPage from "../../Pages/PlaylistPage/PlaylistPage";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -68,6 +69,7 @@ function App() {
         <Route path="/prompt" element={<PromptPage />} />
         <Route path="/playlist/:id" element={<PlaylistPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/loading" element={<LoadingPage />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
