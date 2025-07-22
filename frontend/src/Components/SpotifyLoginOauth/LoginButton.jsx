@@ -1,5 +1,7 @@
 import axios from "axios";
 import "./LoginButton.css";
+import login from "../../assets/bg free login-modified.png";
+
 
 function LoginButton() {
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -21,9 +23,14 @@ console.log("BASE URL:", API_BASE_URL);
     }
   };
   return (
-    <button className="login-button" onClick={handleLoginClick}>
-      Login
-    </button>
+    <div>
+      <img
+        className="login-button"
+        onClick={handleLoginClick}
+        src={login}
+        alt="Spinning Login button"
+      />
+    </div>
   );
 }
 
