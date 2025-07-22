@@ -1,9 +1,10 @@
 .login-button{
-   width: 300px;
-   height: 300px;
    border-radius: 50%;
-   border: 2px solid #fcfcff2a;
+   border: 6px solid #fcfcff2a;
    animation: spin 15s linear infinite;
+   position: relative;
+   width: 20vw;
+   height: 20vw;
 }
 
 

@@ -18,26 +18,37 @@ function LandingPage() {
         
 
         return (
-        <div className="landing-container">
+          <div className="landing-page">
             <nav>
-            <div className="about-us">
+              <div className="about-us">
                 <Link to={`/about`}>
-                <h3>About Us</h3>
+                  <h3>About Us</h3>
                 </Link>
-            </div>
+              </div>
             </nav>
-            <div style={{ padding: "2rem" }}>
-            <h1>Welcome to Promptify!</h1>
-            <p>Please log in with Spotify to get started.</p>
-
-            <LoginButton />
+            <div className = "info">
+              <div className = "container-left">
+                <h1 id="promptify-title">PROMPTIFY</h1>
+                {/* <p>Please log in with Spotify to get started.</p> */}
+                <video
+                  ref={videoRef}
+                  className="video"
+                  autoPlay
+                  loop
+                  muted
+                  playsinline
+                >
+                  <source src={video}></source>
+                </video>
+              </div>
+              <div className="container-right">
+              <LoginButton />
+              </div>
             </div>
             {/*  */}
-            <video ref = {videoRef} className="video" autoPlay loop muted playsinline>
-            <source src={video}></source>
-            </video>
+
             {/* Rest of the landing page content below */}
-        </div>
+          </div>
         );
 }
 

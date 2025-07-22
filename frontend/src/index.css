@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: black;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,7 +15,6 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
   text-decoration: inherit;
 }
 a:hover {
@@ -25,6 +24,7 @@ a:hover {
 body, #root{
   background: transparent;
 }
+
 /* Controlling the background */
 body {
   margin: 0;
@@ -41,8 +41,10 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1; /* ensures it's behind your app */
-  pointer-events: none; /* allows clicks to pass through */
+  /*Makes sures it's behind the application*/
+  z-index: -1;
+  /*Allows clicks to pass through */
+  pointer-events: none;
   overflow: hidden;}
 
 h1 {
