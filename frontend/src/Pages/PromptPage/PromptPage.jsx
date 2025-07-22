@@ -143,12 +143,13 @@ function PromptPage () {
                 console.log("Playlist created:", result);
                 if (result.id) {
                     console.log("Playlist ID found in result");
+                    console.log(result.id)
                 } else {
                     console.error("Playlist ID not found in result:");
                 }
 
                 // navigate user after success
-                navigate(`/playlist/:${result.id}`);
+                navigate(`/playlist/${result.id}`);
 
                 return result;
             } catch (error) {
