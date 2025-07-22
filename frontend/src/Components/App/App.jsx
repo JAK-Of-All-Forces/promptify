@@ -48,7 +48,8 @@ function App() {
   },[window.location.href] );
 
   if (token === undefined) {
-  return null; 
+  // return null 
+    return <div>Loading...</div>; // or a loading spinner
 }
 
   return (
