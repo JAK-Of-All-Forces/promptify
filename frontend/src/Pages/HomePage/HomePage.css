@@ -7,9 +7,11 @@
 .home-page-button {
     background-color: #20D65F;
     position: relative;
-}
-
-.home-page-button {
     border-radius: 100px;
     border: 4px black solid;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
 }
