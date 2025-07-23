@@ -5,7 +5,7 @@ import "./PreviousPlaylist.css";
 
 function PreviousPlaylists({ userPlaylists = []}){
 
-    console.log("previous playlist" , userPlaylists)
+    console.log("Previous playlist" , userPlaylists)
     return (
         <div className="content">
             <div className="header">

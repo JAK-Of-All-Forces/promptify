@@ -1,13 +1,44 @@
-body {
-
-    background: url("../../assets/Background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    
+.landing-page .about-us{
+    font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+    font-weight: 50;
+    font-size: 1vw;
+    color: yellow;
+    position: fixed;
+    top: 0vh;
+    right: 2vh;
+    /* right: 0; */
 }
 
-.about-us{
+.landing-page .about-us:hover{
+    color: yellow;
+}
+
+#promptify-title {
     font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+    font-weight: 375;
+    font-size: 8vw;
+    margin: .5vh;
+}
+
+.video {
+    width: 55vw;
+}
+
+.landing-page .info {
+    padding: "2rem";
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-left{
+    padding: 10px;
+}
+
+.container-right {
+    justify-content: center;
+    align-items: center;
+    padding-left: 10vh;
 }

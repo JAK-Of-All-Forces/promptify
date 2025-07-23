@@ -5,11 +5,10 @@ import no_image from "../../assets/no_img.png"
 import "./PlaylistPage.css";
 import TrackCard from "../../Components/TrackCard/TrackCard"
 
-function PlaylistPage() {
+function PlaylistPage({token, setToken}) {
 
     const {id} = useParams();
     const [playlist, setPlaylist] = useState(null);
-    const token = localStorage.getItem("spotify_access_token");
     console.log("Token (Playlist Page)", token);
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -38,7 +37,7 @@ function PlaylistPage() {
 
         //If there is no token upon hitting this page, it will show that the user is not logged in as an alert
         if (!token) {
-            alert("User is not logged in")
+            return null; 
         }
 
         try{

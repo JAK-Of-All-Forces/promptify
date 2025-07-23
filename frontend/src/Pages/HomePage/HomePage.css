@@ -1,9 +1,17 @@
-body {
+.home-page {
+    justify-content: center;
+    align-items: center;
+    width: 100vw
+}
 
-    background: url("../../assets/Background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+.home-page-button {
+    background-color: #20D65F;
+    position: relative;
+    border-radius: 100px;
+    border: 4px black solid;
+}
 
-    
+.button-container {
+    display: flex;
+    justify-content: center;
 }

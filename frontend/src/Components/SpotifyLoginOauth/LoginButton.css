@@ -1,0 +1,21 @@
+.login-button{
+   border-radius: 50%;
+   border: 6px solid #fcfcff2a;
+   animation: spin 15s linear infinite;
+   position: relative;
+   width: 20vw;
+   height: 20vw;
+}
+
+
+.login-button:hover{
+    cursor: pointer;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

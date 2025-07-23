@@ -3,6 +3,12 @@ img {
     height: 300px;
 }
 
+.PlaylistCard {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+
 .PlaylistCard:hover {
     background-color: rgba(255, 255, 255, 0.586);    color: black;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -11,4 +17,9 @@ img {
 .PlaylistCard:hover .playlist-info {
     color: black;
     background-color: rgba(255, 255, 255, 0.148);
-  }
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}

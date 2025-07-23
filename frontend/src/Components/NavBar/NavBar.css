@@ -1,14 +1,42 @@
-.content a{
+.nav-bar a{
     color: white;
     font-family: "Helvetica World", Helvetica, Arial, sans-serif;
-
 }
 
-.promptify-logo{
-    font-family: "Helvetica World", Helvetica, Arial, sans-serif;
-
+.nav-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1em;
 }
 
-.about-us{
+.promptify-logo {
+    flex: 0 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar .promptify-logo h1 {
     font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+}
+
+
+.left-nav{
+    flex: 1;
+}
+
+.right-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.about-us {
+    padding-right: 1em;
 }

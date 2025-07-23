@@ -6,6 +6,7 @@ import LandingPage from "../../Pages/LandingPage/LandingPage";
 import PromptPage from "../../Pages/PromptPage/PromptPage";
 import PlaylistPage from "../../Pages/PlaylistPage/PlaylistPage";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
+import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -45,10 +46,11 @@ function App() {
 
     }
    
-  },[window.location.href] );
+  },[] );
 
   if (token === undefined) {
-  return null; 
+  // return null 
+    return <div>Loading...</div>; // or a loading spinner
 }
 
   return (
@@ -64,9 +66,18 @@ function App() {
           }
         />
         <Route path="/about" element={<AboutPage token={token} />} />
-        <Route path="/prompt" element={<PromptPage />} />
-        <Route path="/playlist/:id" element={<PlaylistPage />} />
+        <Route path="/prompt" element={
+          <ProtectedRoute token={token}>
+          <PromptPage  token = {token} setToken={setToken}/>
+          </ProtectedRoute>} 
+          />
+        <Route path="/playlist/:id" element={
+          <ProtectedRoute token={token}>
+          <PlaylistPage token = {token} setToken={setToken}/>
+          </ProtectedRoute>} 
+          />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/loading" element={<LoadingPage />} />
       </Routes>
       <ToastContainer />
     </BrowserRouter>
