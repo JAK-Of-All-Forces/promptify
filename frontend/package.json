@@ -13,6 +13,7 @@
     "node": "20.x"
   },
   "dependencies": {
+    "@lordicon/react": "^1.11.0",
     "axios": "1.10.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
