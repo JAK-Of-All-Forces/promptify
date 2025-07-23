@@ -71,6 +71,7 @@ exports.handleCallback = async (req, res) => {
     });
 
     res.redirect(`${CLIENT_URL}/home?access_token=${access_token}&spotify_id=${userProfile.id}`);
+    // res.send({access_token: access_token, spotify_id: userProfile.id});
   } catch (err) {
     console.error("Callback error:", err.response?.data || err.message);
     res.status(500).send("Callback failed.");
