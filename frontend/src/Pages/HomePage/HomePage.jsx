@@ -5,8 +5,7 @@ import PreviousPlaylists from "../../Components/PreviousPlaylists/PreviousPlayli
 import LogoutButton from "../../Components/SpotifyLogout/LogoutButton";
 import "./HomePage.css";
 
-
-function HomePage({token, setToken}) {
+function HomePage({ token, setToken }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   //User playlists variable
@@ -14,7 +13,6 @@ function HomePage({token, setToken}) {
 
   useEffect(() => {
     if (!token) return;
-
 
     const fetchProfile = async () => {
       try {
@@ -43,13 +41,9 @@ function HomePage({token, setToken}) {
           const data = await res.json();
           console.log("User profile:", data);
 
-
-
           //Calling for previous playlists
-          const playlistRes = await fetch(
-            `${API_BASE_URL}/user/${data.id}`
-          );
-          
+          const playlistRes = await fetch(`${API_BASE_URL}/user/${data.id}`);
+
           const playlistData = await playlistRes.json();
           console.log("Playlist data", playlistData);
 
