@@ -46,7 +46,7 @@ function App() {
 
     }
    
-  },[window.location.href] );
+  },[] );
 
   if (token === undefined) {
   // return null 
@@ -66,8 +66,16 @@ function App() {
           }
         />
         <Route path="/about" element={<AboutPage token={token} />} />
-        <Route path="/prompt" element={<PromptPage />} />
-        <Route path="/playlist/:id" element={<PlaylistPage />} />
+        <Route path="/prompt" element={
+          <ProtectedRoute token={token}>
+          <PromptPage  token = {token} setToken={setToken}/>
+          </ProtectedRoute>} 
+          />
+        <Route path="/playlist/:id" element={
+          <ProtectedRoute token={token}>
+          <PlaylistPage token = {token} setToken={setToken}/>
+          </ProtectedRoute>} 
+          />
         <Route path="*" element={<ErrorPage />} />
         <Route path="/loading" element={<LoadingPage />} />
       </Routes>
