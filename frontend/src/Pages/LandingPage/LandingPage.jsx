@@ -36,7 +36,7 @@ function LandingPage() {
                   autoPlay
                   loop
                   muted
-                  playsinline
+                  playsInline
                 >
                   <source src={video}></source>
                 </video>

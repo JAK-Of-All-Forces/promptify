@@ -24,7 +24,7 @@
     width: 55vw;
 }
 
-.info {
+.landing-page .info {
     padding: "2rem";
     display: flex;
     flex: wrap;
