@@ -9,7 +9,7 @@ return (
     {/* Link to homepage on click of the word Promptify*/}
     <div className="promptify-logo">
       <Link to = {token ? `/home`: `/`}>
-        <h1>Promptify</h1>
+        <h1>PROMPTIFY</h1>
         </Link>
       </div>
 

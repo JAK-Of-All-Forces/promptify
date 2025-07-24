@@ -3,6 +3,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PromptPage.css";
 import { toast } from "react-toastify";
+import Lottie from "lottie-react";
+import animationData from '../../../public/Playing Vinyl Disc.json';
+
+
 
 function PromptPage() {
   const navigate = useNavigate();
@@ -211,7 +215,7 @@ function PromptPage() {
       <NavBar></NavBar>
       <div className="prompt-container">
         <div className="left-side-animation">
-          <p>Insert Image/Animation Here</p>
+          <Lottie animationData={animationData} loop autoplay />
         </div>
         <div className="right-side">
           <div className="caption">
