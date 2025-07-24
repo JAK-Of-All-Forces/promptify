@@ -1,6 +1,7 @@
 const express = require('express');
 require("dotenv").config();
 const app = express();
+
 // middleware
 const cors = require("cors");
 const CLIENT_URL = process.env.CLIENT_URL
