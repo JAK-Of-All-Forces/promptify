@@ -1,47 +1,82 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 .aboutCard-container {
   display: flex;
   flex-wrap: wrap;
   gap: 100px;
   justify-content: center;
+  padding: 20px; 
+  font-family: 'Poppins', sans-serif;
 }
+
+
 
 .about-card {
   position: relative;
-  width: 250px; 
+  width: 250px;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .about-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border: 1px solid #8be9fd;
 }
 
 img.card-bg {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: cover;
+  filter: brightness(0.9);
 }
 
 .card-content {
   position: absolute;
-  top: 200px;
+  top: 250px;
+  z-index: 2;
   color: white;
   width: 100%;
-  padding: 5px;
+  padding: 10px;
   text-align: center;
   font-size: 1rem;
-  line-height: 45px;
+  line-height: 1.6;
 }
+
+.card-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.card-content p {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin: 5px 0;
+}
+
+.card-content a {
+  font-size: 1.2rem;
+  color: #66d3eb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.card-content a:hover {
+  color: #ffffff;
+}
+
 
 .faq-container {
   padding: 2rem;
   max-width: 700px;
   margin: 0 auto;
+    justify-content: center;
+  align-items: center;
 }
 
 .faq-item {
