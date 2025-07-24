@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./PromptPage.css";
 import { toast } from "react-toastify";
 import Lottie from "lottie-react";
-import animationData from '../../../public/Playing Vinyl Disc.json';
+import animationData from '../../assets/Playing Vinyl Disc.json';
 
 
 

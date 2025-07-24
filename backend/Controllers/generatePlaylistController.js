@@ -324,8 +324,8 @@ const createPrompt = async (req, res) => {
 
   let playlistImageUrl;
   console.log("setting playlist image url");
-  if (songTracks.length > 0 && songTracks[0].imageURL) {
-    playlistImageUrl = songTracks[0].imageURL;
+  if (songTracks.length > 0 && songTracks[0].image_url) {
+    playlistImageUrl = songTracks[0].image_url;
   } else {
     playlistImageUrl = "backend/assets/no_img.png";
   }

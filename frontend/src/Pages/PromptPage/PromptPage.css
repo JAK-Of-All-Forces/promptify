@@ -86,9 +86,16 @@
 }
 
 .duration-button .sidebar button {
-    font-size: 0.8rem;
+    font-size: 25px;
     padding: 4px;
-    width: 100px;
+    width: 120px;
+    margin: 5px;
+}
+
+.bpm-button .sidebar button {
+    font-size: 30px;
+    padding: 4px;
+    width: 200px;
     margin: 2px;
 }
 
