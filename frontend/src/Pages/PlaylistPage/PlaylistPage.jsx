@@ -123,43 +123,50 @@ function PlaylistPage({token, setToken}) {
     }
 
     return (
-        <div className="PlaylistPage">
-        
-            {/* Displayling NavBar component */}
-            <NavBar></NavBar>
-            {/* Playlist Page */}
-            <div>
-            {/* Playlist Title */}
-            <h1 className="playlist-title">{playlist.name}</h1>
+      <div className="playlist-page">
+        {/* Displayling NavBar component */}
+        <NavBar></NavBar>
+        {/* Playlist Page */}
+        <div>
+          {/* Playlist Title */}
+          <h1 className="playlist-title">{playlist.name}</h1>
 
-            {/* Add to Spotify Button */}
-            <button onClick = {() => AddToSpotify(playlist)}>Add to Spotify</button>
-
+          {/* Add to Spotify Button */}
+          <div className="button-container">
+            <button
+              className="add-to-spotify-button"
+              onClick={() => AddToSpotify(playlist)}
+            >
+              <h2>+ Add to Spotify</h2>
+            </button>
+          </div>
+          <div className="playlist-content">
             {/* Playlist Cover */}
             <div className="playlist-cover">
-                {playlist.image_url ? (
+              {playlist.image_url ? (
                 <img src={playlist.image_url} alt="Playlist cover" />
-                ) : (
+              ) : (
                 <img src={no_image} alt="Playlist cover (no image)" />
-                )}
+              )}
             </div>
 
             {/* Mapping through all of the playlist tracks */}
             <div className="playlist-tracks">
-                {!playlist.tracks || playlist.tracks.length === 0? (
+              {!playlist.tracks || playlist.tracks.length === 0 ? (
                 <div className="no-tracks">
-                    <img src={no_image} alt="No tracks" />
-                    <p>This Promptify playlist has no tracks</p>
+                  <img src={no_image} alt="No tracks" />
+                  <p>This Promptify playlist has no tracks</p>
                 </div>
-                ) : (
+              ) : (
                 playlist.tracks.map((track) => (
-                    <TrackCard key={track.id} track={track} />
+                  <TrackCard key={track.id} track={track} />
                 ))
-                )}
+              )}
             </div>
-            </div>
+          </div>
         </div>
-        );
+      </div>
+    );
 }
 
 export default PlaylistPage;
