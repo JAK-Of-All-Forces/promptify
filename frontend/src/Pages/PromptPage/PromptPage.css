@@ -1,14 +1,96 @@
-/* .right-side .activity-button .sidebar.closed, 
-.right-side .duration-button .sidebar.closed {
-    display: none;
+.prompt-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around; 
+    align-items: center; 
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+
 }
 
-.right-side .activity-button .sidebar.open,
-.right-side .duration-button .sidebar.closed {
-    display: block;
+.left-side-animation,
+.right-side {
+    flex: 1; 
     padding: 10px;
+}
 
-} */
+.left-side-animation {
+    height: 100vh;            /* full viewport height */
+    display: flex;
+    justify-content: center;  /* center horizontally */
+    align-items: center;      /* center vertically */
+}
+
+.circle {
+    width : 200px;
+    height : 200px;
+    background-color: white;
+    border-radius: 50%;
+
+}
+
+
+
+.caption {
+    color: white;
+    font-weight: bolder;  
+    font-size: medium;  
+    font-style: oblique;
+    text-align: center;
+}
+
+
+.playlist-name >p {
+    color: white;
+    font-weight: bolder;  
+    font-size: 30px;  
+    margin: 0px;
+}
+
+.playlist-name input {
+    margin: 0;
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 30px;
+
+    border: 2px solid #c0b6e9; /* add a border */
+    background-color: #ffffff; /* light background */
+    color: #000000;               /* text color */
+    outline: none;         
+}
+
+.playlist-prompt-section {
+    display: flex;
+    flex-direction: column; /* stack items vertically */
+    align-items: center;    /* center horizontally */
+    justify-content: center; /* center vertically */
+}
+
+.playlist-prompt-section button {
+    background-color: #c0b6e9;
+    border-radius: 30px;
+    border-color: rgb(236, 215, 244);
+    border-width: 2px;
+    margin : 20px;
+    padding: 20px;
+    width: 300px;    
+    font-size: 25px;
+    font-style: oblique;
+    font-weight: bolder;
+}
+
+.playlist-prompt-section .generate-button button {
+    background-color: rgb(32, 214, 95);
+    border-color: rgb(161, 218, 181);
+}
+
+.duration-button .sidebar button {
+    font-size: 0.8rem;
+    padding: 4px;
+    width: 100px;
+    margin: 2px;
+}
 
 .sidebar.closed {
     display: none;
@@ -16,11 +98,58 @@
 
 .sidebar.open {
     display: block;
-    padding: 10px;
+    background-color: white;
+    color: black;
 }
 
 .sidebar button.selected {
-  border-color: #009dff;
-  border-radius: 4px;
+    border-color: #a600ff;
+    border-radius: 4px;
 }
 
+.activity-button, .duration-button, .genre-button, .bpm-button , .generate-button {
+    position: relative;
+    display: inline-block; /* shrink to button width */
+    text-align: center; /* center text inside */
+    z-index: 100;
+}
+
+.sidebar {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border-radius: 30px;
+    width: 275px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 80px;
+    z-index: -1;
+    max-height: 150px;
+    overflow-y: scroll;
+    margin-top: -80px;
+}
+
+.sidebar label {
+    cursor: pointer;
+}
+
+.sidebar p {
+    font-style: oblique;
+    color: #000000;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 5px; /* width of the scrollbar */
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #ffffff; /* color of the scrollbar track */
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #c0b6e9; /* color of the scrollbar thumb */
+    border-radius: 30px;
+    border: 2px solid #ffffff; /* gives a little padding inside the track */
+}
