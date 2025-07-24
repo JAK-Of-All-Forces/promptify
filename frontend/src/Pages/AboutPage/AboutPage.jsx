@@ -28,6 +28,7 @@ function AboutPage({token}) {
 return (
   <div className="about-container">
     <NavBar token = {token}/>
+    <h2 className="about-header">MEET THE TEAM</h2>
     <div className="aboutCard-container">
       {aboutData.map((person) => (
   <div
