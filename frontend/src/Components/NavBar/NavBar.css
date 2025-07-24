@@ -4,19 +4,39 @@
 }
 
 .nav-bar {
+    position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
+    justify-content: center;
+    padding-top: 1em;
 }
 
-.nav-bar .promptify-logo h1{
+.promptify-logo {
+    flex: 0 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar .promptify-logo h1 {
     font-family: "Helvetica World", Helvetica, Arial, sans-serif;
-    font-weight: 580;
+    font-weight: 500;
     text-align: center;
+    margin: 0;
 }
 
-.nav-bar .about-us{
-    position: relative;
-    font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+
+.left-nav{
+    flex: 1;
+}
+
+.right-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.about-us {
+    padding-right: 1em;
 }

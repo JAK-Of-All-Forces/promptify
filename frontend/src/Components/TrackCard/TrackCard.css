@@ -1,0 +1,50 @@
+.TrackCard {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    /* Come back to this for the extension */
+    max-width: 600px;
+}
+
+.TrackCard:hover {
+    background-color: #f0f0f0;
+    color: black;
+  }
+
+
+  .track-cover {
+
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .track-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* fill available space */
+    min-width: 0; /* important to prevent overflow */
+  }
+
+  .track-name {
+    font-weight: 600;
+    font-size: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .track-artist {
+    font-size: 1rem;
+  }
+
+
+.track-duration {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }

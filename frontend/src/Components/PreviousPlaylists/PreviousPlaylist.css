@@ -1,6 +1,14 @@
 .previous-playlists {
-    /* background-color: rgba(0, 0, 0, 0.367); */
     display: flex;
     flex-wrap: wrap;
-    
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    padding-top: 2em;
 }

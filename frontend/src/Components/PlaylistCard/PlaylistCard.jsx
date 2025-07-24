@@ -20,7 +20,7 @@ function PlaylistCard({ playlist }) {
                 {/* Displaying the Playlist Info */}
                 <div className = "playlist-info">
                     <div className = "info">
-                        <p className = "playlist-name">{playlist.name}</p>
+                        <h3 className = "playlist-name">{playlist.name}</h3>
                         <p className = "playlist-creation">Created: {playlist.createdAt}</p>
                     </div>
                 </div>
