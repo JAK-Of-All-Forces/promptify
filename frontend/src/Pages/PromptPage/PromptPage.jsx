@@ -8,9 +8,13 @@ import animationData from '../../../public/Playing Vinyl Disc.json';
 
 
 
-function PromptPage() {
-  const navigate = useNavigate();
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+function PromptPage ({token,setToken}) {
+    const navigate = useNavigate();
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+    if(!token){
+        return null; 
+    }
 
   // playlist Name logic
   const [inputPlaylistName, setInputPlaylistName] = useState("");

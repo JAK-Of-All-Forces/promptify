@@ -5,32 +5,12 @@ import PreviousPlaylists from "../../Components/PreviousPlaylists/PreviousPlayli
 import LogoutButton from "../../Components/SpotifyLogout/LogoutButton";
 import "./HomePage.css";
 
-
-function HomePage({token, setToken}) {
+function HomePage({ token, setToken }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  // TEMP: Dummy playlists for testing
-  const PORT = import.meta.env.PORT
-
-  const dummyPlaylists = [
-    {
-      id: "1",
-      name: "Energetic Gym Afrobeats",
-      image_url:
-        "https://i.scdn.co/image/ab67616d0000b273a0b4e05b489e5e037028b496",
-      createdAt: "2025-07-17T10:00:00Z",
-    },
-
-    {
-      id: "2",
-      name: "Chill Walk",
-      image_url:
-        "https://i.scdn.co/image/ab67616d0000b2739b791593e61e77e9a1c092fa",
-      createdAt: "2025-07-17T12:30:00Z",
-    },
-  ];
-
+  //User playlists variable
   const [userPlaylists, setUserPlaylists] = useState([]);
+
   useEffect(() => {
     if (!token) return;
 
@@ -61,16 +41,14 @@ function HomePage({token, setToken}) {
           const data = await res.json();
           console.log("User profile:", data);
 
-          console.log("spotify id", data.id);
           //Calling for previous playlists
-          const playlistRes = await fetch(
-            `${API_BASE_URL}/user/${data.id}`
-          );
-          const playlistData = await playlistRes.json();
-          setUserPlaylists(playlistData);
-          setUserPlaylists(dummyPlaylists);
+          const playlistRes = await fetch(`${API_BASE_URL}/user/${data.id}`);
 
-          console.log("User playlists:", userPlaylists);
+          const playlistData = await playlistRes.json();
+          console.log("Playlist data", playlistData);
+
+          setUserPlaylists(playlistData);
+
           //Checking where the token is stored
           console.log("Token", token);
         }
@@ -84,8 +62,8 @@ function HomePage({token, setToken}) {
 
   return (
     //Displayling NavBar component
-    <div className="home-container">
-      <NavBar token = {token}></NavBar>
+    <div className="home-page">
+      <NavBar token={token}></NavBar>
       <div style={{ padding: "2rem" }}>
         <LogoutButton setToken={setToken} />
       </div>
@@ -93,15 +71,15 @@ function HomePage({token, setToken}) {
       {/* Rest of the home page content below */}
 
       <div>
-        <PreviousPlaylists userPlaylists={userPlaylists} />
-      </div>
-
-      <div>
-        <button>
-          <Link to = "/prompt">
+        <button className="home-page-button">
+          <Link to="/prompt">
             <h1>Let's Make a Playlist</h1>
           </Link>
         </button>
+      </div>
+
+      <div>
+        <PreviousPlaylists userPlaylists={userPlaylists} />
       </div>
     </div>
   );
