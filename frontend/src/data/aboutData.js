@@ -10,6 +10,7 @@ const aboutData = [
     image: amari,
     linkedin: "https://www.linkedin.com/in/amari-may-2ba6112b0/",
     funFacts: {
+      modalImage: amari,
       favoriteSong: "Alien Superstar – Beyoncé",
       favoriteGenre: "Alt R&B",
       favoriteEmoji: "💻"
@@ -22,6 +23,7 @@ const aboutData = [
     image: jessica,
     linkedin: "https://www.linkedin.com/in/jessica-obi-80a184287/",
     funFacts: {
+      modalImage: jessica,
       favoriteSong: "Uptown Funk – Bruno Mars",
       favoriteGenre: "Funk",
       favoriteEmoji: "🪩"
@@ -34,6 +36,7 @@ const aboutData = [
     image: kenna,
     linkedin: "https://www.linkedin.com/in/knyuga/",
     funFacts: {
+      modalImage: kenna,
       favoriteSong: "Good Days – SZA",
       favoriteGenre: "Neo-Soul",
       favoriteEmoji: "🎧"

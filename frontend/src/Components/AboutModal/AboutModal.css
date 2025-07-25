@@ -1,70 +1,73 @@
-
-
-/* Fullscreen dark background overlay */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* translucent black */
+  background-color: rgba(0, 0, 0, 0.6); /* translucent dark overlay */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal content container */
 .modal-content {
-  background-color: #ffffff;
-  border-radius: 12px;
+  background-image: url(""); /* Will be dynamically set with inline style in JSX */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   width: 90%;
   max-width: 500px;
-  padding: 20px 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  height: 90vh;
+  border-radius: 12px;
   position: relative;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Header with close button */
-.modal-header {
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  padding: 0; /* remove padding to let image fill fully */
 }
 
-/* Close button styling */
+/* Header */
+.modal-header {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  z-index: 2;
+}
+
 .modal-header button {
-  background: none;
+  background: rgba(255, 255, 255, 0.8);
   border: none;
   font-size: 1.4rem;
   cursor: pointer;
-  color: #333;
+  padding: 4px 10px;
+  border-radius: 4px;
 }
 
-/* Modal body content */
+/* Body content over image */
 .modal-body {
-  padding-top: 10px;
+  background-color: rgba(0, 0, 0, 0.5); /* translucent black background for text */
+  color: white;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  z-index: 2;
 }
 
-/* Info styling inside modal */
 .details h2 {
   margin-top: 0;
   font-size: 1.5rem;
-  color: #222;
 }
 
 .details p {
   margin: 8px 0;
   font-size: 1rem;
-  color: #444;
 }
 
-/* Fun facts section */
-.fun-facts p {
-  margin: 6px 0;
-}
-
-/* Simple fade-in animation */
+/* Optional animation */
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -1,41 +1,35 @@
 import "./AboutModal.css"
-import React, {useState, useEffect} from "react"
+import React from "react"
 
-const AboutModal = ({selectedPerson, onClose}) => {
-    console.log(selectedPerson); 
-   
+const AboutModal = ({ selectedPerson, onClose }) => {
+  if (!selectedPerson) return null;
 
-   return(
-     <div className="modal" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <div className="modal-header">
-                    <button onClick ={onClose}>X</button>
-                </div>
-                <div className="modal-body">
-                   {!selectedPerson || !selectedPerson.name ? (
-  <p>Loading...</p>
-) : (
-  <div className="details">
-    <h2>{selectedPerson.name}</h2>
-    {selectedPerson.funFacts && (
-  <div className="fun-facts">
-    <p><strong>Favorite Song:</strong> {selectedPerson.funFacts.favoriteSong}</p>
-    <p><strong>Favorite Genre:</strong> {selectedPerson.funFacts.favoriteGenre}</p>
-    <p><strong>Favorite Emoji:</strong> {selectedPerson.funFacts.favoriteEmoji}</p>
-  </div>
-)}   
-   
-  </div>
-)}
-                </div>
-            </div>
+  return (
+    <div className="modal" onClick={onClose}>
+      <div
+        className="modal-content"
+        style={{
+          backgroundImage: `url(${selectedPerson.funFacts.modalImage})`,
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-header">
+          <button onClick={onClose}>X</button>
         </div>
 
+        <div className="modal-body">
+          <div className="details">
+            <h2>{selectedPerson.name}</h2>
+            <div className="fun-facts">
+              <p><strong>Favorite Song:</strong> {selectedPerson.funFacts.favoriteSong}</p>
+              <p><strong>Favorite Genre:</strong> {selectedPerson.funFacts.favoriteGenre}</p>
+              <p><strong>Favorite Emoji:</strong> {selectedPerson.funFacts.favoriteEmoji}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-    )
-
-
-
-
-}
-export default AboutModal 
+export default AboutModal;
