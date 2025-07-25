@@ -5,6 +5,7 @@
     align-items: center; 
     padding: 20px;
     width: 100vw;
+    height: 100vh;
 }
 
 .left-side-animation,
@@ -14,19 +15,53 @@
 }
 
 .left-side-animation {
-    height: 100vh;            /* full viewport height */
     display: flex;
     justify-content: center;  /* center horizontally */
     align-items: center;      /* center vertically */
 }
 
-.circle {
-    width : 200px;
-    height : 200px;
-    background-color: white;
-    border-radius: 50%;
-
+.genre-search {
+    width: 85%;
+    padding: 8px;
+    margin: 10px auto;
+    display: block;
+    border-radius: 30px;
+    border: 2px solid #c0b6e9;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 1rem;
+    outline: none;
 }
+
+.all-genres {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.all-genres label {
+    display: flex;
+    align-items: center;
+    background-color: #f4f0fa;
+    border: 1px solid #c0b6e9;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.all-genres label:hover {
+    background-color: #e0d7f3;
+}
+
+.all-genres input[type="checkbox"] {
+    margin-right: 6px;
+    accent-color: #a600ff; /* modern checkbox theming */
+    transform: scale(1.2);
+}
+
 
 
 
@@ -83,6 +118,26 @@
     border-color: rgb(161, 218, 181);
 }
 
+.activity-button .sidebar button {
+    font-size: 15px;
+    padding: 4px;
+    width: 120px;
+    margin: 5px;
+    background-color: #e7def6;
+    border: 2px solid #c0b6e9;
+    border-radius: 30px;
+    font-weight: bold;
+    font-style: oblique;
+    color: #ffffff;
+}
+
+.activity-button .sidebar button.selected {
+    border-color: #a600ff;
+    background-color: #d6c2f0;
+}
+
+
+
 .duration-button .sidebar button {
     font-size: 25px;
     padding: 4px;
@@ -95,7 +150,49 @@
     padding: 4px;
     width: 200px;
     margin: 2px;
+
+    background-color: #a3e9c6;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    margin-top: 10px;
+    cursor: pointer;
 }
+
+.bpm-button .sidebar {
+    font-size: 25px;
+    background-color: #ffffff;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.bpm-button .sidebar input[type="number"] {
+    font-size: 20px;
+    width: 75px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px solid #c0b6e9;
+    background-color: #f9f6ff;
+    color: #000000;
+    text-align: center;
+    outline: none;
+}
+
+.bpm-button .sidebar p {
+    text-align: center;
+    margin-top: 10px;
+    font-style: oblique;
+    font-size: 16px;
+    color: #333333;
+}
+
+.bpm-button .sidebar button:hover {
+    background-color: #32d27f;
+}
+
 
 .sidebar.closed {
     display: none;

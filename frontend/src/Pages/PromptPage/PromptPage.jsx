@@ -1,5 +1,5 @@
 import NavBar from "../../Components/NavBar/NavBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PromptPage.css";
 import { toast } from "react-toastify";
@@ -8,45 +8,61 @@ import animationData from '../../assets/Playing Vinyl Disc.json';
 
 
 
-function PromptPage ({token,setToken}) {
-    const navigate = useNavigate();
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+function PromptPage ({token, setToken}) {
+  const navigate = useNavigate();
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    if(!token){
-        return null; 
+  const [inputPlaylistName, setInputPlaylistName] = useState("");
+  const [showActivityInput, setShowActivityInput] = useState(false);
+  const [selectedActivity, setSelectedActivity] = useState("");
+  const [showDurationInput, setShowDurationInput] = useState(false);
+  const [selectedDuration, setSelectedDuration] = useState("");
+  const [genres, setGenres] = useState([]);
+  const [genreSearchTerm, setGenreSearchTerm] = useState("");
+  const [showGenreInput, setShowGenreInput] = useState(false);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [showBPMInput, setShowBPMInput] = useState(false);
+  const [bpmLow, setBPMLow] = useState("");
+  const [bpmHigh, setBPMHigh] = useState("");
+  const [allowGenerate, setAllowGenerate] = useState(false);
+
+  useEffect(() => {
+    async function fetchGenres() {
+      const spotifyId = localStorage.getItem("spotify_id");
+      const response = await fetch(`${API_BASE_URL}/playlist/getGenres?spotifyId=${spotifyId}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const result = await response.json();
+      setGenres(result.genres);
     }
+    fetchGenres();
+  }, []);
+
+
+
+  if(!token){
+    return null; 
+  }
 
   // playlist Name logic
-  const [inputPlaylistName, setInputPlaylistName] = useState("");
   const handleOnNameInputChange = (event) => {
     setInputPlaylistName(event.target.value);
   };
 
   // activity button logic
-  const [showActivityInput, setShowActivityInput] = useState(false);
   const activities = [
-    "Studying",
-    "Commuting",
-    "Hiking",
-    "Yoga",
-    "Gym",
-    "Sleep",
-  ]; // need to change this to have more features in stretch
-  const [selectedActivity, setSelectedActivity] = useState("");
-  function handleActivityCheckboxChange(event) {
-    const { value, checked } = event.target; // destructures event to the value and checked
-    if (checked) {
-      setSelectedActivity([...selectedActivity, value]);
-    } else {
-      setSelectedActivity(selectedActivity.filter((a) => a !== value)); // removes unchecked values from selected activities
-    }
+    "Studying", "Commuting", "Hiking", "Yoga", "Gym", "Sleep", "Working,", "Cooking", "Cleaning", "Relaxing", "Running", "Driving",
+    "Meditiation", "Partying", "Reading", "Shopping", "Walking", "Gaming"
+  ]; 
+  const handleActivityButtonClick = (activity) => {
+    setSelectedActivity([activity]);
   }
   const toggleActivities = () => {
     setShowActivityInput((prev) => !prev);
   };
 
   // duration button logic
-  const [showDurationInput, setShowDurationInput] = useState(false);
   const durations = [
     "15 minutes",
     "30 minutes",
@@ -57,7 +73,6 @@ function PromptPage ({token,setToken}) {
     "105 minutes",
     "120 minutes",
   ];
-  const [selectedDuration, setSelectedDuration] = useState("");
   function handleDurationChange(event) {
     // stretch feature: change 90 minutes to be hour and minutes format to users
     if (selectedDuration.includes(event)) {
@@ -76,9 +91,6 @@ function PromptPage ({token,setToken}) {
   };
 
   // genre button logic
-  const [showGenreInput, setShowGenreInput] = useState(false);
-  const genres = ["lyrical rap", "rnb", "rap", "country", "pop", "worship"];
-  const [selectedGenres, setSelectedGenres] = useState([]);
   function handleGenreCheckboxChange(event) {
     const { value, checked } = event.target; // destructures event to the value and checked
     if (checked) {
@@ -96,11 +108,11 @@ function PromptPage ({token,setToken}) {
       setShowGenreInput((prev) => !prev);
     }
   };
+  const filteredGenres = genres.filter((genre) =>
+    genre.toLowerCase().includes(genreSearchTerm.toLowerCase())
+  );
 
   // BPM button logic
-  const [showBPMInput, setShowBPMInput] = useState(false);
-  const [bpmLow, setBPMLow] = useState("");
-  const [bpmHigh, setBPMHigh] = useState("");
   const handleBPMLowInputChange = (event) => {
     setBPMLow(event.target.value); // just update the raw input
   };
@@ -118,7 +130,6 @@ function PromptPage ({token,setToken}) {
   };
 
   // generate playlist logic
-  const [allowGenerate, setAllowGenerate] = useState(false);
   const proceedGenerate = () => {
     setAllowGenerate(true);
   };
@@ -240,15 +251,13 @@ function PromptPage ({token,setToken}) {
               <div
                 className={`sidebar ${showActivityInput ? "open" : "closed"}`}>
                 {activities.map((activity) => (
-                  <label key={activity}>
-                    <input
-                      type="checkbox"
-                      value={activity}
-                      checked={selectedActivity.includes(activity)}
-                      onChange={handleActivityCheckboxChange}
-                    />
+                  <button
+                    key={activity}
+                    className={`activity-option ${selectedActivity.includes(activity) ? "selected" : ""}`}
+                    onClick={() => handleActivityButtonClick(activity)}
+                  >
                     {activity}
-                  </label>
+                  </button>
                 ))}
                 {selectedActivity.length > 0 ? (
                   <p>
@@ -285,17 +294,31 @@ function PromptPage ({token,setToken}) {
             <div className="genre-button">
               <button onClick={toggleGenre}>Select the Genre(s)</button>
               <div className={`sidebar ${showGenreInput ? "open" : "closed"}`}>
-                {genres.map((genre) => (
-                  <label key={genre}>
-                    <input
-                      type="checkbox"
-                      value={genre}
-                      checked={selectedGenres.includes(genre)}
-                      onChange={handleGenreCheckboxChange}
-                    />
-                    {genre}
-                  </label>
-                ))}
+                <input
+                  className="genre-search"
+                  type="text"
+                  placeholder="Search genres here..."
+                  value={genreSearchTerm}
+                  onChange={(e) => setGenreSearchTerm(e.target.value)}
+                />
+                <div className="all-genres">
+                  {filteredGenres.length > 0 ? (
+                    filteredGenres.map((genre) => (
+                      <label key={genre} >
+                        <input
+                          type="checkbox"
+                          value={genre}
+                          checked={selectedGenres.includes(genre)}
+                          onChange={handleGenreCheckboxChange}
+                        />
+                        {genre}
+                      </label>
+                    ))
+                  ) : (
+                    <p>No genres found.</p>
+                  )}
+                </div>
+
                 {selectedGenres.length > 0 ? (
                   <p>Your selected genres are: {selectedGenres.join(", ")}</p>
                 ) : (
