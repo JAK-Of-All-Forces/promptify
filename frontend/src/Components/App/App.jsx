@@ -66,10 +66,13 @@ function App() {
           }
         />
         <Route path="/about" element={<AboutPage token={token} />} />
-        <Route path="/prompt" element={
+        <Route 
+          path="/prompt" 
+          element={
           <ProtectedRoute token={token}>
           <PromptPage  token = {token} setToken={setToken}/>
-          </ProtectedRoute>} 
+          </ProtectedRoute>
+          } 
           />
         <Route path="/playlist/:id" element={
           <ProtectedRoute token={token}>

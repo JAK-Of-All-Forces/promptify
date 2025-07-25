@@ -216,7 +216,7 @@ function PromptPage ({token,setToken}) {
 
   return (
     <>
-      <NavBar></NavBar>
+      <NavBar token={token}></NavBar>
       <div className="prompt-container">
         <div className="left-side-animation">
           <Lottie animationData={animationData} loop autoplay />
