@@ -8,13 +8,15 @@ const aboutData = [
     name: "Amari May",
     role: "University of Virginia",
     image: amari,
+    email: "amarimay1213@gmail.com",
     linkedin: "https://www.linkedin.com/in/amari-may-2ba6112b0/",
     funFacts: {
       modalImage: amari,
-      mostListenedSong: "Alien Superstar – Beyoncé",
-      favoriteGenre: "Alt R&B",
-      favoriteEmoji: "💻"
-      topArtist: "Beyonce"
+      mostListenedSong: "Pretty Little Birds (feat. Isaiah Rashad) – SZA",
+      favoriteGenre: "R&B",
+      topArtist: "Beyonce",
+      topAlubm: "Sinners"
+
     }
   },
   {
@@ -22,13 +24,14 @@ const aboutData = [
     name: "Jessica Obi",
     role: "Spellman College",
     image: jessica,
+    email: "",
     linkedin: "https://www.linkedin.com/in/jessica-obi-80a184287/",
     funFacts: {
       modalImage: jessica,
-      mostListenedSong: "Alien Superstar – Beyoncé",
-      favoriteGenre: "Funk",
-      favoriteEmoji: "🪩"
-      topArtist: "Rema"
+      mostListenedSong: "Less Speed - Chief Keef",
+      favoriteGenre: "Rap",
+      topArtist: "Rema",
+      topAlubm: "Apollo XXI - Steve Lacy"
     }
   },
   {
@@ -36,13 +39,14 @@ const aboutData = [
     name: "Kenna Nyuga-Galega",
     role: "University of Austin Texas",
     image: kenna,
+    email: "",
     linkedin: "https://www.linkedin.com/in/knyuga/",
     funFacts: {
       modalImage: kenna,
-      mostListenedSong: "Alien Superstar – Beyoncé",
-      favoriteGenre: "Neo-Soul",
-      favoriteEmoji: "🎧"
-      topArtist: "NBA Youngboy"
+      mostListenedSong: "Make No Sense - NBA Youngboy",
+      favoriteGenre: "Afrobeat",
+      topArtist: "NBA Youngboy",
+      topAlubm: "Never Broke Again: The Compilation"
     }
   }
 ];

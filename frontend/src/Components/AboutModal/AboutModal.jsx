@@ -21,9 +21,10 @@ const AboutModal = ({ selectedPerson, onClose }) => {
           <div className="details">
             <h2>{selectedPerson.name}</h2>
             <div className="fun-facts">
-              <p><strong>Favorite Song:</strong> {selectedPerson.funFacts.favoriteSong}</p>
+              <p><strong>Most Listened to Song:</strong> {selectedPerson.funFacts.mostListenedSong}</p>
               <p><strong>Favorite Genre:</strong> {selectedPerson.funFacts.favoriteGenre}</p>
-              <p><strong>Favorite Emoji:</strong> {selectedPerson.funFacts.favoriteEmoji}</p>
+              <p><strong>Top Artist:</strong> {selectedPerson.funFacts.topArtist}</p>
+              <p><strong>Top Album:</strong> {selectedPerson.funFacts.topAlubm}</p>
             </div>
           </div>
         </div>

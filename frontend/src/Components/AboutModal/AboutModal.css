@@ -1,33 +1,32 @@
-/* Fullscreen dark background overlay */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* translucent black */
+  background-color: rgba(0, 0, 0, 0.6); 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal content with background image */
 .modal-content {
-  position: relative;
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
   width: 90%;
   max-width: 500px;
-  height: 600px; /* Adjust as needed */
+  min-height: 700px; /* Try adjusting this incrementally (e.g., 680, 720) */
+  background-size: cover;
+  background-position: 50% 20%; /* Evenly centers image top-to-bottom */
   border-radius: 12px;
+  padding: 20px 30px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  animation: fadeIn 0.3s ease-in-out;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-/* Header with close button */
+
 .modal-header {
   position: absolute;
   top: 10px;
@@ -35,7 +34,6 @@
   z-index: 2;
 }
 
-/* Close button styling */
 .modal-header button {
   background: rgba(0,0,0,0.5);
   border: none;
@@ -46,32 +44,39 @@
   padding: 5px 10px;
 }
 
-/* Text content container layered on top of image */
 .modal-body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* background: rgba(0, 0, 0, 0.6); dark overlay */
   color: white;
   padding: 20px;
   z-index: 2;
 }
 
-/* Text styling */
 .details h2 {
   margin-top: 0;
-  font-size: 1.5rem;
+  font-size: 3rem;
+  text-align: center;
+;
   color: white;
 }
 
-.details p,
-.fun-facts p {
-  margin: 6px 0;
-  font-size: 1rem;
-  color: #ddd;
+.details p {
+  margin: 10px 0;
+  font-size: 1.5rem;
+  line-height: 1.5;
 }
 
-/* Simple fade-in animation */
+.details {
+  position: relative;
+  top: 30px;     /* Move text upward (adjust as needed) */
+  left: -60px;    /* Move text to the left (adjust as needed) */
+  padding: 20px;
+  color: white;   /* Make sure it's visible against the background */
+  text-shadow: 0 0 4px rgba(0,0,0,0.7); 
+}
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;
