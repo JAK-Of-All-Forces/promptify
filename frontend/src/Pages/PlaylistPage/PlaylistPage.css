@@ -104,12 +104,12 @@ width: 100vw;
     align-items: flex-start;
   }
 
-.add-to-spotify-button {
+/* .add-to-spotify-button {
     background-color: #20d660;
     position: relative;
     border-radius: 100px;
     border: 3px black solid;
-}
+} */
 
 .button-container {
     display: flex;
@@ -120,7 +120,7 @@ width: 100vw;
 .add-to-spotify-button {
     background-color: #20D65F;
       border: 1px solid black;
-      border-radius: 20px;
+      border-radius: 50px;
       box-sizing: border-box;
       color: #FFFFFF;
       cursor: pointer;
@@ -142,7 +142,8 @@ width: 100vw;
     }
     
     .add-to-spotify-button:hover {
-      background-color: #159241;
+        background-color: #107434;
+
     }
     
     .add-to-spotify-button:focus {
