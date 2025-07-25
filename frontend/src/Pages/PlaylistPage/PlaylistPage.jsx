@@ -127,7 +127,6 @@ function PlaylistPage({token, setToken}) {
         {/* Displayling NavBar component */}
       <NavBar token={token}></NavBar>
         {/* Playlist Page */}
-        <div>
           {/* Add to Spotify Button */}
 
           <div className="playlist-content">
@@ -168,7 +167,6 @@ function PlaylistPage({token, setToken}) {
             </div>
           </div>
         </div>
-      </div>
     );
 }
 
