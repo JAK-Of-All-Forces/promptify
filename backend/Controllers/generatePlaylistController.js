@@ -6,7 +6,6 @@ dotenv.config()
 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-
 const axios = require("axios");
 
 // neeed  to try this after a user has logged in
@@ -267,7 +266,7 @@ const createPrompt = async (req, res) => {
       The playlist should match the mood and energy of the activity.
       The name of the playlist is ${name}.
 
-      The playlist should be approximately ${duration} minutes long. 
+      The playlist should be at LEAST ${duration} minutes long. 
       Assume the average song is 3 minutes, and include about ${Math.floor(duration / 3)} songs.
 
       Respond in valid JSON format only.
@@ -290,7 +289,7 @@ const createPrompt = async (req, res) => {
       The playlist should match the mood and energy of the activity.
       The name of the playlist is ${name}.
 
-      The playlist should be approximately ${duration} minutes long. 
+      The playlist should be at LEAST ${duration} minutes long. 
       Assume the average song is 3 minutes, and include about ${Math.floor(duration / 3)} songs.
 
       Respond in valid JSON format only.
