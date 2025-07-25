@@ -125,7 +125,7 @@ function PlaylistPage({token, setToken}) {
     return (
       <div className="playlist-page">
         {/* Displayling NavBar component */}
-        <NavBar></NavBar>
+      <NavBar token={token}></NavBar>
         {/* Playlist Page */}
         <div>
           {/* Playlist Title */}
