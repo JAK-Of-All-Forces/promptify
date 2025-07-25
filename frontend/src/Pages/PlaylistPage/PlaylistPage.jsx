@@ -127,27 +127,29 @@ function PlaylistPage({token, setToken}) {
         {/* Displayling NavBar component */}
       <NavBar token={token}></NavBar>
         {/* Playlist Page */}
-        <div>
-          {/* Playlist Title */}
-          <h1 className="playlist-title">{playlist.name}</h1>
-
           {/* Add to Spotify Button */}
-          <div className="button-container">
-            <button
-              className="add-to-spotify-button"
-              onClick={() => AddToSpotify(playlist)}
-            >
-              <h2>+ Add to Spotify</h2>
-            </button>
-          </div>
+
           <div className="playlist-content">
             {/* Playlist Cover */}
-            <div className="playlist-cover">
-              {playlist.image_url ? (
-                <img src={playlist.image_url} alt="Playlist cover" />
-              ) : (
-                <img src={no_image} alt="Playlist cover (no image)" />
-              )}
+            <div className = "left-container">
+              <div className="playlist-cover">
+                {playlist.image_url ? (
+                  <img src={playlist.image_url} alt="Playlist cover" />
+                ) : (
+                  <img src={no_image} alt="Playlist cover (no image)" />
+                )}
+              </div>
+
+              {/* Playlist Title */}
+              <h1 className="playlist-title">{playlist.name}</h1>
+              <div className="button-container">
+                <button
+                  className="add-to-spotify-button"
+                  onClick={() => AddToSpotify(playlist)}
+                >
+                  <h2>+ Add to Spotify</h2>
+                </button>
+              </div>
             </div>
 
             {/* Mapping through all of the playlist tracks */}
@@ -165,7 +167,6 @@ function PlaylistPage({token, setToken}) {
             </div>
           </div>
         </div>
-      </div>
     );
 }
 

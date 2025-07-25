@@ -20,7 +20,7 @@
 .home-page-button {
 background-color: #20D65F;
   border: 1px solid black;
-  border-radius: 20px;
+  border-radius: 50px;
   box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
@@ -42,7 +42,7 @@ background-color: #20D65F;
 }
 
 .home-page-button:hover {
-  background-color: #159241;
+  background-color: #107434;
 }
 
 .home-page-button:focus {
