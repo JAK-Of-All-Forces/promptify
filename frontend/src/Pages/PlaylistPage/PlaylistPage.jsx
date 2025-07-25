@@ -132,7 +132,7 @@ function PlaylistPage({token, setToken}) {
 
           <div className="playlist-content">
             {/* Playlist Cover */}
-            <div>
+            <div className = "left-container">
               <div className="playlist-cover">
                 {playlist.image_url ? (
                   <img src={playlist.image_url} alt="Playlist cover" />

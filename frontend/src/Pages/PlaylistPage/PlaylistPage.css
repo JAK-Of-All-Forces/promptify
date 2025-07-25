@@ -16,9 +16,9 @@ width: 100vw;
 } */
 
 .playlist-content {
-    background-color: rgba(0, 0, 0, 0.538);
+    /* background-color: rgba(0, 0, 0, 0.538); */
     border-radius: 10px;
-    padding-top: 1em;
+    padding: 1em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -119,7 +119,7 @@ width: 100vw;
 /* CSS for playlist button*/
 .add-to-spotify-button {
     background-color: #20D65F;
-      border: 1px solid black;
+      /* border: 3px solid black; */
       border-radius: 50px;
       box-sizing: border-box;
       color: #FFFFFF;
@@ -128,7 +128,6 @@ width: 100vw;
       font-size: 1.125rem;
       font-weight: 600;
       line-height: 1.5rem;
-      padding: .75rem 1.2rem;
       text-align: center;
       text-decoration: none #6B7280 solid;
       text-decoration-thickness: auto;
@@ -139,6 +138,7 @@ width: 100vw;
       -webkit-user-select: none;
       touch-action: manipulation;
       width: auto;
+      margin: 2em;
     }
     
     .add-to-spotify-button:hover {
@@ -150,6 +150,13 @@ width: 100vw;
       box-shadow: none;
       outline: 2px solid transparent;
       outline-offset: 2px;
+    }
+
+    .add-to-spotify-button h2{
+        margin: 0;
+    }
+    .left-container {
+        padding: 1em;
     }
     
     @media (min-width: 768px) {
