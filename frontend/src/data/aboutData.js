@@ -11,9 +11,10 @@ const aboutData = [
     linkedin: "https://www.linkedin.com/in/amari-may-2ba6112b0/",
     funFacts: {
       modalImage: amari,
-      favoriteSong: "Alien Superstar – Beyoncé",
+      mostListenedSong: "Alien Superstar – Beyoncé",
       favoriteGenre: "Alt R&B",
       favoriteEmoji: "💻"
+      topArtist: "Beyonce"
     }
   },
   {
@@ -24,9 +25,10 @@ const aboutData = [
     linkedin: "https://www.linkedin.com/in/jessica-obi-80a184287/",
     funFacts: {
       modalImage: jessica,
-      favoriteSong: "Uptown Funk – Bruno Mars",
+      mostListenedSong: "Alien Superstar – Beyoncé",
       favoriteGenre: "Funk",
       favoriteEmoji: "🪩"
+      topArtist: "Rema"
     }
   },
   {
@@ -37,9 +39,10 @@ const aboutData = [
     linkedin: "https://www.linkedin.com/in/knyuga/",
     funFacts: {
       modalImage: kenna,
-      favoriteSong: "Good Days – SZA",
+      mostListenedSong: "Alien Superstar – Beyoncé",
       favoriteGenre: "Neo-Soul",
       favoriteEmoji: "🎧"
+      topArtist: "NBA Youngboy"
     }
   }
 ];

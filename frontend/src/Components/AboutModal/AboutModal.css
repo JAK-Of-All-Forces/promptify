@@ -1,36 +1,33 @@
+/* Fullscreen dark background overlay */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* translucent dark overlay */
+  background-color: rgba(0, 0, 0, 0.6); /* translucent black */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
+/* Modal content with background image */
 .modal-content {
-  background-image: url(""); /* Will be dynamically set with inline style in JSX */
-  background-size: contain;
+  position: relative;
+  background-size: cover;
+  background-position: top center;
   background-repeat: no-repeat;
-  background-position: center;
   width: 90%;
   max-width: 500px;
-  height: 90vh;
+  height: 600px; /* Adjust as needed */
   border-radius: 12px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  padding: 0; /* remove padding to let image fill fully */
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Header */
+/* Header with close button */
 .modal-header {
   position: absolute;
   top: 10px;
@@ -38,36 +35,43 @@
   z-index: 2;
 }
 
+/* Close button styling */
 .modal-header button {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(0,0,0,0.5);
   border: none;
   font-size: 1.4rem;
   cursor: pointer;
-  padding: 4px 10px;
-  border-radius: 4px;
+  color: white;
+  border-radius: 50%;
+  padding: 5px 10px;
 }
 
-/* Body content over image */
+/* Text content container layered on top of image */
 .modal-body {
-  background-color: rgba(0, 0, 0, 0.5); /* translucent black background for text */
-  color: white;
+  position: absolute;
+  bottom: 0;
   width: 100%;
+  /* background: rgba(0, 0, 0, 0.6); dark overlay */
+  color: white;
   padding: 20px;
-  text-align: center;
   z-index: 2;
 }
 
+/* Text styling */
 .details h2 {
   margin-top: 0;
   font-size: 1.5rem;
+  color: white;
 }
 
-.details p {
-  margin: 8px 0;
+.details p,
+.fun-facts p {
+  margin: 6px 0;
   font-size: 1rem;
+  color: #ddd;
 }
 
-/* Optional animation */
+/* Simple fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
