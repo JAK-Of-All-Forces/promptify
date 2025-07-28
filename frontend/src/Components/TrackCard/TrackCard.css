@@ -12,8 +12,9 @@
 }
 
 .TrackCard:hover {
-    background-color: #b1b1b1;
+    background-color: #cecece;
     color: black;
+    cursor: pointer;
   }
 
 
@@ -49,6 +50,8 @@
     font-size: 1.75rem;
     white-space: nowrap;
     margin: 0;
+    /* Try fixing this */
+    text-overflow: ellipsis;
   }
 
   .track-artist {
@@ -58,7 +61,7 @@
 
 
 .track-duration {
-    font-size: 0.85rem;
+    font-size: 1rem;
     white-space: nowrap;
     flex-shrink: 0;
       text-align: right;
