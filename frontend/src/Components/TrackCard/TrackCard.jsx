@@ -4,7 +4,10 @@ import "./TrackCard.css";
 
 function TrackCard({ track }) {
   return (
-    <div className="TrackCard">
+    <div
+      className="TrackCard"
+      onClick={() => window.open(`https://open.spotify.com/track/${track.spotifyId}`)}
+    >
       {/* Track cover */}
       <div className="track-cover">
         {track.image_url ? (
