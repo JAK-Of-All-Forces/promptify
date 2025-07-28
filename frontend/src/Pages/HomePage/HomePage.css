@@ -1,26 +1,23 @@
 .home-page {
-    justify-content: center;
-    align-items: center;
-    width: 100vw
+  justify-content: center;
+  align-items: center;
+  width: 100vw
 }
-
 /* .home-page-button {
     background-color: #20D65F;
     position: relative;
     border-radius: 100px;
     border: 4px black solid;
 } */
-
 .button-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-
 /* CSS for homepage button*/
 .home-page-button {
-background-color: #20D65F;
+  background-color: #20D65F;
   border: 1px solid black;
-  border-radius: 20px;
+  border-radius: 50px;
   box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
@@ -40,17 +37,14 @@ background-color: #20D65F;
   touch-action: manipulation;
   width: auto;
 }
-
 .home-page-button:hover {
-  background-color: #159241;
+  background-color: #107434;
 }
-
 .home-page-button:focus {
   box-shadow: none;
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
-
 @media (min-width: 768px) {
   .home-page-button {
     padding: .75rem 1.5rem;
