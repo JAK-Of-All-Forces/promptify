@@ -43,6 +43,7 @@ return (
     <div className="card-content">
       <h3>{person.name}</h3>
       <p>{person.role}</p>
+      <p>{person.school}</p>
       <p>{person.email}</p>
       <a href={person.linkedin} >
         LinkedIn

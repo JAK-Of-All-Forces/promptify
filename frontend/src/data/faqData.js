@@ -19,10 +19,6 @@ const faqData = [
         answer: "Yes, Promptify is completely free to use. You can create and enjoy personalized playlists without any cost. However, you will need a Spotify account to access your music library and use Promptify's features."
     },
     {
-        question: "Is my data secure?",
-        answer: "tbd"
-    },
-    {
         question: "Why Promptify?",
         answer: "Promptify is a unique platform that leverages AI to enhance your Spotify experience. By analyzing your listening habits, it creates playlists that truly resonate with your mood and preferences, making music discovery more personal and enjoyable. Whether you're looking for a chill vibe or an energetic boost, Promptify has you covered with tailored playlists that evolve with your musical tastes."
     }, 

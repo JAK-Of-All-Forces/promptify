@@ -1,89 +1,82 @@
+/* Backdrop */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); 
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
+/* Modal content */
 .modal-content {
+  background-image: none;
+  background-size: cover;
+  background-position: center;
   width: 90%;
   max-width: 500px;
-  min-height: 700px; /* Try adjusting this incrementally (e.g., 680, 720) */
-  background-size: cover;
-  background-position: 50% 20%; /* Evenly centers image top-to-bottom */
-  border-radius: 12px;
-  padding: 20px 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-
+/* Close button */
 .modal-header {
   position: absolute;
-  top: 10px;
-  right: 15px;
-  z-index: 2;
+  top: 12px;
+  right: 16px;
+  z-index: 10;
 }
 
 .modal-header button {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   border: none;
-  font-size: 1.4rem;
-  cursor: pointer;
+  font-size: 1.25rem;
   color: white;
+  cursor: pointer;
   border-radius: 50%;
-  padding: 5px 10px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
 }
 
+/* Content at the bottom */
 .modal-body {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  color: white;
-  padding: 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 80%);
+  padding: 24px;
+  position: relative;
   z-index: 2;
 }
 
+/* Name + facts */
 .details h2 {
-  margin-top: 0;
-  font-size: 3rem;
+  font-size: 2rem;
+  margin-bottom: 12px;
   text-align: center;
-;
-  color: white;
 }
 
 .details p {
-  margin: 10px 0;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  margin: 6px 0;
   line-height: 1.5;
 }
 
-.details {
-  position: relative;
-  top: 30px;     /* Move text upward (adjust as needed) */
-  left: -60px;    /* Move text to the left (adjust as needed) */
-  padding: 20px;
-  color: white;   /* Make sure it's visible against the background */
-  text-shadow: 0 0 4px rgba(0,0,0,0.7); 
+.fun-facts strong {
+  color: #8be9fd;
 }
 
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.details{
+  position: relative;
+  top: -45px;
 }

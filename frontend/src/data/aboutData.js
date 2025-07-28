@@ -6,7 +6,8 @@ const aboutData = [
   {
     id: 1,
     name: "Amari May",
-    role: "University of Virginia",
+    role: "FTL Scholar",
+    school: "University of Virginia",
     image: amari,
     email: "amarimay1213@gmail.com",
     linkedin: "https://www.linkedin.com/in/amari-may-2ba6112b0/",
@@ -22,7 +23,8 @@ const aboutData = [
   {
     id: 2,
     name: "Jessica Obi",
-    role: "Spellman College",
+    role: "FTL Scholar",
+    school: "Spellman College",
     image: jessica,
     email: "",
     linkedin: "https://www.linkedin.com/in/jessica-obi-80a184287/",
@@ -37,16 +39,17 @@ const aboutData = [
   {
     id: 3,
     name: "Kenna Nyuga-Galega",
-    role: "University of Austin Texas",
+    role: "FTL Scholar",
+    school: "University of Texas at Austin",
     image: kenna,
     email: "",
     linkedin: "https://www.linkedin.com/in/knyuga/",
     funFacts: {
       modalImage: kenna,
-      mostListenedSong: "Make No Sense - NBA Youngboy",
-      favoriteGenre: "Afrobeat",
-      topArtist: "NBA Youngboy",
-      topAlubm: "Never Broke Again: The Compilation"
+      mostListenedSong: "",
+      favoriteGenre: "Afrobeats/Amapiano/Makossa, R&B, Worship",
+      topArtist: "Musiq Soulchild",
+      topAlubm: "Luv 4 Rent - Smino"
     }
   }
 ];
