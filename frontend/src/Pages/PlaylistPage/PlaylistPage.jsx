@@ -12,6 +12,8 @@ function PlaylistPage({token, setToken}) {
     console.log("Token (Playlist Page)", token);
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+    //This is for when a track is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
+    const [refreshFlag, setRefreshFlag] = useState(false);
 
     //Fetching the playlist using the id from the url
     useEffect(() => {
@@ -27,7 +29,7 @@ function PlaylistPage({token, setToken}) {
         }
         fetchPlaylist();
 
-    }, [id]);
+    }, [id, refreshFlag]);
 
     console.log("Playlist", playlist);
     
@@ -153,6 +155,7 @@ function PlaylistPage({token, setToken}) {
             </div>
 
             {/* Mapping through all of the playlist tracks */}
+            {/* Sending the setRefreshFlag is necessary so that when a card is deleted, it updates the useEffect in this component as well */}
             <div className="playlist-tracks">
               {!playlist.tracks || playlist.tracks.length === 0 ? (
                 <div className="no-tracks">
@@ -161,7 +164,10 @@ function PlaylistPage({token, setToken}) {
                 </div>
               ) : (
                 playlist.tracks.map((track) => (
-                  <TrackCard key={track.id} track={track} />
+                  <TrackCard
+                  key={track.trackOnPlaylistId}
+                  track={track}
+                  setRefreshFlag={setRefreshFlag}/>
                 ))
               )}
             </div>

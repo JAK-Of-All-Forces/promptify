@@ -26,6 +26,7 @@ exports.getAll = async (req, res) => {
 
 
 //DELETE a specific track on a playlist
+
 exports.deleteTrackById = async (req, res) => {
   const id = String(req.params.id);
 
@@ -40,9 +41,11 @@ exports.deleteTrackById = async (req, res) => {
 
   try {
     await prisma.TracksOnPlaylists.delete({ where: { id } });
+    //Res statuses are absolutely necessary when deleting unless the frontend will constantly be in limbo
+    res.status(200).json({ success: true });
   }
   catch (err) {
-    console.error("Failed to delete track on playlist:", err);
+    res.status(500).json({ error: "Failed to delete track on playlist" });
 
   }
 };
