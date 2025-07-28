@@ -28,11 +28,41 @@
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%23FFFFFF" stroke="%23FFFFFF" stroke-width="15" width="30" height="30" x="25" y="50"><animate attributeName="y" calcMode="spline" dur="1.7" values="50;120;50;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></rect><rect fill="%23FFFFFF" stroke="%23FFFFFF" stroke-width="15" width="30" height="30" x="85" y="50"><animate attributeName="y" calcMode="spline" dur="1.7" values="50;120;50;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></rect><rect fill="%23FFFFFF" stroke="%23FFFFFF" stroke-width="15" width="30" height="30" x="145" y="50"><animate attributeName="y" calcMode="spline" dur="1.7" values="50;120;50;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></rect></svg>');
     background-position: center;
     margin: 0 auto; /* ✅ center horizontally */
-
 }
 
 .prompt-caption {
     font-size: 23px;
     font-weight: bold;
     transform: translate(0%, -100%);
+}
+
+@media (max-width: 768px) {
+    .prompt-caption {
+        font-size: 15px;
+        transform: translate(0%, -150%);
+        white-space: nowrap; /* prevents line wrapping */
+    }
+
+    .loading-dots {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media ( (min-width: 768px) and (max-width: 1024px) ){
+    .prompt-caption {
+        font-size: 35px;
+        transform: translate(0%, -120%);
+        width: 100%;
+        white-space: nowrap; /* prevents line wrapping */
+    }
+
+    .loading-dots {
+        width: 300px;
+        height: 300px;
+    }
+
+    .title {
+        font-size: 100px;
+    }
 }
