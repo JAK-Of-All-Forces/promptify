@@ -8,6 +8,12 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const axios = require("axios");
 
+// const { topTracks4 } = require("../Controllers/userDataController")
+
+// const testingRoutes(){
+
+// }
+
 // neeed  to try this after a user has logged in
 const getAccessToken = async(userId) => {
   const response = await prisma.user.findUnique({
@@ -245,7 +251,7 @@ const createPrompt = async (req, res) => {
   
   // these are the things we need to get the playlist
   console.log(req.body);
-  const { name, activity, bpmLow, bpmHigh, genres, duration, spotifyId } = req.body;
+  const { name, activity, genres, duration, spotifyId } = req.body;
   if (!name || !activity || !genres || !duration || !spotifyId ){
     return res
     .status(400)
@@ -258,55 +264,39 @@ const createPrompt = async (req, res) => {
   });
   const userId = user.id;
 
-  let userContentPrompt = "";
-  if ((bpmLow != 0) && (bpmHigh != 0)){
-    userContentPrompt = `Create a playlist for the activity: ${activity}. 
-      All songs should have a tempo between ${bpmLow} and ${bpmHigh} BPM. 
-      Use the following genres: ${genres.join(", ")}. 
-      The playlist should match the mood and energy of the activity.
-      The name of the playlist is ${name}.
+  let userContentPrompt = 
+  `Create a playlist for the activity: ${activity}. 
+  Use the following genres: ${genres.join(", ")}. 
+  The playlist should match the mood and energy of the activity.
+  The name of the playlist is ${name}.
 
-      The playlist should be at LEAST ${duration} minutes long. 
-      Assume the average song is 3 minutes, and include about ${Math.floor(duration / 3)} songs.
+  The playlist must be at least ${duration} minutes long.
+  Assume the average song length is ~3 minutes.
+  Include exactly ${Math.ceil(duration / 3)} songs.
 
-      Respond in valid JSON format only.
-      Structure your response like this:
+  Follow these rules strictly:
+  1. Match the energy/mood of the activity.
+  2. Stick to the listed genres.
+  3. Include exactly ${Math.ceil(duration / 3)} songs.
+  4. Each song should be roughly 3 minutes.
+  5. Ensure the total duration is at least ${duration} minutes.
+  6. Respond in **valid JSON format only**.
+
+  Structure your response like this:
+  {
+    "playlistName": "Name of the Playlist",
+    "estimatedDuration": totalDurationInMinutes,
+    "tracks": [
       {
-        "playlistName": "Name of the Playlist",
-        "tracks": [
-          {
-            "spotifyId": "Spotify Track ID",
-            "name": "Song Title",
-            "artist": "Artist Name",
-            "bpm": BPM
-          },
-          ...
-        ]
-      }`;
-  } else {
-    userContentPrompt = `Create a playlist for the activity: ${activity}. 
-      Use the following genres: ${genres.join(", ")}. 
-      The playlist should match the mood and energy of the activity.
-      The name of the playlist is ${name}.
+        "spotifyId": "Spotify Track ID",
+        "name": "Song Title",
+        "artist": "Artist Name",
+        "bpm": BPM
+      },
+      ...
+    ]
+  }`;
 
-      The playlist should be at LEAST ${duration} minutes long. 
-      Assume the average song is 3 minutes, and include about ${Math.floor(duration / 3)} songs.
-
-      Respond in valid JSON format only.
-      Structure your response like this:
-      {
-        "playlistName": "Name of the Playlist",
-        "tracks": [
-          {
-            "spotifyId": "Spotify Track ID",
-            "name": "Song Title",
-            "artist": "Artist Name",
-            "bpm": BPM
-          },
-          ...
-        ]
-      }`;
-  }
 
   console.log("about to talk to OpenAIAPI");
   const openAIResponse = await callOpenAI(userContentPrompt);
@@ -335,8 +325,6 @@ const createPrompt = async (req, res) => {
       data: {
         name,
         activity,
-        bpmLow,
-        bpmHigh,
         genres,
         duration,
         user: {
