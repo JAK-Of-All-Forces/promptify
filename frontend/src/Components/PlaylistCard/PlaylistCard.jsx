@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import no_image from "../../assets/no_img.png";
+import { FaTrash } from "react-icons/fa";
 import axios from "axios";
-//import { FaTrash } from "react-icons/fa";
 import "./PlaylistCard.css";
 
 function PlaylistCard({ playlist, setRefreshFlag}) {
@@ -20,7 +20,7 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
         await axios.delete(
             `${API_BASE_URL}/playlist/${playlist.id}`);
             setRefreshFlag((prev) => !prev);
-            
+
         } catch (err) {
         console.log("Error deleting track on playlist:", err);
         }
@@ -32,9 +32,9 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
           {/* Playlist cover */}
           <div className="playlist-cover">
             {playlist.image_url ? (
-              <img src={playlist.image_url} alt="Playlist cover" />
+              <img src={playlist.image_url} alt="Playlist Cover" />
             ) : (
-              <img src={no_image} alt="Playlist cover (no image)" />
+              <img src={no_image} alt="Playlist Cover (No Image)" />
             )}
           </div>
 
@@ -45,8 +45,7 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
               <p className="playlist-creation">Created: {playlist.createdAt}</p>
               {/* Needed to import react */}
               {/* Delete icon */}
-              <button onClick={deletePlaylist}>X</button>
-              {/* <FaTrash onClick = {deleteTrack} /> */}
+              <FaTrash onClick = {deletePlaylist} />
             </div>
           </div>
         </Link>
