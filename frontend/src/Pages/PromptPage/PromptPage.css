@@ -7,16 +7,16 @@
     width: 100vw;
 }
 
-.left-side-animation,
-.right-side {
-    flex: 1; 
-    padding: 10px;
-}
-
 .left-side-animation {
     display: flex;
     justify-content: center;  /* center horizontally */
     align-items: center;      /* center vertically */
+}
+
+.left-side-animation > div {
+    width: 100%;
+    max-width: 600px;  
+    min-width: 200px;  
 }
 
 .genre-search {
@@ -62,8 +62,6 @@
 }
 
 
-
-
 .caption {
     color: white;
     font-weight: bolder;  
@@ -72,12 +70,12 @@
     text-align: center;
 }
 
-
 .playlist-name >p {
     color: white;
     font-weight: bolder;  
     font-size: 30px;  
     margin: 0px;
+    text-align: center;
 }
 
 .playlist-name input {
@@ -90,6 +88,7 @@
     background-color: #ffffff; /* light background */
     color: #000000;               /* text color */
     outline: none;         
+    text-align: center;
 }
 
 .playlist-prompt-section {
@@ -122,7 +121,7 @@
     padding: 4px;
     width: 120px;
     margin: 5px;
-    background-color: #e7def6;
+    background-color: #c0b6e9;
     border: 2px solid #c0b6e9;
     border-radius: 30px;
     font-weight: bold;
@@ -134,8 +133,6 @@
     border-color: #a600ff;
     background-color: #d6c2f0;
 }
-
-
 
 .duration-button .sidebar button {
     font-size: 25px;
@@ -253,4 +250,84 @@
     background-color: #c0b6e9; /* color of the scrollbar thumb */
     border-radius: 30px;
     border: 2px solid #ffffff; /* gives a little padding inside the track */
+}
+
+@media (max-width: 768px) {
+    .prompt-container {
+        flex-direction: column;
+    }
+
+    .left-side-animation > div {
+        width: 100%;
+        max-width: 300px;  
+        min-width: 200px;  
+    }
+}
+
+@media ( (min-width: 768px) and (max-width: 1024px) ){
+    .prompt-container {
+        flex-direction: column;
+    }
+
+    .left-side-animation > div {
+        width: 100%;
+        max-width: 500px;  
+        min-width: 200px;  
+    }
+
+    .sidebar {
+        width: 600px;
+        max-height: 150px;
+    }
+    .sidebar::-webkit-scrollbar {
+        width: 10px; /* width of the scrollbar */
+    }
+
+    .playlist-prompt-section button {
+        border-width: 4px;
+        width: 620px;    
+        font-size: 50px;
+    }
+
+    .all-genres label {
+        padding: 8px 16px;
+        font-size: 25px;
+    }
+
+    .activity-button .sidebar button {
+        font-size: 35px;
+        margin: 10px;
+        padding: 10px;
+        width: 220px;
+    }
+
+    .playlist-name >p {
+        font-size: 60px;
+        text-align: center;  
+    }
+
+    .playlist-name input {
+        font-size: 35px;
+        text-align: center;
+    }
+
+    .caption {
+        font-size: 30px;  
+        text-align: center;
+    }
+
+    .activity-button, .duration-button, .genre-button p {
+        font-size: 30px;
+    }
+
+    .bpm-button .sidebar p {
+        font-size: 25px;
+    }
+
+    .bpm-button .sidebar input[type="number"] {
+        font-size: 35px;
+        width: 95px;
+    }
+
+    
 }

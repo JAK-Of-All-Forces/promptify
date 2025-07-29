@@ -1,5 +1,3 @@
-# Reflection #2
-
 Pod Members: **Amari May, Kenna Nyuga-Galega, Jessica Obi**
 
 ## Reflection Questions

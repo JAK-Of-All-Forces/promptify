@@ -6,37 +6,50 @@ const aboutData = [
   {
     id: 1,
     name: "Amari May",
-    role: "University of Virginia",
+    role: "FTL Scholar",
+    school: "University of Virginia",
     image: amari,
+    email: "amarimay1213@gmail.com",
     linkedin: "https://www.linkedin.com/in/amari-may-2ba6112b0/",
     funFacts: {
-      favoriteSong: "Alien Superstar – Beyoncé",
-      favoriteGenre: "Alt R&B",
-      favoriteEmoji: "💻"
+      modalImage: amari,
+      mostListenedSong: "Pretty Little Birds (feat. Isaiah Rashad) – SZA",
+      favoriteGenre: "R&B",
+      topArtist: "Beyonce",
+      topAlubm: "Sinners"
+
     }
   },
   {
     id: 2,
     name: "Jessica Obi",
-    role: "Spellman College",
+    role: "FTL Scholar",
+    school: "Spellman College",
     image: jessica,
+    email: "",
     linkedin: "https://www.linkedin.com/in/jessica-obi-80a184287/",
     funFacts: {
-      favoriteSong: "Uptown Funk – Bruno Mars",
-      favoriteGenre: "Funk",
-      favoriteEmoji: "🪩"
+      modalImage: jessica,
+      mostListenedSong: "Less Speed - Chief Keef",
+      favoriteGenre: "Rap",
+      topArtist: "Rema",
+      topAlubm: "Apollo XXI - Steve Lacy"
     }
   },
   {
     id: 3,
     name: "Kenna Nyuga-Galega",
-    role: "University of Austin Texas",
+    role: "FTL Scholar",
+    school: "University of Texas at Austin",
     image: kenna,
+    email: "",
     linkedin: "https://www.linkedin.com/in/knyuga/",
     funFacts: {
-      favoriteSong: "Good Days – SZA",
-      favoriteGenre: "Neo-Soul",
-      favoriteEmoji: "🎧"
+      modalImage: kenna,
+      mostListenedSong: "",
+      favoriteGenre: "Afrobeats/Amapiano/Makossa, R&B, Worship",
+      topArtist: "Musiq Soulchild",
+      topAlubm: "Luv 4 Rent - Smino"
     }
   }
 ];
