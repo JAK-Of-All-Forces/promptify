@@ -42,18 +42,27 @@ function TrackCard({ track, setRefreshFlag }) {
           <img src={no_image} alt="Track cover (no image)" />
         )}
       </div>
-
       {/* Displaying the Track Info */}
       <div className="track-info">
         <p className="track-name">{track.name}</p>
         <p className="track-artist">{track.artist}</p>
       </div>
-
       <p className="track-duration">{track.duration}</p>
       {/* Delete icon */}
       <FaTrash onClick = {deleteTrack} />
     </div>
   );
 }
-
 export default TrackCard;
+
+
+
+
+
+
+
+
+
+
+
+
