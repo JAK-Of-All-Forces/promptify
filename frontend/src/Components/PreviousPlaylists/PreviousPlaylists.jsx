@@ -3,7 +3,7 @@ import no_image from "../../assets/no_img.png"
 import "./PreviousPlaylist.css";
 
 
-function PreviousPlaylists({ userPlaylists = []}){
+function PreviousPlaylists({ userPlaylists = [], setRefreshFlag}){
 
     console.log("Previous playlist" , userPlaylists)
     return (
@@ -25,6 +25,7 @@ function PreviousPlaylists({ userPlaylists = []}){
                         <PlaylistCard
                         key={playlist.id}
                         playlist={playlist}
+                        setRefreshFlag={setRefreshFlag}
                         />
                     ))
                 )}

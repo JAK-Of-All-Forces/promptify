@@ -14,5 +14,9 @@ router.get("/", controller.getAll);
 //GET specifc playlist
 router.get("/:id", controller.getById);
 
+//DELETES playlist given the specific ID
+router.delete("/:id", controller.deletePlaylistById);
+
+
 
 module.exports = router;

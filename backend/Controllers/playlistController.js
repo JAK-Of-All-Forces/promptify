@@ -47,3 +47,28 @@ exports.getById = async (req, res) => {
       ...playlistTrack.track}))
 });
 }
+
+//DELETE a specific playlist
+
+exports.deletePlaylistById = async (req, res) => {
+  const id = String(req.params.id);
+
+  console.log(id);
+
+  // Get the specific playlist from the database
+  const playlist = await prisma.Playlist.findUnique({ where: { id } });
+
+  if (!playlist) {
+    return res.status(404).json({ error: "This playlist was not found" });
+  }
+
+  try {
+    await prisma.Playlist.delete({ where: { id } });
+    //Res statuses are absolutely necessary when deleting unless the frontend will constantly be in limbo
+    res.status(200).json({ success: true });
+  }
+  catch (err) {
+    res.status(500).json({ error: "Failed to delete track on playlist" });
+
+  }
+};
