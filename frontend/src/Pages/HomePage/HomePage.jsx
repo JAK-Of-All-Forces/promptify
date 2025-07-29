@@ -73,18 +73,19 @@ function HomePage({ token, setToken }) {
 
       {/* Rest of the home page content below */}
 
-      <div>
-        <button className="home-page-button">
-          <Link to="/prompt">
-            <h1>Let's Make a Playlist</h1>
-          </Link>
-        </button>
+      <div className="button-container">
+        <Link to="/prompt">
+          <button className="home-page-button">
+            <h2>Let's Make a Playlist</h2>
+          </button>
+        </Link>
       </div>
-
+      
       <div>
-        <PreviousPlaylists 
-        userPlaylists={userPlaylists}
-        setRefreshFlag={setRefreshFlag}/>
+        <PreviousPlaylists
+          userPlaylists={userPlaylists}
+          setRefreshFlag={setRefreshFlag}
+        />
       </div>
     </div>
   );
