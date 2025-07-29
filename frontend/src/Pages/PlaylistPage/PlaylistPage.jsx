@@ -97,8 +97,20 @@ function PlaylistPage({token, setToken}) {
             }
 
             // alert("Playlist added to Spotify!");
-            toast.success(`${playlist.name} has been added to your spotify account!\n
-              Show me my playlist: https://open.spotify.com/playlist/${createdPlaylist.id} `);
+            toast.success(
+              <span>
+                "{playlist.name}" has been added to your Spotify account!
+                <br />
+                <a
+                  href={`https://open.spotify.com/playlist/${createdPlaylist.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#1DB954" }}
+                >
+                  Go to Spotify
+                </a>
+              </span>
+            )
             } catch (err) {
             console.error("Error adding to Spotify:", err);
             toast.error("Failed to add playlist to Spotify.");
