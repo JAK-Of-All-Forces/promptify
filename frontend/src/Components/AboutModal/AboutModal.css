@@ -1,77 +1,147 @@
-
-
-/* Fullscreen dark background overlay */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* translucent black */
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal content container */
 .modal-content {
-  background-color: #ffffff;
-  border-radius: 12px;
+  background-image: none;
+  background-size: cover;
+  background-position: center;
   width: 90%;
   max-width: 500px;
-  padding: 20px 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  aspect-ratio: 3 / 4;
+  border-radius: 16px;
+  overflow: hidden;
   position: relative;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Header with close button */
-.modal-header {
   display: flex;
+  flex-direction: column;
   justify-content: flex-end;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding-top: 100px;
 }
 
-/* Close button styling */
+.modal-header {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  z-index: 10;
+}
+
 .modal-header button {
-  background: none;
+  background: rgba(0, 0, 0, 0.5);
   border: none;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
+  color: white;
   cursor: pointer;
-  color: #333;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+
+  /* Center the X */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Modal body content */
+
 .modal-body {
-  padding-top: 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 80%);
+  padding: 24px;
+  position: relative;
+  z-index: 2;
 }
 
-/* Info styling inside modal */
 .details h2 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  color: #222;
+  font-size: 2rem;
+  margin-bottom: 12px;
+  text-align: center;
 }
 
 .details p {
-  margin: 8px 0;
-  font-size: 1rem;
-  color: #444;
-}
-
-/* Fun facts section */
-.fun-facts p {
+  font-size: 1.1rem;
   margin: 6px 0;
+  line-height: 1.5;
 }
 
-/* Simple fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10%);
+.fun-facts strong {
+  color: #8be9fd;
+}
+
+.details{
+  position: relative;
+  top: -100px;
+}
+
+.about-header {
+  text-align: center;
+  width: 100%;
+  font-size: 2rem; 
+  margin: 20px 0;   
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    max-width: 400px;
+    aspect-ratio: 3 / 4;
+    padding-top: 80px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .details h2 {
+    font-size: 1.5rem;
+  }
+
+  .details p {
+    font-size: 1rem;
+  }
+
+  .modal-header button {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 90%;
+    max-width: 340px;
+    aspect-ratio: 3 / 4;
+    padding-top: 60px;
+  }
+
+  .details h2 {
+    font-size: 1.3rem;
+  }
+
+  .details p {
+    font-size: 0.95rem;
+  }
+
+  .modal-header button {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    top: -20px; /* less offset */
+  }
+}
+
+@media (max-width: 480px) {
+  .details {
+    top: 0; /* no offset at all on small screens */
   }
 }

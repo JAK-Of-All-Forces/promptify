@@ -45,6 +45,12 @@ function App() {
      }
 
     }
+
+    // Clean the URL after storing the tokens
+if (accessToken || spotifyId) {
+  window.history.replaceState({}, document.title, "/home");
+}
+
    
   },[] );
 
