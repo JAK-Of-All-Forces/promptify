@@ -230,9 +230,7 @@ function PromptPage ({token, setToken}) {
     <>
       <NavBar token={token}></NavBar>
       <div className="prompt-container">
-        <div className="left-side-animation">
-          <Lottie animationData={animationData} loop autoplay />
-        </div>
+      
         <div className="right-side">
           <div className="caption">
             <p>Your vibe, your music, your prompt, your playlist!</p>

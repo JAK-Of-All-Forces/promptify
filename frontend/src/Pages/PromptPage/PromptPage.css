@@ -7,18 +7,6 @@
     width: 100vw;
 }
 
-.left-side-animation {
-    display: flex;
-    justify-content: center;  /* center horizontally */
-    align-items: center;      /* center vertically */
-}
-
-.left-side-animation > div {
-    width: 100%;
-    max-width: 600px;  
-    min-width: 200px;  
-}
-
 .genre-search {
     width: 85%;
     padding: 8px;
