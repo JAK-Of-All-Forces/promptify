@@ -1,5 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const axios = require("axios");
+
+
 
 
 const getAccessToken = async(userId) => {
@@ -34,8 +37,14 @@ const topTracks4 = async (userId) => {
     
         console.log("about to get short term top tracks");
         const response = await axios.get(
-            `https://api.spotify.com/v1/me/top/tracks?limit=30&time_range=short_term`,
-            {headers}
+            `https://api.spotify.com/v1/me/top/tracks`,
+            {
+                headers,
+                params: {
+                    limit: 30,
+                    time_range: "short_term"
+                }
+            }
         );
         console.log("got the short term top tracks");
 
@@ -60,7 +69,7 @@ const topTracks4 = async (userId) => {
 
         
     } catch (error) {
-        
+        console.error("Error in topTracks4:", error.response?.data || error.message || error);
     }
 
 }
