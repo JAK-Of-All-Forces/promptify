@@ -243,8 +243,6 @@ try {
 
 }
 
-
-
 // this is for the route : router.post("/", generatePlaylistController.createPrompt)
 const createPrompt = async (req, res) => {
   console.log("Saving the created prompt to database.");
