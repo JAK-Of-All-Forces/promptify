@@ -41,6 +41,9 @@ exports.getById = async (req, res) => {
 
   res.json({
     //This function allows the playlist to only return the tracks, instead of the other attributes such as playlist id and track id every single time
-    ...playlist, tracks: playlist.tracks.map(playlistTracks => playlistTracks.track)
-  });
-};
+    ...playlist,
+    tracks: playlist.tracks.map((playlistTrack)=> ({
+      trackOnPlaylistId: playlistTrack.id,
+      ...playlistTrack.track}))
+});
+}

@@ -3,12 +3,19 @@ import { useParams } from "react-router-dom";
 import {useEffect, useState} from "react";
 import no_image from "../../assets/no_img.png"
 import "./PlaylistPage.css";
-import TrackCard from "../../Components/TrackCard/TrackCard"
+import TrackCard from "../../Components/TrackCard/TrackCard";
+import { toast } from "react-toastify";
+
+
 function PlaylistPage({token, setToken}) {
     const {id} = useParams();
     const [playlist, setPlaylist] = useState(null);
     console.log("Token (Playlist Page)", token);
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+    //This is for when a track is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
+    const [refreshFlag, setRefreshFlag] = useState(false);
+
     //Fetching the playlist using the id from the url
     useEffect(() => {
         const fetchPlaylist = async () => {
@@ -22,7 +29,9 @@ function PlaylistPage({token, setToken}) {
             }
         }
         fetchPlaylist();
-    }, [id]);
+
+    }, [id, refreshFlag]);
+
     console.log("Playlist", playlist);
     //Add to Spotify function
     async function AddToSpotify(playlist) {
@@ -86,10 +95,25 @@ function PlaylistPage({token, setToken}) {
                 );
                 }
             }
-            alert("Playlist added to Spotify!");
+
+            // alert("Playlist added to Spotify!");
+            toast.success(
+              <span>
+                "{playlist.name}" has been added to your Spotify account!
+                <br />
+                <a
+                  href={`https://open.spotify.com/playlist/${createdPlaylist.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#1DB954" }}
+                >
+                  Go to Spotify
+                </a>
+              </span>
+            )
             } catch (err) {
             console.error("Error adding to Spotify:", err);
-            alert("Failed to add playlist to Spotify.");
+            toast.error("Failed to add playlist to Spotify.");
         }
         }
     if (!playlist) {
@@ -123,6 +147,7 @@ function PlaylistPage({token, setToken}) {
               </div>
             </div>
             {/* Mapping through all of the playlist tracks */}
+            {/* Sending the setRefreshFlag is necessary so that when a card is deleted, it updates the useEffect in this component as well */}
             <div className="playlist-tracks">
               {!playlist.tracks || playlist.tracks.length === 0 ? (
                 <div className="no-tracks">
@@ -131,7 +156,10 @@ function PlaylistPage({token, setToken}) {
                 </div>
               ) : (
                 playlist.tracks.map((track) => (
-                  <TrackCard key={track.id} track={track} />
+                  <TrackCard
+                  key={track.trackOnPlaylistId}
+                  track={track}
+                  setRefreshFlag={setRefreshFlag}/>
                 ))
               )}
             </div>

@@ -35,6 +35,7 @@ const PORT = process.env.PORT
 app.use("/api/tracks/" ,trackRoutes);
 app.use('/user', userRoutes);
 app.use('/playlist', playlistRoutes);
+app.use("/tracksOnPlaylists", tracksOnPlaylistRoutes)
 
 
 
