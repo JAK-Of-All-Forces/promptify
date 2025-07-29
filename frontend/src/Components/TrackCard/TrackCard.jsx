@@ -1,7 +1,7 @@
 //import { Link } from "react-router-dom";
 import no_image from "../../assets/no_img.png";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
+//import { FaTrash } from "react-icons/fa";
 
 import "./TrackCard.css";
 
@@ -48,8 +48,10 @@ function TrackCard({ track, setRefreshFlag }) {
         <p className="track-artist">{track.artist}</p>
       </div>
       <p className="track-duration">{track.duration}</p>
+      {/* Needed to import react */}
       {/* Delete icon */}
-      <FaTrash onClick = {deleteTrack} />
+      <p onClick={deleteTrack}>X</p>
+      {/* <FaTrash onClick = {deleteTrack} /> */}
     </div>
   );
 }
