@@ -48,6 +48,7 @@ function TrackCard({ track, setRefreshFlag }) {
         <p className="track-artist">{track.artist}</p>
       </div>
       <p className="track-duration">{track.duration}</p>
+      {/* Needed to import react */}
       {/* Delete icon */}
       <FaTrash onClick = {deleteTrack} />
     </div>
