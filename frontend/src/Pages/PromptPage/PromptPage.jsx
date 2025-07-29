@@ -13,15 +13,11 @@ function PromptPage ({token, setToken}) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   const [inputPlaylistName, setInputPlaylistName] = useState("");
-  const [showActivityInput, setShowActivityInput] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState("");
-  const [showDurationInput, setShowDurationInput] = useState(false);
   const [selectedDuration, setSelectedDuration] = useState("");
   const [genres, setGenres] = useState([]);
   const [genreSearchTerm, setGenreSearchTerm] = useState("");
-  const [showGenreInput, setShowGenreInput] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [showBPMInput, setShowBPMInput] = useState(false);
   const [bpmLow, setBPMLow] = useState("");
   const [bpmHigh, setBPMHigh] = useState("");
   const [allowGenerate, setAllowGenerate] = useState(false);
@@ -59,9 +55,7 @@ function PromptPage ({token, setToken}) {
   const handleActivityButtonClick = (activity) => {
     setSelectedActivity([activity]);
   }
-  const toggleActivities = () => {
-    setShowActivityInput((prev) => !prev);
-  };
+
 
   // duration button logic
   const durations = [
@@ -82,14 +76,7 @@ function PromptPage ({token, setToken}) {
       setSelectedDuration([event]);
     }
   }
-  const toggleDuration = () => {
-    if (selectedActivity.length !== 1) {
-      toast.error("Please select ONE activity before continuing.");
-      return;
-    } else {
-      setShowDurationInput((prev) => !prev);
-    }
-  };
+
 
   // genre button logic
   function handleGenreCheckboxChange(event) {
@@ -100,15 +87,7 @@ function PromptPage ({token, setToken}) {
       setSelectedGenres(selectedGenres.filter((a) => a !== value)); // removes unchecked values from selected activities
     }
   }
-  const toggleGenre = () => {
-    if (!selectedDuration || !selectedActivity) {
-      toast.error(
-        "Please select the activity and duration of your activity to set the length of your playlist before continuing."
-      );
-    } else {
-      setShowGenreInput((prev) => !prev);
-    }
-  };
+
   const filteredGenres = genres.filter((genre) =>
     genre.toLowerCase().includes(genreSearchTerm.toLowerCase())
   );
@@ -120,22 +99,14 @@ function PromptPage ({token, setToken}) {
   const handleBPMHighInputChange = (event) => {
     setBPMHigh(event.target.value); // just update the raw input
   };
-  const toggleBPM = () => {
-    if (selectedGenres.length === 0 || !selectedDuration || !selectedActivity) {
-      toast.error(
-        "Please select the activity,  genre(s), and duration you would like to be in your playlist before continuing."
-      );
-    } else {
-      setShowBPMInput((prev) => !prev);
-    }
-  };
+ 
 
   // generate playlist logic
   const proceedGenerate = () => {
     setAllowGenerate(true);
   };
   async function generatePlaylist() {
-    if (selectedGenres && selectedDuration && selectedActivity) {
+    if (selectedGenres.length && selectedDuration.length && selectedActivity.length) {
       const low = parseInt(bpmLow);
       const high = parseInt(bpmHigh);
 
@@ -230,141 +201,101 @@ function PromptPage ({token, setToken}) {
     <>
       <NavBar token={token}></NavBar>
       <div className="prompt-container">
-      
-        <div className="right-side">
-          <div className="caption">
-            <p>Your vibe, your music, your prompt, your playlist!</p>
-          </div>
-          <div className="playlist-prompt-section">
-            <div className="playlist-name">
-              <p>Playlist Name: </p>
-              <input
-                type="text"
-                placeholder="Optional"
-                value={inputPlaylistName}
-                onChange={handleOnNameInputChange}
-              />
-            </div>
-            <div className="activity-button">
-              <button onClick={toggleActivities}>Choose an Activity</button>
-              <div
-                className={`sidebar ${showActivityInput ? "open" : "closed"}`}>
-                {activities.map((activity) => (
-                  <button
-                    key={activity}
-                    className={`activity-option ${selectedActivity.includes(activity) ? "selected" : ""}`}
-                    onClick={() => handleActivityButtonClick(activity)}
-                  >
-                    {activity}
-                  </button>
-                ))}
-                {selectedActivity.length > 0 ? (
-                  <p>
-                    Your selected activity is: {selectedActivity.join(", ")}
-                  </p>
-                ) : (
-                  <p>You have not selected any activities.</p>
-                )}
-              </div>
-            </div>
-            <div className="duration-button">
-              <button onClick={toggleDuration}>Set the Duration</button>
-              <div
-                className={`sidebar ${showDurationInput ? "open" : "closed"}`}>
-                {durations.map((duration) => (
-                  <button
-                    key={duration}
-                    onClick={() => handleDurationChange(duration)}
-                    className={
-                      selectedDuration.includes(duration) ? "selected" : ""
-                    }>
-                    {duration}
-                  </button>
-                ))}
-                {selectedDuration.length > 0 ? (
-                  <p>
-                    Your selected duration is: {selectedDuration.join(", ")}
-                  </p>
-                ) : (
-                  <p>You have not selected a duration.</p>
-                )}
-              </div>
-            </div>
-            <div className="genre-button">
-              <button onClick={toggleGenre}>Select the Genre(s)</button>
-              <div className={`sidebar ${showGenreInput ? "open" : "closed"}`}>
-                <input
-                  className="genre-search"
-                  type="text"
-                  placeholder="Search genres here..."
-                  value={genreSearchTerm}
-                  onChange={(e) => setGenreSearchTerm(e.target.value)}
-                />
-                <div className="all-genres">
-                  {filteredGenres.length > 0 ? (
-                    filteredGenres.map((genre) => (
-                      <label key={genre} >
-                        <input
-                          type="checkbox"
-                          value={genre}
-                          checked={selectedGenres.includes(genre)}
-                          onChange={handleGenreCheckboxChange}
-                        />
-                        {genre}
-                      </label>
-                    ))
-                  ) : (
-                    <p>No genres found.</p>
-                  )}
-                </div>
+       <div className="prompt-layout">
+  <div className="prompt-sidebar">
+    <h2 className="section-title">Playlist Name</h2>
+    <input
+      type="text"
+      placeholder="Optional"
+      value={inputPlaylistName}
+      onChange={handleOnNameInputChange}
+    />
 
-                {selectedGenres.length > 0 ? (
-                  <p>Your selected genres are: {selectedGenres.join(", ")}</p>
-                ) : (
-                  <p>You have not selected any genres.</p>
-                )}
-              </div>
-            </div>
-            <div className="bpm-button">
-              <button onClick={toggleBPM}>Set a BPM Range (Optional)</button>
-              <div className={`sidebar ${showBPMInput ? "open" : "closed"}`}>
-                <input
-                  type="number"
-                  placeholder="40"
-                  min="40"
-                  max="200"
-                  value={bpmLow}
-                  onChange={handleBPMLowInputChange}
-                />
-                <input
-                  type="number"
-                  placeholder="200"
-                  min="40"
-                  max="200"
-                  value={bpmHigh}
-                  onChange={handleBPMHighInputChange}
-                />
-                {bpmLow && bpmHigh ? (
-                  <p>
-                    Your chosen BPM range is : {bpmLow} to {bpmHigh}.
-                  </p>
-                ) : (
-                  <>
-                    <p>You have not chosen a BPM range.</p>
-                    <p>
-                      If you are okay with that, please press the PROCEED
-                      button, and then press generate playlist.
-                    </p>
-                    <button onClick={proceedGenerate}>PROCEED</button>
-                  </>
-                )}
-              </div>
-            </div>
-            <div className="generate-button">
-              <button onClick={generatePlaylist}>Generate a Playlist!</button>
-            </div>
-          </div>
-        </div>
+    <h2 className="section-title">Choose an Activity</h2>
+    <div className="option-list">
+      {activities.map((activity) => (
+        <button
+          key={activity}
+          className={`activity-option ${selectedActivity.includes(activity) ? "selected" : ""}`}
+          onClick={() => handleActivityButtonClick(activity)}
+        >
+          {activity}
+        </button>
+      ))}
+    </div>
+
+    <h2 className="section-title">Set the Duration</h2>
+    <div className="option-list">
+      {durations.map((duration) => (
+        <button
+          key={duration}
+          onClick={() => handleDurationChange(duration)}
+          className={selectedDuration.includes(duration) ? "selected" : ""}
+        >
+          {duration}
+        </button>
+      ))}
+    </div>
+
+    <h2 className="section-title">Select Genre(s)</h2>
+    <input
+      className="genre-search"
+      type="text"
+      placeholder="Search genres here..."
+      value={genreSearchTerm}
+      onChange={(e) => setGenreSearchTerm(e.target.value)}
+    />
+    <div className="option-list">
+      {filteredGenres.map((genre) => (
+        <label key={genre}>
+          <input
+            type="checkbox"
+            value={genre}
+            checked={selectedGenres.includes(genre)}
+            onChange={handleGenreCheckboxChange}
+          />
+          {genre}
+        </label>
+      ))}
+    </div>
+
+    <h2 className="section-title">Set a BPM Range (Optional)</h2>
+    <div className="bpm-inputs">
+      <input
+        type="number"
+        placeholder="40"
+        min="40"
+        max="200"
+        value={bpmLow}
+        onChange={handleBPMLowInputChange}
+      />
+      <input
+        type="number"
+        placeholder="200"
+        min="40"
+        max="200"
+        value={bpmHigh}
+        onChange={handleBPMHighInputChange}
+      />
+    </div>
+    {!bpmLow || !bpmHigh ? (
+      <>
+        <p>You have not chosen a BPM range.</p>
+        <p>If you're okay with that, press PROCEED:</p>
+        <button onClick={proceedGenerate}>PROCEED</button>
+      </>
+    ) : (
+      <p>
+        Your chosen BPM range is: {bpmLow} to {bpmHigh}.
+      </p>
+    )}
+
+    <div className="generate-button">
+      <button onClick={generatePlaylist}>Generate a Playlist!</button>
+    </div>
+  </div>
+</div>
+
       </div>
     </>
   );
