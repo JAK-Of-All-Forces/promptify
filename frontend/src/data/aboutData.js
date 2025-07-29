@@ -46,7 +46,7 @@ const aboutData = [
     linkedin: "https://www.linkedin.com/in/knyuga/",
     funFacts: {
       modalImage: kenna,
-      mostListenedSong: "",
+      mostListenedSong: "3 SMRS STR8 - LUCKI",
       favoriteGenre: "Afrobeats/Amapiano/Makossa, R&B, Worship",
       topArtist: "Musiq Soulchild",
       topAlubm: "Luv 4 Rent - Smino"

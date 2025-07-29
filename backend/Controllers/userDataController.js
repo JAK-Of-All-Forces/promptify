@@ -187,6 +187,58 @@ const topTracks1 = async (req, res) => {
 
 // get top albums (4 weeks), top 10
 const topAlbums4 = async (req, res) => {
+    try {
+        console.log("grabbing the top albums for this user...");
+        const spotifyToken = await getAccessToken(userId);
+        if (spotifyToken){
+            console.log(`looking up tracks...`);
+        } else {
+            console.log("there is no valid token")
+        }
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + spotifyToken
+        };
+    
+        console.log("about to get short term top tracks");
+        const response = await axios.get(
+            `https://api.spotify.com/v1/me/top/tracks`,
+            {
+                headers,
+                params: {
+                    limit: 30,
+                    time_range: "short_term"
+                }
+            }
+        );
+        console.log("got the short term top tracks");
+
+        const topTracks = response.data.items;
+        const simplifiedTracks = [];
+        const payloadTrackInfo = [];
+
+        for (let i = 0; i < topTracks.length; i++) {
+            const currTrack = topTracks[i];
+            
+            const trackName = currTrack.name;
+            const spotifyId = currTrack.id;
+            const albumName = currTrack.album.name;
+            const artists = currTrack.artists.map(artist => artist.name).join(', '); // .join makes it a string
+
+            simplifiedTracks.push({
+                trackName, spotifyId, albumName, artists
+            });
+            payloadTrackInfo.push({
+                trackName, artists
+            });
+        }
+        console.log(simplifiedTracks);
+
+        return payloadTrackInfo
+    } catch (error) {
+        console.error("Error in topTracks4:", error.response?.data || error.message || error);
+    }
 
 }
 
