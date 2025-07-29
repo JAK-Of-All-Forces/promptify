@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import {useEffect, useState} from "react";
 import no_image from "../../assets/no_img.png"
 import "./PlaylistPage.css";
-import TrackCard from "../../Components/TrackCard/TrackCard"
+import TrackCard from "../../Components/TrackCard/TrackCard";
+import { toast } from "react-toastify";
+
 
 function PlaylistPage({token, setToken}) {
 
@@ -105,11 +107,12 @@ function PlaylistPage({token, setToken}) {
                 }
             }
 
-            alert("Playlist added to Spotify!");
-
+            // alert("Playlist added to Spotify!");
+            toast.success(`${playlist.name} has been added to your spotify account!\n
+              Show me my playlist: https://open.spotify.com/playlist/${createdPlaylist.id} `);
             } catch (err) {
             console.error("Error adding to Spotify:", err);
-            alert("Failed to add playlist to Spotify.");
+            toast.error("Failed to add playlist to Spotify.");
         }
         }
 
