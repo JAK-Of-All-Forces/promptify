@@ -1,4 +1,3 @@
-/* Backdrop */
 .modal {
   position: fixed;
   top: 0;
@@ -12,7 +11,6 @@
   z-index: 1000;
 }
 
-/* Modal content */
 .modal-content {
   background-image: none;
   background-size: cover;
@@ -28,9 +26,9 @@
   justify-content: flex-end;
   color: white;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  padding-top: 100px;
 }
 
-/* Close button */
 .modal-header {
   position: absolute;
   top: 12px;
@@ -47,11 +45,14 @@
   border-radius: 50%;
   width: 36px;
   height: 36px;
-  line-height: 36px;
-  text-align: center;
+
+  /* Center the X */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Content at the bottom */
+
 .modal-body {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 80%);
   padding: 24px;
@@ -59,7 +60,6 @@
   z-index: 2;
 }
 
-/* Name + facts */
 .details h2 {
   font-size: 2rem;
   margin-bottom: 12px;
@@ -78,12 +78,70 @@
 
 .details{
   position: relative;
-  top: -45px;
+  top: -100px;
 }
 
 .about-header {
   text-align: center;
   width: 100%;
-  font-size: 2rem; /* optional for better visibility */
-  margin: 20px 0;   /* optional spacing */
+  font-size: 2rem; 
+  margin: 20px 0;   
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    max-width: 400px;
+    aspect-ratio: 3 / 4;
+    padding-top: 80px;
+  }
+
+  .details h2 {
+    font-size: 1.5rem;
+  }
+
+  .details p {
+    font-size: 1rem;
+  }
+
+  .modal-header button {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 90%;
+    max-width: 340px;
+    aspect-ratio: 3 / 4;
+    padding-top: 60px;
+  }
+
+  .details h2 {
+    font-size: 1.3rem;
+  }
+
+  .details p {
+    font-size: 0.95rem;
+  }
+
+  .modal-header button {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    top: -20px; /* less offset */
+  }
+}
+
+@media (max-width: 480px) {
+  .details {
+    top: 0; /* no offset at all on small screens */
+  }
 }
