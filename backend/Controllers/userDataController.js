@@ -69,7 +69,7 @@ const topTracks4 = async (userId) => {
         }
         console.log(simplifiedTracks);
 
-        return payloadTrackInfo
+        return {payloadTrackInfo, simplifiedTracks}
     } catch (error) {
         console.error("Error in topTracks4:", error.response?.data || error.message || error);
     }
@@ -132,7 +132,7 @@ try {
 }
 
 // get top tracks (one year), limit = 30 - return the album, artists, spotify id, track name
-const topTracks1 = async (req, res) => {
+const topTracks1 = async (userId) => {
     try {
         console.log("grabbing the top tracks for this user...");
         const spotifyToken = await getAccessToken(userId);
@@ -186,33 +186,12 @@ const topTracks1 = async (req, res) => {
 }
 
 // get top albums (4 weeks), top 10
-const topAlbums4 = async (req, res) => {
+const topAlbums4 = async (userId) => {
     try {
         console.log("grabbing the top albums for this user...");
-        const spotifyToken = await getAccessToken(userId);
-        if (spotifyToken){
-            console.log(`looking up tracks...`);
-        } else {
-            console.log("there is no valid token")
-        }
+        const { shortTermTrackDataFull, shortTermTrackData } = await topTracks4(userId);
 
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + spotifyToken
-        };
-    
-        console.log("about to get short term top tracks");
-        const response = await axios.get(
-            `https://api.spotify.com/v1/me/top/tracks`,
-            {
-                headers,
-                params: {
-                    limit: 30,
-                    time_range: "short_term"
-                }
-            }
-        );
-        console.log("got the short term top tracks");
+
 
         const topTracks = response.data.items;
         const simplifiedTracks = [];

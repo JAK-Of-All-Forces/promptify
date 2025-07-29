@@ -148,28 +148,24 @@ async function createTracks(tracks, userId) {
           return null;
         }
 
-        let existingTrack = await prisma.track.findUnique({ where: {  spotifyId: spotifyID } });
+        const imageURL = await getTrackImageURL(userId, spotifyID);
+        const trackDuration = await getTrackDuration(userId, spotifyID);
 
-        if (!existingTrack) {
-          const imageURL = await getTrackImageURL(userId, spotifyID);
-          const trackDuration = await getTrackDuration(userId, spotifyID)
-          console.log(`Creating track in DB with image: ${imageURL}`);
-          existingTrack = await prisma.track.create({
-            data: {
-              spotifyId : spotifyID,
-              name: track.name,
-              artist: track.artist,
-              duration: trackDuration,
-              image_url: imageURL,
-            },
-          });
-        } else {
-          console.log(`Track already exists: ${track.name}`);
-        }
+        const existingTrack = await prisma.track.upsert({
+          where: { spotifyId: spotifyID },
+          update: {}, // No update needed; just return existing
+          create: {
+            spotifyId: spotifyID,
+            name: track.name,
+            artist: track.artist,
+            duration: trackDuration,
+            image_url: imageURL,
+          },
+        });
 
-        console.log("leaving create tracks!")
-        return existingTrack;
-      })
+          console.log("leaving create tracks!")
+          return existingTrack;
+        })
     );
     // Remove any nulls from skipped tracks
     return prismaTracks.filter(Boolean);
