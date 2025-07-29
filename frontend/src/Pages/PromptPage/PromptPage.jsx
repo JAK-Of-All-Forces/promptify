@@ -34,8 +34,9 @@ function PromptPage ({token, setToken}) {
         headers: { "Content-Type": "application/json" },
       });
       const result = await response.json();
-      setGenres(result.genres);
-    }
+      const sortedGenres = result.genres.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+
+      setGenres(sortedGenres);    }
     fetchGenres();
   }, []);
 
@@ -52,7 +53,7 @@ function PromptPage ({token, setToken}) {
 
   // activity button logic
   const activities = [
-    "Studying", "Commuting", "Hiking", "Yoga", "Gym", "Sleep", "Working,", "Cooking", "Cleaning", "Relaxing", "Running", "Driving",
+    "Studying", "Commuting", "Hiking", "Yoga", "Gym", "Sleep", "Working", "Cooking", "Cleaning", "Relaxing", "Running", "Driving",
     "Meditiation", "Partying", "Reading", "Shopping", "Walking", "Gaming"
   ]; 
   const handleActivityButtonClick = (activity) => {
