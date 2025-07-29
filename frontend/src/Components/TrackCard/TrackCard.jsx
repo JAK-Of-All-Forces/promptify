@@ -1,8 +1,6 @@
 //import { Link } from "react-router-dom";
 import no_image from "../../assets/no_img.png";
 import axios from "axios";
-//import { FaTrash } from "react-icons/fa";
-
 import "./TrackCard.css";
 
 
@@ -56,15 +54,3 @@ function TrackCard({ track, setRefreshFlag }) {
   );
 }
 export default TrackCard;
-
-
-
-
-
-
-
-
-
-
-
-
