@@ -8,13 +8,30 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const axios = require("axios");
 
-// const { topTracks4 } = require("../Controllers/userDataController")
+const { topTracks4 } = require("../Controllers/userDataController")
 
-// const testingRoutes(){
+// delete when done
+const testingRoutes = async (req, res) => {
+  try {
+    const { spotifyId } = req.body;
+    const user = await prisma.user.findUnique({ where: { spotifyId } });
 
-// }
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
-// neeed  to try this after a user has logged in
+    const userId = user.id;
+    const topTracks4weeks = await topTracks4(userId);
+
+    return res.status(200).json({ topTracks4weeks });
+
+  } catch (error) {
+    console.error("Error in testingRoutes:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
+
+
 const getAccessToken = async(userId) => {
   const response = await prisma.user.findUnique({
     where: { id: userId },
@@ -86,6 +103,8 @@ async function getSpotifyId(name, artist, userId) {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + spotifyToken
     };
+    
+    artist = artist.split(/ft\.|feat\.|featuring/i)[0].trim();
     const query = `track:"${name}" artist:"${artist}"`;
     const encodedQuery = encodeURIComponent(query);
 
@@ -365,5 +384,6 @@ const createPrompt = async (req, res) => {
 
 
 module.exports = {
-  createPrompt
+  createPrompt,
+  testingRoutes
 };

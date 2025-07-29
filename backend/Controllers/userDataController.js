@@ -32,10 +32,12 @@ const topTracks4 = async (userId) => {
             'Authorization': 'Bearer ' + spotifyToken
         };
     
+        console.log("about to get short term top tracks");
         const response = await axios.get(
             `https://api.spotify.com/v1/me/top/tracks?limit=30&time_range=short_term`,
             {headers}
         );
+        console.log("got the short term top tracks");
 
         const topTracks = response.data.items;
         const simplifiedTracks = [];
