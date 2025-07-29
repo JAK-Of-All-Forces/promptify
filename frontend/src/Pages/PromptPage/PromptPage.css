@@ -3,7 +3,7 @@
   margin: 50px auto;
   padding: 40px;
   width: 90%;
-  max-width: 1500px;
+  max-width: 1300px;
   min-height: 80vh;
   overflow-y: auto;
   border-radius: 20px;
@@ -15,7 +15,6 @@
   gap: 30px;
 }
 
-/* ---------- Page Layout ---------- */
 .prompt-layout {
   display: flex;
   flex-direction: column;
@@ -29,15 +28,46 @@
   gap: 20px;
 }
 
-/* ---------- Section Titles ---------- */
 .section-title {
   font-size: 1.5rem;
   font-weight: bold;
   color: #ffffff;
-  text-align: center;
+  text-align: left;
+}
+
+.section-title.inline {
+  margin: 0;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  color: #ffffff;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* ---------- Form Row: Label + Input (Inline) ---------- */
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 /* ---------- Playlist Name Input ---------- */
+.playlist-name,
+.genre-search {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 2px solid #c0b6e9;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1rem;
+  outline: none;
+}
+
 .playlist-name > p {
   color: white;
   font-weight: bolder;
@@ -46,63 +76,41 @@
   text-align: center;
 }
 
-.playlist-name input {
-  margin: 0;
-  padding: 5px;
-  font-size: 1rem;
-  border-radius: 30px;
-  border: 2px solid #c0b6e9;
-  background-color: #ffffff;
-  color: #000000;
-  outline: none;
-  text-align: center;
-}
-
-/* ---------- Genre Search Input ---------- */
-.genre-search {
-  width: 85%;
-  padding: 8px;
-  margin: 10px auto;
-  display: block;
-  border-radius: 30px;
-  border: 2px solid #c0b6e9;
-  background-color: #ffffff;
-  color: #000000;
-  font-size: 1rem;
-  outline: none;
-}
-
 /* ---------- Option Lists ---------- */
 .option-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 10px;
+  justify-content: left;
 }
 
-.option-list button,
-.activity-option {
+.option-list button {
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 30px;
-  border: 2px solid #c0b6e9;
-  background-color: #c0b6e9;
-  color: white;
+  border: 2px solid #a97ff0;
+  background-color: #4b2991;
+  color: #ffffff;
   font-weight: bold;
+  font-style: oblique;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.option-list button.selected,
-.activity-option.selected {
-  background-color: #a600ff;
-  border-color: #a600ff;
+.option-list button:hover {
+  background-color: #6f4dcf;
+}
+
+.option-list button.selected {
+  background-color: #7e5dcf;
+  border-color: #ffccff;
 }
 
 /* ---------- Genres Checkboxes ---------- */
 .all-genres {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
   gap: 10px;
   margin: 10px 0;
 }
@@ -185,5 +193,14 @@
 
   .bpm-inputs input {
     width: 60px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-title.inline {
+    margin-bottom: 5px;
   }
 }

@@ -88,9 +88,13 @@ function PromptPage ({token, setToken}) {
     }
   }
 
-  const filteredGenres = genres.filter((genre) =>
-    genre.toLowerCase().includes(genreSearchTerm.toLowerCase())
-  );
+
+  const filteredGenres = genreSearchTerm.length > 0
+  ? genres.filter((genre) =>
+      genre.toLowerCase().includes(genreSearchTerm.toLowerCase())
+    )
+  : genres.slice(0, 20);
+
 
   // BPM button logic
   const handleBPMLowInputChange = (event) => {
@@ -198,20 +202,25 @@ function PromptPage ({token, setToken}) {
   }
 
   return (
+    
     <>
       <NavBar token={token}></NavBar>
       <div className="prompt-container">
        <div className="prompt-layout">
   <div className="prompt-sidebar">
-    <h2 className="section-title">Playlist Name</h2>
-    <input
-      type="text"
-      placeholder="Optional"
-      value={inputPlaylistName}
-      onChange={handleOnNameInputChange}
-    />
+   <div className="form-row">
+  <h2 className="section-title inline">Playlist Name:</h2>
+  <input
+    type="text"
+    className="playlist-name"
+    placeholder="Optional"
+    value={inputPlaylistName}
+    onChange={handleOnNameInputChange}
+  />
+</div>
 
-    <h2 className="section-title">Choose an Activity</h2>
+
+    <h2 className="section-title">Choose an Activity:</h2>
     <div className="option-list">
       {activities.map((activity) => (
         <button
@@ -224,7 +233,7 @@ function PromptPage ({token, setToken}) {
       ))}
     </div>
 
-    <h2 className="section-title">Set the Duration</h2>
+    <h2 className="section-title">Set the Duration:</h2>
     <div className="option-list">
       {durations.map((duration) => (
         <button
@@ -237,14 +246,17 @@ function PromptPage ({token, setToken}) {
       ))}
     </div>
 
-    <h2 className="section-title">Select Genre(s)</h2>
-    <input
-      className="genre-search"
-      type="text"
-      placeholder="Search genres here..."
-      value={genreSearchTerm}
-      onChange={(e) => setGenreSearchTerm(e.target.value)}
-    />
+   <div className="form-row">
+  <h2 className="section-title inline">Select Genre(s):</h2>
+  <input
+    type="text"
+    className="genre-search"
+    placeholder="Search genres here..."
+    value={genreSearchTerm}
+    onChange={(e) => setGenreSearchTerm(e.target.value)}
+  />
+</div>
+
     <div className="option-list">
       {filteredGenres.map((genre) => (
         <label key={genre}>
@@ -259,7 +271,7 @@ function PromptPage ({token, setToken}) {
       ))}
     </div>
 
-    <h2 className="section-title">Set a BPM Range (Optional)</h2>
+    <h2 className="section-title">Set a BPM Range (Optional):</h2>
     <div className="bpm-inputs">
       <input
         type="number"
