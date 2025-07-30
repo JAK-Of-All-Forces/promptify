@@ -10,8 +10,6 @@ const axios = require("axios");
 
 const { topTracks4, topAlbums4, topArtists4, topGenres4,} = require("../Controllers/userDataController");
 
-// delete when done
-
 const seedUserMusicHistory = async (userId) => {
   try {
     const topTracks4Weeks = await topTracks4(userId);
@@ -52,7 +50,8 @@ const seedUserMusicHistory = async (userId) => {
       The user's top albums in the past 4 weeks are: ${albumswithArtist}.
       The user's top artists in the past 4 weeks are: ${seedArtist}.
       The user's top genres in the past 4 weeks are: ${seedGenres}.
-      Use this information to help pick songs closer to what the user already listens to.
+    Use this data to generate a playlist that closely matches the user's current listening preferences. 
+    Prioritize songs that fit well with these seeds to ensure relevance, but feel free to include some new or lesser-known tracks to keep the playlist fresh and engaging.
     `
 
     return seededData;
@@ -141,7 +140,6 @@ async function getSpotifyId(name, artist, userId) {
       "Content-Type": "application/json",
       Authorization: "Bearer " + spotifyToken,
     };
-
     artist = artist.split(/ft\.|feat\.|featuring/i)[0].trim();
     const query = `track:"${name}" artist:"${artist}"`;
     const encodedQuery = encodeURIComponent(query);
@@ -430,5 +428,5 @@ const createPrompt = async (req, res) => {
 };
 
 module.exports = {
-  createPrompt
+  createPrompt,
 };
