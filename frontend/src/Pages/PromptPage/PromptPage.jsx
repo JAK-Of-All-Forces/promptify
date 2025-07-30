@@ -216,7 +216,7 @@ function PromptPage ({token, setToken}) {
                 )}
               </div>
             </div>
-            <div className="duration-button">
+            <div className="duration-button"> 
               <button onClick={toggleDuration}>Set the Duration</button>
               <div
                 className={`sidebar ${showDurationInput ? "open" : "closed"}`}>
