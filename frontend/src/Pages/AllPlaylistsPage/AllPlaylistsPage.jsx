@@ -2,11 +2,10 @@ import NavBar from "../../Components/NavBar/NavBar";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import no_image from "../../assets/no_img.png";
-//Come back to this
-// import "./AllPlaylistsPage.css";
+import "./AllPlaylistsPage.css";
 import TrackCard from "../../Components/TrackCard/TrackCard";
 import { toast } from "react-toastify";
-import PreviousPlaylists from "../../Components/PreviousPlaylists/PreviousPlaylists";
+import AllPlaylists from "../../Components/AllPlaylists/AllPlaylists";
 
 function AllPlaylistPage({ token, setToken }) {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -77,7 +76,7 @@ function AllPlaylistPage({ token, setToken }) {
           <div className="header">
             <h2>All Promptify Playlists</h2>
           </div>
-          <PreviousPlaylists
+          <AllPlaylists
             userPlaylists={userPlaylists}
             setRefreshFlag={setRefreshFlag}
           />

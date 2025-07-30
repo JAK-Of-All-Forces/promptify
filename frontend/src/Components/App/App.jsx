@@ -5,7 +5,7 @@ import AboutPage from "../../Pages/AboutPage/AboutPage";
 import LandingPage from "../../Pages/LandingPage/LandingPage";
 import PromptPage from "../../Pages/PromptPage/PromptPage";
 import PlaylistPage from "../../Pages/PlaylistPage/PlaylistPage";
-import AllPlaylistPage from '../../Pages/AllPlaylistsPage/AllPlaylists.jsx';
+import AllPlaylistPage from '../../Pages/AllPlaylistsPage/AllPlaylistsPage.jsx';
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
