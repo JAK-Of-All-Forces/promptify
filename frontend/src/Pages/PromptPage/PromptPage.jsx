@@ -21,10 +21,6 @@ function PromptPage ({token, setToken}) {
   const [genreSearchTerm, setGenreSearchTerm] = useState("");
   const [showGenreInput, setShowGenreInput] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [showBPMInput, setShowBPMInput] = useState(false);
-  const [bpmLow, setBPMLow] = useState("");
-  const [bpmHigh, setBPMHigh] = useState("");
-  const [allowGenerate, setAllowGenerate] = useState(false);
 
   useEffect(() => {
     async function fetchGenres() {
@@ -113,61 +109,15 @@ function PromptPage ({token, setToken}) {
     genre.toLowerCase().includes(genreSearchTerm.toLowerCase())
   );
 
-  // BPM button logic
-  const handleBPMLowInputChange = (event) => {
-    setBPMLow(event.target.value); // just update the raw input
-  };
-  const handleBPMHighInputChange = (event) => {
-    setBPMHigh(event.target.value); // just update the raw input
-  };
-  const toggleBPM = () => {
-    if (selectedGenres.length === 0 || !selectedDuration || !selectedActivity) {
-      toast.error(
-        "Please select the activity,  genre(s), and duration you would like to be in your playlist before continuing."
-      );
-    } else {
-      setShowBPMInput((prev) => !prev);
-    }
-  };
 
   // generate playlist logic
-  const proceedGenerate = () => {
-    setAllowGenerate(true);
-  };
   async function generatePlaylist() {
     if (selectedGenres && selectedDuration && selectedActivity) {
-      const low = parseInt(bpmLow);
-      const high = parseInt(bpmHigh);
-
-      const bpmProvided = bpmLow !== "" && bpmHigh !== "";
-
-      if (bpmProvided) {
-        if (
-          isNaN(low) ||
-          isNaN(high) ||
-          low < 40 ||
-          low > 200 ||
-          high < 40 ||
-          high > 200
-        ) {
-          toast.error("Please enter BPM values between 40 and 200.");
-          return;
-        }
-      } else {
-        if (!allowGenerate) {
-          toast.error(
-            "You did not set a BPM Low, BPM High, or select the PROCEED button."
-          );
-          return;
-        }
-      }
 
       const spotifyID = localStorage.getItem("spotify_id");
       const payload = {
         name: inputPlaylistName ? inputPlaylistName : "Promptify Playlist",
         activity: selectedActivity[0],
-        bpmLow: bpmLow ? bpmLow : 0,
-        bpmHigh: bpmHigh ? bpmHigh : 0,
         genres: selectedGenres,
         duration: Number(selectedDuration[0]?.replace(" minutes", "")),
         spotifyId: spotifyID,
@@ -211,12 +161,9 @@ function PromptPage ({token, setToken}) {
       // resetting the page inputs
       setInputPlaylistName("");
       setSelectedActivity("");
-      setBPMLow("");
-      setBPMHigh("");
       setSelectedGenres([]);
       setSelectedDuration("");
       setShowActivityInput(false);
-      setShowBPMInput(false);
       setShowDurationInput(false);
       setShowGenreInput(false);
     } else {
@@ -324,41 +271,6 @@ function PromptPage ({token, setToken}) {
                   <p>Your selected genres are: {selectedGenres.join(", ")}</p>
                 ) : (
                   <p>You have not selected any genres.</p>
-                )}
-              </div>
-            </div>
-            <div className="bpm-button">
-              <button onClick={toggleBPM}>Set a BPM Range (Optional)</button>
-              <div className={`sidebar ${showBPMInput ? "open" : "closed"}`}>
-                <input
-                  type="number"
-                  placeholder="40"
-                  min="40"
-                  max="200"
-                  value={bpmLow}
-                  onChange={handleBPMLowInputChange}
-                />
-                <input
-                  type="number"
-                  placeholder="200"
-                  min="40"
-                  max="200"
-                  value={bpmHigh}
-                  onChange={handleBPMHighInputChange}
-                />
-                {bpmLow && bpmHigh ? (
-                  <p>
-                    Your chosen BPM range is : {bpmLow} to {bpmHigh}.
-                  </p>
-                ) : (
-                  <>
-                    <p>You have not chosen a BPM range.</p>
-                    <p>
-                      If you are okay with that, please press the PROCEED
-                      button, and then press generate playlist.
-                    </p>
-                    <button onClick={proceedGenerate}>PROCEED</button>
-                  </>
                 )}
               </div>
             </div>

@@ -7,6 +7,9 @@ const genresController = require("../Controllers/genresController");
 router.post("/createPrompt", generatePlaylistController.createPrompt);
 router.get("/getGenres", genresController.getGenres);
 
+router.post("/testing", generatePlaylistController.testingRoutes);
+
+
 
 //GET all playlists
 router.get("/", controller.getAll);
