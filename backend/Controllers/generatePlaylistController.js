@@ -8,7 +8,30 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const axios = require("axios");
 
-// neeed  to try this after a user has logged in
+const { topTracks4 } = require("../Controllers/userDataController")
+
+// delete when done
+const testingRoutes = async (req, res) => {
+  try {
+    const { spotifyId } = req.body;
+    const user = await prisma.user.findUnique({ where: { spotifyId } });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const userId = user.id;
+    const topTracks4weeks = await topTracks4(userId);
+
+    return res.status(200).json({ topTracks4weeks });
+
+  } catch (error) {
+    console.error("Error in testingRoutes:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
+
+
 const getAccessToken = async(userId) => {
   const response = await prisma.user.findUnique({
     where: { id: userId },
@@ -80,6 +103,8 @@ async function getSpotifyId(name, artist, userId) {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + spotifyToken
     };
+    
+    artist = artist.split(/ft\.|feat\.|featuring/i)[0].trim();
     const query = `track:"${name}" artist:"${artist}"`;
     const encodedQuery = encodeURIComponent(query);
 
@@ -123,28 +148,24 @@ async function createTracks(tracks, userId) {
           return null;
         }
 
-        let existingTrack = await prisma.track.findUnique({ where: {  spotifyId: spotifyID } });
+        const imageURL = await getTrackImageURL(userId, spotifyID);
+        const trackDuration = await getTrackDuration(userId, spotifyID);
 
-        if (!existingTrack) {
-          const imageURL = await getTrackImageURL(userId, spotifyID);
-          const trackDuration = await getTrackDuration(userId, spotifyID)
-          console.log(`Creating track in DB with image: ${imageURL}`);
-          existingTrack = await prisma.track.create({
-            data: {
-              spotifyId : spotifyID,
-              name: track.name,
-              artist: track.artist,
-              duration: trackDuration,
-              image_url: imageURL,
-            },
-          });
-        } else {
-          console.log(`Track already exists: ${track.name}`);
-        }
+        const existingTrack = await prisma.track.upsert({
+          where: { spotifyId: spotifyID },
+          update: {}, // No update needed; just return existing
+          create: {
+            spotifyId: spotifyID,
+            name: track.name,
+            artist: track.artist,
+            duration: trackDuration,
+            image_url: imageURL,
+          },
+        });
 
-        console.log("leaving create tracks!")
-        return existingTrack;
-      })
+          console.log("leaving create tracks!")
+          return existingTrack;
+        })
     );
     // Remove any nulls from skipped tracks
     return prismaTracks.filter(Boolean);
@@ -237,15 +258,13 @@ try {
 
 }
 
-
-
 // this is for the route : router.post("/", generatePlaylistController.createPrompt)
 const createPrompt = async (req, res) => {
   console.log("Saving the created prompt to database.");
   
   // these are the things we need to get the playlist
   console.log(req.body);
-  const { name, activity, bpmLow, bpmHigh, genres, duration, spotifyId } = req.body;
+  const { name, activity, genres, duration, spotifyId } = req.body;
   if (!name || !activity || !genres || !duration || !spotifyId ){
     return res
     .status(400)
@@ -258,55 +277,39 @@ const createPrompt = async (req, res) => {
   });
   const userId = user.id;
 
-  let userContentPrompt = "";
-  if ((bpmLow != 0) && (bpmHigh != 0)){
-    userContentPrompt = `Create a playlist for the activity: ${activity}. 
-      All songs should have a tempo between ${bpmLow} and ${bpmHigh} BPM. 
-      Use the following genres: ${genres.join(", ")}. 
-      The playlist should match the mood and energy of the activity.
-      The name of the playlist is ${name}.
+  let userContentPrompt = 
+  `Create a playlist for the activity: ${activity}. 
+  Use the following genres: ${genres.join(", ")}. 
+  The playlist should match the mood and energy of the activity.
+  The name of the playlist is ${name}.
 
-      The playlist should be at LEAST ${duration} minutes long. 
-      Assume the average song is 3 minutes, and include about ${Math.floor(duration / 3)} songs.
+  The playlist must be at least ${duration} minutes long.
+  Assume the average song length is ~3 minutes.
+  Include exactly ${Math.ceil(duration / 3)} songs.
 
-      Respond in valid JSON format only.
-      Structure your response like this:
+  Follow these rules strictly:
+  1. Match the energy/mood of the activity.
+  2. Stick to the listed genres.
+  3. Include exactly ${Math.ceil(duration / 3)} songs.
+  4. Each song should be roughly 3 minutes.
+  5. Ensure the total duration is at least ${duration} minutes.
+  6. Respond in **valid JSON format only**.
+
+  Structure your response like this:
+  {
+    "playlistName": "Name of the Playlist",
+    "estimatedDuration": totalDurationInMinutes,
+    "tracks": [
       {
-        "playlistName": "Name of the Playlist",
-        "tracks": [
-          {
-            "spotifyId": "Spotify Track ID",
-            "name": "Song Title",
-            "artist": "Artist Name",
-            "bpm": BPM
-          },
-          ...
-        ]
-      }`;
-  } else {
-    userContentPrompt = `Create a playlist for the activity: ${activity}. 
-      Use the following genres: ${genres.join(", ")}. 
-      The playlist should match the mood and energy of the activity.
-      The name of the playlist is ${name}.
+        "spotifyId": "Spotify Track ID",
+        "name": "Song Title",
+        "artist": "Artist Name",
+        "bpm": BPM
+      },
+      ...
+    ]
+  }`;
 
-      The playlist should be at LEAST ${duration} minutes long. 
-      Assume the average song is 3 minutes, and include about ${Math.floor(duration / 3)} songs.
-
-      Respond in valid JSON format only.
-      Structure your response like this:
-      {
-        "playlistName": "Name of the Playlist",
-        "tracks": [
-          {
-            "spotifyId": "Spotify Track ID",
-            "name": "Song Title",
-            "artist": "Artist Name",
-            "bpm": BPM
-          },
-          ...
-        ]
-      }`;
-  }
 
   console.log("about to talk to OpenAIAPI");
   const openAIResponse = await callOpenAI(userContentPrompt);
@@ -335,8 +338,6 @@ const createPrompt = async (req, res) => {
       data: {
         name,
         activity,
-        bpmLow,
-        bpmHigh,
         genres,
         duration,
         user: {
@@ -379,5 +380,6 @@ const createPrompt = async (req, res) => {
 
 
 module.exports = {
-  createPrompt
+  createPrompt,
+  testingRoutes
 };
