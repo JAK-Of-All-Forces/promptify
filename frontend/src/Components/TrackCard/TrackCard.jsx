@@ -2,7 +2,6 @@
 import no_image from "../../assets/no_img.png";
 import { FaTrash } from "react-icons/fa";
 import axios from "axios";
-import { FaTrash } from "react-icons/fa";
 
 import "./TrackCard.css";
 
