@@ -1,333 +1,206 @@
 .prompt-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around; 
-    align-items: center; 
-    padding: 20px;
-    width: 100vw;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 1300px;
+  min-height: 80vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-.left-side-animation {
-    display: flex;
-    justify-content: center;  /* center horizontally */
-    align-items: center;      /* center vertically */
+.prompt-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
 }
 
-.left-side-animation > div {
-    width: 100%;
-    max-width: 600px;  
-    min-width: 200px;  
+.prompt-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+}
+
+.section-title.inline {
+  margin: 0;
+  font-size: 1.2rem;
+  white-space: nowrap;
+  color: #ffffff;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* ---------- Form Row: Label + Input (Inline) ---------- */
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* ---------- Playlist Name Input ---------- */
+.playlist-name,
 .genre-search {
-    width: 85%;
-    padding: 8px;
-    margin: 10px auto;
-    display: block;
-    border-radius: 30px;
-    border: 2px solid #c0b6e9;
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 1rem;
-    outline: none;
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 15px;
+  border-radius: 30px;
+  border: 2px solid #c0b6e9;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 1rem;
+  outline: none;
 }
 
+.playlist-name > p {
+  color: white;
+  font-weight: bolder;
+  font-size: 30px;
+  margin: 0px;
+  text-align: center;
+}
+
+/* ---------- Option Lists ---------- */
+.option-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: left;
+}
+
+.option-list button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: 2px solid #a97ff0;
+  background-color: #4b2991;
+  color: #ffffff;
+  font-weight: bold;
+  font-style: oblique;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.option-list button:hover {
+  background-color: #6f4dcf;
+}
+
+.option-list button.selected {
+  background-color: #7e5dcf;
+  border-color: #ffccff;
+}
+
+/* ---------- Genres Checkboxes ---------- */
 .all-genres {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 10px;
+  margin: 10px 0;
 }
 
 .all-genres label {
-    display: flex;
-    align-items: center;
-    background-color: #f4f0fa;
-    border: 1px solid #c0b6e9;
-    border-radius: 20px;
-    padding: 6px 12px;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-
-.all-genres label:hover {
-    background-color: #e0d7f3;
+  display: flex;
+  align-items: center;
+  background-color: #f4f0fa;
+  border: 1px solid #c0b6e9;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 .all-genres input[type="checkbox"] {
-    margin-right: 6px;
-    accent-color: #a600ff; /* modern checkbox theming */
-    transform: scale(1.2);
+  margin-right: 6px;
+  accent-color: #a600ff;
+  transform: scale(1.2);
 }
 
+/* ---------- BPM Input ---------- */
+.bpm-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 
+.bpm-inputs input {
+  font-size: 1rem;
+  width: 80px;
+  padding: 8px;
+  border-radius: 15px;
+  border: 2px solid #c0b6e9;
+  background-color: #f9f6ff;
+  color: #000000;
+  text-align: center;
+  outline: none;
+}
+
+/* ---------- Generate Button ---------- */
+.generate-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.generate-button button {
+  background-color: rgb(32, 214, 95);
+  border: 2px solid rgb(161, 218, 181);
+  border-radius: 30px;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ---------- Captions ---------- */
 .caption {
-    color: white;
-    font-weight: bolder;  
-    font-size: medium;  
-    font-style: oblique;
-    text-align: center;
+  color: white;
+  font-weight: bolder;
+  font-size: medium;
+  font-style: oblique;
+  text-align: center;
 }
 
-.playlist-name >p {
-    color: white;
-    font-weight: bolder;  
-    font-size: 30px;  
-    margin: 0px;
-    text-align: center;
-}
-
-.playlist-name input {
-    margin: 0;
-    padding: 5px;
-    font-size: 1rem;
-    border-radius: 30px;
-
-    border: 2px solid #c0b6e9; /* add a border */
-    background-color: #ffffff; /* light background */
-    color: #000000;               /* text color */
-    outline: none;         
-    text-align: center;
-}
-
-.playlist-prompt-section {
-    display: flex;
-    flex-direction: column; /* stack items vertically */
-    align-items: center;    /* center horizontally */
-    justify-content: center; /* center vertically */
-}
-
-.playlist-prompt-section button {
-    background-color: #c0b6e9;
-    border-radius: 30px;
-    border-color: rgb(236, 215, 244);
-    border-width: 2px;
-    margin : 20px;
-    padding: 20px;
-    width: 300px;    
-    font-size: 25px;
-    font-style: oblique;
-    font-weight: bolder;
-}
-
-.playlist-prompt-section .generate-button button {
-    background-color: rgb(32, 214, 95);
-    border-color: rgb(161, 218, 181);
-}
-
-.activity-button .sidebar button {
-    font-size: 15px;
-    padding: 4px;
-    width: 120px;
-    margin: 5px;
-    background-color: #c0b6e9;
-    border: 2px solid #c0b6e9;
-    border-radius: 30px;
-    font-weight: bold;
-    font-style: oblique;
-    color: #ffffff;
-}
-
-.activity-button .sidebar button.selected {
-    border-color: #a600ff;
-    background-color: #d6c2f0;
-}
-
-.duration-button .sidebar button {
-    font-size: 25px;
-    padding: 4px;
-    width: 120px;
-    margin: 5px;
-}
-
-.bpm-button .sidebar button {
-    font-size: 30px;
-    padding: 4px;
-    width: 200px;
-    margin: 2px;
-
-    background-color: #a3e9c6;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-.bpm-button .sidebar {
-    font-size: 25px;
-    background-color: #ffffff;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    color: #000000;
-}
-
-.bpm-button .sidebar input[type="number"] {
-    font-size: 20px;
-    width: 75px;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 15px;
-    border: 2px solid #c0b6e9;
-    background-color: #f9f6ff;
-    color: #000000;
-    text-align: center;
-    outline: none;
-}
-
-.bpm-button .sidebar p {
-    text-align: center;
-    margin-top: 10px;
-    font-style: oblique;
-    font-size: 16px;
-    color: #333333;
-}
-
-.bpm-button .sidebar button:hover {
-    background-color: #32d27f;
-}
-
-
-.sidebar.closed {
-    display: none;
-}
-
-.sidebar.open {
-    display: block;
-    background-color: white;
-    color: black;
-}
-
-.sidebar button.selected {
-    border-color: #a600ff;
-    border-radius: 4px;
-}
-
-.activity-button, .duration-button, .genre-button, .bpm-button , .generate-button {
-    position: relative;
-    display: inline-block; /* shrink to button width */
-    text-align: center; /* center text inside */
-    z-index: 100;
-}
-
-.sidebar {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #ffffff;
-    border-radius: 30px;
-    width: 275px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 80px;
-    z-index: -1;
-    max-height: 150px;
-    overflow-y: scroll;
-    margin-top: -80px;
-}
-
-.sidebar label {
-    cursor: pointer;
-}
-
-.sidebar p {
-    font-style: oblique;
-    color: #000000;
-}
-
-.sidebar::-webkit-scrollbar {
-    width: 5px; /* width of the scrollbar */
-}
-
-.sidebar::-webkit-scrollbar-track {
-    background: #ffffff; /* color of the scrollbar track */
-    border-radius: 10px;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-    background-color: #c0b6e9; /* color of the scrollbar thumb */
-    border-radius: 30px;
-    border: 2px solid #ffffff; /* gives a little padding inside the track */
-}
-
+/* ---------- Media Queries ---------- */
 @media (max-width: 768px) {
-    .prompt-container {
-        flex-direction: column;
-    }
+  .prompt-container {
+    padding: 20px;
+  }
 
-    .left-side-animation > div {
-        width: 100%;
-        max-width: 300px;  
-        min-width: 200px;  
-    }
-}
+  .section-title {
+    font-size: 1.2rem;
+  }
 
-@media ( (min-width: 768px) and (max-width: 1024px) ){
-    .prompt-container {
-        flex-direction: column;
-    }
+  .option-list button {
+    font-size: 0.9rem;
+  }
 
-    .left-side-animation > div {
-        width: 100%;
-        max-width: 500px;  
-        min-width: 200px;  
-    }
+  .bpm-inputs input {
+    width: 60px;
+  }
 
-    .sidebar {
-        width: 600px;
-        max-height: 150px;
-    }
-    .sidebar::-webkit-scrollbar {
-        width: 10px; /* width of the scrollbar */
-    }
+  .form-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .playlist-prompt-section button {
-        border-width: 4px;
-        width: 620px;    
-        font-size: 50px;
-    }
-
-    .all-genres label {
-        padding: 8px 16px;
-        font-size: 25px;
-    }
-
-    .activity-button .sidebar button {
-        font-size: 35px;
-        margin: 10px;
-        padding: 10px;
-        width: 220px;
-    }
-
-    .playlist-name >p {
-        font-size: 60px;
-        text-align: center;  
-    }
-
-    .playlist-name input {
-        font-size: 35px;
-        text-align: center;
-    }
-
-    .caption {
-        font-size: 30px;  
-        text-align: center;
-    }
-
-    .activity-button, .duration-button, .genre-button p {
-        font-size: 30px;
-    }
-
-    .bpm-button .sidebar p {
-        font-size: 25px;
-    }
-
-    .bpm-button .sidebar input[type="number"] {
-        font-size: 35px;
-        width: 95px;
-    }
-
-    
+  .section-title.inline {
+    margin-bottom: 5px;
+  }
 }
