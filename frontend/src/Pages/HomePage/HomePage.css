@@ -16,7 +16,7 @@
 /* CSS for homepage button*/
 .home-page-button {
   background-color: #20D65F;
-  border: 1px solid black;
+  /* border: 3px solid black; */
   border-radius: 50px;
   box-sizing: border-box;
   color: #FFFFFF;
@@ -25,7 +25,6 @@
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5rem;
-  padding: .75rem 1.2rem;
   text-align: center;
   text-decoration: none #6B7280 solid;
   text-decoration-thickness: auto;
@@ -36,6 +35,12 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   width: auto;
+  margin: 2em;
+}
+
+.home-page-button h2 {
+  margin: 0;
+
 }
 .home-page-button:hover {
   background-color: #107434;

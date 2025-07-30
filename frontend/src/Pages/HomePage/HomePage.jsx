@@ -11,6 +11,9 @@ function HomePage({ token, setToken }) {
   //User playlists variable
   const [userPlaylists, setUserPlaylists] = useState([]);
 
+  //This is for when a track is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
+  const [refreshFlag, setRefreshFlag] = useState(false);
+
   useEffect(() => {
     if (!token) return;
 
@@ -58,7 +61,7 @@ function HomePage({ token, setToken }) {
     };
 
     fetchProfile();
-  }, [token]);
+  }, [token, refreshFlag]);
 
   return (
     //Displayling NavBar component
@@ -77,9 +80,12 @@ function HomePage({ token, setToken }) {
           </button>
         </Link>
       </div>
-
+      
       <div>
-        <PreviousPlaylists userPlaylists={userPlaylists} />
+        <PreviousPlaylists
+          userPlaylists={userPlaylists}
+          setRefreshFlag={setRefreshFlag}
+        />
       </div>
     </div>
   );
