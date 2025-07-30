@@ -66,11 +66,7 @@ function HomePage({ token, setToken }) {
   return (
     //Displayling NavBar component
     <div className="home-page">
-      <NavBar
-      token={token}
-      setToken={setToken}>
-      </NavBar>
-   
+      <NavBar token={token} setToken={setToken}></NavBar>
 
       {/* Rest of the home page content below */}
 
@@ -83,10 +79,21 @@ function HomePage({ token, setToken }) {
       </div>
 
       <div>
+        <div className="header">
+          <h2>Recent Promptify Playlists</h2>
+        </div>
         <PreviousPlaylists
           userPlaylists={userPlaylists}
           setRefreshFlag={setRefreshFlag}
         />
+
+        <div className="button-container">
+          <Link to="/all-playlists">
+            <button className="home-page-button">
+              <h2>View All Playlists</h2>
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

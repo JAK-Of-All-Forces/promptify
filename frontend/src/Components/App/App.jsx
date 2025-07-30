@@ -5,6 +5,7 @@ import AboutPage from "../../Pages/AboutPage/AboutPage";
 import LandingPage from "../../Pages/LandingPage/LandingPage";
 import PromptPage from "../../Pages/PromptPage/PromptPage";
 import PlaylistPage from "../../Pages/PlaylistPage/PlaylistPage";
+import AllPlaylistPage from '../../Pages/AllPlaylistsPage/AllPlaylists.jsx';
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -72,19 +73,32 @@ if (accessToken || spotifyId) {
           }
         />
         <Route path="/about" element={<AboutPage token={token} />} />
-        <Route 
-          path="/prompt" 
+        <Route
+          path="/prompt"
           element={
-          <ProtectedRoute token={token}>
-          <PromptPage  token = {token} setToken={setToken}/>
-          </ProtectedRoute>
-          } 
-          />
-        <Route path="/playlist/:id" element={
-          <ProtectedRoute token={token}>
-          <PlaylistPage token = {token} setToken={setToken}/>
-          </ProtectedRoute>} 
-          />
+            <ProtectedRoute token={token}>
+              <PromptPage token={token} setToken={setToken} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/playlist/:id"
+          element={
+            <ProtectedRoute token={token}>
+              <PlaylistPage token={token} setToken={setToken} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/all-playlists/"
+          element={
+            <ProtectedRoute token={token}>
+              <AllPlaylistPage token={token} setToken={setToken} />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<ErrorPage />} />
         <Route path="/loading" element={<LoadingPage />} />
       </Routes>

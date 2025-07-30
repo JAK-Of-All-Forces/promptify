@@ -8,9 +8,6 @@ function PreviousPlaylists({ userPlaylists = [], setRefreshFlag}){
     console.log("Previous playlist" , userPlaylists)
     return (
         <div className="content">
-            <div className="header">
-                <h2>Your Promptify Playlists</h2>
-            </div>
             {/* Mapping through all of the previous playlists if there are any */}
             <div className="previous-playlists">
                 {!userPlaylists?.length ? (

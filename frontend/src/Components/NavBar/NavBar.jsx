@@ -53,6 +53,11 @@ return (
               </Link>
             </div>
             <div className="dropdown-item">
+              <Link to="/all-playlists">
+                <p>All Playlists</p>
+              </Link>
+            </div>
+            <div className="dropdown-item">
               <Link to="/about">
                 <p>Stats Page</p>
               </Link>
