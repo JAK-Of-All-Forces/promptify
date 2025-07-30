@@ -46,12 +46,14 @@ const seedUserMusicHistory = async (userId) => {
     console.log("\n")
 
     const seededData = `
-      The user's top tracks in the past 4 weeks are: ${trackswithArtist}.
-      The user's top albums in the past 4 weeks are: ${albumswithArtist}.
-      The user's top artists in the past 4 weeks are: ${seedArtist}.
-      The user's top genres in the past 4 weeks are: ${seedGenres}.
-    Use this data to generate a playlist that closely matches the user's current listening preferences. 
-    Prioritize songs that fit well with these seeds to ensure relevance, but feel free to include some new or lesser-known tracks to keep the playlist fresh and engaging.
+    The user's recent listening history includes these top tracks: ${trackswithArtist}.
+    Top albums: ${albumswithArtist}.
+    Top artists: ${seedArtist}.
+    Top genres: ${seedGenres}.
+
+    Use this information to build a profile of the user's music taste. 
+    For requests involving genres similar to these, prioritize recommendations that fit their current preferences. 
+    For other requests, use this profile to understand their overall style and tailor the playlist accordingly.
     `
 
     return seededData;
@@ -107,14 +109,11 @@ async function callOpenAI(prompt) {
       ],
     });
 
-    console.log("🧠 Playlist from OpenAI:\n");
     const openAIContent = response.choices[0].message.content;
     const openAIJSON = JSON.parse(openAIContent);
 
-    console.log(
-      "THIS IS THE JSON. response.choice[0].message.content has already been done\n",
-      openAIJSON
-    );
+    console.log("🧠 Playlist from OpenAI:\n");
+    console.log(openAIJSON);
     return openAIJSON;
   } catch (err) {
     console.error("Error talking to OpenAI:", err);
@@ -323,8 +322,9 @@ const createPrompt = async (req, res) => {
   const userId = user.id;
   
   const extraData = await seedUserMusicHistory(userId);
+  let userContentPrompt = extraData;
 
-  let userContentPrompt = `Create a playlist for the activity: ${activity}. 
+  userContentPrompt += `Create a playlist for the activity: ${activity}. 
   Use the following genres: ${genres.join(", ")}. 
   The playlist should match the mood and energy of the activity.
   The name of the playlist is ${name}.
@@ -356,7 +356,6 @@ const createPrompt = async (req, res) => {
     ]
   }`;
 
-  userContentPrompt += extraData;
 
   console.log("about to talk to OpenAIAPI");
   const openAIResponse = await callOpenAI(userContentPrompt);
