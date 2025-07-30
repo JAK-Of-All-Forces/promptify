@@ -2,6 +2,7 @@
 import no_image from "../../assets/no_img.png";
 import { FaTrash } from "react-icons/fa";
 import axios from "axios";
+
 import "./TrackCard.css";
 
 
@@ -49,7 +50,6 @@ function TrackCard({ track, setRefreshFlag }) {
       <p className="track-duration">{track.duration}</p>
       {/* Needed to import react */}
       {/* Delete icon */}
-      {/* <p onClick={deleteTrack}>X</p> */}
       <FaTrash onClick = {deleteTrack} />
     </div>
   );
