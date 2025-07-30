@@ -1,13 +1,9 @@
 import "./NavBar.css";
 import logo from "../../assets/favicon.png";
 import { useNavigate, Link } from "react-router-dom";
-<<<<<<< HEAD
 import { useState} from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
-=======
-import { GiHamburgerMenu } from "react-icons/gi";
->>>>>>> origin
 
 
 function NavBar({token, setToken}){
@@ -30,11 +26,6 @@ return (
       <Link to={token ? `/home` : `/`}>
         <img className="logo-image" src={logo}></img>
       </Link>
-<<<<<<< HEAD
-=======
-
-      {/* <img src = {logo}/> */}
->>>>>>> origin
     </div>
     {/* Link to homepage on click of the word Promptify*/}
     <div className="promptify-logo">
@@ -73,20 +64,6 @@ return (
             </div>
           </div>
         )}
-      </div>
-      <div class = "dropdown">
-        <GiHamburgerMenu className = "hamburger" />
-        <div class="dropdown-content">
-          <Link to="/about">
-            <p>About</p>
-          </Link>{" "}
-          <Link to="/about">
-            <p>About</p>
-          </Link>{" "}
-          <Link to="/about">
-            <p>About</p>
-          </Link>{" "}
-        </div>
       </div>
     </div>
   </nav>
