@@ -24,3 +24,12 @@ img {
     display: flex;
     flex-direction: column;
 }
+
+.playlist-first-line {
+    display: flex;
+    align-items: center;
+}
+
+.delete-icon {
+    position: right;
+}
