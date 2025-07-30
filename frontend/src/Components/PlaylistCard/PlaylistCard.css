@@ -6,7 +6,7 @@ img {
 .PlaylistCard {
     display: flex;
     justify-content: center;
-    padding: .2em;
+    padding: 1em;
 
 }
 
@@ -23,6 +23,15 @@ img {
 .info {
     display: flex;
     flex-direction: column;
+}
+
+.playlist-nam {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+
+}
+.playlist-creation{
+    margin: 0;
 }
 
 .playlist-first-line {
