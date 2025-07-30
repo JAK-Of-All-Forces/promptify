@@ -66,10 +66,11 @@ function HomePage({ token, setToken }) {
   return (
     //Displayling NavBar component
     <div className="home-page">
-      <NavBar token={token}></NavBar>
-      <div style={{ padding: "2rem" }}>
-        <LogoutButton setToken={setToken} />
-      </div>
+      <NavBar
+      token={token}
+      setToken={setToken}>
+      </NavBar>
+   
 
       {/* Rest of the home page content below */}
 
@@ -80,7 +81,7 @@ function HomePage({ token, setToken }) {
           </button>
         </Link>
       </div>
-      
+
       <div>
         <PreviousPlaylists
           userPlaylists={userPlaylists}
