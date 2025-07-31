@@ -1,3 +1,10 @@
+
+.landing-page{
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+
 .landing-page .about-us{
     font-family: "Helvetica World", Helvetica, Arial, sans-serif;
     font-weight: 50;
@@ -46,7 +53,8 @@
 }
 
 .landing-page .info {
-    padding: "2rem";
+    padding: 2rem;
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
