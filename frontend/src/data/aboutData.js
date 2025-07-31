@@ -26,7 +26,7 @@ const aboutData = [
     role: "FTL Scholar",
     school: "Spellman College",
     image: jessica,
-    email: "",
+    email: "obicjessica@gmail.com",
     linkedin: "https://www.linkedin.com/in/jessica-obi-80a184287/",
     funFacts: {
       modalImage: jessica,
@@ -42,7 +42,7 @@ const aboutData = [
     role: "FTL Scholar",
     school: "University of Texas at Austin",
     image: kenna,
-    email: "",
+    email: "kennanyuga@utexas.edu",
     linkedin: "https://www.linkedin.com/in/knyuga/",
     funFacts: {
       modalImage: kenna,
