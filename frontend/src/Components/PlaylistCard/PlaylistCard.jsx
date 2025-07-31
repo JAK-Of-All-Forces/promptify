@@ -53,7 +53,7 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
           <div className="playlist-info">
             <div className="info">
               <div className = "playlist-first-line">
-                <h3 className="playlist-nam">{playlist.name}</h3>
+                <h3 className="playlist-name">{playlist.name}</h3>
                 {/* Delete icon */}
                 <FaTrash className = "delete-icon" onClick={deletePlaylist} />
               </div>
