@@ -45,7 +45,7 @@ return (
       <p>{person.role}</p>
       <p>{person.school}</p>
       <p>{person.email}</p>
-      <a href={person.linkedin} >
+      <a href={person.linkedin} target="_blank" rel="noopener noreferrer">
         LinkedIn
       </a>
     </div>
