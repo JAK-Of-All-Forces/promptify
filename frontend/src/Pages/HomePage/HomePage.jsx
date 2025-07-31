@@ -1,7 +1,7 @@
 import NavBar from "../../Components/NavBar/NavBar";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import PreviousPlaylists from "../../Components/PreviousPlaylists/PreviousPlaylists";
+import RecentPlaylists from "../../Components/RecentPlaylists/RecentPlaylists";
 import LogoutButton from "../../Components/SpotifyLogout/LogoutButton";
 import "./HomePage.css";
 
@@ -82,7 +82,7 @@ function HomePage({ token, setToken }) {
         <div className="header">
           <h2>Recent Promptify Playlists</h2>
         </div>
-        <PreviousPlaylists
+        <RecentPlaylists
           userPlaylists={userPlaylists}
           setRefreshFlag={setRefreshFlag}
         />

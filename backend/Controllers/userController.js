@@ -3,7 +3,6 @@ const prisma = require("../models/prismaClient");
 
 //GET specific user (This will be needed to access information regarding the user's playlists and other information
 
-//Coming back to this
 exports.getPreviousPlaylistsByUser = async (req, res) => {
     const spotifyId = String(req.params.spotifyId);
   
