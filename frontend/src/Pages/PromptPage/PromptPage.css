@@ -184,15 +184,10 @@
 
     padding: 20px;
     margin: 20px auto;
-    max-width: 80vw; /* prevent full edge-to-edge */
+    max-width: 80vw; 
     min-height: 90vh;
     border-radius: 18px;
   }
-
- 
-
- 
-
 
 
   .prompt-layout,
@@ -220,7 +215,7 @@
   .playlist-name,
 .genre-search {
   width: 100%;
-  max-width: 300px;  /* 👈 try 280px–320px range */
+  max-width: 300px;  
   font-size: 0.9rem;
   padding: 6px 12px;
   border-radius: 20px;
