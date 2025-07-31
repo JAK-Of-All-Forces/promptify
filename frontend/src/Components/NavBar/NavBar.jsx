@@ -67,7 +67,7 @@ return (
               </Link>
             </div>
             <div className="dropdown-item">
-              <Link onClick={handleLogout}>
+              <Link to = "/" onClick={handleLogout}>
                 <p>Logout</p>
               </Link>
             </div>
