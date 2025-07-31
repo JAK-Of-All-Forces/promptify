@@ -50,6 +50,7 @@
 
 .video {
     width: 55vw;
+    border-radius: 60px;
 }
 
 .landing-page .info {

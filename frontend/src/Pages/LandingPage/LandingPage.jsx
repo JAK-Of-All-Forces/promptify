@@ -31,21 +31,25 @@ function LandingPage() {
             <div className="info">
               <div className="container-left">
                 <div className="promptify-logo">
-                  <h1 className="promptify-title">PR
-                  <img className="logo-image" src={logo}></img>
-                  MPTIFY</h1>
+                  <h1 className="promptify-title">
+                    PR
+                    <img className="logo-image" src={logo}></img>
+                    MPTIFY
+                  </h1>
                 </div>
                 {/* <p>Please log in with Spotify to get started.</p> */}
-                <video
-                  ref={videoRef}
-                  className="video"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                >
-                  <source src={video}></source>
-                </video>
+                <div className="video-container">
+                  <video
+                    ref={videoRef}
+                    className="video"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  >
+                    <source src={video}></source>
+                  </video>
+                </div>
               </div>
               <div className="container-right">
                 <LoginButton />
