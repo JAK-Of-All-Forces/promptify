@@ -148,9 +148,9 @@ function PromptPage ({token, setToken}) {
       setSelectedActivity("");
       setSelectedGenres([]);
       setSelectedDuration("");
-      setShowActivityInput(false);
-      setShowDurationInput(false);
-      setShowGenreInput(false);
+      // setShowActivityInput(false);
+      // setShowDurationInput(false);
+      // setShowGenreInput(false);
     } else {
       toast.error(
         "Please make sure you have chosen an activity, set the duration, and selected a genre."
@@ -189,6 +189,12 @@ function PromptPage ({token, setToken}) {
         </button>
       ))}
     </div>
+    {selectedActivity && (
+  <div className="user-choice">
+    <p>Your chosen activity is: {selectedActivity}</p>
+  </div>
+)}
+
 
     <h2 className="section-title">Set the Duration:</h2>
     <div className="option-list">
@@ -202,6 +208,10 @@ function PromptPage ({token, setToken}) {
         </button>
       ))}
     </div>
+    {selectedDuration &&( <div className="user-choice">
+        <p>Your chosen duration is: {selectedDuration}</p>
+      </div>
+      )}
 
    <div className="form-row">
   <h2 className="section-title inline">Select Genre(s):</h2>
@@ -227,12 +237,17 @@ function PromptPage ({token, setToken}) {
         </label>
       ))}
     </div>
+    {selectedGenres.length>0 &&(<div className="user-choice">
+        <p>Your chosen genre(s) is/are: {selectedGenres.join(", ")}</p>
+      </div>
+       )}
 
     <div className="generate-button">
       <button onClick={generatePlaylist}>Generate a Playlist!</button>
     </div>
   </div>
 </div>
+   
 
       </div>
     </>
