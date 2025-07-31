@@ -1,7 +1,7 @@
 import NavBar from "../../Components/NavBar/NavBar";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import PreviousPlaylists from "../../Components/PreviousPlaylists/PreviousPlaylists";
+import RecentPlaylists from "../../Components/RecentPlaylists/RecentPlaylists";
 import LogoutButton from "../../Components/SpotifyLogout/LogoutButton";
 import "./HomePage.css";
 
@@ -66,10 +66,7 @@ function HomePage({ token, setToken }) {
   return (
     //Displayling NavBar component
     <div className="home-page">
-      <NavBar token={token}></NavBar>
-      <div style={{ padding: "2rem" }}>
-        <LogoutButton setToken={setToken} />
-      </div>
+      <NavBar token={token} setToken={setToken}></NavBar>
 
       {/* Rest of the home page content below */}
 
@@ -80,12 +77,23 @@ function HomePage({ token, setToken }) {
           </button>
         </Link>
       </div>
-      
+
       <div>
-        <PreviousPlaylists
+        <div className="header">
+          <h2>Recent Promptify Playlists</h2>
+        </div>
+        <RecentPlaylists
           userPlaylists={userPlaylists}
           setRefreshFlag={setRefreshFlag}
         />
+
+        <div className="button-container">
+          <Link to="/all-playlists">
+            <button className="home-page-button">
+              <h2>View All Playlists</h2>
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
