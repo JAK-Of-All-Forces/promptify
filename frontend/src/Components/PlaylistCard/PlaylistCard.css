@@ -46,3 +46,28 @@ img {
     margin-left: auto;
     padding-right: 1rem;
 }
+
+@media (max-width: 780px) {
+  .PlaylistCard {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5em;
+    max-width: 95vw;
+  }
+
+  img {
+    width: 90vw;
+    max-width: 140px;
+    height: auto;
+    max-height: 140px;
+  }
+
+  .info {
+    font-size: 0.95rem;
+    padding: 0.5em 0;
+  }
+
+  .playlist-name {
+    font-size: 1.05rem;
+  }
+}
