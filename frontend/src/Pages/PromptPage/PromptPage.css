@@ -195,3 +195,93 @@
     margin-bottom: 5px;
   }
 }
+
+@media (max-width: 768px) {
+  .prompt-container {
+    padding: 20px;
+    margin: 30px auto;
+  }
+
+  .prompt-layout,
+  .prompt-sidebar {
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+
+  .section-title.inline {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .playlist-name,
+  .genre-search {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .option-list {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .option-list button {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+
+  .user-choice {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+  }
+
+  .generate-button button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .prompt-container {
+    padding: 30px;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .form-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .option-list {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .option-list button {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+
+  .generate-button {
+    justify-content: center;
+  }
+
+  .playlist-name,
+  .genre-search {
+    width: 100%;
+  }
+}
+
