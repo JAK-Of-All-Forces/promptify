@@ -9,6 +9,12 @@
     border-radius: 100px;
     border: 4px black solid;
 } */
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
 .button-container {
   display: flex;
   justify-content: center;
