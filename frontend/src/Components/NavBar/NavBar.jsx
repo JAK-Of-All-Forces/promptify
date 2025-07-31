@@ -23,16 +23,20 @@ function NavBar({token, setToken}){
 return (
   <nav className="nav-bar">
     <div className="left-nav">
-      <Link to={token ? `/home` : `/`}>
+      {/* <Link to={token ? `/home` : `/`}>
         <img className="logo-image" src={logo}></img>
-      </Link>
+      </Link> */}
+      <div className="promptify-logo">
+        <Link to={token ? `/home` : `/`}>
+          <div className="error-message">
+            <h1>PR</h1>
+            <img className="logo-image" src={logo}></img>
+            <h1>MPTIFY</h1>
+          </div>
+        </Link>
+      </div>
     </div>
     {/* Link to homepage on click of the word Promptify*/}
-    <div className="promptify-logo">
-      <Link to={token ? `/home` : `/`}>
-        <h1>PROMPTIFY</h1>
-      </Link>
-    </div>
 
     <div className="right-nav">
       <div className="dropdown">

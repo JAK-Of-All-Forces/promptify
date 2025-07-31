@@ -99,7 +99,7 @@ if (accessToken || spotifyId) {
           }
         />
 
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="/error" element={<ErrorPage />} />
         <Route path="/loading" element={<LoadingPage />} />
       </Routes>
       <ToastContainer />

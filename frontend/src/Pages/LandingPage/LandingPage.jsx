@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import {useEffect, useRef} from "react";
+import logo from "../../assets/favicon.png";
+
 
 import LoginButton from "../../Components/SpotifyLoginOauth/LoginButton";
 import video from "../../assets/search animation.mp4"
@@ -26,9 +28,13 @@ function LandingPage() {
                 </Link>
               </div>
             </nav>
-            <div className = "info">
-              <div className = "container-left">
-                <h1 id="promptify-title">PROMPTIFY</h1>
+            <div className="info">
+              <div className="container-left">
+                <div className="promptify-logo">
+                  <h1 className="promptify-title">PR
+                  <img className="logo-image" src={logo}></img>
+                  MPTIFY</h1>
+                </div>
                 {/* <p>Please log in with Spotify to get started.</p> */}
                 <video
                   ref={videoRef}
@@ -42,7 +48,7 @@ function LandingPage() {
                 </video>
               </div>
               <div className="container-right">
-              <LoginButton />
+                <LoginButton />
               </div>
             </div>
             {/*  */}
