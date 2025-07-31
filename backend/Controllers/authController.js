@@ -19,7 +19,8 @@ exports.getLoginUrl = (req, res) => {
     "user-library-read", 
     "user-top-read", 
     "user-read-recently-played",
-    "user-library-read"
+    "user-library-read", 
+    "user-read-private"
   ].join(" ");
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scope}`;
   res.json({ url: authUrl });

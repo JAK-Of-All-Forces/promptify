@@ -1,63 +1,98 @@
-const {OpenAI} = require("openai");
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const { OpenAI } = require("openai");
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const dotenv = require("dotenv");
-dotenv.config()
+dotenv.config();
 
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const axios = require("axios");
 
-const { topTracks4 } = require("../Controllers/userDataController")
+const { topTracks4, topAlbums4, topArtists4, topGenres4,} = require("../Controllers/userDataController");
 
-// delete when done
-const testingRoutes = async (req, res) => {
+const seedUserMusicHistory = async (userId) => {
   try {
-    const { spotifyId } = req.body;
-    const user = await prisma.user.findUnique({ where: { spotifyId } });
+    const topTracks4Weeks = await topTracks4(userId);
+    const topAlbums4Weeks = await topAlbums4(userId);
+    const topArtist4Weeks = await topArtists4(userId);
+    const topGenres4Weeks = await topGenres4(userId);
 
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+    let trackswithArtist = ""
+    for (let track of topTracks4Weeks){
+      trackswithArtist += `${track.trackName} by ${track.artists}, `
     }
 
-    const userId = user.id;
-    const topTracks4weeks = await topTracks4(userId);
+    let albumswithArtist = ""
+    for (let album of topAlbums4Weeks) {
+      const albumName = album[0];
+      const firstArtist = album[1][0]?.artists || "Unknown Artist"; // get first artist of first track, safely
+      albumswithArtist += `${albumName} by ${firstArtist}, `;
+    }
+    console.log(albumswithArtist);
+    console.log("\n")
 
-    return res.status(200).json({ topTracks4weeks });
+    let seedArtist = ""
+    for (let artist of topArtist4Weeks){
+      seedArtist += `${artist.artistName}, `
+    }
+    console.log(seedArtist)
+    console.log("\n")
 
+    let seedGenres = ""
+    for (let genre of topGenres4Weeks){
+      seedGenres += `${genre[0]}, `
+    }
+    console.log(seedGenres)
+    console.log("\n")
+
+    const seededData = `
+    The user's recent listening history includes these top tracks: ${trackswithArtist}.
+    Top albums: ${albumswithArtist}.
+    Top artists: ${seedArtist}.
+    Top genres: ${seedGenres}.
+
+    Use this information to build a profile of the user's music taste. 
+    For requests involving genres similar to these, prioritize recommendations that fit their current preferences. 
+    For other requests, use this profile to understand their overall style and tailor the playlist accordingly.
+    `
+
+    return seededData;
   } catch (error) {
-    console.error("Error in testingRoutes:", error);
-    return res.status(500).json({ error: "Server error" });
+    console.error("Error in seedUserMusicHistory:", error);
+    throw error;
   }
 };
 
-
-const getAccessToken = async(userId) => {
+const getAccessToken = async (userId) => {
   const response = await prisma.user.findUnique({
     where: { id: userId },
-    select: { accessToken: true }
+    select: { accessToken: true },
   });
 
-  if (response){
-    console.log("we got the accesss token")
-    return response.accessToken
+  if (response) {
+    console.log("we got the accesss token");
+    return response.accessToken;
   } else {
-    return null
+    return null;
   }
-}
+};
 
 async function callOpenAI(prompt) {
   try {
-
     console.log("Inside the OpenAI call");
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
-      {
-        role: "system",
-        content: `You are an AI playlist generator. Your job is to generate a playlist based on the user's activity, genre, duration, and target BPM range. 
+        {
+          role: "system",
+          content: `You are an AI playlist generator. Your job is to generate a playlist based on the user's activity, genre, duration, and target BPM range. 
                   You always respond in clean, valid JSON format only — no explanations or extra text. 
-                  Include a playlist name and a list of tracks. Each track should include a title, artist, and (optional) estimated BPM.
+                  Include a playlist name and a list of tracks. Each track should include a title, artist, and estimated BPM.
+                  Only include songs that are available on Spotify. Do not include made-up or fictional tracks. 
+                  All recommendations must be based on real, verifiable songs that exist in Spotify’s public catalog.
+                  Only recommend real songs that are **definitely available on Spotify** — if you're unsure, do not include them. Avoid fictional, obscure, or AI-invented tracks. 
+
+
                 Example format:
                   {
                     "tracks": [
@@ -65,52 +100,52 @@ async function callOpenAI(prompt) {
                       { "title": "Song B", "artist": "Artist B", "bpm": 90 }
                     ],
                     "duration": 100 minutes
-                  }`
-      },        
-      {  
-        role: "user", 
-        content: prompt 
-      }
+                  }`,
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
       ],
-    })
+    });
 
-    console.log("🧠 Playlist from OpenAI:\n");
     const openAIContent = response.choices[0].message.content;
     const openAIJSON = JSON.parse(openAIContent);
 
-    console.log("THIS IS THE JSON. response.choice[0].message.content has already been done\n", openAIJSON);
+    console.log("🧠 Playlist from OpenAI:\n");
+    console.log(openAIJSON);
     return openAIJSON;
-
   } catch (err) {
-    console.error("Error talking to OpenAI:", err)
+    console.error("Error talking to OpenAI:", err);
     throw err;
   }
 }
 
 async function getSpotifyId(name, artist, userId) {
   try {
-    console.log("Searching for the track ID with this name and artist on Spotify");
+    console.log(
+      "Searching for the track ID with this name and artist on Spotify"
+    );
     console.log("This is the name: " + name);
     console.log("This is the artist: " + artist);
     const spotifyToken = await getAccessToken(userId);
-    if (spotifyToken){
+    if (spotifyToken) {
       console.log(`Looking up Spotify ID for ${name} by ${artist}`);
     } else {
-      console.log("there is no valid token")
+      console.log("there is no valid token");
     }
 
     const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + spotifyToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + spotifyToken,
     };
-    
     artist = artist.split(/ft\.|feat\.|featuring/i)[0].trim();
     const query = `track:"${name}" artist:"${artist}"`;
     const encodedQuery = encodeURIComponent(query);
 
     const response = await axios.get(
       `https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=1`,
-      {headers}
+      { headers }
     );
 
     // console.log("we have searched the spotify api, this is what we got: ")
@@ -119,7 +154,7 @@ async function getSpotifyId(name, artist, userId) {
 
     const items = response.data.tracks.items;
     if (items && items.length > 0) {
-      console.log("the spotify id was found! returning it now")
+      console.log("the spotify id was found! returning it now");
       return items[0].id; // Spotify ID
     } else {
       console.log("The Spotify ID for this track was not found in Spotify.");
@@ -141,10 +176,14 @@ async function createTracks(tracks, userId) {
     const prismaTracks = await Promise.all(
       tracks.map(async (track) => {
         const spotifyID = await getSpotifyId(track.name, track.artist, userId);
-        console.log(`Track: ${track.name}, Artist: ${track.artist}, Spotify ID: ${spotifyID}`);
+        console.log(
+          `Track: ${track.name}, Artist: ${track.artist}, Spotify ID: ${spotifyID}`
+        );
 
         if (!spotifyID) {
-          console.warn(`Skipping track: ${track.name} by ${track.artist} — No Spotify ID found`);
+          console.warn(
+            `Skipping track: ${track.name} by ${track.artist} — No Spotify ID found`
+          );
           return null;
         }
 
@@ -163,9 +202,9 @@ async function createTracks(tracks, userId) {
           },
         });
 
-          console.log("leaving create tracks!")
-          return existingTrack;
-        })
+        console.log("leaving create tracks!");
+        return existingTrack;
+      })
     );
     // Remove any nulls from skipped tracks
     return prismaTracks.filter(Boolean);
@@ -186,8 +225,8 @@ async function getTrackImageURL(userId, spotifyId) {
     }
 
     const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + spotifyToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + spotifyToken,
     };
 
     const response = await axios.get(
@@ -210,13 +249,16 @@ async function getTrackImageURL(userId, spotifyId) {
       return null;
     }
   } catch (error) {
-    console.error("error fetching track image URL from Spotify:", error.response?.data || error.message);
+    console.error(
+      "error fetching track image URL from Spotify:",
+      error.response?.data || error.message
+    );
     return null;
   }
 }
 
 async function getTrackDuration(userId, spotifyId) {
-try {
+  try {
     console.log("Inside getTrackDuration");
 
     const spotifyToken = await getAccessToken(userId);
@@ -226,8 +268,8 @@ try {
     }
 
     const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + spotifyToken
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + spotifyToken,
     };
 
     const response = await axios.get(
@@ -235,15 +277,15 @@ try {
       { headers }
     );
 
-    if (response && response.data && response.data.duration_ms){
+    if (response && response.data && response.data.duration_ms) {
       const durationMs = response.data.duration_ms;
       console.log(`fetched duration in ms: ${durationMs}`);
 
       // regular duration as string
-      let minutes = Number(((durationMs / 1000) / 60).toFixed(0));
+      let minutes = Number((durationMs / 1000 / 60).toFixed(0));
       let seconds = Number(((durationMs / 1000) % 60).toFixed(0));
       let regularDuration = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-      console.log(`calculated duration is: ${regularDuration} `)
+      console.log(`calculated duration is: ${regularDuration} `);
 
       return regularDuration;
     } else {
@@ -251,34 +293,38 @@ try {
       return null;
     }
   } catch (error) {
-    console.error("error fetching track image URL from Spotify:", error.response?.data || error.message);
+    console.error(
+      "error fetching track image URL from Spotify:",
+      error.response?.data || error.message
+    );
     return null;
   }
-
-
 }
 
 // this is for the route : router.post("/", generatePlaylistController.createPrompt)
 const createPrompt = async (req, res) => {
   console.log("Saving the created prompt to database.");
-  
+
   // these are the things we need to get the playlist
   console.log(req.body);
   const { name, activity, genres, duration, spotifyId } = req.body;
-  if (!name || !activity || !genres || !duration || !spotifyId ){
-    return res
-    .status(400)
-    .json({ error: "The name, activity, genres, duration, and SpotifyId fields are required" });
+  if (!name || !activity || !genres || !duration || !spotifyId) {
+    return res.status(400).json({
+      error:
+        "The name, activity, genres, duration, and SpotifyId fields are required",
+    });
   }
 
   // get spotifyID
   const user = await prisma.user.findUnique({
-    where: { spotifyId }
+    where: { spotifyId },
   });
   const userId = user.id;
+  
+  const extraData = await seedUserMusicHistory(userId);
+  let userContentPrompt = extraData;
 
-  let userContentPrompt = 
-  `Create a playlist for the activity: ${activity}. 
+  userContentPrompt += `Create a playlist for the activity: ${activity}. 
   Use the following genres: ${genres.join(", ")}. 
   The playlist should match the mood and energy of the activity.
   The name of the playlist is ${name}.
@@ -315,14 +361,15 @@ const createPrompt = async (req, res) => {
   const openAIResponse = await callOpenAI(userContentPrompt);
   console.log("done talking to OpenAIAPI ");
 
-  console.log("trying to get the spotify ids and make the tracks for the database, entering the createTracks function");
+  console.log(
+    "trying to get the spotify ids and make the tracks for the database, entering the createTracks function"
+  );
 
-  console.log("here are the songTracks:")
+  console.log("here are the songTracks:");
   const songTracks = await createTracks(openAIResponse.tracks, userId);
-  console.log("made it back to createPrompt from createTracks")
-  console.log("these are the songtracks")
-  console.log(songTracks)
-
+  console.log("made it back to createPrompt from createTracks");
+  console.log("these are the songtracks");
+  console.log(songTracks);
 
   let playlistImageUrl;
   console.log("setting playlist image url");
@@ -341,19 +388,23 @@ const createPrompt = async (req, res) => {
         genres,
         duration,
         user: {
-          connect: { id: userId }
+          connect: { id: userId },
         },
-        image_url : playlistImageUrl
-      }
+        image_url: playlistImageUrl,
+      },
     });
 
-    console.log("Playlist data created successfully, but there are no tracks yet");
+    console.log(
+      "Playlist data created successfully, but there are no tracks yet"
+    );
 
     // Create relations between tracks and the playlist
     await Promise.all(
       songTracks.map(async (track) => {
         if (!track.id) {
-          console.warn(`Skipping track with missing id: ${JSON.stringify(track)}`);
+          console.warn(
+            `Skipping track with missing id: ${JSON.stringify(track)}`
+          );
           return null; // Skip this track to avoid error
         }
         return prisma.tracksOnPlaylists.create({
@@ -367,19 +418,14 @@ const createPrompt = async (req, res) => {
     console.log("Relation between track and playlist has been made");
 
     res.json(playlistInfo);
-
   } catch (error) {
     console.error("Error creating playlist or relations:", error);
     res.status(500).json({ error: error.message });
   }
 
   console.log("all done!");
-
-}
-
-
+};
 
 module.exports = {
   createPrompt,
-  testingRoutes
 };
