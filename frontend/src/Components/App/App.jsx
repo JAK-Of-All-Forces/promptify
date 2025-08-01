@@ -9,15 +9,16 @@ import AllPlaylistPage from '../../Pages/AllPlaylistsPage/AllPlaylistsPage.jsx';
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import StatsPage from '../../Pages/StatsPage/StatsPage';
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
       const [token, setToken] = useState(undefined); 
-      const [showModal,setShowModal] = useState(false); 
-      const [selectedPerson, setSelectedPerson] = useState(null); 
+      // const [showModal,setShowModal] = useState(false); 
+      // const [selectedPerson, setSelectedPerson] = useState(null); 
 
     useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -95,6 +96,15 @@ if (accessToken || spotifyId) {
           element={
             <ProtectedRoute token={token}>
               <AllPlaylistPage token={token} setToken={setToken} />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/stats"
+          element={
+            <ProtectedRoute token={token}>
+              <StatsPage token={token} setToken={setToken} />
             </ProtectedRoute>
           }
         />

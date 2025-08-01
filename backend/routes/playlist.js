@@ -8,10 +8,6 @@ router.post("/createPrompt", generatePlaylistController.createPrompt);
 router.get("/getGenres", genresController.getGenres);
 
 
-
-
-
-
 //GET all playlists
 router.get("/", controller.getAll);
 

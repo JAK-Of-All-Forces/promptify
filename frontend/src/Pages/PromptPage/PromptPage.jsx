@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PromptPage.css";
 import { toast } from "react-toastify";
-import Lottie from "lottie-react";
-import animationData from '../../assets/Playing Vinyl Disc.json';
 
 
 

@@ -16,6 +16,49 @@ const getAccessToken = async (userId) => {
   }
 };
 
+async function getTrackImageURL(userId, spotifyId) {
+  try {
+    console.log("Inside getTrackImageURL");
+
+    const spotifyToken = await getAccessToken(userId);
+    if (!spotifyToken) {
+      console.log("no valid access token found");
+      return null;
+    }
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + spotifyToken,
+    };
+
+    const response = await axios.get(
+      `https://api.spotify.com/v1/tracks/${spotifyId}`,
+      { headers }
+    );
+
+    if (
+      response &&
+      response.data &&
+      response.data.album &&
+      Array.isArray(response.data.album.images) &&
+      response.data.album.images.length > 0
+    ) {
+      const imageUrl = response.data.album.images[0].url;
+      console.log(`fetched track image URL: ${imageUrl}`);
+      return imageUrl;
+    } else {
+      console.log("no album images found for this track");
+      return null;
+    }
+  } catch (error) {
+    console.error(
+      "error fetching track image URL from Spotify:",
+      error.response?.data || error.message
+    );
+    return null;
+  }
+}
+
 // get top tracks (4 weeks), limit = 30 - return the album, artists, spotify id, track name
 const topTracks4 = async (userId) => {
   try {
@@ -54,12 +97,14 @@ const topTracks4 = async (userId) => {
       const trackName = currTrack.name;
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
+      const image = await getTrackImageURL(userId, spotifyId);
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
         trackName,
         spotifyId,
         albumName,
+        image,
         artists,
       });
     }
@@ -112,18 +157,17 @@ const topTracks6 = async (userId) => {
       const trackName = currTrack.name;
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
+    const image = await getTrackImageURL(userId, spotifyId);  
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
         trackName,
         spotifyId,
         albumName,
+        image,
         artists,
       });
-      payloadTrackInfo.push({
-        trackName,
-        artists,
-      });
+
     }
     console.log(simplifiedTracks);
   } catch (error) {
@@ -172,18 +216,17 @@ const topTracks1 = async (userId) => {
       const trackName = currTrack.name;
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
+        const image = await getTrackImageURL(userId, spotifyId);
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
         trackName,
         spotifyId,
         albumName,
+        image, 
         artists,
       });
-      payloadTrackInfo.push({
-        trackName,
-        artists,
-      });
+
     }
     console.log(simplifiedTracks);
   } catch (error) {
@@ -204,6 +247,8 @@ const topAlbums4 = async (userId) => {
     // loop through track data, create a map. place the album name with corresponding tracks
     const albumMap = {};
     for (let track of shortTermTrackData) {
+        console.log("SCEEBADKJBFM JLKBALSGE");
+        console.log(track.image)
         if (!albumMap[track.albumName]) {
             albumMap[track.albumName] = [];
         }
@@ -211,14 +256,19 @@ const topAlbums4 = async (userId) => {
         albumMap[track.albumName].push({
             trackName: track.trackName,
             artists: track.artists, // adjust based on how artist info is stored (string or array)
+            image: track.image
         });
+
     }
 
     const topAlbums = Object.entries(albumMap)
       .sort((a, b) => b[1].length - a[1].length)
       .slice(0, 10);
 
-    console.log(topAlbums);
+
+
+    console.log("THIS IS TOP ALBUMS USERDATA CONTROLLER")
+    // console.log(topAlbums[0].image);
 
     return topAlbums;
   } catch (error) {
@@ -246,6 +296,7 @@ const topAlbums6 = async (userId) => {
         albumMap[track.albumName].push({
             trackName: track.trackName,
             artists: track.artists, // adjust based on how artist info is stored (string or array)
+            image: track.image
         });
     }
 
@@ -268,7 +319,7 @@ const topAlbums6 = async (userId) => {
 const topAlbums1 = async (userId) => {
   try {
     console.log("grabbing the top albums for this user...");
-    const longTermTrackData = await topTracks6(userId);
+    const longTermTrackData = await topTracks1(userId);
     console.log(longTermTrackData);
 
     // loop through track data, create a map. place the album name with corresponding tracks
@@ -281,6 +332,7 @@ const topAlbums1 = async (userId) => {
         albumMap[track.albumName].push({
             trackName: track.trackName,
             artists: track.artists, // adjust based on how artist info is stored (string or array)
+            image: track.image
         });
     }
 
@@ -337,11 +389,13 @@ const topArtists4 = async (userId) => {
       const spotifyId = currArtist.id;
       const artistName = currArtist.name;
       const genres = currArtist.genres;
+      const images = currArtist.images[0].url;
 
       simplifiedArtists.push({
         spotifyId,
         artistName,
         genres,
+        images
       });
     }
 
@@ -387,17 +441,19 @@ const topArtists6 = async (userId) => {
     const simplifiedArtists = [];
 
     for (let i = 0; i < topArtists.length; i++) {
-      const currArtist = topArtists[i];
+        const currArtist = topArtists[i];
 
-      const spotifyId = currArtist.id;
-      const artistName = currArtist.name;
-      const genres = currArtist.genres;
+        const spotifyId = currArtist.id;
+        const artistName = currArtist.name;
+        const genres = currArtist.genres;
+        const images = currArtist.images;       
 
-      simplifiedArtists.push({
-        spotifyId,
-        artistName,
-        genres,
-      });
+        simplifiedArtists.push({
+            spotifyId,
+            artistName,
+            genres,
+            images
+        });
     }
 
     return simplifiedArtists;
@@ -447,11 +503,13 @@ const topArtists1 = async (userId) => {
       const spotifyId = currArtist.id;
       const artistName = currArtist.name;
       const genres = currArtist.genres;
+        const images = currArtist.images;
 
       simplifiedArtists.push({
         spotifyId,
         artistName,
         genres,
+        images
       });
     }
 
@@ -562,7 +620,6 @@ const topGenres1 = async (userId) => {
     );
   }
 };
-
 
 
 module.exports = {
