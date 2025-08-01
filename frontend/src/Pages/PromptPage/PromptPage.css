@@ -58,6 +58,7 @@
 }
 
 
+
 /* ---------- Form Row: Label + Input (Inline) ---------- */
 .form-row {
   display: flex;
@@ -70,7 +71,7 @@
 
 /* ---------- Playlist Name Input ---------- */
 .prompt-container .playlist-name,
-.genre-search {
+.genre-search, .activity-search-input {
   flex: 1;
   min-width: 200px;
   padding: 10px 15px;
@@ -118,6 +119,63 @@
 .option-list button.selected {
   background-color: #7e5dcf;
   border-color: #ffccff;
+}
+
+.loadmore-btn {
+  display: inline-block;
+  min-width: 90px;
+  max-width: 140px;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  border-radius: 18px;
+  border: 2px solid #ffb347;           /* Distinct border color */
+  background: linear-gradient(180deg, #ffe29f 0%, #ffb347 100%);
+  color: #4b2991;
+  font-weight: bold;
+  font-style: italic;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #e6a03a, 0 2px 8px rgba(0,0,0,0.12); /* 3D look */
+  transition: 
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
+  margin: 10px auto 0 auto;
+  text-align: center;
+}
+
+.loadmore-btn:hover {
+  background: linear-gradient(180deg, #ffb347 0%, #ffe29f 100%);
+  box-shadow: 0 2px 0 #e6a03a, 0 1px 4px rgba(0,0,0,0.18);
+  transform: translateY(2px);
+}
+
+/* 3D look for all main buttons */
+.option-list button,
+.generate-button button,
+.loadmore-btn {
+  box-shadow: 0 4px 0 #a97ff0, 0 2px 8px rgba(0,0,0,0.12); /* 3D shadow */
+  transition: 
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
+  position: relative;
+}
+
+/* Pressed effect on click */
+.option-list button:active,
+.generate-button button:active,
+.loadmore-btn:active {
+  box-shadow: 0 2px 0 #a97ff0, 0 1px 4px rgba(0,0,0,0.18);
+  transform: translateY(2px);
+}
+
+/* Optional: Enhance hover for desktop */
+.option-list button:hover,
+.generate-button button:hover,
+.loadmore-btn:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 2px 0 #a97ff0, 0 1px 4px rgba(0,0,0,0.18);
+  transform: translateY(1px);
 }
 
 /* ---------- Genres Checkboxes ---------- */

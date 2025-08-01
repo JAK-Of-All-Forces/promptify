@@ -65,6 +65,7 @@ exports.handleCallback = async (req, res) => {
         refreshToken: refresh_token,
         displayName: userProfile.display_name,
         email: userProfile.email,
+        image: userProfile.images[0]?.url
       },
       create: {
         spotifyId: userProfile.id,
@@ -72,6 +73,7 @@ exports.handleCallback = async (req, res) => {
         refreshToken: refresh_token,
         displayName: userProfile.display_name,
         email: userProfile.email,
+        image: userProfile.images[0]?.url
       },
     });
 

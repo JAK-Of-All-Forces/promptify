@@ -28,9 +28,9 @@ return (
       </Link> */}
       <div className="promptify-logo">
         <Link to={token ? `/home` : `/`}>
-          <div className="error-message">
+          <div className="nav-logo">
             <h1>PR</h1>
-            <img className="logo-image" src={logo}></img>
+            <img className="nav-logo-image" src={logo}></img>
             <h1>MPTIFY</h1>
           </div>
         </Link>
@@ -65,7 +65,7 @@ return (
               </Link>
             </div>
             <div className="dropdown-item">
-              <Link onClick={handleLogout}>
+              <Link to = "/" onClick={handleLogout}>
                 <p>Logout</p>
               </Link>
             </div>

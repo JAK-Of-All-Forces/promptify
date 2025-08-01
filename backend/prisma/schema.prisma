@@ -23,6 +23,7 @@ model User {
   accessToken   String
   refreshToken  String 
   createdAt     DateTime    @default(now())
+  image         String?
 }
 
 model Playlist {

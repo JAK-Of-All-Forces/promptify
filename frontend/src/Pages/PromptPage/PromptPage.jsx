@@ -19,6 +19,8 @@ function PromptPage ({token, setToken}) {
   const [genres, setGenres] = useState([]);
   const [genreSearchTerm, setGenreSearchTerm] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
+  const [visibleActivities, setVisibleActivities] = useState(8);
+  const [activitySearchTerm, setActivitySearchTerm] = useState("");
   
 
   useEffect(() => {
@@ -53,11 +55,11 @@ function PromptPage ({token, setToken}) {
     setSelectedActivity([activity]);
   }
 
-  
-
-
-
-
+  const filteredActivities = activitySearchTerm.length > 0
+  ? activitiesData.filter((activity) =>
+      activity.label.toLowerCase().includes(activitySearchTerm.toLowerCase())
+    )
+  : activitiesData.slice(0, visibleActivities);  
 
 
 
@@ -183,20 +185,33 @@ function PromptPage ({token, setToken}) {
   />
 </div>
 
-
+<div className = "form-row">
     <h2 className="section-title">Choose an Activity:</h2>
-    <div className="option-list">
-      {activitiesData.slice(0,20).map((activity) => (
-        <button
-  key={activity.id}
-  className={`activity-option ${selectedActivity.includes(activity.label) ? "selected" : ""}`}
-  onClick={() => handleActivityButtonClick(activity.label)}
->
-  {activity.label}
-</button>
 
+      <input
+        type="text"
+        className="activity-search-input"
+        placeholder="Search activities here..."
+        value={activitySearchTerm}
+        onChange={(e) => setActivitySearchTerm(e.target.value)}
+      />
+    </div>
+    <div className="option-list">
+      {filteredActivities.map((activity) => (
+        <button
+          key={activity.id}
+          className={`activity-option ${selectedActivity.includes(activity.label) ? "selected" : ""}`}
+          onClick={() => handleActivityButtonClick(activity.label)}
+        >
+          {activity.label}
+        </button>
       ))}
     </div>
+    {visibleActivities < activitiesData.length && (
+      <button className="loadmore-btn" onClick={() => setVisibleActivities(visibleActivities + 8)}>
+        Load More
+      </button>
+    )}
     {selectedActivity && (
   <div className="user-choice">
     <p>Your chosen activity is: {selectedActivity}</p>
