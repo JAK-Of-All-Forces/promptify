@@ -6,35 +6,45 @@ img {
 .PlaylistCard {
     display: flex;
     justify-content: center;
-    padding: 1em;
-    border-radius: 10px;
-
+    padding-bottom: 1em;
+    border-radius: 20px;
 
 }
 
 .PlaylistCard:hover {
-    background-color: rgba(255, 255, 255, 0.586);    color: black;
-    transition: background-color 0.3s ease-in, color 0.2s ease;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    transition: background-color 0.3s ease-in;
 }
-.PlaylistCard:hover .playlist-info {
-    color: black;
-    background-color: rgba(255, 255, 255, 0.148);
-}
+
 
 .PlaylistCard .info {
     display: flex;
     flex-direction: column;
+    background-color: transparent;
+}
+
+.PlaylistCard .info:hover {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
 }
 
 .PlaylistCard .playlist-name {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    padding-left: 0.4em;
+    padding-left: 0.5em;
 
 }
 .playlist-creation{
     margin: 0;
-    padding-left: 0.4em;
+    padding-left: 0.5em;
 
 }
 
