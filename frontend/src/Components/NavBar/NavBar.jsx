@@ -40,17 +40,15 @@ return (
 
     <div className="right-nav">
       <div className="dropdown">
-        <div className="hamburger-icon" onClick={toggleDropdown}>
-          <div className={`icon ${activeMenu ? "fade-out" : "fade-in"}`}>
-            <GiHamburgerMenu />
+        {!activeMenu && (
+          <div className="hamburger-icon" onClick={toggleDropdown}>
+            <GiHamburgerMenu className="icon fade-in" />
           </div>
-          <div className={`icon ${activeMenu ? "fade-in" : "fade-out"}`}>
-            <AiOutlineClose />
-          </div>
-        </div>
+        )}
 
         {activeMenu && (
           <div className="dropdown-content">
+            <span className="close-icon" onClick={toggleDropdown}>×</span>
             <div className="dropdown-item">
               <Link to="/about">
                 <p>About</p>
