@@ -139,6 +139,7 @@ function PromptPage ({token, setToken}) {
         return result;
       } catch (error) {
         console.error("Failed to create playlist prompt:", error);
+        navigate("/error"); //Leading the user to the error page, when there's something wrong when creating a playlist
       }
 
       // resetting the page inputs
