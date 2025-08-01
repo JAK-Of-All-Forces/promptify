@@ -25,7 +25,7 @@ function DeleteTrackModal({ selectedTrack, setRefreshFlag, onClose }) {
         className="delete-modal-content"
         onClick={(e) => {
             e.stopPropagation();
-          e.preventDefault();
+            e.preventDefault();
         }}
       >
         <div className="delete-modal-body">

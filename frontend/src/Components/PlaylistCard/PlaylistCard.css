@@ -16,13 +16,14 @@ img {
     justify-content: center;
     padding: 1em;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: #cecece;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
     transition: background-color 0.3s ease-in;
 }
 
+.PlaylistCard:hover .playlist-info {
+    color: black;
+}
 
 .PlaylistCard .info {
     display: flex;
