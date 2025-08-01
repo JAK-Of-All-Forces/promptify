@@ -1,6 +1,86 @@
-.error-message {
-    display: flex;
-    flex-direction: row;
+.error-page {
+    width: 100vw;
     justify-content: center;
     align-items: center;
 }
+.error-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+.error-page .error-title {
+    font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+    font-weight: 375;
+    font-size: 12vw;
+    height: auto;
+    margin: 0;
+    display: flex;
+    align-items: center
+
+}
+
+
+.error-page .logo-image {
+    height: .85em;
+    width: auto;
+    animation: spin 15s linear infinite;
+    position: relative;
+    margin: 0;
+    
+}
+
+.error-page .error-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    justify-content: center;
+    margin: 0;
+    position: relati
+}
+
+.error-page p {
+    font-weight: bold;
+    align-items: center;
+    font-size: 2vw;
+
+}
+
+/* CSS for homepage button*/
+.error-page-button {
+    background-color: #20D65F;
+    /* border: 3px solid black; */
+    border-radius: 50px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    margin: 2em;
+  }
+  
+  .error-page-button h2 {
+    margin: 0;
+  
+  }
+  .error-page-button:hover {
+    background-color: #107434;
+  }
+  .error-page-button:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }

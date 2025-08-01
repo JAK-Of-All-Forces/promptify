@@ -28,9 +28,9 @@ return (
       </Link> */}
       <div className="promptify-logo">
         <Link to={token ? `/home` : `/`}>
-          <div className="error-message">
+          <div className="nav-logo">
             <h1>PR</h1>
-            <img className="logo-image" src={logo}></img>
+            <img className="nav-logo-image" src={logo}></img>
             <h1>MPTIFY</h1>
           </div>
         </Link>
@@ -40,17 +40,15 @@ return (
 
     <div className="right-nav">
       <div className="dropdown">
-        <div className="hamburger-icon" onClick={toggleDropdown}>
-          <div className={`icon ${activeMenu ? "fade-out" : "fade-in"}`}>
-            <GiHamburgerMenu />
+        {!activeMenu && (
+          <div className="hamburger-icon" onClick={toggleDropdown}>
+            <GiHamburgerMenu className="icon fade-in" />
           </div>
-          <div className={`icon ${activeMenu ? "fade-in" : "fade-out"}`}>
-            <AiOutlineClose />
-          </div>
-        </div>
+        )}
 
         {activeMenu && (
           <div className="dropdown-content">
+            <span className="close-icon" onClick={toggleDropdown}>×</span>
             <div className="dropdown-item">
               <Link to="/about">
                 <p>About</p>
@@ -62,12 +60,12 @@ return (
               </Link>
             </div>
             <div className="dropdown-item">
-              <Link to="/about">
+              <Link to="/stats">
                 <p>Stats Page</p>
               </Link>
             </div>
             <div className="dropdown-item">
-              <Link onClick={handleLogout}>
+              <Link to = "/" onClick={handleLogout}>
                 <p>Logout</p>
               </Link>
             </div>

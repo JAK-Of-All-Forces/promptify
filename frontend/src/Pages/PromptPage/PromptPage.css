@@ -37,7 +37,7 @@
 
 .section-title.inline {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* Match .section-title */
   white-space: nowrap;
   color: #ffffff;
   font-weight: bold;
@@ -58,6 +58,7 @@
 }
 
 
+
 /* ---------- Form Row: Label + Input (Inline) ---------- */
 .form-row {
   display: flex;
@@ -70,7 +71,7 @@
 
 /* ---------- Playlist Name Input ---------- */
 .prompt-container .playlist-name,
-.genre-search {
+.genre-search, .activity-search-input {
   flex: 1;
   min-width: 200px;
   padding: 10px 15px;
@@ -118,6 +119,62 @@
 .option-list button.selected {
   background-color: #7e5dcf;
   border-color: #ffccff;
+}
+
+.loadmore-btn {
+  display: inline-block;
+  min-width: 90px;
+  max-width: 140px;
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  border-radius: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: rgb(32, 214, 95);
+  border: 2px solid rgb(161, 218, 181);
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
+  margin: 10px auto 0 auto;
+  text-align: center;
+}
+
+.loadmore-btn:hover {
+  /* background: linear-gradient(180deg, #ffb347 0%, #ffe29f 100%);
+  box-shadow: 0 2px 0 #e6a03a, 0 1px 4px rgba(0,0,0,0.18); */
+  transform: translateY(2px);
+}
+
+/* 3D look for all main buttons */
+.option-list button,
+.generate-button button,
+.loadmore-btn {
+  transition: 
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.1s;
+  position: relative;
+}
+
+/* Pressed effect on click */
+.option-list button:active,
+.generate-button button:active,
+.loadmore-btn:active {
+  transform: translateY(2px);
+}
+
+/* Optional: Enhance hover for desktop */
+.option-list button:hover,
+.generate-button button:hover,
+.loadmore-btn:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 2px 0 #a97ff0, 0 1px 4px rgba(0,0,0,0.18);
+  transform: translateY(1px);
 }
 
 /* ---------- Genres Checkboxes ---------- */
@@ -173,25 +230,206 @@
 }
 
 /* ---------- Media Queries ---------- */
-@media (max-width: 768px) {
+
+/* Phones (max-width: 600px) */
+@media (max-width: 600px) {
   .prompt-container {
+    overflow-x: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+     width: 92%;
+
     padding: 20px;
+    margin: 20px auto;
+    max-width: 80vw; 
+    min-height: 90vh;
+    border-radius: 18px;
+  }
+
+
+  .prompt-layout,
+  .prompt-sidebar {
+    gap: 14px;
   }
 
   .section-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
   }
 
-  .option-list button {
-    font-size: 0.9rem;
+  .section-title.inline {
+    font-size: 1rem;
+    white-space: normal;
   }
 
   .form-row {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .playlist-name,
+.genre-search {
+  width: 100%;
+  max-width: 300px;  
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+
+  .option-list {
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .option-list button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .user-choice {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+
+  .generate-button {
+    margin-top: 16px;
+  }
+
+  .generate-button button {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+  }
+
+  .all-genres label {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+  }
+
+  .all-genres input[type="checkbox"] {
+    transform: scale(1);
+  }
+}
+
+
+
+/* Tablets (601px - 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .prompt-container {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 95vw;
+  }
+
+  .prompt-layout,
+  .prompt-sidebar {
+    gap: 18px;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
   }
 
   .section-title.inline {
-    margin-bottom: 5px;
+    font-size: 1.1rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .playlist-name,
+  .genre-search {
+    width: 100%;
+    min-width: 0;
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+
+  .option-list {
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .option-list button {
+    padding: 9px 16px;
+    font-size: 1rem;
+  }
+
+  .user-choice {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .generate-button button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
   }
 }
+
+/* Laptops (901px - 1200px) */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .prompt-container {
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 1100px;
+  }
+
+  .prompt-layout,
+  .prompt-sidebar {
+    gap: 24px;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .section-title.inline {
+    font-size: 1.15rem;
+  }
+
+  .form-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .playlist-name,
+  .genre-search {
+    width: 100%;
+    min-width: 200px;
+    font-size: 1.05rem;
+    padding: 12px 15px;
+  }
+
+  .option-list {
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .option-list button {
+    padding: 10px 18px;
+    font-size: 1.05rem;
+  }
+
+  .user-choice {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+
+  .generate-button button {
+    width: auto;
+    padding: 16px 32px;
+    font-size: 1.15rem;
+  }
+}
+
+

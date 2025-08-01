@@ -1,0 +1,96 @@
+.delete-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.delete-modal-content {
+  background-color: rgb(255, 255, 255);
+  width: 90%;
+  max-width: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: black;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.delete-modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0px 15px 0px;
+  position: relative;
+  z-index: 2;
+}
+
+
+.delete-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.delete-content h2 {
+  display: flex;
+  justify-content: center;
+  margin-bottom : 1.5px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+}
+
+.delete-modal .playlist-name {
+  font-weight: bold;
+}
+
+.cancel-button{
+  background: transparent;
+  color: black;
+  border: black solid 1.5px;
+}
+button {
+  background-color: #20D65F;
+    /* border: 3px solid black; */
+    border-radius: 50px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: .2s;
+    transition-property: background-color,border-color,color,fill,stroke;
+    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+    margin: 0em 1em 0em 1em;
+  }
+ button:hover {
+      background-color: #107434;
+  }
+button:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
