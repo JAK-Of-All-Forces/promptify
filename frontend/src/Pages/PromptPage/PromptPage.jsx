@@ -5,6 +5,7 @@ import "./PromptPage.css";
 import { toast } from "react-toastify";
 import Lottie from "lottie-react";
 import animationData from '../../assets/Playing Vinyl Disc.json';
+import activitiesData from "../../data/activitiesData";
 
 
 
@@ -45,14 +46,17 @@ function PromptPage ({token, setToken}) {
     setInputPlaylistName(event.target.value);
   };
 
-  // activity button logic
-  const activities = [
-    "Studying", "Commuting", "Hiking", "Yoga", "Gym", "Sleep", "Working", "Cooking", "Cleaning", "Relaxing", "Running", "Driving",
-    "Meditiation", "Partying", "Reading", "Shopping", "Walking", "Gaming"
-  ]; 
+ //activity button logic
+
+
   const handleActivityButtonClick = (activity) => {
     setSelectedActivity([activity]);
   }
+
+
+
+
+
 
 
   // duration button logic
@@ -179,14 +183,15 @@ function PromptPage ({token, setToken}) {
 
     <h2 className="section-title">Choose an Activity:</h2>
     <div className="option-list">
-      {activities.map((activity) => (
+      {activitiesData.map((activity) => (
         <button
-          key={activity}
-          className={`activity-option ${selectedActivity.includes(activity) ? "selected" : ""}`}
-          onClick={() => handleActivityButtonClick(activity)}
-        >
-          {activity}
-        </button>
+  key={activity.id}
+  className={`activity-option ${selectedActivity.includes(activity.label) ? "selected" : ""}`}
+  onClick={() => handleActivityButtonClick(activity.label)}
+>
+  {activity.label}
+</button>
+
       ))}
     </div>
     {selectedActivity && (
