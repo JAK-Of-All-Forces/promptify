@@ -21,7 +21,7 @@ const ArtistStats = () => {
   useEffect(() => {
     if (!spotifyId) return;
 
-    async function fetchAllTracks() {
+    async function fetchAllArtists() {
         try {
             const urls = [
             `${API_BASE_URL}/user/top-artists/4w?spotifyId=${spotifyId}`,
@@ -53,15 +53,15 @@ const ArtistStats = () => {
         await delay(90); // let state update settle before hiding loader
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching tracks:", err);
-        if (err.message.includes("Failed to fetch") || err.message.includes("NetworkError") || err.message.includes("ECONNREFUSED")) {
+        console.error("Error fetching artists:", err);
+        if (err.message.includes("Failed to fetch artists") || err.message.includes("NetworkError") || err.message.includes("ECONNREFUSED")) {
             setConnectionError(true);
         }
         setLoading(false);
 
       }
     }
-    fetchAllTracks();
+    fetchAllArtists();
   }, [spotifyId]);
   
     const handleTimeRangeClick = (range) => {
@@ -83,7 +83,7 @@ const ArtistStats = () => {
     }
 
     return (
-        <div className="track-stats">
+        <div className="artist-stats">
 
             <div className="button-options">
                 <button disabled={loading} onClick={() => handleTimeRangeClick("4w")}>4 WEEKS</button>

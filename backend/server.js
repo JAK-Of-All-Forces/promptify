@@ -32,6 +32,8 @@ const PORT = process.env.PORT
 
 // const authRoutes = require("./routes/authRoutes");
 // app.use("/api/auth", authRoutes);
+app.use('/assets', express.static('public/assets'));  // serve static assets
+
 app.use("/api/tracks/" ,trackRoutes);
 app.use('/user', userRoutes);
 app.use('/playlist', playlistRoutes);

@@ -21,7 +21,7 @@ const AlbumStats = () => {
   useEffect(() => {
     if (!spotifyId) return;
 
-    async function fetchAllTracks() {
+    async function fetchAllAlbums() {
         try {
             const urls = [
             `${API_BASE_URL}/user/top-albums/4w?spotifyId=${spotifyId}`,
@@ -53,8 +53,8 @@ const AlbumStats = () => {
         await delay(90); // let state update settle before hiding loader
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching tracks:", err);
-          console.error("Error fetching tracks:", err);
+        console.error("Error fetching albums:", err);
+          console.error("Error fetching albums:", err);
 
         if (err.message.includes("Failed to fetch") || err.message.includes("NetworkError") || err.message.includes("ECONNREFUSED")) {
             setConnectionError(true);
@@ -64,7 +64,7 @@ const AlbumStats = () => {
 
       }
     }
-    fetchAllTracks();
+    fetchAllAlbums();
   }, [spotifyId]);
   
     const handleTimeRangeClick = (range) => {
@@ -86,7 +86,7 @@ const AlbumStats = () => {
     }
 
     return (
-        <div className="track-stats">
+        <div className="album-stats">
 
             <div className="button-options">
                 <button disabled={loading} onClick={() => handleTimeRangeClick("4w")}>4 WEEKS</button>
@@ -111,20 +111,22 @@ const AlbumStats = () => {
                 </div>
                 ) : (
                 <div className="track-list">
-                {selectedAlbum.map((album, index) => (
-                    <div key={index} className="TrackCard">
-                    <div className="track-number">
-                        {index + 1}.
-                    </div>
-                    <div className="track-cover">
-                        <img src={album.images} alt={`${album.albumName} cover`} />
-                    </div>
-                    <div className="track-info">
-                        <h3 className="track-name">{album.albumName}</h3>
-                        <p className="track-artist">{album.artists}</p>
-                    </div>
-                    </div>
-                ))}
+                    {selectedAlbum.map(([albumName, tracks], index) => (
+                        <div key={index} className="TrackCard">
+                        <div className="track-number">
+                            {index + 1}.
+                        </div>
+                        <div className="track-cover">
+                            <img src={tracks[0].image} alt={`${albumName} cover`} />
+                        </div>
+                        <div className="track-info">
+                            <h3 className="track-name">{albumName}</h3>
+                            <p className="track-artist">
+                            {Array.isArray(tracks[0].artists) ? tracks[0].artists.join(", ") : tracks[0].artists}
+                            </p>
+                        </div>
+                        </div>
+                    ))}
                 </div>
             )}
         </div>

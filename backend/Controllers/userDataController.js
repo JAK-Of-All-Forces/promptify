@@ -1,6 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const axios = require("axios");
+const fallbackImageUrl = 'http://localhost:3001/assets/no-img.png';
+
 
 const getAccessToken = async (userId) => {
   const response = await prisma.user.findUnique({
@@ -16,14 +18,12 @@ const getAccessToken = async (userId) => {
   }
 };
 
-async function getTrackImageURL(userId, spotifyId) {
-  try {
-    console.log("Inside getTrackImageURL");
-
+async function getTrackImageURL(userId, spotifyIds) {
+try {
     const spotifyToken = await getAccessToken(userId);
     if (!spotifyToken) {
-      console.log("no valid access token found");
-      return null;
+      console.log("No valid access token found");
+      return {};
     }
 
     const headers = {
@@ -31,31 +31,38 @@ async function getTrackImageURL(userId, spotifyId) {
       Authorization: "Bearer " + spotifyToken,
     };
 
-    const response = await axios.get(
-      `https://api.spotify.com/v1/tracks/${spotifyId}`,
-      { headers }
-    );
+    // Spotify allows max 50 IDs per request
+    const MAX_BATCH_SIZE = 50;
+    const imageMap = {};
 
-    if (
-      response &&
-      response.data &&
-      response.data.album &&
-      Array.isArray(response.data.album.images) &&
-      response.data.album.images.length > 0
-    ) {
-      const imageUrl = response.data.album.images[0].url;
-      // console.log(`fetched track image URL: ${imageUrl}`);
-      return imageUrl;
-    } else {
-      // console.log("no album images found for this track");
-      return null;
+    for (let i = 0; i < spotifyIds.length; i += MAX_BATCH_SIZE) {
+      const batchIds = spotifyIds.slice(i, i + MAX_BATCH_SIZE).join(",");
+      const response = await axios.get(
+        `https://api.spotify.com/v1/tracks?ids=${batchIds}`,
+        { headers }
+      );
+
+      if (response && response.data && response.data.tracks) {
+        response.data.tracks.forEach(track => {
+          if (
+            track &&
+            track.album &&
+            Array.isArray(track.album.images) &&
+            track.album.images.length > 0
+          ) {
+            imageMap[track.id] = track.album.images[0].url;
+          } else {
+            imageMap[track.id] = fallbackImageUrl; // Fallback image if no album image is available
+          }
+        });
+      }
     }
+
+    return imageMap; // { trackId1: imageUrl1, trackId2: imageUrl2, ... }
+
   } catch (error) {
-    console.error(
-      "error fetching track image URL from Spotify:",
-      error.response?.data || error.message
-    );
-    return null;
+    console.error("Error fetching track images batch:", error.response?.data || error.message);
+    return {};
   }
 }
 
@@ -88,8 +95,15 @@ const topTracks4 = async (userId) => {
     );
     console.log("got the short term top tracks");
 
+
     const topTracks = response.data.items;
     const simplifiedTracks = [];
+    const spotifyIds = [];
+    for (let i = 0; i < topTracks.length; i++) {
+      spotifyIds.push(topTracks[i].id);
+    }
+    const imagesMap = await getTrackImageURL(userId, spotifyIds);
+    
 
     for (let i = 0; i < topTracks.length; i++) {
       const currTrack = topTracks[i];
@@ -97,7 +111,7 @@ const topTracks4 = async (userId) => {
       const trackName = currTrack.name;
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
-      const image = await getTrackImageURL(userId, spotifyId);
+      const image = imagesMap[currTrack.id];
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
@@ -150,6 +164,12 @@ const topTracks6 = async (userId) => {
 
     const topTracks = response.data.items;
     const simplifiedTracks = [];
+    const spotifyIds = [];
+    for (let i = 0; i < topTracks.length; i++) {
+      spotifyIds.push(topTracks[i].id);
+    }
+    const imagesMap = await getTrackImageURL(userId, spotifyIds);
+    
 
     for (let i = 0; i < topTracks.length; i++) {
       const currTrack = topTracks[i];
@@ -157,7 +177,7 @@ const topTracks6 = async (userId) => {
       const trackName = currTrack.name;
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
-      const image = await getTrackImageURL(userId, spotifyId);  
+      const image = imagesMap[currTrack.id];
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
@@ -167,8 +187,8 @@ const topTracks6 = async (userId) => {
         image,
         artists,
       });
-
     }
+
     return simplifiedTracks;
   } catch (error) {
     console.error(
@@ -209,6 +229,12 @@ const topTracks1 = async (userId) => {
 
     const topTracks = response.data.items;
     const simplifiedTracks = [];
+    const spotifyIds = [];
+    for (let i = 0; i < topTracks.length; i++) {
+      spotifyIds.push(topTracks[i].id);
+    }
+    const imagesMap = await getTrackImageURL(userId, spotifyIds);
+    
 
     for (let i = 0; i < topTracks.length; i++) {
       const currTrack = topTracks[i];
@@ -216,17 +242,16 @@ const topTracks1 = async (userId) => {
       const trackName = currTrack.name;
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
-        const image = await getTrackImageURL(userId, spotifyId);
+      const image = imagesMap[currTrack.id];
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
         trackName,
         spotifyId,
         albumName,
-        image, 
+        image,
         artists,
       });
-
     }
     return simplifiedTracks;
   } catch (error) {
