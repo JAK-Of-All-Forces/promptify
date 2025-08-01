@@ -1,7 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const axios = require("axios");
-const fallbackImageUrl = 'http://localhost:3001/assets/no-img.png';
 
 
 const getAccessToken = async (userId) => {
@@ -25,6 +24,7 @@ try {
       console.log("No valid access token found");
       return {};
     }
+    console.log("These are the spotify IDs: ", spotifyIds);
 
     const headers = {
       "Content-Type": "application/json",
@@ -51,7 +51,9 @@ try {
             track.album.images.length > 0
           ) {
             imageMap[track.id] = track.album.images[0].url;
+            console.log(`Image URL for track ${track.id}: ${imageMap[track.id]}`);
           } else {
+            const fallbackImageUrl = 'http://localhost:3001/assets/no-img.png';
             imageMap[track.id] = fallbackImageUrl; // Fallback image if no album image is available
           }
         });
@@ -59,7 +61,6 @@ try {
     }
 
     return imageMap; // { trackId1: imageUrl1, trackId2: imageUrl2, ... }
-
   } catch (error) {
     console.error("Error fetching track images batch:", error.response?.data || error.message);
     return {};

@@ -93,7 +93,7 @@
 
 .extra-display .welcome-message p,
 .extra-display .thank-you-section p {
-  font-size: 40px;  /* slightly larger text */
+  font-size: 30px;  /* slightly larger text */
 font-weight: bold;
   text-align: center;
   margin: 8px 0;
