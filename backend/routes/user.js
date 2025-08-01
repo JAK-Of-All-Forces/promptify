@@ -5,9 +5,15 @@ const prisma = new PrismaClient();
 const controller = require("../Controllers/userController");
 const userDataController = require("../Controllers/userController");
 
+// GET user profile
+router.get("/profile", controller.getProfile);
+
 
 //GET all playlists for the user by Spotify ID
 router.get("/:spotifyId", controller.getPreviousPlaylistsByUser);
+
+
+
 
 // wrapper for routes from the user data controller
 const asyncHandler = (fn) => {
@@ -49,7 +55,7 @@ router.get("/top-tracks/4w", asyncHandler(async (req, res) => {
 
 router.get("/top-tracks/6m", asyncHandler(async (req, res) => {
   const userId = req.query.userId;
-  const data = await topTracks6(userId);
+  const data = await userDataController.topTracks6(userId);
   res.json(data);
 }));
 

@@ -101,7 +101,7 @@ if (accessToken || spotifyId) {
         />
 
         <Route
-          path="/stats-page/"
+          path="/stats"
           element={
             <ProtectedRoute token={token}>
               <StatsPage token={token} setToken={setToken} />
