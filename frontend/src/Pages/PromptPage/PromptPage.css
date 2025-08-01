@@ -128,17 +128,14 @@
   padding: 6px 10px;
   font-size: 0.95rem;
   border-radius: 18px;
-background: linear-gradient(180deg, #ff4ecd 0%, #7b2cbf 100%);
-border: 2px solid #ff8bd3;
-color: #ffffff;
-
-
-
-
   font-weight: bold;
-  font-style: italic;
   cursor: pointer;
-  box-shadow: 0 4px 0 #e6a03a, 0 2px 8px rgba(0,0,0,0.12); /* 3D look */
+  background-color: rgb(32, 214, 95);
+  border: 2px solid rgb(161, 218, 181);
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
   transition: 
     background 0.2s,
     box-shadow 0.2s,
@@ -157,7 +154,6 @@ color: #ffffff;
 .option-list button,
 .generate-button button,
 .loadmore-btn {
-  box-shadow: 0 4px 0 #a97ff0, 0 2px 8px rgba(0,0,0,0.12); /* 3D shadow */
   transition: 
     background 0.2s,
     box-shadow 0.2s,
@@ -169,7 +165,6 @@ color: #ffffff;
 .option-list button:active,
 .generate-button button:active,
 .loadmore-btn:active {
-  box-shadow: 0 2px 0 #a97ff0, 0 1px 4px rgba(0,0,0,0.18);
   transform: translateY(2px);
 }
 

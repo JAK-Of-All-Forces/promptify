@@ -60,7 +60,7 @@ return (
               </Link>
             </div>
             <div className="dropdown-item">
-              <Link to="/about">
+              <Link to="/stats">
                 <p>Stats Page</p>
               </Link>
             </div>
