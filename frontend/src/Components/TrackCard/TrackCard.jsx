@@ -1,6 +1,8 @@
 //import { Link } from "react-router-dom";
+import { useState } from "react";
 import no_image from "../../assets/no_img.png";
 import { FaTrash } from "react-icons/fa";
+import DeleteTrackModal from "../DeleteTrackModal/DeleteTrackModal";
 import axios from "axios";
 
 import "./TrackCard.css";
@@ -10,21 +12,14 @@ import "./TrackCard.css";
 function TrackCard({ track, setRefreshFlag }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  //Function for deleting track
-  const deleteTrack = async (event) => {
-    //Allows for user to only click on the delete button
-    event.stopPropagation();
+  //Modal work
+  const [selectedTrack, setSelectedTrack] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
-    try {
-      //Calls on the endpoint for deleting and updates the refresh flag
-      await axios.delete(`${API_BASE_URL}/tracksOnPlaylists/${track.trackOnPlaylistId}`);
-      setRefreshFlag((prev) => !prev);
-
-    } catch (err) {
-      console.log("Error deleting track on playlist:", err);
-    }
+  const handleClose = () => {
+    setModalOpen(false);
+    setSelectedTrack(null);
   };
-
 
 
   return (
@@ -50,7 +45,24 @@ function TrackCard({ track, setRefreshFlag }) {
       <p className="track-duration">{track.duration}</p>
       {/* Needed to import react */}
       {/* Delete icon */}
-      <FaTrash onClick = {deleteTrack} />
+      <FaTrash
+        className="delete-icon"
+        key={track.id}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setSelectedTrack(track);
+          setModalOpen(true);
+        }}
+      />
+
+      {modalOpen && selectedTrack && (
+        <DeleteTrackModal
+          onClose={handleClose}
+          selectedTrack={selectedTrack}
+          setRefreshFlag={setRefreshFlag}
+        />
+      )}
     </div>
   );
 }
