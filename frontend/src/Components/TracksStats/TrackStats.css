@@ -1,0 +1,64 @@
+.track-number {
+  font-size: 2rem;      /* Increase the size */
+  font-weight: bold;
+  color: #ffffff;
+  width: 40px;
+  text-align: right;
+  display: flex;
+  align-items: center;  /* Vertically center with the image */
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.button-options {
+  display: flex;
+  justify-content: center; /* centers buttons horizontally */
+  gap: 1rem; /* even space between buttons */
+}
+
+.button-options button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: 2px solid #a97ff0;
+  background-color: #4b2991;
+  color: #ffffff;
+  font-weight: bold;
+  font-style: oblique;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 120px; /* optional: equal button widths */
+  margin-bottom: 10px;;
+}
+
+.button-options button:hover:not(:disabled) {
+  background-color: #5e35b1;
+}
+
+.button-options button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* WebKit browsers */
+.top-artists::-webkit-scrollbar,
+.top-tracks::-webkit-scrollbar,
+.top-albums::-webkit-scrollbar,
+.top-genres::-webkit-scrollbar {
+  width: 8px;
+}
+
+.top-artists::-webkit-scrollbar-track,
+.top-tracks::-webkit-scrollbar-track,
+.top-albums::-webkit-scrollbar-track,
+.top-genres::-webkit-scrollbar-track {
+  background: white;
+}
+
+.top-artists::-webkit-scrollbar-thumb,
+.top-tracks::-webkit-scrollbar-thumb,
+.top-albums::-webkit-scrollbar-thumb,
+.top-genres::-webkit-scrollbar-thumb {
+  background-color: #a97ff0; /* light purple */
+  border-radius: 4px;
+}

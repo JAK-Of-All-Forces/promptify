@@ -12,12 +12,15 @@ import AlbumStats from "../../Components/AlbumStats/AlbumStats";
 function StatsPage({ token, setToken }) {
     // const navigate = useNavigate();
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const [playlistCount, setPlaylistCount] = useState(0);
     const [profileImage, setProfileImage] = useState("");
     const [displayName, setDisplayName] = useState("");
 
+    const spotifyId = localStorage.getItem("spotify_id");
+
     useEffect(() => {
+        if (!spotifyId) return;
         async function fetchProfile() {
-            const spotifyId = localStorage.getItem("spotify_id");
             const response = await fetch(`${API_BASE_URL}/user/profile?spotifyId=${spotifyId}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -30,7 +33,40 @@ function StatsPage({ token, setToken }) {
             console.log(profileImage)
         }
         fetchProfile();
-    }, []);
+    }, [spotifyId]);
+
+    useEffect(() => {
+        if (!spotifyId) return;
+
+        const fetchUserPlaylists = async () => {
+        try {
+            const res = await fetch(`${API_BASE_URL}/user/${spotifyId}`);
+            const data = await res.json();
+
+            if (Array.isArray(data)) {
+            setPlaylistCount(data.length);
+            } else {
+            console.error("Unexpected playlist data format:", data);
+            }
+        } catch (err) {
+            console.error("Error fetching playlist data:", err);
+        }
+        };
+        fetchUserPlaylists();
+    }, [spotifyId]);
+    
+
+    // useEffect(() => {
+
+    // }, []);
+
+    // useEffect(() => {
+
+    // }, []);
+
+    // useEffect(() => {
+
+    // }, []);
 
 
 
@@ -38,62 +74,68 @@ function StatsPage({ token, setToken }) {
         <>
         <NavBar token={token} setToken={setToken}></NavBar>
 
-        <div className="top-artists">
-            <header>TOP ARTISTS</header>
-            <div className="button-options">
-                <button>4 WEEKS</button>
-                <button>6 MONTHS</button>
-                <button>1 YEAR</button>
+        <div className="stats-page-container">
+            <div className="top-artists">
+                <header>TOP ARTISTS</header>
+                <div className="button-options">
+                    <button>4 WEEKS</button>
+                    <button>6 MONTHS</button>
+                    <button>1 YEAR</button>
+                </div>
+                <ArtistStats></ArtistStats>
             </div>
-            <ArtistStats></ArtistStats>
+
+            <div className="top-tracks">
+                <header>TOP TRACKS</header>
+                <div className="track-block">
+                    <TrackStats></TrackStats>
+                </div>
+            </div>
+
+            <div className="top-genres">
+                <header>TOP GENRES</header>
+                <div className="button-options">
+                    <button>4 WEEKS</button>
+                    <button>6 MONTHS</button>
+                    <button>1 YEAR</button>
+                </div>
+                <GenreStats></GenreStats>
+            </div>
+
+            <div className="top-albums">
+                <header>TOP ALBUMS</header>
+                <div className="button-options">
+                    <button>4 WEEKS</button>
+                    <button>6 MONTH</button>
+                    <button>1 YEAR</button>
+                </div>
+                <AlbumStats></AlbumStats>
+            </div>
+
+            <div className="extra-display">
+                <div className="profile-pic">
+                    {profileImage && <img src={profileImage} alt="profile image" />}
+                </div>
+                <div className="welcome-message">
+                    <p>WELCOME {displayName} TO YOUR STATS PAGE - DISPLAYING YOUR TOP GENRES, ARTISTS, TRACKS, AND ALBUMS ACROSS TIME</p>
+                </div>
+                <div className="thank-you-section">
+                    {playlistCount > 0 ? (
+                        <>
+                        <p>THANK YOU FOR CREATING</p>
+                        <p className="large-number">{playlistCount}</p>
+                        <p>PROMPTIFY PLAYLISTS</p>
+                        </>
+                    ) : (
+                        <>
+                        <p className="no-playlists-message">
+                            YOU HAVEN'T CREATED ANY PROMPTIFY PLAYLISTS YET</p>
+                        <p>BUT THANK YOU FOR CHECKING US OUT ANYWAYS</p>
+                        </>
+                    )}
+                </div>
+            </div>
         </div>
-
-        <div className="top-tracks">
-            <header>TOP TRACKS</header>
-            <div className="button-options">
-                <button>4 WEEKS</button>
-                <button>6 MONTHS</button>
-                <button>1 YEAR</button>
-            </div>
-            <TrackStats></TrackStats>
-        </div>
-
-        <div className="top-genres">
-            <header>TOP GENRES</header>
-            <div className="button-options">
-                <button>4 WEEKS</button>
-                <button>6 MONTHS</button>
-                <button>1 YEAR</button>
-            </div>
-            <GenreStats></GenreStats>
-        </div>
-
-        <div className="top-albums">
-            <header>TOP ALBUMS</header>
-            <div className="button-options">
-                <button>4 WEEKS</button>
-                <button>6 MONTH</button>
-                <button>1 YEAR</button>
-            </div>
-            <AlbumStats></AlbumStats>
-        </div>
-
-        <div className="extra-display">
-            <div className="profile-pic">
-                <img src={profileImage} alt="Profile" />
-            </div>
-            <div className="welcome-message">
-                <p>WELCOME ${displayName} TO YOUR STATS PAGE - DISPLAYING YOUR TOP GENRES, ARTISTS, TRACKS, AND ALBUMS ACROSS TIME</p>
-            </div>
-            <div className="thank-you-section">
-                <p>THANK YOU FOR CREATING</p>
-                <p className="large-number">[number]</p>
-                <p>PROMPTIFY PLAYLISTS</p>
-            </div>
-        </div>
-
-
-
         </>
     )
 

@@ -1,0 +1,78 @@
+.stats-page-container header {
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #ffffff44;
+  padding-bottom: 0.5rem;
+}
+
+.top-tracks {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 350px;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.top-artists {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 350px;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.top-albums {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 350px;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.top-genres {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 350px;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

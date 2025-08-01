@@ -44,10 +44,10 @@ async function getTrackImageURL(userId, spotifyId) {
       response.data.album.images.length > 0
     ) {
       const imageUrl = response.data.album.images[0].url;
-      console.log(`fetched track image URL: ${imageUrl}`);
+      // console.log(`fetched track image URL: ${imageUrl}`);
       return imageUrl;
     } else {
-      console.log("no album images found for this track");
+      // console.log("no album images found for this track");
       return null;
     }
   } catch (error) {
@@ -62,7 +62,7 @@ async function getTrackImageURL(userId, spotifyId) {
 // get top tracks (4 weeks), limit = 30 - return the album, artists, spotify id, track name
 const topTracks4 = async (userId) => {
   try {
-    console.log("grabbing the top tracks for this user...");
+    // console.log("grabbing the top tracks for this user...");
     const spotifyToken = await getAccessToken(userId);
     if (spotifyToken) {
       console.log(`looking up tracks...`);
@@ -75,7 +75,7 @@ const topTracks4 = async (userId) => {
       Authorization: "Bearer " + spotifyToken,
     };
 
-    console.log("about to get short term top tracks");
+    // console.log("about to get short term top tracks");
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/tracks`,
       {
@@ -146,7 +146,7 @@ const topTracks6 = async (userId) => {
         },
       }
     );
-    console.log("got the short term top tracks");
+    console.log("got the medium term top tracks");
 
     const topTracks = response.data.items;
     const simplifiedTracks = [];
@@ -157,7 +157,7 @@ const topTracks6 = async (userId) => {
       const trackName = currTrack.name;
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
-    const image = await getTrackImageURL(userId, spotifyId);  
+      const image = await getTrackImageURL(userId, spotifyId);  
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
@@ -169,7 +169,7 @@ const topTracks6 = async (userId) => {
       });
 
     }
-    console.log(simplifiedTracks);
+    return simplifiedTracks;
   } catch (error) {
     console.error(
       "Error in topTracks6:",
@@ -205,7 +205,7 @@ const topTracks1 = async (userId) => {
         },
       }
     );
-    console.log("got the short term top tracks");
+    console.log("got the long term top tracks");
 
     const topTracks = response.data.items;
     const simplifiedTracks = [];
@@ -228,7 +228,7 @@ const topTracks1 = async (userId) => {
       });
 
     }
-    console.log(simplifiedTracks);
+    return simplifiedTracks;
   } catch (error) {
     console.error(
       "Error in topTracks1:",
@@ -240,14 +240,14 @@ const topTracks1 = async (userId) => {
 // get top albums (4 weeks), top 10
 const topAlbums4 = async (userId) => {
   try {
-    console.log("grabbing the top albums for this user...");
+    console.log("grabbing the short term top albums for this user...");
     const shortTermTrackData = await topTracks4(userId);
     console.log(shortTermTrackData);
 
     // loop through track data, create a map. place the album name with corresponding tracks
     const albumMap = {};
     for (let track of shortTermTrackData) {
-        console.log("SCEEBADKJBFM JLKBALSGE");
+        // console.log("SCEEBADKJBFM JLKBALSGE");
         console.log(track.image)
         if (!albumMap[track.albumName]) {
             albumMap[track.albumName] = [];
@@ -267,7 +267,7 @@ const topAlbums4 = async (userId) => {
 
 
 
-    console.log("THIS IS TOP ALBUMS USERDATA CONTROLLER")
+    // console.log("THIS IS TOP ALBUMS USERDATA CONTROLLER")
     // console.log(topAlbums[0].image);
 
     return topAlbums;
