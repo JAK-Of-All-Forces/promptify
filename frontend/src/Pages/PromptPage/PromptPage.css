@@ -128,9 +128,13 @@
   padding: 6px 10px;
   font-size: 0.95rem;
   border-radius: 18px;
-  border: 2px solid #ffb24790;           /* Distinct border color */
-  background: linear-gradient(180deg, #ffe29f 0%, #ffb347 100%);
-  color: #4b2991;
+background: linear-gradient(180deg, #ff4ecd 0%, #7b2cbf 100%);
+border: 2px solid #ff8bd3;
+color: #ffffff;
+
+
+
+
   font-weight: bold;
   font-style: italic;
   cursor: pointer;
@@ -144,8 +148,8 @@
 }
 
 .loadmore-btn:hover {
-  background: linear-gradient(180deg, #ffb347 0%, #ffe29f 100%);
-  box-shadow: 0 2px 0 #e6a03a, 0 1px 4px rgba(0,0,0,0.18);
+  /* background: linear-gradient(180deg, #ffb347 0%, #ffe29f 100%);
+  box-shadow: 0 2px 0 #e6a03a, 0 1px 4px rgba(0,0,0,0.18); */
   transform: translateY(2px);
 }
 
