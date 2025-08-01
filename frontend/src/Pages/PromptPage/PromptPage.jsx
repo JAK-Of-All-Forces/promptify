@@ -53,6 +53,9 @@ function PromptPage ({token, setToken}) {
     setSelectedActivity([activity]);
   }
 
+  
+
+
 
 
 
@@ -183,7 +186,7 @@ function PromptPage ({token, setToken}) {
 
     <h2 className="section-title">Choose an Activity:</h2>
     <div className="option-list">
-      {activitiesData.map((activity) => (
+      {activitiesData.slice(0,20).map((activity) => (
         <button
   key={activity.id}
   className={`activity-option ${selectedActivity.includes(activity.label) ? "selected" : ""}`}
