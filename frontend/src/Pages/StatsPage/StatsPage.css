@@ -76,3 +76,27 @@
   flex-direction: column;
   gap: 30px;
 }
+
+.extra-display .profile-pic img {
+  width: 300px;      
+  height: 300px;     
+  border-radius: 50%; 
+  object-fit: cover; 
+  display: block;
+  margin: 0 auto;   
+}
+
+.extra-display .thank-you-section .large-number {
+  font-size: 78px; 
+  text-align: center;
+}
+
+.extra-display .welcome-message p,
+.extra-display .thank-you-section p {
+  font-size: 40px;  /* slightly larger text */
+font-weight: bold;
+  text-align: center;
+  margin: 8px 0;
+}
+
+

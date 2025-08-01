@@ -1,14 +1,131 @@
 import "./ArtistStats.css"
-import React from "react"
+import { useEffect, useState } from "react";
+import loadingIcon from "../../assets/favicon.png"; 
 
 const ArtistStats = () => {
+    const spotifyId = localStorage.getItem("spotify_id");
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    
+    const [artist4w, setArtist4w] = useState([]);
+    const [artist6m, setArtist6m] = useState([]);
+    const [artist1y, setArtist1y] = useState([]);
+    const [selectedArtist, setSelectedArtist] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [connectionError, setConnectionError] = useState(false);
+
+
+    function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+  useEffect(() => {
+    if (!spotifyId) return;
+
+    async function fetchAllTracks() {
+        try {
+            const urls = [
+            `${API_BASE_URL}/user/top-artists/4w?spotifyId=${spotifyId}`,
+            `${API_BASE_URL}/user/top-artists/6m?spotifyId=${spotifyId}`,
+            `${API_BASE_URL}/user/top-artists/1y?spotifyId=${spotifyId}`,
+        ];
+
+        const res4w = await fetch(urls[0], { method: "GET", headers: { "Content-Type": "application/json" } });
+        if (!res4w.ok) throw new Error("Failed to fetch 4w artists");
+        const data4w = await res4w.json();
+        setArtist4w(data4w);
+
+        await delay(30000); // 30 second delay
+
+        const res6m = await fetch(urls[1], { method: "GET", headers: { "Content-Type": "application/json" } });
+        if (!res6m.ok) throw new Error("Failed to fetch 6m tracks");
+        const data6m = await res6m.json();
+        setArtist6m(data6m);
+
+        await delay(30000); // 30 second delay
+
+        const res1y = await fetch(urls[2], { method: "GET", headers: { "Content-Type": "application/json" } });
+        if (!res1y.ok) throw new Error("Failed to fetch 1y tracks");
+        const data1y = await res1y.json();
+        setArtist1y(data1y);
+
+        // Initialize with 4 weeks data
+        setSelectedArtist(data4w);
+        await delay(90); // let state update settle before hiding loader
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching tracks:", err);
+        if (err.message.includes("Failed to fetch") || err.message.includes("NetworkError") || err.message.includes("ECONNREFUSED")) {
+            setConnectionError(true);
+        }
+        setLoading(false);
+
+      }
+    }
+    fetchAllTracks();
+  }, [spotifyId]);
+  
+    const handleTimeRangeClick = (range) => {
+        if (range === "4w") { 
+            console.log('just clicked 4 weeks')
+            console.log(artist4w)
+            setSelectedArtist(artist4w)
+        } else if (range === "6m") {
+            console.log('just clicked 6 months')
+            console.log(artist6m)
+
+            setSelectedArtist(artist6m) 
+        } else if (range === "1y") { 
+            console.log('just clicked 1 year')
+            console.log(artist1y)
+
+            setSelectedArtist(artist1y);
+        };
+    }
 
     return (
-        <>
-        </>
+        <div className="track-stats">
+
+            <div className="button-options">
+                <button disabled={loading} onClick={() => handleTimeRangeClick("4w")}>4 WEEKS</button>
+                <button disabled={loading} onClick={() => handleTimeRangeClick("6m")}>6 MONTHS</button>
+                <button disabled={loading} onClick={() => handleTimeRangeClick("1y")}>1 YEAR</button>
+            </div>
+
+            {loading ? (
+                <div className="loading-container">
+                    {loading && !connectionError && (
+                        <>
+                        <img src={loadingIcon} alt="Loading..." className="loading-spinner" />
+                        <p className="loading-text">Loading...</p>
+                        </>
+                    )}
+
+                    {loading && connectionError && (
+                        <p className="connection-error-message">
+                            We apologize, but please wait 1 minute until you reload this page.
+                        </p>
+                    )}
+                </div>
+                ) : (
+                <div className="track-list">
+                {selectedArtist.map((artist, index) => (
+                    <div key={index} className="TrackCard">
+                    <div className="track-number">
+                        {index + 1}.
+                    </div>
+                    <div className="track-cover">
+                        <img src={artist.images} alt={`${artist.artistName} cover`} />
+                    </div>
+                    <div className="track-info">
+                        <h3 className="track-name">{artist.artistName}</h3>
+                    </div>
+                    </div>
+                ))}
+                </div>
+            )}
+        </div>
     )
+
 }
 
 export default ArtistStats;

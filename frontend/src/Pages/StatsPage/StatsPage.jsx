@@ -77,12 +77,9 @@ function StatsPage({ token, setToken }) {
         <div className="stats-page-container">
             <div className="top-artists">
                 <header>TOP ARTISTS</header>
-                <div className="button-options">
-                    <button>4 WEEKS</button>
-                    <button>6 MONTHS</button>
-                    <button>1 YEAR</button>
+                <div className="artist-block">
+                    <ArtistStats></ArtistStats>
                 </div>
-                <ArtistStats></ArtistStats>
             </div>
 
             <div className="top-tracks">
@@ -94,22 +91,16 @@ function StatsPage({ token, setToken }) {
 
             <div className="top-genres">
                 <header>TOP GENRES</header>
-                <div className="button-options">
-                    <button>4 WEEKS</button>
-                    <button>6 MONTHS</button>
-                    <button>1 YEAR</button>
+                <div className="genre-block">
+                    <GenreStats></GenreStats>
                 </div>
-                <GenreStats></GenreStats>
             </div>
 
             <div className="top-albums">
                 <header>TOP ALBUMS</header>
-                <div className="button-options">
-                    <button>4 WEEKS</button>
-                    <button>6 MONTH</button>
-                    <button>1 YEAR</button>
+                <div className="album-block">
+                    <AlbumStats></AlbumStats>
                 </div>
-                <AlbumStats></AlbumStats>
             </div>
 
             <div className="extra-display">

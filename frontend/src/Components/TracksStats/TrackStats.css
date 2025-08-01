@@ -5,15 +5,15 @@
   width: 40px;
   text-align: right;
   display: flex;
-  align-items: center;  /* Vertically center with the image */
+  align-items: center;  
   justify-content: center;
   flex-shrink: 0;
 }
 
 .button-options {
   display: flex;
-  justify-content: center; /* centers buttons horizontally */
-  gap: 1rem; /* even space between buttons */
+  justify-content: center; 
+  gap: 1rem; 
 }
 
 .button-options button {
@@ -59,6 +59,32 @@
 .top-tracks::-webkit-scrollbar-thumb,
 .top-albums::-webkit-scrollbar-thumb,
 .top-genres::-webkit-scrollbar-thumb {
-  background-color: #a97ff0; /* light purple */
+  background-color: #a97ff0; 
   border-radius: 4px;
+}
+
+.loading-container img {
+  width: 100px;  /* Adjust size as needed */
+  height: 100px;
+  padding: 10px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.loading-container p {
+  font-size: 24px;       /* make text clear but not too big */
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;    /* optional, matches your button style */
 }

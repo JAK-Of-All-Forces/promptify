@@ -1,18 +1,18 @@
 import "./TrackStats.css"
 import { useEffect, useState } from "react";
-import loadingIcon from "../../assets/favicon.png"; // adjust path as needed
+import loadingIcon from "../../assets/favicon.png"; 
 
 
 const TrackStats = () => {
     const spotifyId = localStorage.getItem("spotify_id");
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    const [tracks, setTracks] = useState([]);
     const [tracks4w, setTracks4w] = useState([]);
     const [tracks6m, setTracks6m] = useState([]);
     const [tracks1y, setTracks1y] = useState([]);
     const [selectedTracks, setSelectedTracks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [connectionError, setConnectionError] = useState(false);
 
 
     function delay(ms) {
@@ -51,10 +51,13 @@ const TrackStats = () => {
 
         // Initialize with 4 weeks data
         setSelectedTracks(data4w);
-        await delay(90); // let state update settle before hiding loader
+        await delay(150); // let state update settle before hiding loader
         setLoading(false);
       } catch (err) {
         console.error("Error fetching tracks:", err);
+        if (err.message.includes("Failed to fetch") || err.message.includes("NetworkError") || err.message.includes("ECONNREFUSED")) {
+            setConnectionError(true);
+        }
         setLoading(false);
 
       }
@@ -91,8 +94,18 @@ const TrackStats = () => {
 
             {loading ? (
                 <div className="loading-container">
-                    <img src={loadingIcon} alt="Loading..." />
-                    <p>Loading...</p>
+                    {loading && !connectionError && (
+                        <>
+                        <img src={loadingIcon} alt="Loading..." className="loading-spinner" />
+                        <p className="loading-text">Loading...</p>
+                        </>
+                    )}
+
+                    {loading && connectionError && (
+                        <p className="connection-error-message">
+                            We apologize, but please wait 1 minute until you reload this page.
+                        </p>
+                    )}
                 </div>
                 ) : (
                 <div className="track-list">

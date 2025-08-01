@@ -446,7 +446,7 @@ const topArtists6 = async (userId) => {
         const spotifyId = currArtist.id;
         const artistName = currArtist.name;
         const genres = currArtist.genres;
-        const images = currArtist.images;       
+        const images = currArtist.images[0].url;       
 
         simplifiedArtists.push({
             spotifyId,
@@ -503,7 +503,7 @@ const topArtists1 = async (userId) => {
       const spotifyId = currArtist.id;
       const artistName = currArtist.name;
       const genres = currArtist.genres;
-        const images = currArtist.images;
+      const images = currArtist.images[0].url;
 
       simplifiedArtists.push({
         spotifyId,
