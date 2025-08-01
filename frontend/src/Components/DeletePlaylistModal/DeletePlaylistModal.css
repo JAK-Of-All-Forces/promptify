@@ -48,11 +48,14 @@
 }
 
 .message {
-    display: flex;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.delete-modal .playlist-name {
+.delete-modal .modal-playlist-name {
     font-weight: bold;
 }
   
@@ -61,8 +64,14 @@
     color: black;
     border: black solid 1.5px;
 }
+
+.cancel-button:hover{
+  background-color: #6e6e6e;
+  color: white;
+
+}
   button {
-    background-color: #20D65F;
+    background-color: #20E65F;
       /* border: 3px solid black; */
       border-radius: 50px;
       box-sizing: border-box;
@@ -86,6 +95,8 @@
     }
    button:hover {
         background-color: #107434;
+          color: white;
+
     }
 button:focus {
       box-shadow: none;

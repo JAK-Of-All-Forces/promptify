@@ -32,10 +32,10 @@ function DeleteTrackModal({ selectedTrack, setRefreshFlag, onClose }) {
           <div className="delete-content">
             <h2>Delete Track?</h2>
             <p className="message">
-              This will delete{" "}
+              This will delete
               <span className="modal-track-name">
                 &nbsp;{selectedTrack.name}&nbsp;
-              </span>{" "}
+              </span>
               from this playlist
             </p>
             {/* Come back to this */}
