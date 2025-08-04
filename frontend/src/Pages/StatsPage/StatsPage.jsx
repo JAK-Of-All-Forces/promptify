@@ -56,20 +56,6 @@ function StatsPage({ token, setToken }) {
     }, [spotifyId]);
     
 
-    // useEffect(() => {
-
-    // }, []);
-
-    // useEffect(() => {
-
-    // }, []);
-
-    // useEffect(() => {
-
-    // }, []);
-
-
-
     return (
         <>
         <NavBar token={token} setToken={setToken}></NavBar>
