@@ -6,19 +6,15 @@ img {
 .PlaylistCard {
     display: flex;
     justify-content: center;
-    padding-bottom: 1em;
+    padding: 1em;
     border-radius: 20px;
 
 }
 
 .PlaylistCard:hover {
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    border-radius: 20px;
     background-color: #cecece;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease-in;
+    transition: background-color 0.5s;
 }
 
 .PlaylistCard:hover .playlist-info {
