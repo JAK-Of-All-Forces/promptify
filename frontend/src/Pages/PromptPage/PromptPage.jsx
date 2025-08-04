@@ -21,6 +21,10 @@ function PromptPage ({token, setToken}) {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [visibleActivities, setVisibleActivities] = useState(8);
   const [activitySearchTerm, setActivitySearchTerm] = useState("");
+  const [topGenres, setTopGenres] = useState([]);
+  const [allGenres, setAllGenres] = useState([]);
+  const [showAllGenres, setShowAllGenres] = useState(false);
+  const [visibleGenres, setVisibleGenres] = useState(20);
   
 
   useEffect(() => {
@@ -37,8 +41,8 @@ function PromptPage ({token, setToken}) {
       });
 
       const data = await response.json();
-      const topGenres = data.slice(0, 15).map(([genreName]) => genreName);
-      setGenres(topGenres);
+      const topGenres = data.map(([genreName]) => genreName);
+      setTopGenres(topGenres);
     }
 
      async function fetchAllGenres() {
@@ -50,7 +54,7 @@ function PromptPage ({token, setToken}) {
       const result = await response.json();
       const sortedGenres = result.genres.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 
-      setGenres(sortedGenres);    }
+      setAllGenres(sortedGenres);    }
 
   
       
@@ -120,11 +124,15 @@ function PromptPage ({token, setToken}) {
   }
 
 
-  const filteredGenres = genreSearchTerm.length > 0
-  ? genres.filter((genre) =>
+ const currentGenres = showAllGenres ? allGenres : topGenres;
+const filteredGenres = genreSearchTerm.length > 0
+  ? currentGenres.filter((genre) =>
       genre.toLowerCase().includes(genreSearchTerm.toLowerCase())
     )
-  : genres.slice(0, 20);
+  : showAllGenres ? currentGenres.slice(0, visibleGenres)
+  : currentGenres;
+
+
 
   
 
@@ -273,6 +281,18 @@ function PromptPage ({token, setToken}) {
     onChange={(e) => setGenreSearchTerm(e.target.value)}
   />
 </div>
+      <div className="toggle-genres">
+  <button
+    onClick={() => {setShowAllGenres(!showAllGenres);
+      setVisibleGenres(20);
+    } }
+
+    className="toggle-btn"
+  >
+    {showAllGenres ? "Show Top Genres" : "Show All Genres"}
+  </button>
+</div>
+
 
     <div className="option-list">
       {filteredGenres.map((genre) => (
@@ -287,6 +307,15 @@ function PromptPage ({token, setToken}) {
         </label>
       ))}
     </div>
+    {showAllGenres && visibleGenres < allGenres.length && (
+  <button
+    className="loadmore-btn"
+    onClick={() => setVisibleGenres(visibleGenres + 20)}
+  >
+    Load More Genres
+  </button>
+)}
+
     {selectedGenres.length>0 &&(<div className="user-choice">
         <p>Your chosen genre(s) is/are: {selectedGenres.join(", ")}</p>
       </div>
