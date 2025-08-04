@@ -48,10 +48,17 @@ return (
 
         {activeMenu && (
           <div className="dropdown-content">
-            <span className="close-icon" onClick={toggleDropdown}>×</span>
+            <span className="close-icon" onClick={toggleDropdown}>
+              ×
+            </span>
             <div className="dropdown-item">
-              <Link to="/about">
-                <p>About</p>
+              <Link to="/home">
+                <p>Home</p>
+              </Link>
+            </div>
+            <div className="dropdown-item">
+              <Link to="/prompt">
+                <p>Make a Playlist</p>
               </Link>
             </div>
             <div className="dropdown-item">
@@ -61,11 +68,16 @@ return (
             </div>
             <div className="dropdown-item">
               <Link to="/stats">
-                <p>Stats Page</p>
+                <p>Stats</p>
               </Link>
             </div>
             <div className="dropdown-item">
-              <Link to = "/" onClick={handleLogout}>
+              <Link to="/about">
+                <p>About</p>
+              </Link>
+            </div>
+            <div className="dropdown-item">
+              <Link to="/" onClick={handleLogout}>
                 <p>Logout</p>
               </Link>
             </div>
