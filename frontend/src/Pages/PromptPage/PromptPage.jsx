@@ -24,17 +24,23 @@ function PromptPage ({token, setToken}) {
   
 
   useEffect(() => {
-    async function fetchGenres() {
+
+    async function fetchUserGenres() {
       const spotifyId = localStorage.getItem("spotify_id");
-      const response = await fetch(`${API_BASE_URL}/playlist/getGenres?spotifyId=${spotifyId}`, {
+      if (!spotifyId) return;
+
+      const url = `${API_BASE_URL}/user/top-genres/4w?spotifyId=${spotifyId}`;
+      const response = await fetch(url, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
-      const result = await response.json();
-      const sortedGenres = result.genres.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 
-      setGenres(sortedGenres);    }
-    fetchGenres();
+      const data = await response.json();
+      const topGenres = data.slice(0, 15).map(([genreName]) => genreName);
+      setGenres(topGenres);
+    }
+
+    fetchUserGenres();
   }, []);
 
 
@@ -101,6 +107,8 @@ function PromptPage ({token, setToken}) {
       genre.toLowerCase().includes(genreSearchTerm.toLowerCase())
     )
   : genres.slice(0, 20);
+
+  
 
 
   // generate playlist logic
