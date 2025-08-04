@@ -40,8 +40,13 @@ function PromptPage ({token, setToken}) {
       setGenres(topGenres);
     }
 
+    async function fetchAllGenres() {
+      
+
     fetchUserGenres();
   }, []);
+
+
 
 
 
