@@ -25,10 +25,11 @@ function PromptPage ({token, setToken}) {
 
   useEffect(() => {
 
-    async function fetchUserGenres() {
       const spotifyId = localStorage.getItem("spotify_id");
-      if (!spotifyId) return;
+       if (!spotifyId) return;
 
+    async function fetchUserGenres() {
+     
       const url = `${API_BASE_URL}/user/top-genres/4w?spotifyId=${spotifyId}`;
       const response = await fetch(url, {
         method: "GET",
@@ -40,10 +41,22 @@ function PromptPage ({token, setToken}) {
       setGenres(topGenres);
     }
 
-    async function fetchAllGenres() {
+     async function fetchAllGenres() {
+      const url = `${API_BASE_URL}/playlist/getGenres?spotifyId=${spotifyId}`
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      const result = await response.json();
+      const sortedGenres = result.genres.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+
+      setGenres(sortedGenres);    }
+
+  
       
 
     fetchUserGenres();
+    fetchAllGenres();
   }, []);
 
 
