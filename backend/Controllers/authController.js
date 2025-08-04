@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const { initUserStats } = require("../Controllers/userDataController");
 
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -58,24 +59,27 @@ exports.handleCallback = async (req, res) => {
     const userProfile = profileRes.data;
 
     // Save user in DB
-    await prisma.user.upsert({
-      where: { spotifyId: userProfile.id },
-      update: {
-        accessToken: access_token,
-        refreshToken: refresh_token,
-        displayName: userProfile.display_name,
-        email: userProfile.email,
-        image: userProfile.images[0]?.url
-      },
-      create: {
-        spotifyId: userProfile.id,
-        accessToken: access_token,
-        refreshToken: refresh_token,
-        displayName: userProfile.display_name,
-        email: userProfile.email,
-        image: userProfile.images[0]?.url
-      },
-    });
+    const upsertedUser = await prisma.user.upsert({
+  where: { spotifyId: userProfile.id },
+  update: {
+    accessToken: access_token,
+    refreshToken: refresh_token,
+    displayName: userProfile.display_name,
+    email: userProfile.email,
+    image: userProfile.images[0]?.url
+  },
+  create: {
+    spotifyId: userProfile.id,
+    accessToken: access_token,
+    refreshToken: refresh_token,
+    displayName: userProfile.display_name,
+    email: userProfile.email,
+    image: userProfile.images[0]?.url
+  },
+});
+
+await initUserStats(upsertedUser.id);
+
 
     res.redirect(`${CLIENT_URL}/home?access_token=${access_token}&spotify_id=${userProfile.id}`);
     // res.send({access_token: access_token, spotify_id: userProfile.id});

@@ -1,0 +1,102 @@
+.stats-page-container header {
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #ffffff44;
+  padding-bottom: 0.5rem;
+}
+
+.top-tracks {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 350px;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.top-artists {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 350px;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.top-albums {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 350px;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.top-genres {
+  background-color: rgba(255, 255, 255, 0.15);
+  margin: 50px auto;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 350px;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.extra-display .profile-pic img {
+  width: 300px;      
+  height: 300px;     
+  border-radius: 50%; 
+  object-fit: cover; 
+  display: block;
+  margin: 0 auto;   
+}
+
+.extra-display .thank-you-section .large-number {
+  font-size: 78px; 
+  text-align: center;
+}
+
+.extra-display .welcome-message p,
+.extra-display .thank-you-section p {
+  font-size: 30px;  /* slightly larger text */
+font-weight: bold;
+  text-align: center;
+  margin: 8px 0;
+}
+
+

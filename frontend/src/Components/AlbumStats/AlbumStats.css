@@ -1,0 +1,7 @@
+.track-name {
+  font-weight: 600;
+  font-size: 24px;
+  margin: 0;
+  word-wrap: break-word;
+  white-space: normal; /* allow wrapping */
+}
