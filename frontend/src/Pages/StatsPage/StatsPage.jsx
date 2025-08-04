@@ -61,31 +61,35 @@ function StatsPage({ token, setToken }) {
         <NavBar token={token} setToken={setToken}></NavBar>
 
         <div className="stats-page-container">
-            <div className="top-artists">
-                <header>TOP ARTISTS</header>
-                <div className="artist-block">
-                    <ArtistStats></ArtistStats>
-                </div>
-            </div>
+            <div className="stats-section">
 
-            <div className="top-tracks">
-                <header>TOP TRACKS</header>
-                <div className="track-block">
-                    <TrackStats></TrackStats>
+                <div className="top-artists">
+                    <header>TOP ARTISTS</header>
+                    <div className="artist-block">
+                        <ArtistStats></ArtistStats>
+                    </div>
                 </div>
-            </div>
 
-            <div className="top-genres">
-                <header>TOP GENRES</header>
-                <div className="genre-block">
-                    <GenreStats></GenreStats>
+                <div className="top-tracks">
+                    <header>TOP TRACKS</header>
+                    <div className="track-block">
+                        <TrackStats></TrackStats>
+                    </div>
                 </div>
-            </div>
 
-            <div className="top-albums">
-                <header>TOP ALBUMS</header>
-                <div className="album-block">
-                    <AlbumStats></AlbumStats>
+
+                <div className="top-albums">
+                    <header>TOP ALBUMS</header>
+                    <div className="album-block">
+                        <AlbumStats></AlbumStats>
+                    </div>
+                </div>
+                
+                <div className="top-genres">
+                    <header>TOP GENRES</header>
+                    <div className="genre-block">
+                        <GenreStats></GenreStats>
+                    </div>
                 </div>
             </div>
 
@@ -94,7 +98,9 @@ function StatsPage({ token, setToken }) {
                     {profileImage && <img src={profileImage} alt="profile image" />}
                 </div>
                 <div className="welcome-message">
-                    <p>WELCOME {displayName} TO YOUR STATS PAGE - DISPLAYING YOUR TOP GENRES, ARTISTS, TRACKS, AND ALBUMS ACROSS TIME</p>
+                    <p>WELCOME</p>
+                    <p className="display-name">{displayName}</p>
+                    <p>TO YOUR STATS PAGE - DISPLAYING YOUR TOP GENRES, ARTISTS, TRACKS, AND ALBUMS ACROSS TIME</p>
                 </div>
                 <div className="thank-you-section">
                     {playlistCount > 0 ? (

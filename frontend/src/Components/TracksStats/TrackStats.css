@@ -21,19 +21,25 @@
   font-size: 1rem;
   border-radius: 30px;
   border: 2px solid #a97ff0;
-  background-color: #4b2991;
+  background-color: #6438bd;
   color: #ffffff;
   font-weight: bold;
   font-style: oblique;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  min-width: 120px; /* optional: equal button widths */
-  margin-bottom: 10px;;
+  min-width: 100px; 
+  margin-bottom: 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
 .button-options button:hover:not(:disabled) {
-  background-color: #5e35b1;
+  background-color: #c1aaf0;
 }
+
+/* .button-options button.selected {
+  background-color: rgb(32, 214, 95);
+  color: white;
+} */
 
 .button-options button:disabled {
   opacity: 0.5;
@@ -53,6 +59,7 @@
 .top-albums::-webkit-scrollbar-track,
 .top-genres::-webkit-scrollbar-track {
   background: white;
+  border-radius: 4px;
 }
 
 .top-artists::-webkit-scrollbar-thumb,
