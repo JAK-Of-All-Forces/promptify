@@ -128,13 +128,13 @@ function PlaylistPage({token, setToken}) {
           <div className="playlist-content">
             {/* Playlist Cover */}
             <div className = "left-container">
-              <div className="playlist-cover">
-                {playlist.image_url ? (
-                  <img src={playlist.image_url} alt="Playlist cover" />
-                ) : (
-                  <img src={no_image} alt="Playlist cover (no image)" />
-                )}
-              </div>
+            <div className="playlist-cover">
+              {playlist.image_url !== "backend/assets/no_img.png" ? (
+                <img src={playlist.image_url} alt="Playlist Cover" />
+              ) : (
+                <img src={no_image} alt="Playlist Cover (No Image)" />
+              )}
+            </div>
               {/* Playlist Title */}
               <h1 className="playlist-title">{playlist.name}</h1>
               <div className="button-container">

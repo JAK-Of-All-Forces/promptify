@@ -42,7 +42,8 @@ return (
       <div className="dropdown">
         {!activeMenu && (
           <div className="hamburger-icon" onClick={toggleDropdown}>
-            <GiHamburgerMenu className="icon fade-in" />
+
+            {token && <GiHamburgerMenu token = {token} className="icon fade-in" />}
           </div>
         )}
 
