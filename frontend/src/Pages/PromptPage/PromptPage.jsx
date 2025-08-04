@@ -293,20 +293,22 @@ const filteredGenres = genreSearchTerm.length > 0
   </button>
 </div>
 
+<div className = "scrollable-genres-list">
+   <div className="all-genres">
+  {filteredGenres.map((genre) => (
+    <label key={genre}>
+      <input
+        type="checkbox"
+        value={genre}
+        checked={selectedGenres.includes(genre)}
+        onChange={handleGenreCheckboxChange}
+      />
+      {genre}
+    </label>
+  ))}
+</div>
+</div>
 
-    <div className="option-list">
-      {filteredGenres.map((genre) => (
-        <label key={genre}>
-          <input
-            type="checkbox"
-            value={genre}
-            checked={selectedGenres.includes(genre)}
-            onChange={handleGenreCheckboxChange}
-          />
-          {genre}
-        </label>
-      ))}
-    </div>
     {showAllGenres && visibleGenres < allGenres.length && (
   <button
     className="loadmore-btn"

@@ -189,8 +189,7 @@
 .all-genres label {
   display: flex;
   align-items: center;
-  background-color: #f4f0fa;
-  border: 1px solid #c0b6e9;
+background-color: #4b2991;  border: 1px solid #c0b6e9;
   border-radius: 20px;
   padding: 6px 12px;
   font-size: 0.9rem;
@@ -202,6 +201,41 @@
   accent-color: #a600ff;
   transform: scale(1.2);
 }
+
+.scrollable-genres-list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Optional for custom scrollbar look */
+.scrollable-genres-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-genres-list::-webkit-scrollbar-thumb {
+  background-color: #c0b6e9;
+  border-radius: 10px;
+}
+
+.toggle-genres .toggle-btn {
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  background-color: #4b2991;
+  border: 2px solid #a97ff0;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.toggle-genres .toggle-btn:hover {
+  background-color: #6f4dcf;
+}
+
+
 
 /* ---------- Generate Button ---------- */
 .generate-button {
