@@ -8,14 +8,28 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const axios = require("axios");
 
-const { topTracks4, topAlbums4, topArtists4, topGenres4,} = require("../Controllers/userDataController");
 
 const seedUserMusicHistory = async (userId) => {
   try {
-    const topTracks4Weeks = await topTracks4(userId);
-    const topAlbums4Weeks = await topAlbums4(userId);
-    const topArtist4Weeks = await topArtists4(userId);
-    const topGenres4Weeks = await topGenres4(userId);
+    // Fetch user stats once from DB
+    const stats = await prisma.userStats.findUnique({
+      where: { userId },
+      select: {
+        topTracks: true,
+        topAlbums: true,
+        topArtists: true,
+        topGenres: true,
+      },
+    });
+
+    if (!stats) {
+      throw new Error("User stats not found");
+    }
+
+    const topTracks4Weeks = stats.topTracks?.short || [];
+    const topAlbums4Weeks = stats.topAlbums?.short || [];
+    const topArtist4Weeks = stats.topArtists?.short || [];
+    const topGenres4Weeks = stats.topGenres?.short || [];
 
     let trackswithArtist = ""
     for (let track of topTracks4Weeks){

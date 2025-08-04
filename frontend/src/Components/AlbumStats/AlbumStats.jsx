@@ -29,6 +29,8 @@ const AlbumStats = () => {
             `${API_BASE_URL}/user/top-albums/1y?spotifyId=${spotifyId}`,
         ];
 
+                await delay(30000); // 30 second delay
+
         const res4w = await fetch(urls[0], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res4w.ok) throw new Error("Failed to fetch 4w albums");
         const data4w = await res4w.json();

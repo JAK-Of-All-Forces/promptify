@@ -29,19 +29,21 @@ const ArtistStats = () => {
             `${API_BASE_URL}/user/top-artists/1y?spotifyId=${spotifyId}`,
         ];
 
+                // await delay(30000); // 30 second delay
+
         const res4w = await fetch(urls[0], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res4w.ok) throw new Error("Failed to fetch 4w artists");
         const data4w = await res4w.json();
         setArtist4w(data4w);
 
-        await delay(30000); // 30 second delay
+        // await delay(30000); // 30 second delay
 
         const res6m = await fetch(urls[1], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res6m.ok) throw new Error("Failed to fetch 6m tracks");
         const data6m = await res6m.json();
         setArtist6m(data6m);
 
-        await delay(30000); // 30 second delay
+        // await delay(30000); // 30 second delay
 
         const res1y = await fetch(urls[2], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res1y.ok) throw new Error("Failed to fetch 1y tracks");

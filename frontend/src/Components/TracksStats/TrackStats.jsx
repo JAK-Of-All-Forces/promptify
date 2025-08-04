@@ -29,6 +29,8 @@ const TrackStats = () => {
             `${API_BASE_URL}/user/top-tracks/6m?spotifyId=${spotifyId}`,
             `${API_BASE_URL}/user/top-tracks/1y?spotifyId=${spotifyId}`,
         ];
+        await delay(30000); // 30 second delay
+
 
         const res4w = await fetch(urls[0], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res4w.ok) throw new Error("Failed to fetch 4w tracks");
@@ -68,7 +70,6 @@ const TrackStats = () => {
     const handleTimeRangeClick = (range) => {
         if (range === "4w") { 
             console.log('just clicked 4 weeks')
-            console.log(tracks4w)
             setSelectedTracks(tracks4w)
         } else if (range === "6m") {
                 console.log('just clicked 6 months')

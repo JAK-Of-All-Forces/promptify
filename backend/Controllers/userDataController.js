@@ -3,6 +3,10 @@ const prisma = new PrismaClient();
 const axios = require("axios");
 
 
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const getAccessToken = async (userId) => {
   const response = await prisma.user.findUnique({
     where: { id: userId },
@@ -34,9 +38,11 @@ try {
     // Spotify allows max 50 IDs per request
     const MAX_BATCH_SIZE = 50;
     const imageMap = {};
+    // await delay(30000); // 30 second delay
 
     for (let i = 0; i < spotifyIds.length; i += MAX_BATCH_SIZE) {
       const batchIds = spotifyIds.slice(i, i + MAX_BATCH_SIZE).join(",");
+      console.log("These are the batch IDs: ", batchIds);
       const response = await axios.get(
         `https://api.spotify.com/v1/tracks?ids=${batchIds}`,
         { headers }
@@ -62,7 +68,7 @@ try {
 
     return imageMap; // { trackId1: imageUrl1, trackId2: imageUrl2, ... }
   } catch (error) {
-    console.error("Error fetching track images batch:", error.response?.data || error.message);
+      console.error("Error fetching track images batch:", error.response?.data || error.message);
     return {};
   }
 }
@@ -70,6 +76,8 @@ try {
 // get top tracks (4 weeks), limit = 30 - return the album, artists, spotify id, track name
 const topTracks4 = async (userId) => {
   try {
+            // await delay(30000); // 30 second delay
+
     // console.log("grabbing the top tracks for this user...");
     const spotifyToken = await getAccessToken(userId);
     if (spotifyToken) {
@@ -136,6 +144,8 @@ const topTracks4 = async (userId) => {
 
 // get top tracks (6 months), limit = 30 - return the album, artists, spotify id, track name
 const topTracks6 = async (userId) => {
+          // await delay(30000); // 30 second delay
+
   try {
     console.log("grabbing the top tracks for this user...");
     const spotifyToken = await getAccessToken(userId);
@@ -201,6 +211,8 @@ const topTracks6 = async (userId) => {
 
 // get top tracks (one year), limit = 30 - return the album, artists, spotify id, track name
 const topTracks1 = async (userId) => {
+          // await delay(30000); // 30 second delay
+
   try {
     console.log("grabbing the top tracks for this user...");
     const spotifyToken = await getAccessToken(userId);
@@ -266,6 +278,7 @@ const topTracks1 = async (userId) => {
 // get top albums (4 weeks), top 10
 const topAlbums4 = async (userId) => {
   try {
+        // await delay(30000); // 30 second delay
     console.log("grabbing the short term top albums for this user...");
     const shortTermTrackData = await topTracks4(userId);
     console.log(shortTermTrackData);
@@ -307,6 +320,8 @@ const topAlbums4 = async (userId) => {
 
 // get top albums (6 months), top 10
 const topAlbums6 = async (userId) => {
+          // await delay(30000); // 30 second delay
+
   try {
     console.log("grabbing the top albums for this user...");
     const mediumTermTrackData = await topTracks6(userId);
@@ -343,6 +358,8 @@ const topAlbums6 = async (userId) => {
 
 // get top albums (one year), top 10
 const topAlbums1 = async (userId) => {
+          // await delay(30000); // 30 second delay
+
   try {
     console.log("grabbing the top albums for this user...");
     const longTermTrackData = await topTracks1(userId);
@@ -647,6 +664,40 @@ const topGenres1 = async (userId) => {
   }
 };
 
+const initUserStats = async (userId) => {
+  const topTracks = {
+    short: await topTracks4(userId),
+    medium: await topTracks6(userId),
+    long: await topTracks1(userId),
+  };
+
+  const topAlbums = {
+    short: await topAlbums4(userId),
+    medium: await topAlbums6(userId),
+    long: await topAlbums1(userId),
+  };
+
+  const topArtists = {
+    short: await topArtists4(userId),
+    medium: await topArtists6(userId),
+    long: await topArtists1(userId),
+  };
+
+  const topGenres = {
+    short: await topGenres4(userId),
+    medium: await topGenres6(userId),
+    long: await topGenres1(userId),
+  };
+
+  const stats = await prisma.userStats.upsert({
+    where: { userId },
+    update: { topTracks, topAlbums, topArtists, topGenres },
+    create: { userId, topTracks, topAlbums, topArtists, topGenres },
+  });
+
+  return stats;
+};
+
 
 module.exports = {
   topTracks4,
@@ -661,4 +712,5 @@ module.exports = {
   topGenres4,
   topGenres6,
   topGenres1,
+  initUserStats
 };

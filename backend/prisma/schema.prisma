@@ -24,6 +24,7 @@ model User {
   refreshToken  String 
   createdAt     DateTime    @default(now())
   image         String?
+  stats         UserStats? 
 }
 
 model Playlist {
@@ -58,4 +59,16 @@ model TracksOnPlaylists {
   trackId    String
   playlist   Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
   track      Track    @relation(fields: [trackId], references: [id], onDelete: Cascade)
+}
+
+model UserStats {
+  userId     String   @id @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  topTracks   Json
+  topAlbums   Json
+  topArtists  Json
+  topGenres   Json
+
+  updatedAt   DateTime @updatedAt
 }
