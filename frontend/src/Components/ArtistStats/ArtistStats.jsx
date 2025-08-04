@@ -111,11 +111,24 @@ const ArtistStats = () => {
                 ) : (
                 <div className="track-list">
                 {selectedArtist.map((artist, index) => (
-                    <div key={index} className="TrackCard">
-                    <div className="track-number">
-                        {index + 1}.
-                    </div>
-                    <div className="track-cover">
+                        <div
+                            key={index}
+                            className="TrackCard"
+                            onClick={() => {
+                                if (artist) {
+                                    console.log("HIiiii");
+                                    console.log(artist);
+                                    if (artist.spotifyId) {
+                                        window.open(`https://open.spotify.com/artist/${artist.spotifyId}?go=0`, "_blank");
+                                    }
+                                }
+                            }}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <div className="track-number">
+                                {index + 1}.
+                            </div>
+                            <div className="track-cover">
                         <img src={artist.images} alt={`${artist.artistName} cover`} />
                     </div>
                     <div className="track-info">

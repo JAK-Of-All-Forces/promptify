@@ -114,11 +114,23 @@ const AlbumStats = () => {
                 ) : (
                 <div className="track-list">
                     {selectedAlbum.map(([albumName, tracks], index) => (
-                        <div key={index} className="TrackCard">
-                        <div className="track-number">
-                            {index + 1}.
-                        </div>
-                        <div className="track-cover">
+                        <div
+                            key={index}
+                            className="TrackCard"
+                            onClick={() => {
+                                if (tracks && tracks.length > 0) {
+                                    const firstTrack = tracks[0];
+                                    if (firstTrack?.spotifyId) {
+                                        window.open(`https://open.spotify.com/track/${firstTrack.spotifyId}?go=0`, "_blank");
+                                    }
+                                }
+                            }}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <div className="track-number">
+                                {index + 1}.
+                            </div>
+                            <div className="track-cover">
                             <img src={tracks[0].image} alt={`${albumName} cover`} />
                         </div>
                         <div className="track-info">
