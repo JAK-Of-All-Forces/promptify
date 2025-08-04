@@ -121,6 +121,7 @@ const topTracks4 = async (userId) => {
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
       const image = imagesMap[currTrack.id];
+      const albumId = currTrack.album.id;
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
@@ -129,6 +130,7 @@ const topTracks4 = async (userId) => {
         albumName,
         image,
         artists,
+        albumId
       });
     }
     // console.log(simplifiedTracks);
@@ -189,6 +191,7 @@ const topTracks6 = async (userId) => {
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
       const image = imagesMap[currTrack.id];
+      const albumId = currTrack.album.id;
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
@@ -197,6 +200,7 @@ const topTracks6 = async (userId) => {
         albumName,
         image,
         artists,
+        albumId
       });
     }
 
@@ -256,6 +260,7 @@ const topTracks1 = async (userId) => {
       const spotifyId = currTrack.id;
       const albumName = currTrack.album.name;
       const image = imagesMap[currTrack.id];
+      const albumId = currTrack.album.id;
       const artists = currTrack.artists.map((artist) => artist.name).join(", "); // .join makes it a string
 
       simplifiedTracks.push({
@@ -264,6 +269,7 @@ const topTracks1 = async (userId) => {
         albumName,
         image,
         artists,
+        albumId
       });
     }
     return simplifiedTracks;
@@ -293,9 +299,10 @@ const topAlbums4 = async (userId) => {
         }
         // Push an object with trackName and artists (assuming track.artists is a string or array)
         albumMap[track.albumName].push({
-            trackName: track.trackName,
-            artists: track.artists, // adjust based on how artist info is stored (string or array)
-            image: track.image
+          albumId: track.albumId,
+          trackName: track.trackName,
+          artists: track.artists, // adjust based on how artist info is stored (string or array)
+          image: track.image
         });
 
     }
@@ -335,6 +342,7 @@ const topAlbums6 = async (userId) => {
         }
         // Push an object with trackName and artists (assuming track.artists is a string or array)
         albumMap[track.albumName].push({
+            albumId: track.albumId,
             trackName: track.trackName,
             artists: track.artists, // adjust based on how artist info is stored (string or array)
             image: track.image
@@ -373,6 +381,7 @@ const topAlbums1 = async (userId) => {
         }
         // Push an object with trackName and artists (assuming track.artists is a string or array)
         albumMap[track.albumName].push({
+            albumId: track.albumId,
             trackName: track.trackName,
             artists: track.artists, // adjust based on how artist info is stored (string or array)
             image: track.image

@@ -118,11 +118,12 @@ const AlbumStats = () => {
                             key={index}
                             className="TrackCard"
                             onClick={() => {
-                                if (tracks && tracks.length > 0) {
-                                    const firstTrack = tracks[0];
-                                    if (firstTrack?.spotifyId) {
-                                        window.open(`https://open.spotify.com/track/${firstTrack.spotifyId}?go=0`, "_blank");
-                                    }
+                                console.log("Clicked album:", tracks);
+                                const albumId = tracks[0]?.albumId;
+                                if (albumId) {
+                                    window.open(`https://open.spotify.com/album/${albumId}?go=0`, "_blank");
+                                } else {
+                                    console.warn("No albumId found");
                                 }
                             }}
                             style={{ cursor: "pointer" }}

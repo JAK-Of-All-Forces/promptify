@@ -110,14 +110,12 @@ const ArtistStats = () => {
                 </div>
                 ) : (
                 <div className="track-list">
-                {selectedArtist.map((artist, index) => (
+                    {selectedArtist.map((artist, index) => (
                         <div
                             key={index}
                             className="TrackCard"
                             onClick={() => {
                                 if (artist) {
-                                    console.log("HIiiii");
-                                    console.log(artist);
                                     if (artist.spotifyId) {
                                         window.open(`https://open.spotify.com/artist/${artist.spotifyId}?go=0`, "_blank");
                                     }
@@ -125,16 +123,16 @@ const ArtistStats = () => {
                             }}
                             style={{ cursor: "pointer" }}
                         >
-                            <div className="track-number">
-                                {index + 1}.
-                            </div>
-                            <div className="track-cover">
-                        <img src={artist.images} alt={`${artist.artistName} cover`} />
-                    </div>
-                    <div className="track-info">
-                        <h3 className="track-name">{artist.artistName}</h3>
-                    </div>
-                    </div>
+                        <div className="track-number">
+                            {index + 1}.
+                        </div>
+                        <div className="track-cover">
+                            <img src={artist.images} alt={`${artist.artistName} cover`} />
+                        </div>
+                        <div className="track-info">
+                            <h3 className="track-name">{artist.artistName}</h3>
+                        </div>
+                        </div>
                 ))}
                 </div>
             )}

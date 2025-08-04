@@ -78,7 +78,7 @@ exports.handleCallback = async (req, res) => {
   },
 });
 
-await initUserStats(upsertedUser.id);
+    await initUserStats(upsertedUser.id);
 
 
     res.redirect(`${CLIENT_URL}/home?access_token=${access_token}&spotify_id=${userProfile.id}`);
