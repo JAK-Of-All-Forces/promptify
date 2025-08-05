@@ -55,7 +55,6 @@ function HomePage({ token, setToken }) {
           const playlistRes = await fetch(`${API_BASE_URL}/user/${data.id}`);
 
           const playlistData = await playlistRes.json();
-          console.log("Playlist data", playlistData);
 
           setUserPlaylists(playlistData);
 

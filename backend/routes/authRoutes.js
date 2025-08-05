@@ -8,4 +8,5 @@ router.get("/callback", authController.handleCallback);
 
 router.get("/refresh-token/:spotifyId", authController.refreshAccessToken);
 
+
 module.exports = router;
