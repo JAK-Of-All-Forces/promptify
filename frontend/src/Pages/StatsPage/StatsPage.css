@@ -66,11 +66,16 @@
 
 .stats-page-container {
   display: flex;
+.stats-page-container {
+  display: flex;
   flex-direction: row;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
   justify-content: center; /* horizontal center */
   align-items: center;     /* vertical center */
 }
 
+.extra-display {
 .extra-display {
   max-width: 300px;
   padding: 25px;
@@ -81,12 +86,7 @@
   margin: 0 auto 40px auto; /* keep centered */
 }
 
-/* .extra-display .thank-you-section {
-  margin-top: 150px;
-} */
 
-
-/** 
 
 /* ==== TABLET SCREENS ==== */
 @media (min-width: 768px) and (max-width: 1524px) {
