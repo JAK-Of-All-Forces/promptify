@@ -24,7 +24,7 @@ const aboutData = [
     id: 2,
     name: "Jessica Obi",
     role: "FTL Scholar",
-    school: "Spellman College",
+    school: "Spelman College",
     image: jessica,
     email: "obicjessica@gmail.com",
     linkedin: "https://www.linkedin.com/in/jessica-obi-80a184287/",
