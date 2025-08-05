@@ -28,9 +28,16 @@ exports.getLoginUrl = (req, res) => {
 };
 
 exports.handleCallback = async (req, res) => {
+  const error = req.query.error;
   const code = req.query.code;
-  if (!code) return res.send("Missing code!");
 
+  if (error === "access_denied") {
+    // User is not authorized in Spotify Dev Mode
+    return res.redirect(`${CLIENT_URL}/unauthorized`);
+  }
+
+  if (!code) return res.send("Missing code!");
+  
   try {
     // Make request to Spotify to get a new access token
 
