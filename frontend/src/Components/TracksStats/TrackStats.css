@@ -10,12 +10,12 @@
   flex-shrink: 0;
 }
 
-.button-options {
+.stats-button-options {
   display: flex;
   justify-content: center; 
 }
 
-.button-options button {
+.stats-button-options button {
   padding: 10px 20px;
   font-size: 15px;
   border-radius: 30px;
@@ -30,11 +30,11 @@
   margin-bottom: 10px;;
 }
 
-.button-options button:hover:not(:disabled) {
+.stats-button-options button:hover:not(:disabled) {
   background-color: #5e35b1;
 }
 
-.button-options button:disabled {
+.stats-button-options button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
