@@ -15,7 +15,7 @@
   justify-content: center; 
 }
 
-.stats-button-options button {
+.stats-button-options-btn  {
   padding: 10px 20px;
   font-size: 15px;
   border-radius: 30px;
@@ -30,11 +30,11 @@
   margin-bottom: 10px;;
 }
 
-.stats-button-options button:hover:not(:disabled) {
-  background-color: #5e35b1;
+.stats-button-options-btn:hover:not(:disabled) {
+  background-color: #8151e1;
 }
 
-.stats-button-options button:disabled {
+.stats-button-options-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
