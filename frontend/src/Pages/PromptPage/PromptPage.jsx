@@ -151,7 +151,6 @@ const filteredGenres = genreSearchTerm.length > 0
         spotifyId: spotifyID,
       };
 
-      console.log(payload);
 
       try {
         navigate("/loading"); // uncomment when the loading state page is made

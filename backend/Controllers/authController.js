@@ -84,7 +84,6 @@ await initUserStats(upsertedUser.id);
     res.redirect(`${CLIENT_URL}/home?access_token=${access_token}&spotify_id=${userProfile.id}`);
     // res.send({access_token: access_token, spotify_id: userProfile.id});
   } catch (err) {
-    console.error("Callback error:", err.response?.data || err.message);
     res.status(500).send("Callback failed.");
   }
 };
@@ -124,7 +123,6 @@ exports.refreshAccessToken = async (req, res) => {
     // Send new access token to client
     res.json({ accessToken: data.access_token, expiresIn: data.expires_in });
   } catch (err) {
-    console.error("Refresh token error:", err.response?.data || err.message);
     res.status(500).json({ error: "Failed to refresh token" });
   }
 };
