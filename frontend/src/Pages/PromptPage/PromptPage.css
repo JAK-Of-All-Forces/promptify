@@ -122,43 +122,24 @@
 }
 
 .loadmore-btn {
-  display: inline-block;
-  min-width: 200px;
+  display: inline-block; /* or block */
+  margin: 10px auto;
   padding: 12px 32px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   border-radius: 30px;
   font-weight: bold;
   cursor: pointer;
   background-color: rgb(32, 214, 95);
   border: 2px solid rgb(161, 218, 181);
-  border-radius: 30px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 
-    background 0.2s,
-    box-shadow 0.2s,
-    transform 0.1s;
-  margin: 10px auto 0 auto;
   text-align: center;
-  white-space: normal; /* allow stacking if needed */
+  white-space: normal;
 }
+
 
 .loadmore-btn:hover {
   /* background: linear-gradient(180deg, #ffb347 0%, #ffe29f 100%);
   box-shadow: 0 2px 0 #e6a03a, 0 1px 4px rgba(0,0,0,0.18); */
   transform: translateY(2px);
-}
-
-/* 3D look for all main buttons */
-.option-list button,
-.generate-button button,
-.loadmore-btn {
-  transition: 
-    background 0.2s,
-    box-shadow 0.2s,
-    transform 0.1s;
-  position: relative;
 }
 
 /* Pressed effect on click */
@@ -231,6 +212,13 @@
   background-color: #c0b6e9;
   border-radius: 10px;
 }
+
+.toggle-genres {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 
 .toggle-genres .toggle-btn {
   padding: 8px 16px;
