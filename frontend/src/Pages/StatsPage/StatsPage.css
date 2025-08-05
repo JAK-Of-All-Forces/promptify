@@ -66,6 +66,8 @@
 
 .stats-page-container {
   display: flex;
+}
+
 .stats-page-container {
   display: flex;
   flex-direction: row;
@@ -75,7 +77,6 @@
   align-items: center;     /* vertical center */
 }
 
-.extra-display {
 .extra-display {
   max-width: 300px;
   padding: 25px;
