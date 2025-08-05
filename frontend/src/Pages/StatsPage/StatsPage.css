@@ -1,72 +1,18 @@
 .stats-page-container header {
-  font-size: 2.5rem;
+  font-size: 50px;
   color: white;
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid #ffffff44;
-  padding-bottom: 0.5rem;
 }
 
-.top-tracks {
-  background-color: rgba(255, 255, 255, 0.15);
-  margin: 50px auto;
-  padding: 40px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 350px;
-  overflow-y: scroll;
-  border-radius: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.top-artists {
-  background-color: rgba(255, 255, 255, 0.15);
-  margin: 50px auto;
-  padding: 40px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 350px;
-  overflow-y: scroll;
-  border-radius: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.top-albums {
-  background-color: rgba(255, 255, 255, 0.15);
-  margin: 50px auto;
-  padding: 40px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 350px;
-  overflow-y: scroll;
-  border-radius: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
+.top-tracks,
+.top-artists,
+.top-albums,
 .top-genres {
   background-color: rgba(255, 255, 255, 0.15);
-  margin: 50px auto;
   padding: 40px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 350px;
   overflow-y: scroll;
   border-radius: 20px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
@@ -77,9 +23,21 @@
   gap: 30px;
 }
 
+.top-tracks, .top-albums {  
+  width: 645px;
+  height: 500px;
+}
+
+.top-artists, .top-genres {
+  width: 385px;
+  height: 500px;
+
+}
+
+
 .extra-display .profile-pic img {
-  width: 300px;      
-  height: 300px;     
+  width: 200px;      
+  height: 200px;     
   border-radius: 50%; 
   object-fit: cover; 
   display: block;
@@ -87,16 +45,219 @@
 }
 
 .extra-display .thank-you-section .large-number {
-  font-size: 78px; 
+  font-size: 149px; 
   text-align: center;
 }
 
 .extra-display .welcome-message p,
 .extra-display .thank-you-section p {
-  font-size: 30px;  /* slightly larger text */
-font-weight: bold;
+  font-size: 22px;  
+  font-weight: bold;
   text-align: center;
   margin: 8px 0;
 }
 
+.stats-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 60px;
+}
 
+
+.stats-page-container{
+  flex-direction: row;
+  display: flex;
+}
+
+.extra-display{
+  max-width: 300px;
+  padding: 25px;
+  margin: 100px auto;
+}
+
+.extra-display .profile-pic {
+  margin-bottom: 120px;
+  margin: 70px auto;
+}
+
+.extra-display .thank-you-section {
+  margin-top: 150px;
+}
+
+
+/** 
+
+/* ==== TABLET SCREENS ==== */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .stats-page-container {
+    flex-direction: column;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    min-height: 100vh;      
+  }
+
+  .stats-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 40px;
+    justify-content: center;
+  }
+
+  .top-tracks, .top-albums, .top-artists, .top-genres {  
+    width: 650px;
+    height: 450px;
+  }
+
+  .extra-display {
+    order: -1; 
+    display: flex;               
+    flex-direction: row;
+    align-items: center;         
+    justify-content: center;
+    gap: 75px;                    
+    padding: 20px;
+    margin-top: auto;              
+    max-width: 900px;
+  }
+
+  .extra-display .profile-pic img {
+    width: 200px;      
+    height: 200px;     
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .extra-display .text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    height: 100%;            
+    justify-content: center;
+  }
+  .extra-display .thank-you-section {
+    margin-top: 10px; 
+    margin-bottom: 0px;
+  }
+
+  .extra-display .thank-you-section .large-number {
+    font-size: 120px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+  }
+}
+
+/* ==== PHONES ==== */
+@media (max-width: 768px) {
+  .stats-page-container {
+    flex-direction: column;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    min-height: 100vh;      
+  }
+
+  .stats-page-container header {
+    font-size: 35px;
+  }
+
+  .stats-section {
+    display: flex;
+    flex-direction: column; /* stack cards for phone */
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .top-tracks, .top-albums, .top-artists, .top-genres {  
+    width: 250px;
+    height: 350px;
+  }
+
+  .extra-display {
+    order: -1; 
+    flex-direction: column;
+    gap: 30px;                    
+    padding: 0px;
+    margin-top: auto;              
+  }
+
+  .extra-display .profile-pic img {
+    width: 230px;      
+    height: 230px;     
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .extra-display .thank-you-section {
+    margin-top: 25px; 
+    margin-bottom: 0px;
+  }
+
+  .extra-display .thank-you-section .large-number {
+    font-size: 80px; 
+  }
+
+  .extra-display .welcome-message p,
+  .extra-display .thank-you-section p {
+    font-size: 18px;
+  }
+}
+
+/* ==== EXTENDED SCREENS ==== */
+@media (min-width: 1800px) {
+  .stats-section {
+    gap: 40px;
+    padding: 80px;
+  }
+
+  .top-tracks, .top-albums {  
+    width: 1200px;
+    height: 550px;
+  }
+
+  .top-artists, .top-genres {
+    width: 800px;
+    height: 550px;
+  }
+
+  .stats-page-container header {
+    font-size: 60px;
+  }
+
+
+.extra-display .profile-pic img {
+  width: 200px;      
+  height: 200px;     
+  border-radius: 50%; 
+  object-fit: cover; 
+  display: block;
+  margin: 0 auto;   
+}
+
+.extra-display .thank-you-section .large-number {
+  font-size: 149px; 
+  text-align: center;
+}
+
+.extra-display .welcome-message p,
+.extra-display .thank-you-section p {
+  font-size: 28px;  
+  font-weight: bold;
+  text-align: center;
+  margin: 8px 0;
+}
+
+.extra-display{
+  max-width: 600px;
+  padding: 25px;
+  margin: 100px auto;
+  margin-right: 190px;
+}
+
+}
+/**

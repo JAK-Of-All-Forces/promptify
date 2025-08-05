@@ -2,22 +2,6 @@ import "./LoadingPage.css";
 
 function LoadingPage() {
 
-
-    // <div className="loading-bar">
-    //             <p>Curating a Promptify Playlist for you now...</p>
-    //             <video
-    //             width="640"
-    //             height="360"
-    //             autoPlay
-    //             muted
-    //             loop
-    //             playsInline
-    //             className="background-video"
-    //             > 
-    //                <source src="/promptify_loading_bar.mp4" type="video/mp4" />
-    //             </video>
-    // </div>
-
     return (
         <>
            <div className="loading-page-container">
