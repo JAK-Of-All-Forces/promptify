@@ -17,11 +17,10 @@ Project Code Repository Links
 
 ## Project Overview
 
-Add a quick summary of what your project theme and objectives are. 
 The theme of our project is to utilize AI prompting to allow a quicker and more personalized process for create playlists for Spotify users. Our objectives are to utilize the OpenAI API to allow users to send in a prompt with the information about what they are doing to make a playlist that can be added to their Spotify if they wish.
 
-Deployment Website: **Add Link to Deployed Project**
+Deployment Website: **https://promptify-je8q.onrender.com/**
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+None Available.
