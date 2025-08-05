@@ -16,10 +16,10 @@ function ErrorPage({token, setToken}) {
                 ERR
                 <img className="logo-image" id="error-logo" src={logo}></img>R
               </h1>
-              <p>Something went wrong :(</p>
-              <Link to="/home">
+              <p>There was an error generating your playlist. Please try again.</p>
+              <Link to="/prompt">
                 <button className="error-page-button">
-                  <h2>Go Back Home</h2>
+                  <h2>Let's Make a Playlist</h2>
                 </button>
               </Link>
             </div>
