@@ -112,9 +112,7 @@ function StatsPage({ token, setToken }) {
                         </>
                     ) : (
                         <>
-                        <p className="no-playlists-message">
-                            YOU HAVEN'T CREATED ANY PROMPTIFY PLAYLISTS YET</p>
-                        <p>BUT THANK YOU FOR CHECKING US OUT ANYWAYS</p>
+                        <p>THANK YOU FOR USING PROMPTIFY!</p>
                         </>
                     )}
                 </div>
