@@ -7,7 +7,6 @@ import "./ErrorPage.css"
 function ErrorPage({token, setToken}) {
     return (
       <div className="error-page">
-        {/* Look into why we have to put the navbar outside of the page unlinke the other ones */}
         <NavBar token={token} setToken={setToken}></NavBar>
         <div className="error-body">
           <div className="error-message">
@@ -17,10 +16,10 @@ function ErrorPage({token, setToken}) {
                 ERR
                 <img className="logo-image" id="error-logo" src={logo}></img>R
               </h1>
-              <p>Something went wrong :(</p>
-              <Link to="/home">
+              <p>There was an error generating your playlist. Please try again.</p>
+              <Link to="/prompt">
                 <button className="error-page-button">
-                  <h2>Go Back Home</h2>
+                  <h2>Let's Make a Playlist</h2>
                 </button>
               </Link>
             </div>

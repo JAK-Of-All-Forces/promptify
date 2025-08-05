@@ -10,6 +10,8 @@ import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import LoadingPage from "../../Pages/LoadingPage/LoadingPage";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import StatsPage from '../../Pages/StatsPage/StatsPage';
+import AuthenticationPage from "../../Pages/AuthenticationPage/AuthenticationPage.jsx";
+import NotFoundPage from "../../Pages/NotFoundPage/NotFoundPage.jsx"
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -111,6 +113,8 @@ if (accessToken || spotifyId) {
 
         <Route path="/error" element={<ErrorPage />} />
         <Route path="/loading" element={<LoadingPage />} />
+        <Route path="/authentication" element={<AuthenticationPage />} />
+        <Route path="*" element = {<NotFoundPage/>}/>
       </Routes>
       <ToastContainer />
     </BrowserRouter>

@@ -34,7 +34,7 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
       <Link to={`/playlist/${playlist.id}`}>
         {/* Playlist cover */}
         <div className="playlist-cover">
-          {playlist.image_url ? (
+          {playlist.image_url !== "backend/assets/no_img.png" ? (
             <img src={playlist.image_url} alt="Playlist Cover" />
           ) : (
             <img src={no_image} alt="Playlist Cover (No Image)" />
@@ -50,7 +50,7 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
               <FaTrash
                 className="delete-icon"
                 key={playlist.id}
-                onClick={e => {
+                onClick={(e) => {
                   e.preventDefault();
                   setSelectedPlaylist(playlist);
                   setModalOpen(true);
@@ -66,7 +66,7 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
         <DeletePlaylistModal
           onClose={handleClose}
           selectedPlaylist={selectedPlaylist}
-          setRefreshFlag = {setRefreshFlag}
+          setRefreshFlag={setRefreshFlag}
         />
       )}
     </div>
