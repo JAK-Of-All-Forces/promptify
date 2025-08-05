@@ -123,11 +123,10 @@
 
 .loadmore-btn {
   display: inline-block;
-  min-width: 90px;
-  max-width: 140px;
-  padding: 6px 10px;
-  font-size: 0.95rem;
-  border-radius: 18px;
+  min-width: 200px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  border-radius: 30px;
   font-weight: bold;
   cursor: pointer;
   background-color: rgb(32, 214, 95);
@@ -142,6 +141,7 @@
     transform 0.1s;
   margin: 10px auto 0 auto;
   text-align: center;
+  white-space: normal; /* allow stacking if needed */
 }
 
 .loadmore-btn:hover {
@@ -198,13 +198,10 @@
   font-weight: bold;
   font-style: oblique;
   cursor: pointer;
-  box-shadow: 0 4px 0 #a97ff0, 0 2px 8px rgba(0,0,0,0.12); /* 3D look */
-  transition: 
-    background 0.2s,
-    box-shadow 0.2s,
-    transform 0.1s;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   margin-bottom: 6px;
 }
+
 
 .all-genres label:hover {
   background-color: #6f4dcf;
@@ -240,8 +237,8 @@
   font-size: 1rem;
   font-weight: bold;
   border-radius: 30px;
-  background-color: #4b2991;
-  border: 2px solid #a97ff0;
+ background-color: rgb(32, 214, 95);
+  border: 2px solid rgb(161, 218, 181);
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -249,7 +246,10 @@
 }
 
 .toggle-genres .toggle-btn:hover {
-  background-color: #6f4dcf;
+  background-color: rgb(32, 214, 95); /* same green as default */
+  color: white;
+  border-color: rgb(161, 218, 181);
+  filter: brightness(1.08);
 }
 
 
@@ -364,6 +364,16 @@
 
   .all-genres input[type="checkbox"] {
     transform: scale(1);
+  }
+
+  .loadmore-btn,
+  .toggle-genres .toggle-btn {
+    min-width: 120px;
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+  .center-btn-row {
+    margin: 10px 0;
   }
 }
 
@@ -481,6 +491,28 @@
     padding: 16px 32px;
     font-size: 1.15rem;
   }
+}
+
+.center-btn-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.loadmore-btn,
+.toggle-genres .toggle-btn {
+  min-width: 140px;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  font-weight: bold;
+  margin: 0 8px;
+}
+
+.center-btn-row > button {
+  margin: 0 8px;
 }
 
 

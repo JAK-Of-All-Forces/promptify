@@ -94,7 +94,7 @@ function PromptPage ({token, setToken}) {
 
   // duration button logic
   const durations = [
-    "15 minutes",
+    // "15 minutes",
     "30 minutes",
     "45 minutes",
     "60 minutes",
@@ -243,10 +243,12 @@ const filteredGenres = genreSearchTerm.length > 0
       ))}
     </div>
     {visibleActivities < activitiesData.length && (
-      <button className="loadmore-btn" onClick={() => setVisibleActivities(visibleActivities + 8)}>
-        Load More
-      </button>
-    )}
+  <div className="center-btn-row">
+    <button className="loadmore-btn" onClick={() => setVisibleActivities(visibleActivities + 8)}>
+      Load More Activities
+    </button>
+  </div>
+)}
     {selectedActivity && (
   <div className="user-choice">
     <p>Your chosen activity is: {selectedActivity}</p>
@@ -310,12 +312,14 @@ const filteredGenres = genreSearchTerm.length > 0
 </div>
 
     {showAllGenres && visibleGenres < allGenres.length && (
+  <div className="center-btn-row">
   <button
     className="loadmore-btn"
     onClick={() => setVisibleGenres(visibleGenres + 20)}
   >
     Load More Genres
   </button>
+  </div>
 )}
 
     {selectedGenres.length>0 &&(<div className="user-choice">
@@ -336,3 +340,4 @@ const filteredGenres = genreSearchTerm.length > 0
 }
 
 export default PromptPage;
+
