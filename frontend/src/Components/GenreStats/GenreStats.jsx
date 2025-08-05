@@ -91,9 +91,9 @@ const GenreStats = () => {
         <div className="genre-stats">
 
             <div className="stats-button-options">
-                <button disabled={loading} onClick={() => handleTimeRangeClick("4w")}>4 WEEKS</button>
-                <button disabled={loading} onClick={() => handleTimeRangeClick("6m")}>6 MONTHS</button>
-                <button disabled={loading} onClick={() => handleTimeRangeClick("1y")}>1 YEAR</button>
+                <button className="stats-button-options-btn" disabled={loading} onClick={() => handleTimeRangeClick("4w")}>4 WEEKS</button>
+                <button className="stats-button-options-btn" disabled={loading} onClick={() => handleTimeRangeClick("6m")}>6 MONTHS</button>
+                <button className="stats-button-options-btn" disabled={loading} onClick={() => handleTimeRangeClick("1y")}>1 YEAR</button>
             </div>
 
             {loading ? (
