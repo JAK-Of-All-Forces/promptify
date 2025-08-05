@@ -68,14 +68,14 @@
   display: flex;
 }
 
+
 .stats-page-container {
   display: flex;
   flex-direction: row;
   justify-content: center; /* horizontal center */
   align-items: center;     /* vertical center */
-  justify-content: center; /* horizontal center */
-  align-items: center;     /* vertical center */
 }
+
 
 .extra-display {
   max-width: 300px;
