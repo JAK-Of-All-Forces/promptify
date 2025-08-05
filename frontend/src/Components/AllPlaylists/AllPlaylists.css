@@ -4,3 +4,25 @@
     justify-content: center;
     gap: 1em;
 }
+
+@media (max-width: 768px) {
+  .all-playlists {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .PlaylistCard {
+    width: auto;
+    max-width: 350px;
+    padding: 1em;
+    border-radius: 20px;
+  }
+
+  .all-playlists .PlaylistCard img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+    max-height: 250px;
+    object-fit: cover; 
+  }
+}

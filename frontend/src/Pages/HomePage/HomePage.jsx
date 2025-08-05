@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import RecentPlaylists from "../../Components/RecentPlaylists/RecentPlaylists";
 import LogoutButton from "../../Components/SpotifyLogout/LogoutButton";
 import "./HomePage.css";
+import "../../Components/NavBar/NavBar.css";
+import "../LoadingPage/LoadingPage.css";
+import logo from "../../assets/favicon.png";
+
+
 
 function HomePage({ token, setToken }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -13,6 +18,8 @@ function HomePage({ token, setToken }) {
 
   //This is for when a track is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
   const [refreshFlag, setRefreshFlag] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     if (!token) return;
@@ -53,14 +60,43 @@ function HomePage({ token, setToken }) {
 
           //Checking where the token is stored
           console.log("Token", token);
+
+          setIsLoading(false); 
         }
       } catch (err) {
         console.error("Error fetching profile:", err);
+        setIsLoading(false); 
       }
     };
 
     fetchProfile();
   }, [token, refreshFlag]);
+
+    if (isLoading) {
+      return (
+      <>
+        <div className="loading-page">
+          <nav className="nav-bar">
+            <div className="left-nav">
+              <div className="promptify-logo">
+                <div className="nav-logo">
+                  <h1>PR</h1>
+                  <img className="nav-logo-image" src={logo}></img>
+                  <h1>MPTIFY</h1>
+                </div>
+              </div>
+            </div>
+          </nav>
+          <div className="center-content">
+            <div className="loading-dots"></div>
+              <div className="prompt-caption">
+                  <p>Powering up Promptify for you now...</p>
+              </div>
+            </div>
+        </div>
+      </>
+    );
+  } 
 
   return (
     //Displayling NavBar component

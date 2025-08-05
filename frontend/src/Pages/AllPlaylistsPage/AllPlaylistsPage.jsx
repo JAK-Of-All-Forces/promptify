@@ -6,9 +6,14 @@ import "./AllPlaylistsPage.css";
 import TrackCard from "../../Components/TrackCard/TrackCard";
 import { toast } from "react-toastify";
 import AllPlaylists from "../../Components/AllPlaylists/AllPlaylists";
+import "../../Components/NavBar/NavBar.css";
+import "../LoadingPage/LoadingPage.css";
+import logo from "../../assets/favicon.png";
 
 function AllPlaylistPage({ token, setToken }) {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const [isLoading, setIsLoading] = useState(true); 
+
 
     //User playlists variable
     const [userPlaylists, setUserPlaylists] = useState([]);
@@ -58,18 +63,50 @@ function AllPlaylistPage({ token, setToken }) {
 
             //Checking where the token is stored
             console.log("Token", token);
+
+            setIsLoading(false); 
           }
         } catch (err) {
           console.error("Error fetching profile:", err);
+          setIsLoading(false); 
+
         }
       };
 
       fetchProfile();
     }, [token, refreshFlag]);
 
+
+
     const filteredPlaylists = userPlaylists.filter(playlist =>
       playlist.name.toLowerCase().includes(playlistSearchTerm.toLowerCase())
     );
+
+    if (isLoading) {
+          return (
+          <>
+            <div className="loading-page">
+              <nav className="nav-bar">
+                <div className="left-nav">
+                  <div className="promptify-logo">
+                    <div className="nav-logo">
+                      <h1>PR</h1>
+                      <img className="nav-logo-image" src={logo}></img>
+                      <h1>MPTIFY</h1>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+              <div className="center-content">
+                <div className="loading-dots"></div>
+                  <div className="prompt-caption">
+                      <p>Grabbing all of your Promptify playlists for you now...</p>
+                  </div>
+                </div>
+            </div>
+          </>
+        );
+      } 
 
     return (
       //Displayling NavBar component
