@@ -16,6 +16,8 @@ function AllPlaylistPage({ token, setToken }) {
     //This is for when a track is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
     const [refreshFlag, setRefreshFlag] = useState(false);
 
+    const[playlistSearchTerm, setPlaylistSearchTerm] = useState("");
+
     useEffect(() => {
       if (!token) return;
 
@@ -65,6 +67,10 @@ function AllPlaylistPage({ token, setToken }) {
       fetchProfile();
     }, [token, refreshFlag]);
 
+    const filteredPlaylists = userPlaylists.filter(playlist =>
+      playlist.name.toLowerCase().includes(playlistSearchTerm.toLowerCase())
+    );
+
     return (
       //Displayling NavBar component
       <div className="home-page">
@@ -76,8 +82,18 @@ function AllPlaylistPage({ token, setToken }) {
           <div className="header">
             <h2>All Promptify Playlists</h2>
           </div>
+          <div className = "search-bar">
+          <input
+            type="text"
+            className="playlist-search"
+             placeholder="Search Playlists..."
+           value={playlistSearchTerm}
+       onChange={(e) => setPlaylistSearchTerm(e.target.value)}
+          />
+          </div>
+
           <AllPlaylists
-            userPlaylists={userPlaylists}
+            userPlaylists={filteredPlaylists}
             setRefreshFlag={setRefreshFlag}
           />
         </div>
