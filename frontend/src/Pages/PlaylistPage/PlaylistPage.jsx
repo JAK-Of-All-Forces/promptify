@@ -151,8 +151,8 @@ function PlaylistPage({token, setToken}) {
             <div className="playlist-tracks">
               {!playlist.tracks || playlist.tracks.length === 0 ? (
                 <div className="no-tracks">
-                  <img src={no_image} alt="No tracks" />
-                  <p>This Promptify playlist has no tracks</p>
+                  {/* <img src={no_image} alt="No tracks" /> */}
+                  <p>This Promptify playlist has no tracks.</p>
                 </div>
               ) : (
                 playlist.tracks.map((track) => (
