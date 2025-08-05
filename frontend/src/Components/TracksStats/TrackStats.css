@@ -1,5 +1,5 @@
 .track-number {
-  font-size: 2rem;      /* Increase the size */
+  font-size: 2rem;      
   font-weight: bold;
   color: #ffffff;
   width: 40px;
@@ -27,7 +27,7 @@
   font-style: oblique;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  min-width: 100px; 
+  min-width: 75px; 
   margin-bottom: 10px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
@@ -36,10 +36,6 @@
   background-color: #c1aaf0;
 }
 
-/* .button-options button.selected {
-  background-color: rgb(32, 214, 95);
-  color: white;
-} */
 
 .button-options button:disabled {
   opacity: 0.5;
@@ -51,7 +47,7 @@
 .top-tracks::-webkit-scrollbar,
 .top-albums::-webkit-scrollbar,
 .top-genres::-webkit-scrollbar {
-  width: 8px;
+  width: 0.px;
 }
 
 .top-artists::-webkit-scrollbar-track,
@@ -71,7 +67,7 @@
 }
 
 .loading-container img {
-  width: 100px;  /* Adjust size as needed */
+  width: 100px; 
   height: 100px;
   padding: 10px;
   animation: spin 1.5s linear infinite;
@@ -90,8 +86,51 @@
 }
 
 .loading-container p {
-  font-size: 24px;       /* make text clear but not too big */
+  font-size: 24px;       
   font-weight: bold;
   text-align: center;
-  font-style: italic;    /* optional, matches your button style */
+  font-style: italic;    
+}
+
+
+@media (max-width: 768px) {
+  .TrackCard {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 8px;
+  }
+
+  .track-cover img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .track-number {
+    font-size: 24px;
+    order: 1;
+  }
+
+  .track-cover {
+    order: 2;   
+  }
+
+  .track-info {
+    order: 3;   
+    text-align: center; 
+  }
+
+  .track-info .track-name {
+    margin-bottom: 4px;
+  }
+
+  .button-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;         
+    flex-wrap: wrap;  
+  }
+
 }

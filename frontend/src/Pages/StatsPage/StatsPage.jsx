@@ -100,7 +100,8 @@ function StatsPage({ token, setToken }) {
                 <div className="welcome-message">
                     <p>WELCOME</p>
                     <p className="display-name">{displayName}</p>
-                    <p>TO YOUR STATS PAGE - DISPLAYING YOUR TOP GENRES, ARTISTS, TRACKS, AND ALBUMS ACROSS TIME</p>
+                    <p>TO YOUR STATS PAGE!</p>
+                    <p>DISPLAYING YOUR TOP GENRES, TOP ARTISTS, TOP TRACKS, AND TOP ALBUMS ACROSS TIME.</p>
                 </div>
                 <div className="thank-you-section">
                     {playlistCount > 0 ? (
