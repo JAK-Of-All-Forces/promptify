@@ -60,14 +60,23 @@ const seedUserMusicHistory = async (userId) => {
     console.log("\n")
 
     const seededData = `
-    The user's recent listening history includes these top tracks: ${trackswithArtist}.
-    Top albums: ${albumswithArtist}.
-    Top artists: ${seedArtist}.
-    Top genres: ${seedGenres}.
+    The user's recent listening history (for reference only) includes:
+    - Top tracks: ${trackswithArtist}
+    - Top albums: ${albumswithArtist}
+    - Top artists: ${seedArtist}
+    - Top genres: ${seedGenres}
 
-    Use this information to build a profile of the user's music taste. 
-    For requests involving genres similar to these, prioritize recommendations that fit their current preferences. 
-    For other requests, use this profile to understand their overall style and tailor the playlist accordingly.
+    From this data, build an internal profile of the user's music taste: their preferred styles, moods, tempos, and other patterns.
+    
+    This taste profile should guide your recommendations.
+    • If the user's request relates to genres, artists, or moods similar to the profile, prioritize matching their preferences.
+    • If the request is unrelated to their usual taste, still tailor the response using insights from the profile, but adapt to fit the new request.
+
+    Important:
+    - Do NOT directly include the provided top tracks, albums, artists, or genres in your response unless they are explicitly relevant to the request.
+    - The provided history is context only and should not be surfaced unless it makes sense for the request.
+    - Use this data to inform your understanding of the user's music taste, but do not repeat it verbatim in your response.
+    - Focus on the user's preferences and how they relate to the current request.
     `
 
     return seededData;
