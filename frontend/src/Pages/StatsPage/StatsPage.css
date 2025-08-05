@@ -64,32 +64,32 @@
   padding: 60px;
 }
 
-
-.stats-page-container{
-  flex-direction: row;
+.stats-page-container {
   display: flex;
+  flex-direction: row;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
 }
 
-.extra-display{
+.extra-display {
   max-width: 300px;
   padding: 25px;
-  margin: 100px auto;
+  margin: 0; /* reset margins */
 }
 
 .extra-display .profile-pic {
-  margin-bottom: 120px;
-  margin: 70px auto;
+  margin: 0 auto 40px auto; /* keep centered */
 }
 
-.extra-display .thank-you-section {
+/* .extra-display .thank-you-section {
   margin-top: 150px;
-}
+} */
 
 
 /** 
 
 /* ==== TABLET SCREENS ==== */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1524px) {
   .stats-page-container {
     flex-direction: column;
     display: flex;
