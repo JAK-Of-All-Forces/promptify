@@ -96,7 +96,6 @@
 
  .landing-page .info {
     padding: 1rem 1rem 0 1rem;
-    margin-top: -200px; 
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -105,7 +104,6 @@
     align-items: flex-start;
 }
 .login-button {
-    padding: 1rem 2rem;
     font-size: 1.3rem;
     border-radius: 10px;
     color: white;

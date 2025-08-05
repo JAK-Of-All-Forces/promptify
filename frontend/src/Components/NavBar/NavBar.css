@@ -53,9 +53,6 @@
     position: relative;
     margin: 0;
 }
-.logo-image:hover {
-  cursor: pointer;
-}
 
 @keyframes spin {
   from {

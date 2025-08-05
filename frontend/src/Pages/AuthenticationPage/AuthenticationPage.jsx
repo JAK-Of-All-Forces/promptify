@@ -7,7 +7,6 @@ import "./AuthenticationPage.css";
 function AuthenticationPage({ token, setToken }) {
     return (
       <div className="authentication-page">
-        {/* Look into why we have to put the navbar outside of the page unlinke the other ones */}
         <NavBar token={token} setToken={setToken}></NavBar>
         <div className="authentication-body">
           <div className="authentication-message">
@@ -17,11 +16,11 @@ function AuthenticationPage({ token, setToken }) {
                 <span className="authorization-word">AUTHENTICATION</span>
                 <span className="error-word">
                   ERR
-                  <img className="logo-image" src={logo} alt="Logo"/>R
+                  <img className="logo-image" src={logo} alt="Logo" />R
                 </span>
               </h1>
               <p>
-                You require authentication to access Promptify. Please contact
+                You require authentication to access Promptify. Please contact amarimay1213@gmail.com
               </p>
               <Link to="/home">
                 <button className="authentication-page-button">

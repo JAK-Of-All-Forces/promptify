@@ -7,7 +7,6 @@ import "./ErrorPage.css"
 function ErrorPage({token, setToken}) {
     return (
       <div className="error-page">
-        {/* Look into why we have to put the navbar outside of the page unlinke the other ones */}
         <NavBar token={token} setToken={setToken}></NavBar>
         <div className="error-body">
           <div className="error-message">
