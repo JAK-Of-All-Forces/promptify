@@ -1,22 +1,22 @@
+/*PROBE: TS-9DYA */
 .track-number {
-  font-size: 2rem;      
+  font-size: 2rem;
   font-weight: bold;
   color: #ffffff;
   width: 40px;
   text-align: right;
   display: flex;
-  align-items: center;  
+  align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
 .stats-button-options {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 }
 
-.stats-button-options-btn  {
-
+.stats-button-options-btn {
   padding: 10px 20px;
   font-size: 15px;
   border-radius: 30px;
@@ -27,8 +27,8 @@
   font-style: oblique;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  min-width: 90px; 
-  margin-bottom: 10px;;
+  min-width: 90px;
+  margin-bottom: 10px;
 }
 
 .stats-button-options-btn:hover:not(:disabled) {
@@ -59,20 +59,24 @@
 .top-tracks::-webkit-scrollbar-thumb,
 .top-albums::-webkit-scrollbar-thumb,
 .top-genres::-webkit-scrollbar-thumb {
-  background-color: #a97ff0; 
+  background-color: #a97ff0;
   border-radius: 4px;
 }
 
 .loading-container img {
-  width: 100px;  /* Adjust size as needed */
+  width: 100px; /* Adjust size as needed */
   height: 100px;
   padding: 70px;
   animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-container {
@@ -82,16 +86,16 @@
 }
 
 .loading-container p {
-  font-size: 24px;       /* make text clear but not too big */
+  font-size: 24px; /* make text clear but not too big */
   font-weight: bold;
   text-align: center;
-  font-style: italic;    /* optional, matches your button style */
+  font-style: italic; /* optional, matches your button style */
 }
 
 @media (max-width: 768px) {
   .TrackCard {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
     gap: 8px;
   }
@@ -109,12 +113,12 @@
   }
 
   .track-cover {
-    order: 2;   
+    order: 2;
   }
 
   .track-info {
-    order: 3;   
-    text-align: center; 
+    order: 3;
+    text-align: center;
   }
 
   .track-info .track-name {
@@ -124,8 +128,7 @@
   .button-options {
     display: flex;
     justify-content: center;
-    gap: 10px;         
-    flex-wrap: wrap;  
+    gap: 10px;
+    flex-wrap: wrap;
   }
-
 }
