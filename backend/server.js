@@ -20,7 +20,6 @@ const userRoutes = require('../backend/routes/user.js')
 const playlistRoutes = require('../backend/routes/playlist.js')
 
 const authRoutes = require("./routes/authRoutes");
-console.log("authRoutes:", authRoutes); // Add this
 app.use("/api/auth", authRoutes);
 
 

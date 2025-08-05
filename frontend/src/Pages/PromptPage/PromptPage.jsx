@@ -21,21 +21,49 @@ function PromptPage ({token, setToken}) {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [visibleActivities, setVisibleActivities] = useState(8);
   const [activitySearchTerm, setActivitySearchTerm] = useState("");
+  const [topGenres, setTopGenres] = useState([]);
+  const [allGenres, setAllGenres] = useState([]);
+  const [showAllGenres, setShowAllGenres] = useState(false);
+  const [visibleGenres, setVisibleGenres] = useState(20);
   
 
   useEffect(() => {
-    async function fetchGenres() {
+
       const spotifyId = localStorage.getItem("spotify_id");
-      const response = await fetch(`${API_BASE_URL}/playlist/getGenres?spotifyId=${spotifyId}`, {
+       if (!spotifyId) return;
+
+    async function fetchUserGenres() {
+     
+      const url = `${API_BASE_URL}/user/top-genres/4w?spotifyId=${spotifyId}`;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await response.json();
+      const topGenres = data.map(([genreName]) => genreName);
+      setTopGenres(topGenres);
+    }
+
+     async function fetchAllGenres() {
+      const url = `${API_BASE_URL}/playlist/getGenres?spotifyId=${spotifyId}`
+      const response = await fetch(url, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
       const result = await response.json();
       const sortedGenres = result.genres.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 
-      setGenres(sortedGenres);    }
-    fetchGenres();
+      setAllGenres(sortedGenres);    }
+
+  
+      
+
+    fetchUserGenres();
+    fetchAllGenres();
   }, []);
+
+
 
 
 
@@ -66,7 +94,7 @@ function PromptPage ({token, setToken}) {
 
   // duration button logic
   const durations = [
-    "15 minutes",
+    // "15 minutes",
     "30 minutes",
     "45 minutes",
     "60 minutes",
@@ -96,11 +124,17 @@ function PromptPage ({token, setToken}) {
   }
 
 
-  const filteredGenres = genreSearchTerm.length > 0
-  ? genres.filter((genre) =>
+ const currentGenres = showAllGenres ? allGenres : topGenres;
+const filteredGenres = genreSearchTerm.length > 0
+  ? currentGenres.filter((genre) =>
       genre.toLowerCase().includes(genreSearchTerm.toLowerCase())
     )
-  : genres.slice(0, 20);
+  : showAllGenres ? currentGenres.slice(0, visibleGenres)
+  : currentGenres;
+
+
+
+  
 
 
   // generate playlist logic
@@ -117,7 +151,6 @@ function PromptPage ({token, setToken}) {
         spotifyId: spotifyID,
       };
 
-      console.log(payload);
 
       try {
         navigate("/loading"); // uncomment when the loading state page is made
@@ -209,10 +242,12 @@ function PromptPage ({token, setToken}) {
       ))}
     </div>
     {visibleActivities < activitiesData.length && (
-      <button className="loadmore-btn" onClick={() => setVisibleActivities(visibleActivities + 8)}>
-        Load More
-      </button>
-    )}
+  <div className="center-btn-row">
+    <button className="loadmore-btn" onClick={() => setVisibleActivities(visibleActivities + 8)}>
+      Load More Activities
+    </button>
+  </div>
+)}
     {selectedActivity && (
   <div className="user-choice">
     <p>Your chosen activity is: {selectedActivity}</p>
@@ -247,20 +282,45 @@ function PromptPage ({token, setToken}) {
     onChange={(e) => setGenreSearchTerm(e.target.value)}
   />
 </div>
+      <div className="toggle-genres">
+  <button
+    onClick={() => {setShowAllGenres(!showAllGenres);
+      setVisibleGenres(20);
+    } }
 
-    <div className="option-list">
-      {filteredGenres.map((genre) => (
-        <label key={genre}>
-          <input
-            type="checkbox"
-            value={genre}
-            checked={selectedGenres.includes(genre)}
-            onChange={handleGenreCheckboxChange}
-          />
-          {genre}
-        </label>
-      ))}
-    </div>
+    className="toggle-btn"
+  >
+    {showAllGenres ? "Show Top Genres" : "Show All Genres"}
+  </button>
+</div>
+
+<div className = "scrollable-genres-list">
+   <div className="all-genres">
+  {filteredGenres.map((genre) => (
+    <label key={genre}>
+      <input
+        type="checkbox"
+        value={genre}
+        checked={selectedGenres.includes(genre)}
+        onChange={handleGenreCheckboxChange}
+      />
+      {genre}
+    </label>
+  ))}
+</div>
+</div>
+
+    {showAllGenres && visibleGenres < allGenres.length && (
+  <div className="center-btn-row">
+  <button
+    className="loadmore-btn"
+    onClick={() => setVisibleGenres(visibleGenres + 20)}
+  >
+    Load More Genres
+  </button>
+  </div>
+)}
+
     {selectedGenres.length>0 &&(<div className="user-choice">
         <p>Your chosen genre(s) is/are: {selectedGenres.join(", ")}</p>
       </div>
@@ -279,3 +339,4 @@ function PromptPage ({token, setToken}) {
 }
 
 export default PromptPage;
+

@@ -3,12 +3,6 @@
   align-items: center;
   width: 100vw
 }
-/* .home-page-button {
-    background-color: #20D65F;
-    position: relative;
-    border-radius: 100px;
-    border: 4px black solid;
-} */
 
 .header {
   display: flex;

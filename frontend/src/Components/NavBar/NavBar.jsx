@@ -37,21 +37,30 @@ return (
       </div>
     </div>
     {/* Link to homepage on click of the word Promptify*/}
-
     <div className="right-nav">
       <div className="dropdown">
-        {!activeMenu && (
+
+        {!activeMenu && token && (
           <div className="hamburger-icon" onClick={toggleDropdown}>
-            <GiHamburgerMenu className="icon fade-in" />
+            <GiHamburgerMenu className="icon hamburger-svg fade-in" />
           </div>
         )}
 
+  
         {activeMenu && (
           <div className="dropdown-content">
-            <span className="close-icon" onClick={toggleDropdown}>×</span>
+            <AiOutlineClose
+              className="close-icon"
+              onClick={toggleDropdown}
+            />
             <div className="dropdown-item">
-              <Link to="/about">
-                <p>About</p>
+              <Link to="/home">
+                <p>Home</p>
+              </Link>
+            </div>
+            <div className="dropdown-item">
+              <Link to="/prompt">
+                <p>Make a Playlist</p>
               </Link>
             </div>
             <div className="dropdown-item">
@@ -61,11 +70,16 @@ return (
             </div>
             <div className="dropdown-item">
               <Link to="/stats">
-                <p>Stats Page</p>
+                <p>Stats</p>
               </Link>
             </div>
             <div className="dropdown-item">
-              <Link to = "/" onClick={handleLogout}>
+              <Link to="/about">
+                <p>About</p>
+              </Link>
+            </div>
+            <div className="dropdown-item">
+              <Link to="/" onClick={handleLogout}>
                 <p>Logout</p>
               </Link>
             </div>

@@ -1,17 +1,17 @@
-.error-page {
+.not-found-page {
     width: 100vw;
     justify-content: center;
     align-items: center;
 }
 
-.error-body{
+.not-found-body{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 80vh;
 }
 
-.error-page .error-title {
+.not-found-page .not-found-title {
     font-family: "Helvetica World", Helvetica, Arial, sans-serif;
     font-weight: 375;
     font-size: 12vw;
@@ -22,13 +22,13 @@
 }
 
 @media screen and (min-width: 1650px) {
-  .error-page .error-title {
+  .not-found-page .not-found-title {
     font-size: 200px;
   }
 }
 
 
-.error-page .logo-image {
+.not-found-page .logo-image {
     height: .85em;
     width: auto;
     animation: spin 15s linear infinite;
@@ -37,7 +37,7 @@
     
 }
 
-.error-page .error-info {
+.not-found-page .not-found-info {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +47,7 @@
     position: relative;
 }
 
-.error-page p {
+.not-found-page p {
     margin: 0;
     align-items: center;
     font-size: 1.5vw;
@@ -55,13 +55,13 @@
 
 }
 @media screen and (max-width: 1600px) {
-  .error-page p {
+  .not-found-page p {
     font-size: 20px;
   }
 }
 
 /* CSS for homepage button*/
-.error-page-button {
+.not-found-page-button {
     background-color: #20D65F;
     /* border: 3px solid black; */
     border-radius: 50px;
@@ -85,14 +85,14 @@
     margin: 2em;
   }
   
-  .error-page-button h2 {
+  .not-found-page-button h2 {
     margin: 0;
   
   }
-  .error-page-button:hover {
+  .not-found-page-button:hover {
     background-color: #107434;
   }
-  .error-page-button:focus {
+  .not-found-page-button:focus {
     box-shadow: none;
     outline: 2px solid transparent;
     outline-offset: 2px;

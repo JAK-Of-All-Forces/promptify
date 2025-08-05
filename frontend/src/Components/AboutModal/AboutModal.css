@@ -51,6 +51,9 @@
   justify-content: center;
   align-items: center;
 }
+.modal-header button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
 
 
 .modal-body {
