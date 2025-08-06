@@ -37,6 +37,8 @@ const ArtistStats = () => {
         setArtist4w(data4w);
 
         // await delay(30000); // 30 second delay
+                await delay(5000); // 5 second delay
+
 
         const res6m = await fetch(urls[1], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res6m.ok) throw new Error("Failed to fetch 6m tracks");
@@ -44,6 +46,8 @@ const ArtistStats = () => {
         setArtist6m(data6m);
 
         // await delay(30000); // 30 second delay
+                await delay(5000); // 5 second delay
+
 
         const res1y = await fetch(urls[2], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res1y.ok) throw new Error("Failed to fetch 1y tracks");

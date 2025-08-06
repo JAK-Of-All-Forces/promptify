@@ -32,12 +32,15 @@ const GenreStats = () => {
         // await delay(30000); // 30 second delay
 
 
+
         const res4w = await fetch(urls[0], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res4w.ok) throw new Error("Failed to fetch 4w genres");
         const data4w = await res4w.json();
         setGenre4w(data4w);
 
         // await delay(30000); // 30 second delay
+                await delay(5000); // 5 second delay
+
 
         const res6m = await fetch(urls[1], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res6m.ok) throw new Error("Failed to fetch 6m genres");
@@ -45,6 +48,8 @@ const GenreStats = () => {
         setGenre6m(data6m);
 
         // await delay(30000); // 30 second delay
+                await delay(5000); // 5 second delay
+
 
         const res1y = await fetch(urls[2], { method: "GET", headers: { "Content-Type": "application/json" } });
         if (!res1y.ok) throw new Error("Failed to fetch 1y genres");
