@@ -57,71 +57,72 @@ function StatsPage({ token, setToken }) {
     
 
     return (
-        <>
+      <>
         <NavBar token={token} setToken={setToken}></NavBar>
 
         <div className="stats-page-container">
-            <div className="stats-section">
-
-                <div className="top-artists">
-                    <header>TOP ARTISTS</header>
-                    <div className="artist-block">
-                        <ArtistStats></ArtistStats>
-                    </div>
-                </div>
-
-                <div className="top-tracks">
-                    <header>TOP TRACKS</header>
-                    <div className="track-block">
-                        <TrackStats></TrackStats>
-                    </div>
-                </div>
-
-
-                <div className="top-albums">
-                    <header>TOP ALBUMS</header>
-                    <div className="album-block">
-                        <AlbumStats></AlbumStats>
-                    </div>
-                </div>
-                
-                <div className="top-genres">
-                    <header>TOP GENRES</header>
-                    <div className="genre-block">
-                        <GenreStats></GenreStats>
-                    </div>
-                </div>
+          <div className="stats-section">
+            <div className="top-artists">
+              <header>TOP ARTISTS</header>
+              <div className="artist-block">
+                <ArtistStats></ArtistStats>
+              </div>
             </div>
 
-            <div className="extra-display">
-                <div className="profile-pic">
-                    {profileImage && <img src={profileImage} alt="profile image" />}
-                </div>
-                <div className="welcome-message">
-                    <p>WELCOME</p>
-                    <p className="display-name">{displayName}</p>
-                    <p>TO YOUR STATS PAGE!</p>
-                    <p>DISPLAYING YOUR TOP GENRES, TOP ARTISTS, TOP TRACKS, AND TOP ALBUMS ACROSS TIME.</p>
-                </div>
-                <div className="thank-you-section">
-                    {playlistCount > 0 ? (
-                        <>
-                        <p>THANK YOU FOR CREATING</p>
-                        <p className="large-number">{playlistCount}</p>
-                        <p>PROMPTIFY PLAYLISTS</p>
-                        </>
-                    ) : (
-                        <>
-                        <p className="no-playlists-message">
-                            YOU HAVEN'T CREATED ANY PROMPTIFY PLAYLISTS YET</p>
-                        <p>BUT THANK YOU FOR CHECKING US OUT ANYWAYS</p>
-                        </>
-                    )}
-                </div>
+            <div className="top-tracks">
+              <header>TOP TRACKS</header>
+              <div className="track-block">
+                <TrackStats></TrackStats>
+              </div>
             </div>
+
+            <div className="top-albums">
+              <header>TOP ALBUMS</header>
+              <div className="album-block">
+                <AlbumStats></AlbumStats>
+              </div>
+            </div>
+
+            <div className="top-genres">
+              <header>TOP GENRES</header>
+              <div className="genre-block">
+                <GenreStats></GenreStats>
+              </div>
+            </div>
+          </div>
+
+          <div className="extra-display">
+            <div className="profile-pic">
+              {profileImage && <img src={profileImage} alt="profile image" />}
+            </div>
+            <div className="welcome-message">
+              <p>WELCOME TO YOUR STATS PAGE</p>
+              <p className="display-name">{displayName} !</p>
+              <p></p>
+              <p>
+                Displaying your top genres, top artists, top tracks, and top albums across time.
+              </p>
+            </div>
+            <div className="thank-you-section">
+              {playlistCount > 0 ? (
+                <>
+                  <p>THANK YOU FOR CREATING</p>
+                  <p className="large-number">{playlistCount}</p>
+                  <p>PROMPTIFY PLAYLISTS</p>
+                </>
+              ) : (
+                <>
+                  <p className="no-playlists-message">
+                    YOU HAVEN'T CREATED ANY PROMPTIFY PLAYLISTS YET
+                  </p>
+                  <p>BUT THANK YOU FOR CHECKING US OUT ANYWAYS</p>
+                </>
+              )}
+            </div>
+          </div>
         </div>
-        </>
-    )
+      </>
+    );
 
 }
 
