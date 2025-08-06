@@ -1,43 +1,41 @@
+/*PROBE: TS-9DYA */
 .track-number {
-  font-size: 2rem;      
+  font-size: 2rem;
   font-weight: bold;
   color: #ffffff;
   width: 40px;
   text-align: right;
   display: flex;
-  align-items: center;  
+  align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.button-options {
+.stats-button-options {
   display: flex;
-  justify-content: center; 
-  gap: 1rem; 
+  justify-content: center;
 }
 
-.button-options button {
+.stats-button-options-btn {
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 15px;
   border-radius: 30px;
   border: 2px solid #a97ff0;
-  background-color: #6438bd;
+  background-color: #4b2991;
   color: #ffffff;
   font-weight: bold;
   font-style: oblique;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  min-width: 75px; 
+  min-width: 90px;
   margin-bottom: 10px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
-.button-options button:hover:not(:disabled) {
-  background-color: #c1aaf0;
+.stats-button-options-btn:hover:not(:disabled) {
+  background-color: #8151e1;
 }
 
-
-.button-options button:disabled {
+.stats-button-options-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -47,7 +45,7 @@
 .top-tracks::-webkit-scrollbar,
 .top-albums::-webkit-scrollbar,
 .top-genres::-webkit-scrollbar {
-  width: 0.px;
+  width: 3px;
 }
 
 .top-artists::-webkit-scrollbar-track,
@@ -55,48 +53,49 @@
 .top-albums::-webkit-scrollbar-track,
 .top-genres::-webkit-scrollbar-track {
   background: white;
-  border-radius: 4px;
 }
 
 .top-artists::-webkit-scrollbar-thumb,
 .top-tracks::-webkit-scrollbar-thumb,
 .top-albums::-webkit-scrollbar-thumb,
 .top-genres::-webkit-scrollbar-thumb {
-  background-color: #a97ff0; 
+  background-color: #a97ff0;
   border-radius: 4px;
 }
 
 .loading-container img {
-  width: 100px; 
+  width: 100px; /* Adjust size as needed */
   height: 100px;
-  padding: 10px;
+  padding: 70px;
   animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
 }
 
 .loading-container p {
-  font-size: 24px;       
+  font-size: 24px; /* make text clear but not too big */
   font-weight: bold;
   text-align: center;
-  font-style: italic;    
+  font-style: italic; /* optional, matches your button style */
 }
-
 
 @media (max-width: 768px) {
   .track-stats .TrackCard {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
     gap: 8px;
   }
@@ -129,8 +128,20 @@
   .button-options {
     display: flex;
     justify-content: center;
-    gap: 10px;         
-    flex-wrap: wrap;  
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+    .stats-button-options {
+      display: flex;
+      flex-direction: column; 
+      align-items: center; 
+      gap: 10px; 
+    }
   }
 
+.stats-button-options {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 10px; 
 }

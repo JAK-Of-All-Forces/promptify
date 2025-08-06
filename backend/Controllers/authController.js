@@ -28,9 +28,16 @@ exports.getLoginUrl = (req, res) => {
 };
 
 exports.handleCallback = async (req, res) => {
+  const error = req.query.error;
   const code = req.query.code;
-  if (!code) return res.send("Missing code!");
 
+  if (error === "access_denied") {
+    // User is not authorized in Spotify Dev Mode
+    return res.redirect(`${CLIENT_URL}/unauthorized`);
+  }
+
+  if (!code) return res.send("Missing code!");
+  
   try {
     // Make request to Spotify to get a new access token
 
@@ -84,7 +91,6 @@ exports.handleCallback = async (req, res) => {
     res.redirect(`${CLIENT_URL}/home?access_token=${access_token}&spotify_id=${userProfile.id}`);
     // res.send({access_token: access_token, spotify_id: userProfile.id});
   } catch (err) {
-    console.error("Callback error:", err.response?.data || err.message);
     res.status(500).send("Callback failed.");
   }
 };
@@ -124,7 +130,6 @@ exports.refreshAccessToken = async (req, res) => {
     // Send new access token to client
     res.json({ accessToken: data.access_token, expiresIn: data.expires_in });
   } catch (err) {
-    console.error("Refresh token error:", err.response?.data || err.message);
     res.status(500).json({ error: "Failed to refresh token" });
   }
 };
