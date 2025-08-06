@@ -1,7 +1,6 @@
 import NavBar from "../../Components/NavBar/NavBar";
 import logo from "../../assets/favicon.png";
 import { Link } from "react-router-dom";
-
 import "./NotFoundPage.css";
 
 function NotFoundPage({ token, setToken }) {
@@ -13,8 +12,7 @@ function NotFoundPage({ token, setToken }) {
           {/* //Displayling NavBar component */}
           <div className="not-found-info">
             <h1 className="not-found-title">
-              4
-              <img className="logo-image" src={logo}></img>4
+              4<img className="logo-image" src={logo}></img>4
             </h1>
             <p>Sorry, this page was not found</p>
             <Link to="/home">

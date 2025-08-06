@@ -3,7 +3,6 @@ import no_image from "../../assets/no_img.png";
 import "./AllPlaylists.css";
 
 function AllPlaylists({ userPlaylists = [], setRefreshFlag }) {
-  console.log("All playlist", userPlaylists);
   return (
     <div className="content">
       {/* Mapping through all of the users' playlists if there are any */}

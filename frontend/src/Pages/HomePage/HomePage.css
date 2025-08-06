@@ -1,7 +1,7 @@
 .home-page {
   justify-content: center;
   align-items: center;
-  width: 100vw
+  width: 100vw;
 }
 
 .header {
@@ -15,22 +15,21 @@
 }
 /* CSS for homepage button*/
 .home-page-button {
-  background-color: #20D65F;
-  /* border: 3px solid black; */
+  background-color: #20d65f;
   border-radius: 50px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #ffffff;
   cursor: pointer;
   flex: 0 0 auto;
   font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.5rem;
   text-align: center;
-  text-decoration: none #6B7280 solid;
+  text-decoration: none #6b7280 solid;
   text-decoration-thickness: auto;
-  transition-duration: .2s;
-  transition-property: background-color,border-color,color,fill,stroke;
-  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -40,7 +39,6 @@
 
 .home-page-button h2 {
   margin: 0;
-
 }
 .home-page-button:hover {
   background-color: #107434;
@@ -52,6 +50,6 @@
 }
 @media (min-width: 768px) {
   .home-page-button {
-    padding: .75rem 1.5rem;
+    padding: 0.75rem 1.5rem;
   }
 }

@@ -1,6 +1,6 @@
 .header {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .search-bar {
@@ -28,7 +28,6 @@
   justify-content: center;
 }
 
-
 /* Optional hover/focus enhancement */
 .playlist-search:focus {
   border-color: #a97ff0;
@@ -51,4 +50,3 @@
     max-width: 500px;
   }
 }
-

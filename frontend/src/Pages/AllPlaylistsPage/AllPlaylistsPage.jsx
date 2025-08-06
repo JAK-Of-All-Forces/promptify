@@ -11,131 +11,122 @@ import "../LoadingPage/LoadingPage.css";
 import logo from "../../assets/favicon.png";
 
 function AllPlaylistPage({ token, setToken }) {
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-    const [isLoading, setIsLoading] = useState(true); 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const [isLoading, setIsLoading] = useState(true);
 
+  //User playlists variable
+  const [userPlaylists, setUserPlaylists] = useState([]);
 
-    //User playlists variable
-    const [userPlaylists, setUserPlaylists] = useState([]);
+  //This is for when a playlist is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
-    //This is for when a track is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
-    const [refreshFlag, setRefreshFlag] = useState(false);
+  const [playlistSearchTerm, setPlaylistSearchTerm] = useState("");
 
-    const[playlistSearchTerm, setPlaylistSearchTerm] = useState("");
+  useEffect(() => {
+    if (!token) return;
 
-    useEffect(() => {
-      if (!token) return;
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch("https://api.spotify.com/v1/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      const fetchProfile = async () => {
-        try {
-          const res = await fetch("https://api.spotify.com/v1/me", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+        //checks if the access to the users data has expired
+        if (res.status === 401) {
+          console.log("Access token expired. Attempting to refresh.");
 
-          //checks if the access to the users data has expired
-          if (res.status === 401) {
-            console.log("Access token expired. Attempting to refresh.");
+          // Call backend to refresh the token
+          const spotifyId = localStorage.getItem("spotify_id");
+          const refreshRes = await fetch(
+            `${API_BASE_URL}/api/auth/refresh-token/${spotifyId}`
+          );
+          const refreshData = await refreshRes.json();
 
-            // Call backend to refresh the token
-            const spotifyId = localStorage.getItem("spotify_id");
-            const refreshRes = await fetch(
-              `${API_BASE_URL}/api/auth/refresh-token/${spotifyId}`
-            );
-            const refreshData = await refreshRes.json();
+          // Store the new token and re-fetch the profile
+          const newToken = refreshData.accessToken;
+          localStorage.setItem("spotify_access_token", newToken);
+          window.location.reload();
+        } else {
+          const data = await res.json();
 
-            // Store the new token and re-fetch the profile
-            const newToken = refreshData.accessToken;
-            localStorage.setItem("spotify_access_token", newToken);
-            window.location.reload();
-          } else {
-            const data = await res.json();
-            console.log("User profile:", data);
+          //Calling for previous playlists
+          const playlistRes = await fetch(`${API_BASE_URL}/user/${data.id}`);
 
-            //Calling for previous playlists
-            const playlistRes = await fetch(`${API_BASE_URL}/user/${data.id}`);
+          const playlistData = await playlistRes.json();
 
-            const playlistData = await playlistRes.json();
-            console.log("Playlist data", playlistData);
+          setUserPlaylists(playlistData);
 
-            setUserPlaylists(playlistData);
-
-            //Checking where the token is stored
-            console.log("Token", token);
-
-            setIsLoading(false); 
-          }
-        } catch (err) {
-          console.error("Error fetching profile:", err);
-          setIsLoading(false); 
-
+          setIsLoading(false);
         }
-      };
+      } catch (err) {
+        console.error("Error fetching profile:", err);
+        setIsLoading(false);
+      }
+    };
 
-      fetchProfile();
-    }, [token, refreshFlag]);
+    fetchProfile();
+  }, [token, refreshFlag]);
 
+  const filteredPlaylists = userPlaylists.filter((playlist) =>
+    playlist.name.toLowerCase().includes(playlistSearchTerm.toLowerCase())
+  );
 
-
-    const filteredPlaylists = userPlaylists.filter(playlist =>
-      playlist.name.toLowerCase().includes(playlistSearchTerm.toLowerCase())
-    );
-
-    if (isLoading) {
-          return (
-          <>
-            <div className="loading-page">
-              <nav className="nav-bar">
-                <div className="left-nav">
-                  <div className="promptify-logo">
-                    <div className="nav-logo">
-                      <h1>PR</h1>
-                      <img className="nav-logo-image" src={logo}></img>
-                      <h1>MPTIFY</h1>
-                    </div>
-                  </div>
-                </div>
-              </nav>
-              <div className="center-content">
-                <div className="loading-dots"></div>
-                  <div className="prompt-caption">
-                      <p>Grabbing all of your Promptify playlists for you now...</p>
-                  </div>
-                </div>
-            </div>
-          </>
-        );
-      } 
-
+  if (isLoading) {
     return (
-      //Displayling NavBar component
-      <div className="home-page">
-        <NavBar token={token} setToken={setToken}></NavBar>
-
-        {/* Rest of the home page content below */}
-
-        <div>
-          <div className="header">
-            <h2>All Promptify Playlists</h2>
+      <>
+        <div className="loading-page">
+          <nav className="nav-bar">
+            <div className="left-nav">
+              <div className="promptify-logo">
+                <div className="nav-logo">
+                  <h1>PR</h1>
+                  <img className="nav-logo-image" src={logo}></img>
+                  <h1>MPTIFY</h1>
+                </div>
+              </div>
+            </div>
+          </nav>
+          <div className="center-content">
+            <div className="loading-dots"></div>
+            <div className="prompt-caption">
+              <p>Grabbing all of your Promptify playlists for you now...</p>
+            </div>
           </div>
-          <div className = "search-bar">
+        </div>
+      </>
+    );
+  }
+
+  return (
+    //Displayling NavBar component
+    <div className="home-page">
+      <NavBar token={token} setToken={setToken}></NavBar>
+
+      {/* Rest of the home page content below */}
+
+      <div>
+        <div className="header">
+          <h2>All Promptify Playlists</h2>
+        </div>
+        <div className="search-bar">
           <input
             type="text"
             className="playlist-search"
-             placeholder="Search Playlists..."
-           value={playlistSearchTerm}
-       onChange={(e) => setPlaylistSearchTerm(e.target.value)}
-          />
-          </div>
-
-          <AllPlaylists
-            userPlaylists={filteredPlaylists}
-            setRefreshFlag={setRefreshFlag}
+            placeholder="Search Playlists..."
+            value={playlistSearchTerm}
+            onChange={(e) => setPlaylistSearchTerm(e.target.value)}
           />
         </div>
+
+        <AllPlaylists
+          userPlaylists={filteredPlaylists}
+          setRefreshFlag={setRefreshFlag}
+        />
       </div>
-    );
+    </div>
+  );
 }
 
 export default AllPlaylistPage;

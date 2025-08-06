@@ -19,7 +19,9 @@ a {
   color: white;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   background: transparent;
   margin: 0;
   padding: 0;

@@ -54,8 +54,9 @@
   align-items: center;
 }
 
-.delete-modal .playlist-name {
+.delete-modal .modal-playlist-name {
   font-weight: bold;
+  word-break: break-word;
 }
 
 .cancel-button{

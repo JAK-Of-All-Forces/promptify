@@ -1,107 +1,103 @@
 .authentication-page {
-    width: 100vw;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
 }
-.authentication-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
+.authentication-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
 }
 .authentication-page .authentication-title {
-    font-family: "Helvetica World", Helvetica, Arial, sans-serif;
-    font-weight: 375;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem;
-    line-height: 1.2;
+  font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+  font-weight: 375;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  line-height: 1.2;
 }
 
 .authentication-title .authorization-word,
 .authentication-title .error-word {
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
 }
 @media (max-width: 700px) {
-    .authentication-title {
-      font-size: 1.8rem;
-    }
+  .authentication-title {
+    font-size: 1.8rem;
   }
-
+}
 
 .authentication-page .logo-image {
-    height: .85em;
-    width: auto;
-    animation: spin 15s linear infinite;
-    position: relative;
-    margin: 0;
-    
+  height: 0.85em;
+  width: auto;
+  animation: spin 15s linear infinite;
+  position: relative;
+  margin: 0;
 }
 
 .authentication-page .authentication-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: fit-content;
-    justify-content: center;
-    margin: 0;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  justify-content: center;
+  margin: 0;
+  position: relative;
 }
 
 .authentication-page p {
-    display: flex;
-    align-items: center;
-    font-size: 1.5vw;
-    font-weight: bold;
-    text-align: center;
-
+  display: flex;
+  align-items: center;
+  font-size: 1.5vw;
+  font-weight: bold;
+  text-align: center;
 }
 
 @media screen and (min-width: 800px) {
-    .authentication-page p {
-        font-size: 20px;
-    }
+  .authentication-page p {
+    font-size: 20px;
+  }
 }
 
 /* CSS for homepage button*/
 .authentication-page-button {
-    background-color: #20D65F;
-    /* border: 3px solid black; */
-    border-radius: 50px;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    flex: 0 0 auto;
-    font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.5rem;
-    text-align: center;
-    text-decoration: none #6B7280 solid;
-    text-decoration-thickness: auto;
-    transition-duration: .2s;
-    transition-property: background-color,border-color,color,fill,stroke;
-    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: auto;
-    margin: 1em;
-  }
-  
-  .authentication-page-button h2 {
-    margin: 0;
-  
-  }
-  .authentication-page-button:hover {
-    background-color: #107434;
-  }
-  .authentication-page-button:focus {
-    box-shadow: none;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-  }
+  background-color: #20d65f;
+  /* border: 3px solid black; */
+  border-radius: 50px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  text-align: center;
+  text-decoration: none #6b7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  margin: 1em;
+}
+
+.authentication-page-button h2 {
+  margin: 0;
+}
+.authentication-page-button:hover {
+  background-color: #107434;
+}
+.authentication-page-button:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}

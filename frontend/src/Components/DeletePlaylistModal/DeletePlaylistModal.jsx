@@ -29,11 +29,11 @@ function DeletePlaylistModal({ selectedPlaylist, setRefreshFlag, onClose }) {
           <div className="delete-content">
             <h2>Delete Promptify Playlist?</h2>
             <p className="message">
-              This will delete{" "}
-              <p className="playlist-name">
+              This will delete
+              <span className="modal-playlist-name">
                 &nbsp;{selectedPlaylist.name}&nbsp;
-              </p>{" "}
-              from your account
+              </span>
+              from this playlist
             </p>
           </div>
           <div className="buttons">

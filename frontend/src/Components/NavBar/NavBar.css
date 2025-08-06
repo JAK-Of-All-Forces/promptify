@@ -47,11 +47,11 @@
 }
 
 .nav-bar .nav-logo-image {
-    width: 48px;
-    height: 48px;
-    animation: spin 15s linear infinite;
-    position: relative;
-    margin: 0;
+  width: 48px;
+  height: 48px;
+  animation: spin 15s linear infinite;
+  position: relative;
+  margin: 0;
 }
 
 @keyframes spin {
@@ -68,17 +68,17 @@
   display: inline-block;
 }
 
- .dropdown-content .close-icon {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 32px;
-    cursor: pointer;
-    color: #e5f3f0;
-    background: none;
-    border: none;
-    z-index: 1100;
-  }
+.dropdown-content .close-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 32px;
+  cursor: pointer;
+  color: #e5f3f0;
+  background: none;
+  border: none;
+  z-index: 1100;
+}
 
 .hamburger {
   font-size: 40px;
@@ -89,14 +89,11 @@
   position: fixed;
   top: 20px;
   right: 5px;
-  background: linear-gradient(
-    145deg,
-    rgb(25, 25, 25),
-    rgba(0, 255, 170, 0.1)
-  );
+  background: linear-gradient(145deg, rgb(25, 25, 25), rgba(0, 255, 170, 0.1));
   backdrop-filter: blur(16px);
   border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(2, 255, 120, 0.232), 0 0 12px rgba(0, 255, 170, 0.2);
+  box-shadow: 0 8px 24px rgba(2, 255, 120, 0.232),
+    0 0 12px rgba(0, 255, 170, 0.2);
   border: 1px solid rgba(0, 255, 170, 0.4);
   z-index: 100;
   overflow: hidden;
@@ -113,8 +110,8 @@
   transition: background 0.3s ease, color 0.3s ease;
   position: relative;
   min-height: 48px;
-  border-bottom: 1px solid rgba(0, 255, 170, 0.2); 
-  box-shadow: 0 1px 3px rgba(0, 255, 170, 0.1); 
+  border-bottom: 1px solid rgba(0, 255, 170, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 255, 170, 0.1);
 }
 
 .dropdown-content a:hover {
@@ -171,7 +168,6 @@
   font-size: 32px;
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
-
 }
 
 .fade-in {
