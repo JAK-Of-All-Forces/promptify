@@ -8,18 +8,16 @@ import "../../Components/NavBar/NavBar.css";
 import "../LoadingPage/LoadingPage.css";
 import logo from "../../assets/favicon.png";
 
-
-
 function HomePage({ token, setToken }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   //User playlists variable
   const [userPlaylists, setUserPlaylists] = useState([]);
 
-  //This is for when a track is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
+  //This is for when a playlist is deleted so the useEffect knows to refresh everytime the refreshflag value is changed
   const [refreshFlag, setRefreshFlag] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!token) return;
@@ -49,7 +47,6 @@ function HomePage({ token, setToken }) {
           window.location.reload();
         } else {
           const data = await res.json();
-          console.log("User profile:", data);
 
           //Calling for previous playlists
           const playlistRes = await fetch(`${API_BASE_URL}/user/${data.id}`);
@@ -58,22 +55,19 @@ function HomePage({ token, setToken }) {
 
           setUserPlaylists(playlistData);
 
-          //Checking where the token is stored
-          console.log("Token", token);
-
-          setIsLoading(false); 
+          setIsLoading(false);
         }
       } catch (err) {
         console.error("Error fetching profile:", err);
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     };
 
     fetchProfile();
   }, [token, refreshFlag]);
 
-    if (isLoading) {
-      return (
+  if (isLoading) {
+    return (
       <>
         <div className="loading-page">
           <nav className="nav-bar">
@@ -89,14 +83,14 @@ function HomePage({ token, setToken }) {
           </nav>
           <div className="center-content">
             <div className="loading-dots"></div>
-              <div className="prompt-caption">
-                  <p>Powering up Promptify for you now...</p>
-              </div>
+            <div className="prompt-caption">
+              <p>Powering up Promptify for you now...</p>
             </div>
+          </div>
         </div>
       </>
     );
-  } 
+  }
 
   return (
     //Displayling NavBar component

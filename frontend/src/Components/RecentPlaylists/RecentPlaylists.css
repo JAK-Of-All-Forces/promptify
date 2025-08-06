@@ -1,8 +1,8 @@
 .recent-playlists {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
 }
 
 @media (max-width: 768px) {
@@ -23,6 +23,6 @@
     height: auto;
     max-width: 250px;
     max-height: 250px;
-    object-fit: cover; 
-}
+    object-fit: cover;
+  }
 }

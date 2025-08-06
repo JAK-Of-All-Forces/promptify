@@ -2,7 +2,6 @@ import "./DeleteTrackModal.css";
 import axios from "axios";
 
 function DeleteTrackModal({ selectedTrack, setRefreshFlag, onClose }) {
-    console.log ("track", selectedTrack)
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   if (!selectedTrack) return null;
 
@@ -39,7 +38,6 @@ function DeleteTrackModal({ selectedTrack, setRefreshFlag, onClose }) {
               </span>
               from this playlist
             </p>
-            {/* Come back to this */}
           </div>
           <div className="buttons">
             <button className="cancel-button" onClick={onClose}>

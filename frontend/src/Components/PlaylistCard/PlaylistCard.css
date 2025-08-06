@@ -1,59 +1,56 @@
 img {
-    width: 300px;
-    height: 300px;
+  width: 300px;
+  height: 300px;
 }
 
 .PlaylistCard {
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    border-radius: 20px;
-
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  border-radius: 20px;
 }
 
 .PlaylistCard:hover {
-    background-color: #cecece;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.5s;
+  background-color: #cecece;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s;
 }
 
 .PlaylistCard:hover .playlist-info {
-    color: black;
+  color: black;
 }
 
 .PlaylistCard .info {
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
 }
 
 .PlaylistCard .info:hover {
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
 }
 
 .PlaylistCard .playlist-name {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    padding-left: 0.5em;
-
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
 }
-.playlist-creation{
-    margin: 0;
-    padding-left: 0.5em;
-
+.playlist-creation {
+  margin: 0;
+  padding-left: 0.5em;
 }
 
 .playlist-first-line {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .delete-icon {
-    white-space: nowrap;
-    flex-shrink: 0;
-    text-align: right;
-    margin-left: auto;
-    padding-right: 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
+  margin-left: auto;
+  padding-right: 1rem;
 }

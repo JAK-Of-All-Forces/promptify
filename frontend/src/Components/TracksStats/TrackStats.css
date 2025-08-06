@@ -93,35 +93,35 @@
 }
 
 @media (max-width: 768px) {
-  .TrackCard {
+  .track-stats .TrackCard {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
   }
 
-  .track-cover img {
+  .track-stats .track-cover img {
     width: 100px;
     height: 100px;
     border-radius: 8px;
     object-fit: cover;
   }
-
-  .track-number {
+  
+  .track-stats .track-number {
     font-size: 24px;
     order: 1;
   }
 
-  .track-cover {
-    order: 2;
+  .track-stats .track-cover {
+    order: 2;   
   }
 
-  .track-info {
-    order: 3;
-    text-align: center;
+  .track-stats .track-info {
+    order: 3;   
+    text-align: center; 
   }
 
-  .track-info .track-name {
+  .track-stats .track-info .track-name {
     margin-bottom: 4px;
   }
 
@@ -131,12 +131,17 @@
     gap: 10px;
     flex-wrap: wrap;
   }
-
     .stats-button-options {
       display: flex;
       flex-direction: column; 
       align-items: center; 
       gap: 10px; 
+    }
   }
-}
 
+.stats-button-options {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  gap: 10px; 
+}

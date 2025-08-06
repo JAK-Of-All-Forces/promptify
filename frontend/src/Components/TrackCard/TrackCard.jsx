@@ -1,13 +1,8 @@
-//import { Link } from "react-router-dom";
 import { useState } from "react";
 import no_image from "../../assets/no_img.png";
 import { FaTrash } from "react-icons/fa";
 import DeleteTrackModal from "../DeleteTrackModal/DeleteTrackModal";
-import axios from "axios";
-
 import "./TrackCard.css";
-
-
 
 function TrackCard({ track, setRefreshFlag }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -20,7 +15,6 @@ function TrackCard({ track, setRefreshFlag }) {
     setModalOpen(false);
     setSelectedTrack(null);
   };
-
 
   return (
     <div
@@ -43,7 +37,6 @@ function TrackCard({ track, setRefreshFlag }) {
         <p className="track-artist">{track.artist}</p>
       </div>
       <p className="track-duration">{track.duration}</p>
-      {/* Needed to import react */}
       {/* Delete icon */}
       <FaTrash
         className="delete-icon"

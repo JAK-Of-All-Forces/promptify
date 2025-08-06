@@ -1,70 +1,67 @@
-.landing-page{
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
+.landing-page {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
 }
 
-.landing-page .about-us{
-    font-family: "Helvetica World", Helvetica, Arial, sans-serif;
-    font-weight: 50;
-    font-size: 1.1rem;
-    color: yellow;
-    position: fixed;
-    top: 0vh;
-    right: 2vh;
+.landing-page .about-us {
+  font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+  font-weight: 50;
+  font-size: 1.1rem;
+  color: yellow;
+  position: fixed;
+  top: 0vh;
+  right: 2vh;
 }
 
 .promptify-title {
-    font-family: "Helvetica World", Helvetica, Arial, sans-serif;
-    font-weight: 375;
-    font-size: 8vw;
-    margin: 0;
-    display: flex;
-    align-items: center
-
+  font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+  font-weight: 375;
+  font-size: 8vw;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
-
 .landing-page .logo-image {
-    height: .85em;
-    width: auto;
-    animation: spin 15s linear infinite;
-    position: relative;
-    margin: 0;
-    
+  height: 0.85em;
+  width: auto;
+  animation: spin 15s linear infinite;
+  position: relative;
+  margin: 0;
 }
 
 .landing-page .promptify-logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: fit-content;
-    margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: fit-content;
+  margin: 0;
 }
 
 .video {
-    width: 55vw;
-    border-radius: 60px;
+  width: 55vw;
+  border-radius: 60px;
 }
 
 .landing-page .info {
-    padding: 2rem;
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.container-left{
-    padding: 10px;
+.container-left {
+  padding: 10px;
 }
 
 .container-right {
-    justify-content: center;
-    align-items: center;
-    padding-left: 10vh;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10vh;
 }
 
 /* Phones */
@@ -76,11 +73,11 @@
     align-items: center;
     height: fit-content;
     margin: 1em;
-}
+  }
   .promptify-title {
     font-size: 10vw;
     margin-bottom: 1rem;
-    top: -50px
+    top: -50px;
   }
   .landing-page .about-us {
     font-size: 1.1rem;
@@ -96,71 +93,39 @@
 
   .video {
     margin-top: -20px;
-}
+  }
 
- .landing-page .info {
+  .landing-page .info {
     padding: 1rem 1rem 0 1rem;
     position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-}
+  }
 
-.landing-page .info {
-  flex-direction: column;
-  align-items: center;
-}
+  .landing-page .info {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.login-button {
+  .login-button {
     font-size: 1.3rem;
     border-radius: 10px;
     color: white;
     border: none;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-
-
-
-  .container-left, .container-right {
+  }
+  .container-left,
+  .container-right {
     padding: 0;
     width: 100%;
     text-align: center;
   }
   .login-button {
-  font-size: 10rem;
+    font-size: 10rem;
     padding: 2rem 3.5rem;
     border-radius: 22px;
+  }
 }
-
-}
-/* 
-
-@media (min-width: 601px) and (max-width: 900px) {
-  .promptify-title {
-    font-size: 4rem;
-    margin-bottom: 1.5rem;
-  }
-  .landing-page .about-us {
-    font-size: 1.3rem;
-    top: 16px;
-    right: 16px;
-  }
-  .video {
-    width: 80vw;
-    border-radius: 30px;
-    margin-bottom: 2rem;
-  }
-  .landing-page .info {
-    padding: 1.5rem;
-    flex-direction: column;
-    gap: 2rem;
-  }
-  .container-left, .container-right {
-    padding: 0;
-    width: 100%;
-    text-align: center;
-  }
-} */

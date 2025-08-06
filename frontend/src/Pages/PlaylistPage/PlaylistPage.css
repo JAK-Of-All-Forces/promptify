@@ -1,121 +1,121 @@
 .playlist-page {
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  margin: 0 auto;
 }
 
 .playlist-content {
-    border-radius: 10px;
-    padding: 1em;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    overflow: hidden;
-    gap: 2rem;
-    justify-content: center;
-    margin: 2em auto;
-    max-width: 1500px;
-    position: relative;
+  border-radius: 10px;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  overflow: hidden;
+  gap: 2rem;
+  justify-content: center;
+  margin: 2em auto;
+  max-width: 1500px;
+  position: relative;
 }
 .playlist-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-align: center;
-  }
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
 
 .playlist-cover {
-    align-self: center;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .playlist-cover img {
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
+  align-self: center;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.playlist-cover img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
 
 .playlist-tracks {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow-y: auto;
-    max-height: 600px;
-    padding-right: 0.5rem;
-  }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  max-height: 600px;
+  padding-right: 0.5rem;
+}
 
 .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
 
 .content .playlist-page {
-    display: flex;
-    gap: 2rem;
-    width: 100%;
-    max-height: 600px; /* adjust as needed */
-    overflow: hidden; /* to control scroll only on tracks */
-    align-items: flex-start;
-  }
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  max-height: 600px; /* adjust as needed */
+  overflow: hidden; /* to control scroll only on tracks */
+  align-items: flex-start;
+}
 
 .button-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 /* CSS for playlist button*/
 .add-to-spotify-button {
-    background-color: #20D65F;
-      /* border: 3px solid black; */
-      border-radius: 50px;
-      box-sizing: border-box;
-      color: #FFFFFF;
-      cursor: pointer;
-      flex: 0 0 auto;
-      font-size: 1.125rem;
-      font-weight: 600;
-      line-height: 1.5rem;
-      text-align: center;
-      text-decoration: none #6B7280 solid;
-      text-decoration-thickness: auto;
-      transition-duration: .2s;
-      transition-property: background-color,border-color,color,fill,stroke;
-      transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
-      width: auto;
-      margin: 2em;
-    }
-    .add-to-spotify-button:hover {
-        background-color: #107434;
-    }
-    .add-to-spotify-button:focus {
-      box-shadow: none;
-      outline: 2px solid transparent;
-      outline-offset: 2px;
-    }
-    .add-to-spotify-button h2{
-        margin: 0;
-    }
-    .left-container {
-        padding: 1em;
-    }
-    @media (min-width: 768px) {
-      .add-to-spotify-button {
-        padding: .75rem 1.5rem;
-      }
-    }
+  background-color: #20d65f;
+  /* border: 3px solid black; */
+  border-radius: 50px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  text-align: center;
+  text-decoration: none #6b7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: 0.2s;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  margin: 2em;
+}
+.add-to-spotify-button:hover {
+  background-color: #107434;
+}
+.add-to-spotify-button:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.add-to-spotify-button h2 {
+  margin: 0;
+}
+.left-container {
+  padding: 1em;
+}
+@media (min-width: 768px) {
+  .add-to-spotify-button {
+    padding: 0.75rem 1.5rem;
+  }
+}
 
-.no-tracks{
+.no-tracks {
   display: flex;
   justify-content: center;
 }

@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState} from "react"
+import { useState } from "react";
 import no_image from "../../assets/no_img.png";
 import { FaTrash } from "react-icons/fa";
-import DeletePlaylistModal from "../DeletePlaylistModal/DeletePlaylistModal"
-// import datetime from datetime
+import DeletePlaylistModal from "../DeletePlaylistModal/DeletePlaylistModal";
 import "./PlaylistCard.css";
 
-function PlaylistCard({ playlist, setRefreshFlag}) {
-
-  console.log(playlist.id);
-
+function PlaylistCard({ playlist, setRefreshFlag }) {
   //Formatting the time to be in Month-DD-YYYY format
   const date_string = playlist.createdAt;
   const date = new Date(date_string);
@@ -21,7 +17,7 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
 
   //Modal work
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false); 
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleClose = () => {
     setModalOpen(false);
@@ -30,7 +26,6 @@ function PlaylistCard({ playlist, setRefreshFlag}) {
 
   return (
     <div className="PlaylistCard">
-      {/* Make sure to come back to this endpoint for the individual playlist to see if this matches up*/}
       <Link to={`/playlist/${playlist.id}`}>
         {/* Playlist cover */}
         <div className="playlist-cover">

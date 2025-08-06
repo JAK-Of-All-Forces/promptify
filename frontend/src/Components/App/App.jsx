@@ -19,8 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [token, setToken] = useState(undefined);
-  // const [showModal,setShowModal] = useState(false);
-  // const [selectedPerson, setSelectedPerson] = useState(null);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -36,8 +34,8 @@ function App() {
         localStorage.setItem("spotify_id", spotifyId);
       }
     } else {
-      // if an accessToken does not exist on the query after a page refresh, check if the localStorage already has one and restore it
-      //user will stay logged in after a page refresh
+      // If an accessToken does not exist on the query after a page refresh, check if the localStorage already has one and restore it
+      // User will stay logged in after a page refresh
       const storedToken = localStorage.getItem("spotify_access_token");
       if (storedToken) {
         setToken(storedToken);
@@ -54,7 +52,7 @@ function App() {
 
   if (token === undefined) {
     // return null
-    return <div>Loading...</div>; // or a loading spinner
+    return <div>Loading...</div>;
   }
 
   return (
