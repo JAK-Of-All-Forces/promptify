@@ -71,6 +71,15 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+/* This is necessary so that the toastify close button doesn't take the properties of the other buttons in the application */
+.Toastify__close-button {
+  color: #333 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-size: 1.25rem !important;
+  cursor: pointer !important;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
