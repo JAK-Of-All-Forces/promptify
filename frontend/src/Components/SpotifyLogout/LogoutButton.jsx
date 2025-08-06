@@ -1,6 +1,4 @@
 
-
-
 function LogoutButton({setToken}){
 
 const handleLogout = () => {

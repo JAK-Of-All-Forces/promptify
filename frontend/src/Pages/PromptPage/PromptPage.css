@@ -37,7 +37,7 @@
 
 .section-title.inline {
   margin: 0;
-  font-size: 1.5rem; /* Match .section-title */
+  font-size: 1.5rem; 
   white-space: nowrap;
   color: #ffffff;
   font-weight: bold;
@@ -137,8 +137,7 @@
 
 
 .loadmore-btn:hover {
-  /* background: linear-gradient(180deg, #ffb347 0%, #ffe29f 100%);
-  box-shadow: 0 2px 0 #e6a03a, 0 1px 4px rgba(0,0,0,0.18); */
+
   transform: translateY(2px);
 }
 
@@ -186,7 +185,6 @@
 
 .all-genres label:hover {
   background-color: #6f4dcf;
-  /* box-shadow: 0 2px 0 #a97ff0, 0 1px 4px rgba(0,0,0,0.18); */
   transform: translateY(1px);
 }
 
@@ -203,7 +201,6 @@
   padding-right: 5px;
 }
 
-/* Optional for custom scrollbar look */
 .scrollable-genres-list::-webkit-scrollbar {
   width: 6px;
 }
@@ -234,7 +231,7 @@
 }
 
 .toggle-genres .toggle-btn:hover {
-  background-color: rgb(32, 214, 95); /* same green as default */
+  background-color: rgb(32, 214, 95); 
   color: white;
   border-color: rgb(161, 218, 181);
   filter: brightness(1.08);

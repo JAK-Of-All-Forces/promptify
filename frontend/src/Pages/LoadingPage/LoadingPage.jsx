@@ -10,9 +10,7 @@ function LoadingPage() {
         <div className="loading-page">
         <nav className="nav-bar">
     <div className="left-nav">
-      {/* <Link to={token ? `/home` : `/`}>
-        <img className="logo-image" src={logo}></img>
-      </Link> */}
+    
       <div className="promptify-logo">
           <div className="nav-logo">
             <h1>PR</h1>

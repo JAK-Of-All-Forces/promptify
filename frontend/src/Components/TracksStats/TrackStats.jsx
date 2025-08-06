@@ -68,16 +68,11 @@ const TrackStats = () => {
   
     const handleTimeRangeClick = (range) => {
         if (range === "4w") { 
-            console.log('just clicked 4 weeks')
             setSelectedTracks(tracks4w)
         } else if (range === "6m") {
-                console.log('just clicked 6 months')
-                            console.log(tracks6m)
 
             setSelectedTracks(tracks6m) 
         } else if (range === "1y") { 
-            console.log('just clicked 1 year')
-                                        console.log(tracks1y)
 
             setSelectedTracks(tracks1y);
         };

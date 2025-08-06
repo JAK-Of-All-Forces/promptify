@@ -14,7 +14,6 @@ const getAccessToken = async (userId) => {
   });
 
   if (response) {
-    console.log("we got the accesss token");
     return response.accessToken;
   } else {
     return null;
@@ -25,10 +24,8 @@ async function getTrackImageURL(userId, spotifyIds) {
 try {
     const spotifyToken = await getAccessToken(userId);
     if (!spotifyToken) {
-      console.log("No valid access token found");
       return {};
     }
-    console.log("These are the spotify IDs: ", spotifyIds);
 
     const headers = {
       "Content-Type": "application/json",
@@ -42,7 +39,6 @@ try {
 
     for (let i = 0; i < spotifyIds.length; i += MAX_BATCH_SIZE) {
       const batchIds = spotifyIds.slice(i, i + MAX_BATCH_SIZE).join(",");
-      console.log("These are the batch IDs: ", batchIds);
       const response = await axios.get(
         `https://api.spotify.com/v1/tracks?ids=${batchIds}`,
         { headers }
@@ -57,7 +53,6 @@ try {
             track.album.images.length > 0
           ) {
             imageMap[track.id] = track.album.images[0].url;
-            console.log(`Image URL for track ${track.id}: ${imageMap[track.id]}`);
           } else {
             const fallbackImageUrl = 'http://localhost:3001/assets/no-img.png';
             imageMap[track.id] = fallbackImageUrl; // Fallback image if no album image is available
@@ -78,20 +73,13 @@ const topTracks4 = async (userId) => {
   try {
             // await delay(30000); // 30 second delay
 
-    // console.log("grabbing the top tracks for this user...");
     const spotifyToken = await getAccessToken(userId);
-    if (spotifyToken) {
-      console.log(`looking up tracks...`);
-    } else {
-      console.log("there is no valid token");
-    }
 
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + spotifyToken,
     };
 
-    // console.log("about to get short term top tracks");
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/tracks`,
       {
@@ -102,7 +90,6 @@ const topTracks4 = async (userId) => {
         },
       }
     );
-    console.log("got the short term top tracks");
 
 
     const topTracks = response.data.items;
@@ -133,7 +120,6 @@ const topTracks4 = async (userId) => {
         albumId
       });
     }
-    // console.log(simplifiedTracks);
 
     return simplifiedTracks;
   } catch (error) {
@@ -149,20 +135,13 @@ const topTracks6 = async (userId) => {
           // await delay(30000); // 30 second delay
 
   try {
-    console.log("grabbing the top tracks for this user...");
     const spotifyToken = await getAccessToken(userId);
-    if (spotifyToken) {
-      console.log(`looking up tracks...`);
-    } else {
-      console.log("there is no valid token");
-    }
-
+  
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + spotifyToken,
     };
 
-    console.log("about to get short term top tracks");
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/tracks`,
       {
@@ -173,7 +152,6 @@ const topTracks6 = async (userId) => {
         },
       }
     );
-    console.log("got the medium term top tracks");
 
     const topTracks = response.data.items;
     const simplifiedTracks = [];
@@ -218,20 +196,14 @@ const topTracks1 = async (userId) => {
           // await delay(30000); // 30 second delay
 
   try {
-    console.log("grabbing the top tracks for this user...");
     const spotifyToken = await getAccessToken(userId);
-    if (spotifyToken) {
-      console.log(`looking up tracks...`);
-    } else {
-      console.log("there is no valid token");
-    }
+   
 
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + spotifyToken,
     };
 
-    console.log("about to get short term top tracks");
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/tracks`,
       {
@@ -242,7 +214,6 @@ const topTracks1 = async (userId) => {
         },
       }
     );
-    console.log("got the long term top tracks");
 
     const topTracks = response.data.items;
     const simplifiedTracks = [];
@@ -285,15 +256,12 @@ const topTracks1 = async (userId) => {
 const topAlbums4 = async (userId) => {
   try {
         // await delay(30000); // 30 second delay
-    console.log("grabbing the short term top albums for this user...");
     const shortTermTrackData = await topTracks4(userId);
-    console.log(shortTermTrackData);
 
     // loop through track data, create a map. place the album name with corresponding tracks
     const albumMap = {};
     for (let track of shortTermTrackData) {
-        // console.log("SCEEBADKJBFM JLKBALSGE");
-        console.log(track.image)
+        
         if (!albumMap[track.albumName]) {
             albumMap[track.albumName] = [];
         }
@@ -311,11 +279,6 @@ const topAlbums4 = async (userId) => {
       .sort((a, b) => b[1].length - a[1].length)
       .slice(0, 10);
 
-
-
-    // console.log("THIS IS TOP ALBUMS USERDATA CONTROLLER")
-    // console.log(topAlbums[0].image);
-
     return topAlbums;
   } catch (error) {
     console.error(
@@ -330,9 +293,7 @@ const topAlbums6 = async (userId) => {
           // await delay(30000); // 30 second delay
 
   try {
-    console.log("grabbing the top albums for this user...");
     const mediumTermTrackData = await topTracks6(userId);
-    console.log(mediumTermTrackData);
 
     // loop through track data, create a map. place the album name with corresponding tracks
     const albumMap = {};
@@ -353,7 +314,6 @@ const topAlbums6 = async (userId) => {
       .sort((a, b) => b[1].length - a[1].length)
       .slice(0, 10);
 
-    console.log(topAlbums);
 
     return topAlbums;
   } catch (error) {
@@ -369,9 +329,7 @@ const topAlbums1 = async (userId) => {
           // await delay(30000); // 30 second delay
 
   try {
-    console.log("grabbing the top albums for this user...");
     const longTermTrackData = await topTracks1(userId);
-    console.log(longTermTrackData);
 
     // loop through track data, create a map. place the album name with corresponding tracks
     const albumMap = {};
@@ -392,7 +350,6 @@ const topAlbums1 = async (userId) => {
       .sort((a, b) => b[1].length - a[1].length)
       .slice(0, 10);
 
-    console.log(topAlbums);
 
     return topAlbums;
   } catch (error) {
@@ -406,20 +363,14 @@ const topAlbums1 = async (userId) => {
 // get top artists (4 weeks), limit = 15 - return the genres, artist name, spotify id
 const topArtists4 = async (userId) => {
   try {
-    console.log("grabbing the top artists for this user...");
     const spotifyToken = await getAccessToken(userId);
-    if (spotifyToken) {
-      console.log(`looking up artists...`);
-    } else {
-      console.log("there is no valid token");
-    }
+   
 
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + spotifyToken,
     };
 
-    console.log("about to get short term top artist");
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/artists`,
       {
@@ -430,7 +381,6 @@ const topArtists4 = async (userId) => {
         },
       }
     );
-    console.log("got the short term top artists");
 
     const topArtists = response.data.items;
     const simplifiedArtists = [];
@@ -463,20 +413,14 @@ const topArtists4 = async (userId) => {
 // get top artists (6 months), limit = 15 - return the genres, artist name, spotify id
 const topArtists6 = async (userId) => {
   try {
-    console.log("grabbing the top artists for this user...");
     const spotifyToken = await getAccessToken(userId);
-    if (spotifyToken) {
-      console.log(`looking up artists...`);
-    } else {
-      console.log("there is no valid token");
-    }
+  
 
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + spotifyToken,
     };
 
-    console.log("about to get short term top artist");
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/artists`,
       {
@@ -487,7 +431,6 @@ const topArtists6 = async (userId) => {
         },
       }
     );
-    console.log("got the medium term top artists");
 
     const topArtists = response.data.items;
     const simplifiedArtists = [];
@@ -520,20 +463,14 @@ const topArtists6 = async (userId) => {
 // get top artists (one year), limit = 15 - return the genres, artist name, spotify id
 const topArtists1 = async (userId) => {
   try {
-    console.log("grabbing the top artists for this user...");
     const spotifyToken = await getAccessToken(userId);
-    if (spotifyToken) {
-      console.log(`looking up artists...`);
-    } else {
-      console.log("there is no valid token");
-    }
+   
 
     const headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + spotifyToken,
     };
 
-    console.log("about to get long term top artist");
     const response = await axios.get(
       `https://api.spotify.com/v1/me/top/artists`,
       {
@@ -544,7 +481,6 @@ const topArtists1 = async (userId) => {
         },
       }
     );
-    console.log("got the long term top artists");
 
     const topArtists = response.data.items;
     const simplifiedArtists = [];
@@ -577,9 +513,7 @@ const topArtists1 = async (userId) => {
 // get dominant genres (4 weeks), top 10
 const topGenres4 = async (userId) => {
   try {
-    console.log("grabbing the top genres for this user...");
     const shortTermArtistData = await topArtists4(userId);
-    console.log(shortTermArtistData);
 
     // loop through track data, create a map. place the album name with corresponding tracks
     const genreMap = {};
@@ -596,7 +530,6 @@ const topGenres4 = async (userId) => {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10);
 
-    console.log(topGenres);
 
     return topGenres;
   } catch (error) {
@@ -610,9 +543,7 @@ const topGenres4 = async (userId) => {
 // get dominant genres (6 months), top 10
 const topGenres6 = async (userId) => {
   try {
-    console.log("grabbing the top genres for this user...");
     const mediumTermArtistData = await topArtists6(userId);
-    console.log(mediumTermArtistData);
 
     // loop through track data, create a map. place the album name with corresponding tracks
     const genreMap = {};
@@ -629,7 +560,6 @@ const topGenres6 = async (userId) => {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10);
 
-    console.log(topGenres);
 
     return topGenres;
   } catch (error) {
@@ -643,9 +573,7 @@ const topGenres6 = async (userId) => {
 // get dominant genres (one year), top 10
 const topGenres1 = async (userId) => {
   try {
-    console.log("grabbing the top genres for this user...");
     const longTermArtistData = await topArtists1(userId);
-    console.log(longTermArtistData);
 
     // loop through track data, create a map. place the album name with corresponding tracks
     const genreMap = {};
@@ -662,7 +590,6 @@ const topGenres1 = async (userId) => {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10);
 
-    console.log(topGenres);
 
     return topGenres;
   } catch (error) {
