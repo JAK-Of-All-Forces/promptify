@@ -13,7 +13,6 @@ app.use(cors({
 
 app.use(express.json()); 
 
-// const playlistRoutes = require('../backend/routes/playlist.js');
 const trackRoutes = require('../backend/routes/track.js');
 const tracksOnPlaylistRoutes = require('../backend/routes/tracksOnPlaylist.js');
 const userRoutes = require('../backend/routes/user.js')
@@ -25,12 +24,7 @@ app.use("/api/auth", authRoutes);
 
 const PORT = process.env.PORT 
 
-// app.use('/track', trackRoutes);
-// app.use('/trackPlaylist', tracksOnPlaylistRoutes);
 
-
-// const authRoutes = require("./routes/authRoutes");
-// app.use("/api/auth", authRoutes);
 app.use('/assets', express.static('public/assets'));  // serve static assets
 
 app.use("/api/tracks/" ,trackRoutes);

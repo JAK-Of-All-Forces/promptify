@@ -57,7 +57,6 @@ const GenreStats = () => {
         setLoading(false);
       } catch (err) {
         console.error("Error fetching genres:", err);
-          console.error("Error fetching genres:", err);
 
         if (err.message.includes("Failed to fetch") || err.message.includes("NetworkError") || err.message.includes("ECONNREFUSED")) {
             setConnectionError(true);
@@ -72,16 +71,13 @@ const GenreStats = () => {
   
     const handleTimeRangeClick = (range) => {
         if (range === "4w") { 
-            console.log('just clicked 4 weeks')
-            console.log(genre4w)
+           
             setSelectedGenre(genre4w)
         } else if (range === "6m") {
-            console.log('just clicked 6 months')
-            console.log(genre6m)
+           
             setSelectedGenre(genre6m) 
         } else if (range === "1y") { 
-            console.log('just clicked 1 year')
-            console.log(genre1y)
+    
 
             setSelectedGenre(genre1y);
         };

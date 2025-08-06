@@ -71,17 +71,14 @@ const AlbumStats = () => {
   
     const handleTimeRangeClick = (range) => {
         if (range === "4w") { 
-            console.log('just clicked 4 weeks')
-            console.log(album4w)
+            
             setSelectedAlbum(album4w)
         } else if (range === "6m") {
-            console.log('just clicked 6 months')
-            console.log(album6m)
+           
 
             setSelectedAlbum(album6m) 
         } else if (range === "1y") { 
-            console.log('just clicked 1 year')
-            console.log(album1y)
+        
 
             setSelectedAlbum(album1y);
         };
@@ -118,7 +115,6 @@ const AlbumStats = () => {
                             key={index}
                             className="TrackCard"
                             onClick={() => {
-                                console.log("Clicked album:", tracks);
                                 const albumId = tracks[0]?.albumId;
                                 if (albumId) {
                                     window.open(`https://open.spotify.com/album/${albumId}?go=0`, "_blank");
