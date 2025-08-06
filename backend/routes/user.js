@@ -40,11 +40,9 @@ const asyncHandler = (fn) => {
         });
       }
 
-      // Attach userId to req for use in route handlers
-      // console.log("HEREEE")
+    
       req.userId = user.id;
-      // console.log("The Spotify ID is: ", spotifyId)
-      // console.log("The userId is: ", req.userId)
+     
 
       await fn(req, res, next);
     } catch (error) {

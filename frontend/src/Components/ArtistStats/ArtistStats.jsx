@@ -72,17 +72,14 @@ const ArtistStats = () => {
   
     const handleTimeRangeClick = (range) => {
         if (range === "4w") { 
-            console.log('just clicked 4 weeks')
-            console.log(artist4w)
+           
             setSelectedArtist(artist4w)
         } else if (range === "6m") {
-            console.log('just clicked 6 months')
-            console.log(artist6m)
+         
 
             setSelectedArtist(artist6m) 
         } else if (range === "1y") { 
-            console.log('just clicked 1 year')
-            console.log(artist1y)
+           
 
             setSelectedArtist(artist1y);
         };

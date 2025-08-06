@@ -42,22 +42,19 @@ const seedUserMusicHistory = async (userId) => {
       const firstArtist = album[1][0]?.artists || "Unknown Artist"; // get first artist of first track, safely
       albumswithArtist += `${albumName} by ${firstArtist}, `;
     }
-    console.log(albumswithArtist);
-    console.log("\n")
+   
 
     let seedArtist = ""
     for (let artist of topArtist4Weeks){
       seedArtist += `${artist.artistName}, `
     }
-    console.log(seedArtist)
-    console.log("\n")
+    
 
     let seedGenres = ""
     for (let genre of topGenres4Weeks){
       seedGenres += `${genre[0]}, `
     }
-    console.log(seedGenres)
-    console.log("\n")
+
 
     const seededData = `
     The user's recent listening history (for reference only) includes:
@@ -93,7 +90,6 @@ const getAccessToken = async (userId) => {
   });
 
   if (response) {
-    console.log("we got the accesss token");
     return response.accessToken;
   } else {
     return null;
@@ -102,7 +98,6 @@ const getAccessToken = async (userId) => {
 
 async function callOpenAI(prompt) {
   try {
-    console.log("Inside the OpenAI call");
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
@@ -135,8 +130,6 @@ async function callOpenAI(prompt) {
     const openAIContent = response.choices[0].message.content;
     const openAIJSON = JSON.parse(openAIContent);
 
-    console.log("🧠 Playlist from OpenAI:\n");
-    console.log(openAIJSON);
     return openAIJSON;
   } catch (err) {
     console.error("Error talking to OpenAI:", err);
@@ -146,17 +139,7 @@ async function callOpenAI(prompt) {
 
 async function getSpotifyId(name, artist, userId) {
   try {
-    console.log(
-      "Searching for the track ID with this name and artist on Spotify"
-    );
-    console.log("This is the name: " + name);
-    console.log("This is the artist: " + artist);
     const spotifyToken = await getAccessToken(userId);
-    if (spotifyToken) {
-      console.log(`Looking up Spotify ID for ${name} by ${artist}`);
-    } else {
-      console.log("there is no valid token");
-    }
 
     const headers = {
       "Content-Type": "application/json",
@@ -171,16 +154,11 @@ async function getSpotifyId(name, artist, userId) {
       { headers }
     );
 
-    // console.log("we have searched the spotify api, this is what we got: ")
-    // console.log(response);
-    // console.log(response.data);
-
     const items = response.data.tracks.items;
     if (items && items.length > 0) {
       console.log("the spotify id was found! returning it now");
       return items[0].id; // Spotify ID
     } else {
-      console.log("The Spotify ID for this track was not found in Spotify.");
       return null;
     }
   } catch (error) {
@@ -190,7 +168,6 @@ async function getSpotifyId(name, artist, userId) {
 }
 
 async function createTracks(tracks, userId) {
-  console.log("now in the createTracks function");
   if (!tracks || !Array.isArray(tracks) || tracks.length === 0) {
     throw new Error("The tracks are required and must be a non-empty array");
   }
@@ -199,9 +176,7 @@ async function createTracks(tracks, userId) {
     const prismaTracks = await Promise.all(
       tracks.map(async (track) => {
         const spotifyID = await getSpotifyId(track.name, track.artist, userId);
-        console.log(
-          `Track: ${track.name}, Artist: ${track.artist}, Spotify ID: ${spotifyID}`
-        );
+      
 
         if (!spotifyID) {
           console.warn(
@@ -225,7 +200,6 @@ async function createTracks(tracks, userId) {
           },
         });
 
-        console.log("leaving create tracks!");
         return existingTrack;
       })
     );
@@ -239,11 +213,9 @@ async function createTracks(tracks, userId) {
 
 async function getTrackImageURL(userId, spotifyId) {
   try {
-    console.log("Inside getTrackImageURL");
 
     const spotifyToken = await getAccessToken(userId);
     if (!spotifyToken) {
-      console.log("no valid access token found");
       return null;
     }
 
@@ -265,10 +237,8 @@ async function getTrackImageURL(userId, spotifyId) {
       response.data.album.images.length > 0
     ) {
       const imageUrl = response.data.album.images[0].url;
-      console.log(`fetched track image URL: ${imageUrl}`);
       return imageUrl;
     } else {
-      console.log("no album images found for this track");
       return null;
     }
   } catch (error) {
@@ -282,11 +252,9 @@ async function getTrackImageURL(userId, spotifyId) {
 
 async function getTrackDuration(userId, spotifyId) {
   try {
-    console.log("Inside getTrackDuration");
 
     const spotifyToken = await getAccessToken(userId);
     if (!spotifyToken) {
-      console.log("no valid access token found");
       return null;
     }
 
@@ -302,17 +270,14 @@ async function getTrackDuration(userId, spotifyId) {
 
     if (response && response.data && response.data.duration_ms) {
       const durationMs = response.data.duration_ms;
-      console.log(`fetched duration in ms: ${durationMs}`);
 
       // regular duration as string
       let minutes = Number((durationMs / 1000 / 60).toFixed(0));
       let seconds = Number(((durationMs / 1000) % 60).toFixed(0));
       let regularDuration = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-      console.log(`calculated duration is: ${regularDuration} `);
 
       return regularDuration;
     } else {
-      console.log("no duration found for this track");
       return null;
     }
   } catch (error) {
@@ -326,10 +291,8 @@ async function getTrackDuration(userId, spotifyId) {
 
 // this is for the route : router.post("/", generatePlaylistController.createPrompt)
 const createPrompt = async (req, res) => {
-  console.log("Saving the created prompt to database.");
 
   // these are the things we need to get the playlist
-  console.log(req.body);
   const { name, activity, genres, duration, spotifyId } = req.body;
   if (!name || !activity || !genres || !duration || !spotifyId) {
     return res.status(400).json({
@@ -380,22 +343,14 @@ const createPrompt = async (req, res) => {
   }`;
 
 
-  console.log("about to talk to OpenAIAPI");
   const openAIResponse = await callOpenAI(userContentPrompt);
-  console.log("done talking to OpenAIAPI ");
 
-  console.log(
-    "trying to get the spotify ids and make the tracks for the database, entering the createTracks function"
-  );
+ 
 
-  console.log("here are the songTracks:");
   const songTracks = await createTracks(openAIResponse.tracks, userId);
-  console.log("made it back to createPrompt from createTracks");
-  console.log("these are the songtracks");
-  console.log(songTracks);
+ 
 
   let playlistImageUrl;
-  console.log("setting playlist image url");
   if (songTracks.length > 0 && songTracks[0].image_url) {
     playlistImageUrl = songTracks[0].image_url;
   } else {
@@ -417,9 +372,7 @@ const createPrompt = async (req, res) => {
       },
     });
 
-    console.log(
-      "Playlist data created successfully, but there are no tracks yet"
-    );
+   
 
     // Create relations between tracks and the playlist
     await Promise.all(
@@ -438,7 +391,6 @@ const createPrompt = async (req, res) => {
         });
       })
     );
-    console.log("Relation between track and playlist has been made");
 
     res.json(playlistInfo);
   } catch (error) {
@@ -446,7 +398,6 @@ const createPrompt = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 
-  console.log("all done!");
 };
 
 module.exports = {

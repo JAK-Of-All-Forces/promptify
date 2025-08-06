@@ -35,7 +35,6 @@ function AllPlaylistPage({ token, setToken }) {
 
         //checks if the access to the users data has expired
         if (res.status === 401) {
-          console.log("Access token expired. Attempting to refresh.");
 
           // Call backend to refresh the token
           const spotifyId = localStorage.getItem("spotify_id");

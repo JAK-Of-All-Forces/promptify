@@ -153,7 +153,7 @@ const filteredGenres = genreSearchTerm.length > 0
 
 
       try {
-        navigate("/loading"); // uncomment when the loading state page is made
+        navigate("/loading"); 
         const response = await fetch(`${API_BASE_URL}/playlist/createPrompt`, {
           method: "POST",
           headers: {
@@ -169,13 +169,7 @@ const filteredGenres = genreSearchTerm.length > 0
         }
 
         const result = await response.json();
-        console.log("Playlist created:", result);
-        if (result.id) {
-          console.log("Playlist ID found in result");
-          console.log(result.id);
-        } else {
-          console.error("Playlist ID not found in result:");
-        }
+     
 
         // navigate user after success
         navigate(`/playlist/${result.id}`);
