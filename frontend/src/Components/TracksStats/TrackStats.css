@@ -11,11 +11,6 @@
   flex-shrink: 0;
 }
 
-.stats-button-options {
-  display: flex;
-  justify-content: center;
-}
-
 .stats-button-options-btn {
   padding: 10px 20px;
   font-size: 15px;
@@ -27,8 +22,12 @@
   font-style: oblique;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  min-width: 90px;
+  min-width: 70px;
   margin-bottom: 10px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: row; 
 }
 
 .stats-button-options-btn:hover:not(:disabled) {
@@ -79,17 +78,16 @@
   }
 }
 
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .loading-container p {
   font-size: 24px; /* make text clear but not too big */
   font-weight: bold;
   text-align: center;
   font-style: italic; /* optional, matches your button style */
+
+    display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -125,23 +123,20 @@
     margin-bottom: 4px;
   }
 
-  .button-options {
+  /* .button-options {
     display: flex;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-  }
-    .stats-button-options {
-      display: flex;
-      flex-direction: column; 
-      align-items: center; 
-      gap: 10px; 
-    }
+  } */
+
+
+  .stats-button-options {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 10px; 
   }
 
-.stats-button-options {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  gap: 10px; 
-}
+
+  }
