@@ -27,7 +27,16 @@
 
   display: flex;
   justify-content: center;
-  flex-direction: row; 
+  align-items: center;
+}
+
+.stats-button-options {
+  display: flex;
+  justify-content: center;  
+  align-items: center;      
+  flex-wrap: wrap;         
+  width: 100%;             
+  margin: 0 auto;          
 }
 
 .stats-button-options-btn:hover:not(:disabled) {
@@ -85,7 +94,7 @@
   text-align: center;
   font-style: italic; /* optional, matches your button style */
 
-    display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -123,20 +132,12 @@
     margin-bottom: 4px;
   }
 
-  /* .button-options {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  } */
-
 
   .stats-button-options {
-    display: flex;
     flex-direction: column; 
-    align-items: center; 
-    gap: 10px; 
   }
 
 
   }
+
+ 
